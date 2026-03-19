@@ -1,0 +1,229 @@
+# Tổng quan về tỷ lệ sinh lời tài sản, biến động tỷ lệ sinh lời và giá trị chịu rủi ro {#sec-ch1}
+
+## Tỷ lệ sinh lời tài sản
+
+### Giá tài sản và tỷ lệ sinh lời trong phân tích định lượng tài chinh {#sec-why-returns}
+
+Trong phân tích tài chính, đặc biệt khi nghiên cứu biến động và đo lường rủi ro thị trường, đối tượng được sử dụng phổ biến không phải là **mức giá tài sản** mà là **tỷ lệ sinh lời**.Điều này có thể được giải thích như sau:
+
+Thứ nhất, xét từ góc độ nhà đầu tư, điều nhà đầu tư quan tâm không đơn thuần là giá của một tài sản đang ở mức bao nhiêu, mà là **giá trị đầu tư đã thay đổi như thế nào qua thời gian**. Một cổ phiếu có giá 20.000 đồng và tăng lên 22.000 đồng mang ý nghĩa khác với một cổ phiếu có giá 200.000 đồng tăng lên 202.000 đồng, dù cùng tăng 2.000 đồng. Mức thay đổi tuyệt đối của giá vì vậy chưa phản ánh đầy đủ kết quả đầu tư; trong khi đó, tỷ lệ sinh lời cho biết **mức tăng hoặc giảm tương đối so với số vốn ban đầu**, nên có ý nghĩa kinh tế trực tiếp hơn đối với quyết định đầu tư.
+
+```{r}
+#| label: tbl-price-return-demo
+#| tbl-cap: "So sánh thay đổi giá và tỷ lệ sinh lời của hai tài sản"
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tibble)
+library(knitr)
+library(kableExtra)
+
+price_A_0 <- 50
+price_A_1 <- 55
+price_B_0 <- 200
+price_B_1 <- 206
+
+tbl_demo <- tibble(
+  `Tài sản` = c("A", "B"),
+  `Giá đầu kỳ` = c(price_A_0, price_B_0),
+  `Giá cuối kỳ` = c(price_A_1, price_B_1),
+  `Thay đổi giá` = c(price_A_1 - price_A_0, price_B_1 - price_B_0),
+  `Tỷ lệ sinh lời (%)` = c(
+    (price_A_1 / price_A_0 - 1) * 100,
+    (price_B_1 / price_B_0 - 1) * 100
+  )
+)
+
+tbl_demo |>
+  kbl(
+    digits = 2,
+    align = "ccccc",
+    booktabs = TRUE
+  ) |>
+  kable_styling(
+    latex_options = "hold_position",
+    full_width = FALSE,
+    position = "center"
+  )
+```
+
+Thứ hai, tỷ lệ sinh lời cho phép so sánh giữa các tài sản có mức giá rất khác nhau. Mức giá của tài sản phụ thuộc vào đơn vị niêm yết, mệnh giá, số lần chia tách cổ phiếu, cũng như lịch sử giao dịch của từng tài sản. Vì vậy, không thể dựa trực tiếp vào giá để so sánh hiệu quả đầu tư giữa các tài sản khác nhau.
+
+Ví dụ, một cổ phiếu tăng từ 50 lên 55 có mức tăng giá là 5 đơn vị; một cổ phiếu khác tăng từ 200 lên 206 có mức tăng giá là 6 đơn vị. Nếu chỉ nhìn vào biến động giá tuyệt đối, cổ phiếu thứ hai có vẻ tăng mạnh hơn. Tuy nhiên, tỷ lệ sinh lời của cổ phiếu thứ nhất là 10%, trong khi của cổ phiếu thứ hai chỉ là 3%. Rõ ràng, tỷ lệ sinh lời mới là đại lượng phản ánh đúng hơn hiệu quả đầu tư.
+
+Nói cách khác, tỷ lệ sinh lời đưa mọi tài sản về cùng một thang đo tương đối, nhờ đó giúp nhà nghiên cứu:
+
+-   so sánh hiệu quả đầu tư giữa các tài sản;
+
+-   đánh giá hiệu quả giữa các giai đoạn khác nhau;
+
+-   tổng hợp và so sánh các danh mục đầu tư.
+
+Thứ ba, xét về mặt thống kê, chuỗi giá tài sản thường có xu hướng không dừng[^ch01-1], trong khi chuỗi tỷ lệ sinh lời thường ổn định hơn. Với tính chất không dừng, việc mô hình hóa trực tiếp giá trở nên khó khăn hơn và dễ dẫn đến các kết luận sai lệch nếu không xử lý thích hợp. Ngược lại, khi chuyển từ giá sang tỷ lệ sinh lời, chuỗi dữ liệu thường dao động quanh một mức trung bình nhỏ hơn và có cấu trúc thuận lợi hơn cho phân tích thống kê. Đây là một trong những lý do quan trọng khiến tỷ lệ sinh lời được sử dụng rộng rãi trong các mô hình chuỗi thời gian tài chính, mô hình biến động có điều kiện và các phương pháp đo lường rủi ro. Hình @fig-price-vs-return cho thấy chuỗi giá và chuỗi log return có cấu trúc thống kê rất khác nhau. Chuỗi giá ở panel trên thay đổi mức nền theo thời gian và không dao động quanh một trung tâm ổn định, phản ánh đặc điểm không dừng thường gặp của dữ liệu giá tài sản. Trong khi đó, chuỗi log return ở panel dưới dao động quanh mức trung bình gần bằng 0 và có cấu trúc ổn định hơn, dù vẫn có thể xuất hiện các giai đoạn biến động mạnh. Sự khác biệt này giải thích vì sao trong kinh tế lượng tài chính, các mô hình volatility và VaR thường được xây dựng trên chuỗi tỷ lệ sinh lời thay vì trên chuỗi giá.
+
+[^ch01-1]: Trong phân tích chuỗi thời gian, một chuỗi được gọi là *dừng* nếu các đặc trưng xác suất cơ bản của nó, như kỳ vọng, phương sai và hiệp phương sai theo độ trễ, không thay đổi theo thời gian. Nói một cách trực quan, chuỗi dừng dao động quanh một mức trung tâm tương đối ổn định, còn chuỗi không dừng thường có xu hướng, thay đổi mức nền hoặc phương sai theo thời gian. Trong tài chính, chuỗi giá thường gần với quá trình có nghiệm đơn vị, trong khi chuỗi tỷ lệ sinh lời thường ổn định hơn và vì vậy phù hợp hơn cho mô hình hóa thống kê.
+
+```{r}
+#| label: fig-price-vs-return
+#| fig-cap: "So sánh chuỗi giá và chuỗi log return của cùng một tài sản"
+#| fig-width: 7
+#| fig-height: 5.5
+#| fig-pos: "H"
+#| echo: false
+#| message: false
+#| warning: false
+#| dev: cairo_pdf
+
+library(ggplot2)
+library(dplyr)
+library(tibble)
+library(gridExtra)
+
+prices <- tibble(
+  t = 1:120,
+  price = cumsum(c(100, rnorm(119, mean = 0.25, sd = 1.8)))
+) |>
+  mutate(
+    price = ifelse(price <= 0, NA, price),
+    log_return = c(NA, diff(log(price)))
+  )
+
+base_family <- "Arial"
+
+p1 <- ggplot(prices, aes(x = t, y = price)) +
+  geom_line(linewidth = 0.6) +
+  labs(
+    x = "Thời điểm",
+    y = "Giá",
+    title = "Chuỗi giá"
+  ) +
+  theme_minimal(base_size = 11, base_family = base_family)
+
+p2 <- ggplot(prices, aes(x = t, y = 100 * log_return)) +
+  geom_line(linewidth = 0.6, na.rm = TRUE) +
+  geom_hline(yintercept = 0, linewidth = 0.4, linetype = "dashed") +
+  labs(
+    x = "Thời điểm",
+    y = "Log return (%)",
+    title = "Chuỗi tỷ lệ sinh lời"
+  ) +
+  theme_minimal(base_size = 11, base_family = base_family)
+
+gridExtra::grid.arrange(p1, p2, ncol = 1)
+```
+
+Thứ tư, khi đo lường rủi ro thị trường, rủi ro thị trường không gắn với việc “giá bằng bao nhiêu”, mà gắn với việc giá có thể thay đổi bao nhiêu theo hướng bất lợi. Do đó, khi đo lường rủi ro, nhà đầu tư quan tâm tới **mức lỗ tiềm năng** của một vị thế hoặc danh mục trong một khoảng thời gian xác định với một mức tin cậy cho trước, thay vì mức biến động về giá trị tuyệt đối của tài sản.
+
+Thứ năm, một ưu điểm nữa của tỷ lệ sinh lời là thuận tiện khi tổng hợp theo thời gian. Với tỷ lệ sinh lời giản đơn, sinh lời nhiều kỳ được liên kết theo nguyên tắc lãi kép; còn với tỷ lệ sinh lời kép liên tục, sinh lời nhiều kỳ có thể cộng trực tiếp qua thời gian. Đây là một tính chất đặc biệt hữu ích trong phân tích chuỗi thời gian, dự báo, và mô hình hóa biến động. Đối với danh mục, tỷ lệ sinh lời cũng là đại lượng phù hợp để tổng hợp hiệu quả đầu tư từ nhiều tài sản riêng lẻ. Với tỷ lệ sinh lời giản đơn, sinh lời danh mục là trung bình gia quyền của sinh lời các tài sản thành phần. Điều này tạo nền tảng cho phân tích phân bổ tài sản, đo lường rủi ro danh mục, và tính VaR ở cấp độ danh mục đầu tư
+
+Từ những lý do kể trên, với mục tiêu là đo lường và dự báo rủi ro trong hoạt động đầu tư, cuốn sách này sẽ tập trung nghiên cứu và ứng dụng các mô hình đo lường rủi ro biến động và giá trị chịu rủi ro vớ với **chuỗi tỷ lệ sinh lời**, thay vì chuỗi giá gốc của tài sản.
+
+::: callout-note
+Giá tài sản cho biết **mức định giá tại một thời điểm**;\
+Tỷ lệ sinh lời cho biết **mức thay đổi của giá trị đầu tư giữa hai thời điểm**.
+
+Trong đo lường rủi ro thị trường, điều cần phân tích không phải là “giá đang là bao nhiêu” mà là “giá có thể thay đổi bất lợi đến mức nào”.
+:::
+
+### Đo lường tỷ lệ sinh lời của tài sản {#asset-return}
+
+Trong phân tích tài chính, có hai thước đo tỷ lệ sinh lời được sử dụng phổ biến nhất: **tỷ lệ sinh lời giản đơn** và **tỷ lệ sinh lời kép liên tục.**
+
+Nếu giá tài sản được ký hiệu là $P_t$ tại thời điểm $t$,và giả sử tài sản không trả cổ tức trong khoảng từ $t-1$ đến $t$. Khi đó, **tỷ lệ sinh lời giản đơn** được xác định bởi
+
+$$
+R_t = \frac{P_t}{P_{t-1}} - 1
+= \frac{P_t - P_{t-1}}{P_{t-1}}.
+$$
+
+Đây là đại lượng phản ánh trực tiếp mức lãi hoặc lỗ tương đối so với vốn đầu tư ban đầu trong một kỳ nắm giữ. Nếu $R_t = 0.08$, nhà đầu tư thu được 8% trong kỳ; nếu $R_t=-0.08$, nhà đầu tư chịu khoản lỗ 8%.
+
+Với tài sản có chi trả dòng tiền trung gian, chẳng hạn cổ tức tiền mặt $D_t$, công thức cần được điều chỉnh thành
+
+$$
+R_t = \frac{P_t + D_t}{P_{t-1}} - 1.
+$$
+
+Nếu tài sản được nắm giữ trong $k$ kỳ, thì tỷ lệ sinh lời tích lũy được xác định
+
+$$
+1 + R_t[k]
+=
+\frac{P_t}{P_{t-k}}
+=
+(1+R_t)(1+R_{t-1})\cdots(1+R_{t-k+1}),
+$$
+
+và do đó
+
+$$
+R_t[k] = \frac{P_t-P_{t-k}}{P_{t-k}}.
+$$
+
+Như vậy, tỷ lệ sinh lời **không cộng trực tiếp qua thời gian**; thay vào đó, nó cộng gộp theo nguyên tắc lãi kép thông qua tích của tỷ lệ sinh lời gộp qua các thời kỳ.
+
+Một ưu điểm rất lớn của simple return là ở cấp độ danh mục: nếu danh mục có tỷ trọng $w_i$ trên tài sản $i$, thì return của danh mục đúng bằng trung bình gia quyền của các return thành phần:
+
+$$
+R_{p,t} = \sum_{i=1}^N w_i R_{i,t}.
+$$
+
+Đây là tính chất cực kỳ thuận tiện trong phân tích hiệu quả đầu tư, phân bổ tài sản, và đo lường sinh lời danh mục.
+
+Ở phương thức thứ hai, **tỷ lệ sinh lời kép liên tục** được xác định như sau:
+
+$$
+r_t = \ln(1+R_t) = \ln\left(\frac{P_t}{P_{t-1}}\right)
+= \ln(P_t) - \ln(P_{t-1}).
+$$
+
+Nếu đặt $p_t = \ln(P_t)$, ta có dạng rất gọn:
+
+$$
+r_t = p_t - p_{t-1}.
+$$
+
+Với dữ liệu nhiều kỳ, tỷ lệ sinh lời kép liên tục có tính chất đặc biệt quan trọng:
+
+$$
+r_t[k] = \ln(1+R_t[k])
+= \ln[(1+R_t)(1+R_{t-1})\cdots(1+R_{t-k+1})]
+= r_t + r_{t-1} + \cdots + r_{t-k+1}.
+$$
+
+Nói cách khác, **tỷ lệ sinh lời kép liên tục cộng được theo thời gian**. Đây là một ưu điểm then chốt trong phân tích chuỗi thời gian tài chính. Theo Tsay (xxx), hai lợi thế nổi bật của tỷ lệ sinh lời kép liên tục là: (i) tỷ lệ sinh lời nhiều kỳ là tổng các tỷ lệ sinh lời kép liên tục từng kỳ; và (ii) các tính chất thống kê của tỷ lệ sinh lời kép liên tục thuận lợi hơn cho mô hình hóa biến động thời gian của chuỗi tỷ lệ sinh lời tài sản.
+
+Với tài sản có chi trả dòng tiền $D_t$, log return được điều chỉnh thành
+
+$$
+r_t = \ln(P_t + D_t) - \ln(P_{t-1}).
+$$
+
+Ngoài ra, giữa hai thước đo tồn tại quan hệ một-một:
+
+$$
+r_t = \ln(1+R_t), \qquad R_t = e^{r_t} - 1.
+$$
+
+Khi mức sinh lời mỗi kỳ nhỏ, có thể dùng xấp xỉ bậc một
+
+$$
+r_t \approx R_t.
+$$
+
+Như vậy có thể thấy, về bản chất, tỷ lệ sinh lời giản đơn và tỷ lệ sinh lời kép liên tục không phải là hai khái niệm cạnh tranh tuyệt đối, mà là hai phép đo phục vụ các mục tiêu khác nhau.
+
+Tỷ lệ sinh lời giản đơn có ưu thế về **diễn giải kinh tế** và **cộng gộp theo tỷ trọng danh mục**. Khi cần trả lời những câu hỏi như “nhà đầu tư lãi bao nhiêu phần trăm?”, “danh mục tăng bao nhiêu trong kỳ?”, hay “đóng góp của từng tài sản vào sinh lời danh mục là bao nhiêu?”, tỷ lệ sinh lời giản đơn là lựa chọn tự nhiên hơn.
+
+Tỷ lệ sinh lời kép liên tục có ưu thế về **cộng gộp theo thời gian** và **tính thuận tiện trong mô hình hóa**. Khi cần làm việc với chuỗi thời gian, mô hình ARMA, ARCH/GARCH, stochastic volatility, mô hình liên tục, hay các phép biến đổi xác suất phục vụ định giá và quản trị rủi ro, tỷ lệ sinh lời kép liên tục thường là lựa chọn chuẩn hơn.
+
+Cuối cùng, tỷ lệ sinh lời theo ngày, tuần hoặc tháng của tài sản trong dữ liệu tài chính thường có giá trị tuyệt đối không lớn, tỷ lệ sinh lời giản đơn và tỷ lệ sinh lời kép liên tục thường khá gần nhau trong phần lớn quan sát. Tuy nhiên, trong các giai đoạn khủng hoảng hoặc với tài sản biến động rất mạnh, chênh lệch này có thể trở nên đáng kể.
+
+Trong cuốn sách này, với mục tiêu là đánh giá ứng dụng các mô hình định lượng biến động, dự báo biến động tỷ lệ sinh lời và giá trị chịu rủi ro, tỷ lệ sinh lời được sử dụng chủ yếu trong cuốn sách này là tỷ lệ sinh lời kép liên tục.
+
+## Các đặc điểm thống kê của tỷ lệ sinh lời tài sản {#sec-statistical-properties}
+
+Để thực hiện đo lường rủi ro liên quan tới biến động của tỷ lệ sinh lời tài sản, trước hết cần nhận diện các đặc phân phối điển hình của chuỗi dữ liệu này để có cơ sở lựa chọn mô hình định lượng phù hợp.
+
+### Tỷ lệ sinh lời tài sản như một biến ngẫu nhiên {#sec-random-variable-returns}

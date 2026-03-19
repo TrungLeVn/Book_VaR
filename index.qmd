@@ -1,0 +1,26 @@
+---
+title: ""
+toc: false
+---
+
+# Lời mở đầu {.unnumbered}
+
+Cuốn sách này được biên soạn nhằm giới thiệu một cách có hệ thống các khái niệm, phương pháp và mô hình thường được sử dụng trong đo lường biến động của tỷ lệ sinh lời tài sản và giá trị chịu rủi ro (Value-at-Risk, VaR). Nội dung sách tập trung vào cách chuyển từ dữ liệu giá sang chuỗi tỷ lệ sinh lời, cách nhận diện các đặc điểm thống kê điển hình của dữ liệu tài chính, và cách xây dựng các mô hình phục vụ dự báo biến động cũng như định lượng rủi ro thị trường.
+
+Trong tài chính định lượng hiện đại, chuỗi tỷ lệ sinh lời là đầu vào trung tâm cho nhiều bài toán quan trọng như ước lượng độ biến động, kiểm định rủi ro, mô hình hóa phân phối đuôi, và tính toán VaR cho tài sản hay danh mục đầu tư. Tuy nhiên, đối với người học chưa có nền tảng sâu về kinh tế lượng tài chính, các nội dung này thường được trình bày khá kỹ thuật và rời rạc. Vì vậy, cuốn sách được thiết kế theo hướng đi từ nền tảng đến ứng dụng, kết hợp diễn giải trực quan, lập luận thống kê cơ bản và minh họa thực hành bằng R.
+
+Về cấu trúc, sách được triển khai theo ba lớp nội dung chính. Thứ nhất, phần mở đầu trình bày bản chất của tỷ lệ sinh lời tài sản, các đặc điểm thống kê điển hình của dữ liệu tài chính, và cơ sở của đo lường rủi ro thị trường. Thứ hai, các chương tiếp theo giới thiệu các mô hình đo lường và dự báo biến động, từ những cách tiếp cận cơ bản đến các mô hình kinh tế lượng như ARCH, GARCH và các biến thể mở rộng. Thứ ba, sách trình bày khung khái niệm và kỹ thuật tính toán Value-at-Risk, đồng thời thảo luận các vấn đề thực hành như lựa chọn phân phối, ước lượng tham số, và kiểm định chất lượng mô hình.
+
+Cuốn sách không nhằm thay thế các chuyên khảo kinh tế lượng tài chính ở trình độ nâng cao, mà hướng tới việc xây dựng một nền tảng đủ chắc chắn để người đọc có thể hiểu bản chất của các mô hình, đọc được các nghiên cứu thực nghiệm, và áp dụng được các kỹ thuật cơ bản trong bối cảnh dữ liệu tài chính thực tế.
+
+Tác giả hy vọng tài liệu này sẽ hữu ích cho sinh viên, học viên cao học, giảng viên, nhà phân tích và những người quan tâm đến đo lường rủi ro thị trường trong tài chính hiện đại.
+
+
+**Đối tượng bạn đọc**  
+Cuốn sách hướng tới sinh viên và học viên thuộc các ngành tài chính, ngân hàng, đầu tư, kinh tế ứng dụng và khoa học dữ liệu, đồng thời cũng phù hợp với nhà nghiên cứu hoặc người hành nghề muốn có một tài liệu nhập môn có hệ thống về volatility và VaR.
+
+**Phương pháp trình bày**  
+Các nội dung được trình bày theo hướng từ trực quan đến mô hình, từ dữ liệu đến suy luận, và từ khái niệm đến mã lệnh thực hành. Trong toàn bộ cuốn sách, R được sử dụng làm công cụ minh họa chính.
+
+**Gợi ý cách đọc sách**  
+Người đọc mới nên bắt đầu từ Chương 1 để nắm các khái niệm nền tảng về tỷ lệ sinh lời và đặc điểm của dữ liệu tài chính. Sau đó có thể tiếp cận các chương về mô hình biến động và VaR theo đúng thứ tự, vì các chương sau kế thừa trực tiếp logic của các chương trước.
