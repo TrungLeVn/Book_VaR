@@ -4,10 +4,9 @@
 
 ### Giá tài sản và tỷ lệ sinh lời trong phân tích định lượng tài chinh {#sec-why-returns}
 
-Trong phân tích định lượng tài chính, đặc biệt trong nghiên cứu biến động (*volatility*) và đo lường rủi ro thị trường, đối tượng phân tích trung tâm thường không phải là **mức giá tài sản** mà là **tỷ lệ sinh lời**. Giá tài sản cho biết tài sản đang được giao dịch ở mức nào tại một thời điểm cụ thể; trong khi đó, tỷ lệ sinh lời cho biết giá trị đầu tư đã thay đổi bao nhiêu so với số vốn ban đầu trong một khoảng thời gian nhất định. Sự khác biệt này rất quan trọng, vì nhà đầu tư và nhà quản trị rủi ro không chỉ quan tâm tới mức giá tuyệt đối, mà quan tâm chủ yếu tới khả năng sinh lời và mức lỗ tiềm năng của vị thế đầu tư.
+Trong phân tích tài chính, đặc biệt khi nghiên cứu biến động và đo lường rủi ro thị trường, đối tượng được sử dụng phổ biến không phải là **mức giá tài sản** mà là **tỷ lệ sinh lời**.Điều này có thể được giải thích như sau:
 
-Thứ nhất, tỷ lệ sinh lời có ý nghĩa kinh tế trực tiếp hơn so với thay đổi tuyệt đối của giá. Một cổ phiếu tăng từ 20.000 đồng lên 22.000 đồng và một cổ phiếu khác tăng từ 200.000 đồng lên 202.000 đồng đều tăng 2.000 đồng, nhưng kết quả đầu tư là rất khác nhau. Trường hợp thứ nhất tạo ra mức sinh lời 10\%, trong khi trường hợp thứ hai chỉ tạo ra mức sinh lời 1\%. Vì vậy, nếu chỉ quan sát thay đổi tuyệt đối của giá, nhà phân tích có thể đánh giá sai hiệu quả đầu tư.
-
+Thứ nhất, xét từ góc độ nhà đầu tư, điều nhà đầu tư quan tâm không đơn thuần là giá của một tài sản đang ở mức bao nhiêu, mà là **giá trị đầu tư đã thay đổi như thế nào qua thời gian**. Một cổ phiếu có giá 20.000 đồng và tăng lên 22.000 đồng mang ý nghĩa khác với một cổ phiếu có giá 200.000 đồng tăng lên 202.000 đồng, dù cùng tăng 2.000 đồng. Mức thay đổi tuyệt đối của giá vì vậy chưa phản ánh đầy đủ kết quả đầu tư; trong khi đó, tỷ lệ sinh lời cho biết **mức tăng hoặc giảm tương đối so với số vốn ban đầu**, nên có ý nghĩa kinh tế trực tiếp hơn đối với quyết định đầu tư.
 
 ```{r}
 #| label: tbl-price-return-demo
@@ -49,17 +48,21 @@ tbl_demo |>
   )
 ```
 
-Bảng @tbl-price-return-demo cho thấy thay đổi tuyệt đối về giá có thể gây nhầm lẫn khi so sánh các tài sản có mức giá ban đầu khác nhau. Tài sản B tăng giá nhiều hơn về giá trị tuyệt đối, nhưng tài sản A mới là tài sản có tỷ lệ sinh lời cao hơn. Do đó, tỷ lệ sinh lời đưa các tài sản về cùng một thang đo tương đối, giúp so sánh hiệu quả đầu tư giữa các tài sản, giữa các giai đoạn và giữa các danh mục đầu tư. Nói cách khác, tỷ lệ sinh lời đưa mọi tài sản về cùng một thang đo tương đối, nhờ đó giúp nhà nghiên cứu:
+Thứ hai, tỷ lệ sinh lời cho phép so sánh giữa các tài sản có mức giá rất khác nhau. Mức giá của tài sản phụ thuộc vào đơn vị niêm yết, mệnh giá, số lần chia tách cổ phiếu, cũng như lịch sử giao dịch của từng tài sản. Vì vậy, không thể dựa trực tiếp vào giá để so sánh hiệu quả đầu tư giữa các tài sản khác nhau.
 
-- so sánh hiệu quả đầu tư giữa các tài sản;
+Ví dụ, một cổ phiếu tăng từ 50 lên 55 có mức tăng giá là 5 đơn vị; một cổ phiếu khác tăng từ 200 lên 206 có mức tăng giá là 6 đơn vị. Nếu chỉ nhìn vào biến động giá tuyệt đối, cổ phiếu thứ hai có vẻ tăng mạnh hơn. Tuy nhiên, tỷ lệ sinh lời của cổ phiếu thứ nhất là 10%, trong khi của cổ phiếu thứ hai chỉ là 3%. Rõ ràng, tỷ lệ sinh lời mới là đại lượng phản ánh đúng hơn hiệu quả đầu tư.
 
-- đánh giá hiệu quả giữa các giai đoạn khác nhau;
+Nói cách khác, tỷ lệ sinh lời đưa mọi tài sản về cùng một thang đo tương đối, nhờ đó giúp nhà nghiên cứu:
 
-- tổng hợp và so sánh các danh mục đầu tư.
+-   so sánh hiệu quả đầu tư giữa các tài sản;
 
-Thứ hai, tỷ lệ sinh lời có tính chất thống kê thuận lợi hơn giá tài sản. Chuỗi giá tài sản tài chính thường có xu hướng thay đổi mức nền theo thời gian và thường không dừng[^ch01-1]. Nếu mô hình hóa trực tiếp chuỗi giá mà không xử lý đặc điểm không dừng, nhà nghiên cứu có thể gặp hiện tượng hồi quy giả mạo hoặc diễn giải sai quan hệ giữa các biến. Ngược lại, chuỗi tỷ lệ sinh lời, đặc biệt là tỷ lệ sinh lời logarit, thường dao động quanh một mức trung bình nhỏ, gần bằng 0, và có cấu trúc phù hợp hơn cho mô hình chuỗi thời gian tài chính [@Tsay2013; @Brooks2019]. Điều này không có nghĩa là tỷ lệ sinh lời luôn đơn giản hoặc hoàn toàn ổn định; trên thực tế, tỷ lệ sinh lời vẫn có thể có đuôi dày, bất đối xứng và phương sai thay đổi theo thời gian. Tuy nhiên, xét về mặt mô hình hóa, tỷ lệ sinh lời là điểm khởi đầu phù hợp hơn so với chuỗi giá gốc.
+-   đánh giá hiệu quả giữa các giai đoạn khác nhau;
 
-[^ch01-1]: Trong phân tích chuỗi thời gian, một chuỗi được gọi là *dừng* nếu các đặc trưng xác suất cơ bản của nó, như kỳ vọng, phương sai và hiệp phương sai theo độ trễ, không thay đổi theo thời gian. Nói một cách trực quan, chuỗi dừng dao động quanh một mức trung tâm tương đối ổn định; chuỗi không dừng thường có xu hướng, thay đổi mức nền hoặc có cấu trúc phụ thuộc kéo dài theo thời gian. Trong tài chính, chuỗi giá thường gần với quá trình có nghiệm đơn vị, trong khi chuỗi tỷ lệ sinh lời thường ổn định hơn và vì vậy phù hợp hơn cho mô hình hóa thống kê.
+-   tổng hợp và so sánh các danh mục đầu tư.
+
+Thứ ba, xét về mặt thống kê, chuỗi giá tài sản thường có xu hướng không dừng[^ch01-1], trong khi chuỗi tỷ lệ sinh lời thường ổn định hơn. Với tính chất không dừng, việc mô hình hóa trực tiếp giá trở nên khó khăn hơn và dễ dẫn đến các kết luận sai lệch nếu không xử lý thích hợp. Ngược lại, khi chuyển từ giá sang tỷ lệ sinh lời, chuỗi dữ liệu thường dao động quanh một mức trung bình nhỏ hơn và có cấu trúc thuận lợi hơn cho phân tích thống kê. Đây là một trong những lý do quan trọng khiến tỷ lệ sinh lời được sử dụng rộng rãi trong các mô hình chuỗi thời gian tài chính, mô hình biến động có điều kiện và các phương pháp đo lường rủi ro. Hình @fig-price-vs-return cho thấy chuỗi giá và chuỗi log return có cấu trúc thống kê rất khác nhau. Chuỗi giá ở panel trên thay đổi mức nền theo thời gian và không dao động quanh một trung tâm ổn định, phản ánh đặc điểm không dừng thường gặp của dữ liệu giá tài sản. Trong khi đó, chuỗi log return ở panel dưới dao động quanh mức trung bình gần bằng 0 và có cấu trúc ổn định hơn, dù vẫn có thể xuất hiện các giai đoạn biến động mạnh. Sự khác biệt này giải thích vì sao trong kinh tế lượng tài chính, các mô hình volatility và VaR thường được xây dựng trên chuỗi tỷ lệ sinh lời thay vì trên chuỗi giá.
+
+[^ch01-1]: Trong phân tích chuỗi thời gian, một chuỗi được gọi là *dừng* nếu các đặc trưng xác suất cơ bản của nó, như kỳ vọng, phương sai và hiệp phương sai theo độ trễ, không thay đổi theo thời gian. Nói một cách trực quan, chuỗi dừng dao động quanh một mức trung tâm tương đối ổn định, còn chuỗi không dừng thường có xu hướng, thay đổi mức nền hoặc phương sai theo thời gian. Trong tài chính, chuỗi giá thường gần với quá trình có nghiệm đơn vị, trong khi chuỗi tỷ lệ sinh lời thường ổn định hơn và vì vậy phù hợp hơn cho mô hình hóa thống kê.
 
 ```{r}
 #| label: fig-price-vs-return
@@ -70,7 +73,9 @@ Thứ hai, tỷ lệ sinh lời có tính chất thống kê thuận lợi hơn 
 #| echo: false
 #| message: false
 #| warning: false
-#| dev: cairo_pdf
+#| #dev: cairo_pdf
+#| dev: ragg_png
+#| dpi: 300
 
 library(ggplot2)
 library(dplyr)
@@ -109,13 +114,12 @@ p2 <- ggplot(prices, aes(x = t, y = 100 * log_return)) +
 
 gridExtra::grid.arrange(p1, p2, ncol = 1)
 ```
-Hình @fig-price-vs-return minh họa sự khác biệt giữa chuỗi giá và chuỗi tỷ lệ sinh lời. Chuỗi giá ở panel trên thay đổi mức nền theo thời gian và không dao động quanh một trung tâm ổn định. Trong khi đó, chuỗi log return ở panel dưới dao động quanh mức trung bình gần bằng 0, nhưng vẫn xuất hiện các giai đoạn biến động mạnh. Đây chính là lý do các mô hình biến động có điều kiện, chẳng hạn ARCH/GARCH, và các mô hình đo lường VaR thường được xây dựng trên chuỗi tỷ lệ sinh lời thay vì chuỗi giá.
 
-Thứ ba, tỷ lệ sinh lời là đại lượng phù hợp hơn để đo lường rủi ro thị trường. Rủi ro thị trường không gắn với câu hỏi “giá tài sản bằng bao nhiêu”, mà gắn với câu hỏi “giá trị vị thế có thể thay đổi bất lợi đến mức nào trong một khoảng thời gian nhất định”. Khi tính độ biến động, VaR hoặc mức độ thua lỗ ky vọng (Expected Shortfall), nhà quản trị rủi ro cần mô tả phân phối của các khoản lãi/lỗ hoặc tỷ lệ sinh lời, đặc biệt là phần đuôi trái của phân phối. Do đó, tỷ lệ sinh lời là cầu nối trực tiếp giữa dữ liệu thị trường và các thước đo rủi ro định lượng.
+Thứ tư, khi đo lường rủi ro thị trường, rủi ro thị trường không gắn với việc “giá bằng bao nhiêu”, mà gắn với việc giá có thể thay đổi bao nhiêu theo hướng bất lợi. Do đó, khi đo lường rủi ro, nhà đầu tư quan tâm tới **mức lỗ tiềm năng** của một vị thế hoặc danh mục trong một khoảng thời gian xác định với một mức tin cậy cho trước, thay vì mức biến động về giá trị tuyệt đối của tài sản.
 
-Thứ tư, tỷ lệ sinh lời thuận tiện cho việc tổng hợp theo thời gian và theo danh mục. Với tỷ lệ sinh lời giản đơn, sinh lời nhiều kỳ được liên kết theo nguyên tắc lãi kép, còn sinh lời danh mục là trung bình gia quyền của sinh lời các tài sản thành phần. Với tỷ lệ sinh lời logarit, sinh lời nhiều kỳ có thể cộng trực tiếp qua thời gian. Hai tính chất này làm cho tỷ lệ sinh lời trở thành đại lượng nền tảng trong phân tích hiệu quả đầu tư, phân bổ tài sản, mô hình hóa biến động và đo lường VaR ở cấp độ tài sản đơn lẻ cũng như danh mục.
+Thứ năm, một ưu điểm nữa của tỷ lệ sinh lời là thuận tiện khi tổng hợp theo thời gian. Với tỷ lệ sinh lời giản đơn, sinh lời nhiều kỳ được liên kết theo nguyên tắc lãi kép; còn với tỷ lệ sinh lời kép liên tục, sinh lời nhiều kỳ có thể cộng trực tiếp qua thời gian. Đây là một tính chất đặc biệt hữu ích trong phân tích chuỗi thời gian, dự báo, và mô hình hóa biến động. Đối với danh mục, tỷ lệ sinh lời cũng là đại lượng phù hợp để tổng hợp hiệu quả đầu tư từ nhiều tài sản riêng lẻ. Với tỷ lệ sinh lời giản đơn, sinh lời danh mục là trung bình gia quyền của sinh lời các tài sản thành phần. Điều này tạo nền tảng cho phân tích phân bổ tài sản, đo lường rủi ro danh mục, và tính VaR ở cấp độ danh mục đầu tư
 
-Từ các lý do trên, cuốn sách này sử dụng chuỗi tỷ lệ sinh lời làm dữ liệu đầu vào chính cho các mô hình đo lường và dự báo biến động, cũng như cho các phương pháp tính giá trị chịu rủi ro. Chuỗi giá vẫn giữ vai trò quan trọng vì là dữ liệu gốc quan sát được trên thị trường, nhưng chuỗi giá cần được chuyển đổi thành tỷ lệ sinh lời trước khi thực hiện phần lớn các phân tích rủi ro định lượng.
+Từ những lý do kể trên, với mục tiêu là đo lường và dự báo rủi ro trong hoạt động đầu tư, cuốn sách này sẽ tập trung nghiên cứu và ứng dụng các mô hình đo lường rủi ro biến động và giá trị chịu rủi ro vớ với **chuỗi tỷ lệ sinh lời**, thay vì chuỗi giá gốc của tài sản.
 
 ::: callout-note
 Giá tài sản cho biết **mức định giá tại một thời điểm**;\
@@ -124,69 +128,91 @@ Tỷ lệ sinh lời cho biết **mức thay đổi của giá trị đầu tư 
 Trong đo lường rủi ro thị trường, điều cần phân tích không phải là “giá đang là bao nhiêu” mà là “giá có thể thay đổi bất lợi đến mức nào”.
 :::
 
-### Đo lường tỷ lệ sinh lời của tài sản {#asset-return}
+### Đo lường tỷ lệ sinh lời {#asset-return}
 
 Trong phân tích tài chính, có hai thước đo tỷ lệ sinh lời được sử dụng phổ biến nhất: **tỷ lệ sinh lời giản đơn** và **tỷ lệ sinh lời kép liên tục.**
 
 Nếu giá tài sản được ký hiệu là $P_t$ tại thời điểm $t$,và giả sử tài sản không trả cổ tức trong khoảng từ $t-1$ đến $t$. Khi đó, **tỷ lệ sinh lời giản đơn** được xác định bởi
 
-$$R_t = \frac{P_t}{P_{t-1}} - 1
-= \frac{P_t - P_{t-1}}{P_{t-1}}.$$
+$$
+R_t = \frac{P_t}{P_{t-1}} - 1
+= \frac{P_t - P_{t-1}}{P_{t-1}}.
+$$
 
 Đây là đại lượng phản ánh trực tiếp mức lãi hoặc lỗ tương đối so với vốn đầu tư ban đầu trong một kỳ nắm giữ. Nếu $R_t = 0.08$, nhà đầu tư thu được 8% trong kỳ; nếu $R_t=-0.08$, nhà đầu tư chịu khoản lỗ 8%.
 
 Với tài sản có chi trả dòng tiền trung gian, chẳng hạn cổ tức tiền mặt $D_t$, công thức cần được điều chỉnh thành
 
-$$R_t = \frac{P_t + D_t}{P_{t-1}} - 1.$$
+$$
+R_t = \frac{P_t + D_t}{P_{t-1}} - 1.
+$$
 
 Nếu tài sản được nắm giữ trong $k$ kỳ, thì tỷ lệ sinh lời tích lũy được xác định
 
-$$1 + R_t[k]
+$$
+1 + R_t[k]
 =
 \frac{P_t}{P_{t-k}}
 =
-(1+R_t)(1+R_{t-1})\cdots(1+R_{t-k+1}),$$
+(1+R_t)(1+R_{t-1})\cdots(1+R_{t-k+1}),
+$$
 
 và do đó
 
-$$R_t[k] = \frac{P_t-P_{t-k}}{P_{t-k}}.$$
+$$
+R_t[k] = \frac{P_t-P_{t-k}}{P_{t-k}}.
+$$
 
 Như vậy, tỷ lệ sinh lời **không cộng trực tiếp qua thời gian**; thay vào đó, nó cộng gộp theo nguyên tắc lãi kép thông qua tích của tỷ lệ sinh lời gộp qua các thời kỳ.
 
 Một ưu điểm rất lớn của simple return là ở cấp độ danh mục: nếu danh mục có tỷ trọng $w_i$ trên tài sản $i$, thì return của danh mục đúng bằng trung bình gia quyền của các return thành phần:
 
-$$R_{p,t} = \sum_{i=1}^N w_i R_{i,t}.$$
+$$
+R_{p,t} = \sum_{i=1}^N w_i R_{i,t}.
+$$
 
 Đây là tính chất cực kỳ thuận tiện trong phân tích hiệu quả đầu tư, phân bổ tài sản, và đo lường sinh lời danh mục.
 
 Ở phương thức thứ hai, **tỷ lệ sinh lời kép liên tục** được xác định như sau:
 
-$$r_t = \ln(1+R_t) = \ln\left(\frac{P_t}{P_{t-1}}\right)
-= \ln(P_t) - \ln(P_{t-1}).$$
+$$
+r_t = \ln(1+R_t) = \ln\left(\frac{P_t}{P_{t-1}}\right)
+= \ln(P_t) - \ln(P_{t-1}).
+$$
 
 Nếu đặt $p_t = \ln(P_t)$, ta có dạng rất gọn:
 
-$$r_t = p_t - p_{t-1}.$$
+$$
+r_t = p_t - p_{t-1}.
+$$
 
 Với dữ liệu nhiều kỳ, tỷ lệ sinh lời kép liên tục có tính chất đặc biệt quan trọng:
 
-$$r_t[k] = \ln(1+R_t[k])
+$$
+r_t[k] = \ln(1+R_t[k])
 = \ln[(1+R_t)(1+R_{t-1})\cdots(1+R_{t-k+1})]
-= r_t + r_{t-1} + \cdots + r_{t-k+1}.$$
+= r_t + r_{t-1} + \cdots + r_{t-k+1}.
+$$
 
 Nói cách khác, **tỷ lệ sinh lời kép liên tục cộng được theo thời gian**. Đây là một ưu điểm then chốt trong phân tích chuỗi thời gian tài chính. Theo Tsay (xxx), hai lợi thế nổi bật của tỷ lệ sinh lời kép liên tục là: (i) tỷ lệ sinh lời nhiều kỳ là tổng các tỷ lệ sinh lời kép liên tục từng kỳ; và (ii) các tính chất thống kê của tỷ lệ sinh lời kép liên tục thuận lợi hơn cho mô hình hóa biến động thời gian của chuỗi tỷ lệ sinh lời tài sản.
 
 Với tài sản có chi trả dòng tiền $D_t$, log return được điều chỉnh thành
 
-$$r_t = \ln(P_t + D_t) - \ln(P_{t-1}).$$
+$$
+r_t = \ln(P_t + D_t) - \ln(P_{t-1}).
+$$
 
 Ngoài ra, giữa hai thước đo tồn tại quan hệ một-một:
 
-$$r_t = \ln(1+R_t), \qquad R_t = e^{r_t} - 1.$$
+$$
+r_t = \ln(1+R_t), \qquad R_t = e^{r_t} - 1.
+$$
 
 Khi mức sinh lời mỗi kỳ nhỏ, có thể dùng xấp xỉ bậc một
 
-$$r_t \approx R_t.$$
+$$
+r_t \approx R_t.
+$$
 
 Như vậy có thể thấy, về bản chất, tỷ lệ sinh lời giản đơn và tỷ lệ sinh lời kép liên tục không phải là hai khái niệm cạnh tranh tuyệt đối, mà là hai phép đo phục vụ các mục tiêu khác nhau.
 
@@ -198,71 +224,225 @@ Cuối cùng, tỷ lệ sinh lời theo ngày, tuần hoặc tháng của tài s
 
 Trong cuốn sách này, với mục tiêu là đánh giá ứng dụng các mô hình định lượng biến động, dự báo biến động tỷ lệ sinh lời và giá trị chịu rủi ro, tỷ lệ sinh lời được sử dụng chủ yếu trong cuốn sách này là tỷ lệ sinh lời kép liên tục.
 
-## Các đặc điểm thống kê của tỷ lệ sinh lời tài sản {#sec-statistical-properties}
+### Phối phối xác suất của tỷ lệ sinh lời {#sec-statistical-properties}
 
-Để thực hiện đo lường rủi ro liên quan tới biến động của tỷ lệ sinh lời tài sản, trước hết cần nhận diện các đặc phân phối điển hình của chuỗi dữ liệu này để có cơ sở lựa chọn mô hình định lượng phù hợp.
+#### Tham số phân phối của tỷ lệ sinh lời {#sec-distributional-properties-returns}
 
-### Đặc điểm phân phối của tỷ lệ sinh lời giá chứng khoán {#sec-distributional-properties-returns}
+Tỷ lệ sinh lời của chứng khoán có thể được xem là một **biến ngẫu nhiên** bởi lẽ tại mỗi thời điểm $t$ bất kỳ, tỷ lệ sinh lời là một con số không chắc chắn, phụ thuộc vào kết quả của nhiều yếu tố ngẫu nhiên như thông tin mới trên thị trường, tâm lý nhà đầu tư, biến động kinh tế vĩ mô, chính sách điều hành và các cú sốc bất thường. Do đó, để nghiên cứu biến động và rủi ro trên thị trường chứng khoán, thay vì chỉ quan sát từng giá trị riêng lẻ của tỷ lệ sinh lời, nhà nghiên cứu cần quan tâm đến **phân phối xác suất** của chuỗi tỷ lệ sinh lời.
 
-Để nghiên cứu biến động và rủi ro trên thị trường chứng khoán, trước hết cần xem tỷ lệ sinh lời như một **biến ngẫu nhiên**. Nói cách khác, tại mỗi thời điểm, tỷ lệ sinh lời không phải là một con số chắc chắn có thể biết trước, mà là kết quả của nhiều yếu tố ngẫu nhiên như thông tin mới trên thị trường, tâm lý nhà đầu tư, biến động kinh tế vĩ mô, chính sách điều hành và các cú sốc bất thường. Vì vậy, thay vì chỉ quan sát từng giá trị riêng lẻ của tỷ lệ sinh lời, nhà nghiên cứu cần quan tâm đến **phân phối xác suất** của chuỗi tỷ lệ sinh lời.
+Về mặt hình thức, nếu ký hiệu $r_t$ là tỷ lệ sinh lời tại thời điểm $t$, thì $r_t$ có thể được xem là một biến ngẫu nhiên có phân phối xác suất nào đó với hàm phân phối tích lũy:
 
-Về mặt hình thức, nếu ký hiệu (r_t) là tỷ lệ sinh lời tại thời điểm (t), thì (r_t) có thể được xem là một biến ngẫu nhiên có phân phối xác suất nào đó với hàm phân phối tích lũy:
+$$
+F(r)=P(r_t \leq r)
+$$
 
-$$F(r)=P(r_t \leq r)$$
+Hàm phân phối này cho biết xác suất để tỷ lệ sinh lời nhận giá trị nhỏ hơn hoặc bằng một mức $r_t$ bất kỳ. Nếu xét dưới góc độ trực quan, phân phối của tỷ lệ sinh lời mô tả toàn bộ cấu trúc xác suất của chuỗi, tức là cho biết tỷ lệ sinh lời thường tập trung quanh mức nào, mức độ phân tán ra sao, phân phối có cân đối hay không, và khả năng xuất hiện các biến động cực đoan lớn đến mức nào.
 
-Hàm phân phối này cho biết xác suất để tỷ lệ sinh lời nhận giá trị nhỏ hơn hoặc bằng một mức (r) bất kỳ. Nếu xét dưới góc độ trực quan, phân phối của tỷ lệ sinh lời mô tả toàn bộ cấu trúc xác suất của chuỗi, tức là cho biết tỷ lệ sinh lời thường tập trung quanh mức nào, mức độ phân tán ra sao, phân phối có cân đối hay không, và khả năng xuất hiện các biến động cực đoan lớn đến mức nào.
+Trong phân tích tài chính, việc hiểu phân phối của tỷ lệ sinh lời có ý nghĩa đặc biệt quan trọng. Thứ nhất, các mô hình đo lường biến động đều dựa trên việc mô tả hoặc dự báo mức độ phân tán của tỷ lệ sinh lời quanh giá trị trung bình. Thứ hai, các mô hình đo lường rủi ro đuôi (*tail-risk*) như giá trị chịu rủi ro (VaR - Value at Risk) hay mức thiếu hụt vốn kỳ vọng (ES - Expected Shortfall) lại đặc biệt quan tâm đến phần đuôi của phân phối, nơi phản ánh các khoản lỗ lớn có xác suất xảy ra thấp nhưng hậu quả nghiêm trọng. Vì vậy, trước khi lựa chọn mô hình đo lường mức độ biến động và giá trị chịu rủi ro, cần làm rõ các tính chất cơ bản của phân phối tỷ lệ sinh lời.
 
-Trong phân tích tài chính, việc hiểu phân phối của tỷ lệ sinh lời có ý nghĩa đặc biệt quan trọng. Thứ nhất, các mô hình đo lường biến động đều dựa trên việc mô tả hoặc dự báo mức độ phân tán của tỷ lệ sinh lời quanh giá trị trung bình. Thứ hai, các mô hình đo lường giá trị chịu rủi ro (VaR) lại đặc biệt quan tâm đến phần đuôi trái của phân phối, nơi phản ánh các khoản lỗ lớn có xác suất xảy ra thấp nhưng hậu quả nghiêm trọng. Vì vậy, trước khi lựa chọn mô hình volatility hay VaR, cần làm rõ các tính chất cơ bản của phân phối tỷ lệ sinh lời.
+#### Giá trị kỳ vọng của tỷ lệ sinh lời
 
-#### Kỳ vọng của tỷ lệ sinh lời
+Đặc trưng cơ bản đầu tiên của phân phối là **giá trị kỳ vọng** hay giá trị trung bình. Giá trị kỳ vọng của tỷ lệ sinh lời cho biết mức sinh lời trung bình mà nhà đầu tư có thể kỳ vọng nhận được trong một khoảng thời gian nhất định. Nếu $r_t$ là biến ngẫu nhiên biểu diễn tỷ lệ sinh lời, kỳ vọng của nó được ký hiệu là:
 
-Đặc trưng cơ bản đầu tiên của phân phối là **kỳ vọng** hay giá trị trung bình. Kỳ vọng của tỷ lệ sinh lời cho biết mức sinh lời trung bình mà nhà đầu tư có thể kỳ vọng nhận được trong một khoảng thời gian nhất định. Nếu (r_t) là biến ngẫu nhiên biểu diễn tỷ lệ sinh lời, kỳ vọng của nó được ký hiệu là:
+$$
+\mu = E(r_t)
+$$
 
-$$\mu = E(r_t)$$
+Trong thực nghiệm, với mẫu gồm $T$ quan sát, trung bình mẫu của tỷ lệ sinh lời được ước lượng bởi:
 
-Trong thực nghiệm, với mẫu gồm (T) quan sát, trung bình mẫu của tỷ lệ sinh lời được ước lượng bởi:
+$$
+\bar{r}=\frac{1}{T}\sum_{t=1}^{T} r_t
+$$
 
-$$\bar{r}=\frac{1}{T}\sum_{t=1}^{T} r_t$$
-
-Về mặt kinh tế, giá trị này phản ánh xu hướng sinh lời trung tâm của tài sản hoặc của chỉ số thị trường trong kỳ nghiên cứu. Tuy nhiên, đối với dữ liệu chứng khoán ở tần suất ngày, trung bình của tỷ lệ sinh lời thường khá nhỏ và ít biến động so với mức độ phân tán của chuỗi. Điều này có nghĩa là trong phân tích tài chính, đặc biệt là trong nghiên cứu rủi ro, thông tin về trung bình thường không quan trọng bằng thông tin về biến động quanh trung bình.
-
-Nói cách khác, điều mà nhà đầu tư và nhà quản trị rủi ro quan tâm không chỉ là “tỷ lệ sinh lời trung bình là bao nhiêu”, mà quan trọng hơn là “chuỗi tỷ lệ sinh lời dao động mạnh đến mức nào quanh giá trị trung bình đó”.
+Về mặt kinh tế, giá trị này phản ánh xu hướng sinh lời trung tâm của tài sản hoặc của chỉ số thị trường trong kỳ nghiên cứu. Tuy nhiên, đối với dữ liệu chứng khoán ở tần suất ngày, trung bình của tỷ lệ sinh lời thường khá nhỏ và ít biến động so với mức độ phân tán của chuỗi. Điều này có nghĩa là trong phân tích tài chính, đặc biệt là trong nghiên cứu rủi ro, thông tin về trung bình thường không quan trọng bằng thông tin về biến động quanh trung bình. Nói cách khác, điều mà nhà đầu tư và nhà quản trị rủi ro quan tâm không chỉ là “tỷ lệ sinh lời trung bình là bao nhiêu”, mà quan trọng hơn là “chuỗi tỷ lệ sinh lời dao động mạnh đến mức nào quanh giá trị trung bình đó”.
 
 #### Phương sai và độ biến động của tỷ lệ sinh lời
 
-Đặc trưng thứ hai và rất quan trọng của phân phối là **phương sai**, phản ánh mức độ phân tán của tỷ lệ sinh lời quanh kỳ vọng. Phương sai của (r_t) được xác định bởi:
+Đặc trưng thứ hai và rất quan trọng của phân phối là **phương sai**, phản ánh mức độ phân tán của tỷ lệ sinh lời quanh kỳ vọng. Phương sai của $r_t$ được xác định bởi:
 
-$$Var(r_t)=E[(r_t-\mu)^2]$$
+$$
+Var(r_t)=E[(r_t-\mu)^2]
+$$
 
 Căn bậc hai của phương sai là **độ lệch chuẩn**:
 
-$$\sigma=\sqrt{Var(r_t)}$$
+$$
+\sigma=\sqrt{Var(r_t)}
+$$
 
-Trong tài chính, độ lệch chuẩn của tỷ lệ sinh lời thường được gọi là một thước đo của **mức độ biến động** (volatility). Nếu (\sigma) lớn, tỷ lệ sinh lời dao động mạnh quanh giá trị trung bình; nếu (\sigma) nhỏ, tỷ lệ sinh lời ổn định hơn.
+Trong tài chính, độ lệch chuẩn của tỷ lệ sinh lời thường được gọi là một thước đo của **mức độ biến động** (volatility) của tỷ lệ sinh lời. Nếu $\sigma$ lớn, tỷ lệ sinh lời dao động mạnh quanh giá trị trung bình; nếu $\sigma$ nhỏ, tỷ lệ sinh lời ổn định hơn.
 
 Trong thực nghiệm, phương sai mẫu thường được ước lượng bằng:
 
-$$s^2=\frac{1}{T-1}\sum_{t=1}^{T}(r_t-\bar{r})^2$$
+$$
+s^2=\frac{1}{T-1}\sum_{t=1}^{T}(r_t-\bar{r})^2
+$$
 
 và độ lệch chuẩn mẫu là:
 
-$$s=\sqrt{\frac{1}{T-1}\sum_{t=1}^{T}(r_t-\bar{r})^2}$$
+$$
+s=\sqrt{\frac{1}{T-1}\sum_{t=1}^{T}(r_t-\bar{r})^2}
+$$
 
-Đây là đại lượng đặc biệt quan trọng vì nó gắn trực tiếp với khái niệm rủi ro thị trường. Một tài sản có tỷ lệ sinh lời trung bình cao nhưng độ biến động rất lớn chưa chắc đã hấp dẫn hơn một tài sản có mức sinh lời trung bình thấp hơn nhưng ổn định hơn. Chính vì vậy, trong phần lớn các mô hình tài chính hiện đại, biến động được xem là một thành phần trung tâm trong việc đánh giá và quản trị rủi ro.
+Đây là đại lượng gắn trực tiếp với khái niệm rủi ro thị trường. Một tài sản có tỷ lệ sinh lời trung bình cao nhưng độ biến động rất lớn chưa chắc đã hấp dẫn hơn một tài sản có mức sinh lời trung bình thấp hơn nhưng ổn định hơn. Chính vì vậy, trong phần lớn các mô hình tài chính hiện đại, biến động được xem là một thành phần trung tâm trong việc đánh giá và quản trị rủi ro.
 
-Cần lưu ý rằng trong phân tích tài chính, thuật ngữ “biến động” đôi khi được dùng theo nghĩa rộng để chỉ mức độ không chắc chắn của tỷ lệ sinh lời. Tuy nhiên, về mặt thống kê, trong cách tiếp cận cơ bản nhất, biến động thường được đo bởi độ lệch chuẩn hoặc phương sai của chuỗi tỷ lệ sinh lời.
+Để minh hoạ trực quan cho ý nghĩa của mức độ biến động, Hình @fig-minh-hoa-volatility trình bày hai chuỗi tỷ lệ sinh lời giả định có cùng giá trị kỳ vọng nhưng khác nhau về độ lệch chuẩn. Trong cả hai trường hợp, các tỷ lệ sinh lời đều dao động quanh cùng một mức trung bình, được biểu diễn bằng đường gạch ngang. Tuy nhiên, chuỗi ở hình bên trái chỉ dao động trong một khoảng tương đối hẹp quanh giá trị trung bình, trong khi chuỗi ở hình bên phải dao động mạnh hơn rõ rệt và thường xuyên xuất hiện các quan sát nằm xa mức trung bình.
+
+Sự khác biệt này cho thấy rằng giá trị kỳ vọng chỉ phản ánh mức sinh lời trung tâm của chuỗi, còn mức độ biến động mới là đại lượng cho biết mức độ bất ổn định của tỷ lệ sinh lời theo thời gian. Một chuỗi có mức độ biến động thấp thường thể hiện sự ổn định tương đối cao hơn, trong khi một chuỗi có volatility cao phản ánh mức độ rủi ro lớn hơn do tỷ lệ sinh lời biến động mạnh hơn quanh giá trị kỳ vọng. Đây cũng là lý do vì sao trong nghiên cứu tài chính, mức độ biến động được xem là một trong những thước đo quan trọng nhất của rủi ro thị trường.
+
+```{r}
+#| label: fig-minh-hoa-volatility
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Hai chuỗi tỷ lệ sinh lời có cùng giá trị kỳ vọng nhưng khác nhau về mức độ biến động."
+#| fig-width: 7.2
+#| fig-height: 3.4
+#| out-width: 100%
+#| fig-pos: "H"
+#| #dev: cairo_pdf
+#| dev: ragg_png
+#| dpi: 300
+
+library(ggplot2)
+library(patchwork)
+
+set.seed(123)
+
+base_family <- "Arial"
+
+n <- 120
+time <- 1:n
+mu <- 0.001
+sigma_low <- 0.01
+sigma_high <- 0.03
+
+returns_low <- rnorm(n, mean = mu, sd = sigma_low)
+returns_high <- rnorm(n, mean = mu, sd = sigma_high)
+
+ylim_all <- range(c(returns_low, returns_high))
+
+df_low <- data.frame(time = time, return = returns_low)
+df_high <- data.frame(time = time, return = returns_high)
+
+p1 <- ggplot(df_low, aes(x = time, y = return)) +
+  geom_line(linewidth = 0.35) +
+  geom_hline(yintercept = mu, linetype = "dashed", linewidth = 0.5) +
+  labs(
+    title = "Biến động thấp",
+    x = "Thời gian",
+    y = "Tỷ lệ sinh lời"
+  ) +
+  coord_cartesian(ylim = ylim_all) +
+  theme_minimal(base_size = 10, base_family = base_family) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 10),
+    axis.title = element_text(size = 9)
+  )
+
+p2 <- ggplot(df_high, aes(x = time, y = return)) +
+  geom_line(linewidth = 0.35) +
+  geom_hline(yintercept = mu, linetype = "dashed", linewidth = 0.5) +
+  labs(
+    title = "Biến động cao",
+    x = "Thời gian",
+    y = "Tỷ lệ sinh lời"
+  ) +
+  coord_cartesian(ylim = ylim_all) +
+  theme_minimal(base_size = 10, base_family = base_family) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 10),
+    axis.title = element_text(size = 9)
+  )
+
+p1 + p2
+```
+
+Sự khác biệt này cho thấy rằng giá trị kỳ vọng chỉ phản ánh mức sinh lời trung tâm của chuỗi, còn volatility mới là đại lượng cho biết mức độ bất ổn định của tỷ lệ sinh lời theo thời gian. Một chuỗi có volatility thấp thường thể hiện sự ổn định tương đối cao hơn, trong khi một chuỗi có volatility cao phản ánh mức độ rủi ro lớn hơn do tỷ lệ sinh lời biến động mạnh hơn quanh giá trị kỳ vọng. Đây cũng là lý do vì sao trong nghiên cứu tài chính, volatility được xem là một trong những thước đo quan trọng nhất của rủi ro thị trường.
 
 #### Độ lệch của phân phối tỷ lệ sinh lời
 
 Ngoài trung bình và phương sai, hình dạng của phân phối còn được mô tả bởi **độ lệch** (skewness). Độ lệch phản ánh mức độ bất đối xứng của phân phối quanh giá trị trung tâm. Công thức độ lệch lý thuyết là:
 
-$$Skewness=\frac{E[(r_t-\mu)^3]}{\sigma^3}$$
+$$
+Skewness=\frac{E[(r_t-\mu)^3]}{\sigma^3}
+$$
 
 Trong thực nghiệm, độ lệch mẫu có thể được tính xấp xỉ bằng:
 
-$$Skewness=\frac{\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^3}{\left[\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^2\right]^{3/2}}$$
+$$
+Skewness=\frac{\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^3}{\left[\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^2\right]^{3/2}}
+$$
 
 Nếu độ lệch bằng 0, phân phối được xem là đối xứng quanh trung tâm. Nếu độ lệch âm, phân phối lệch trái, tức là phần đuôi bên trái dài hơn hoặc dày hơn; nếu độ lệch dương, phân phối lệch phải.
+
+Để minh hoạ trực quan cho độ lệch của phân phối, Hình @fig-minh-hoa-skewness trình bày hai phân phối có hình dạng bất đối xứng khác nhau. Ở hình bên trái, phân phối lệch trái, tức là phần đuôi bên trái kéo dài hơn; điều này hàm ý rằng các giá trị tỷ lệ sinh lời âm lớn có xác suất xuất hiện tương đối cao hơn. Ngược lại, ở hình bên phải, phân phối lệch phải, tức là phần đuôi bên phải kéo dài hơn; điều này cho thấy các giá trị tỷ lệ sinh lời dương lớn có khả năng xuất hiện nhiều hơn tương đối so với trường hợp đối xứng.
+
+```{r}
+#| label: fig-minh-hoa-skewness
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Minh hoạ phân phối lệch trái và lệch phải."
+#| fig-width: 7.2
+#| fig-height: 3.4
+#| out-width: 100%
+#| fig-pos: "H"
+#| #dev: cairo_pdf
+#| dev: ragg_png
+#| dpi: 300
+
+library(ggplot2)
+library(patchwork)
+library(sn)
+
+set.seed(123)
+base_family <- "Arial"
+
+x <- seq(-4, 4, length.out = 500)
+
+# Phân phối lệch trái
+y_left <- dsn(x, xi = 0, omega = 1, alpha = -6)
+df_left <- data.frame(x = x, density = y_left)
+
+# Phân phối lệch phải
+y_right <- dsn(x, xi = 0, omega = 1, alpha = 6)
+df_right <- data.frame(x = x, density = y_right)
+
+ylim_all <- range(c(y_left, y_right))
+
+p1 <- ggplot(df_left, aes(x = x, y = density)) +
+  geom_line(linewidth = 0.6) +
+  geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.5) +
+  labs(
+    title = "Phân phối lệch trái",
+    x = "Tỷ lệ sinh lời",
+    y = "Mật độ xác suất"
+  ) +
+  coord_cartesian(ylim = ylim_all) +
+  theme_minimal(base_size = 10, base_family = base_family) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 10),
+    axis.title = element_text(size = 9)
+  )
+
+p2 <- ggplot(df_right, aes(x = x, y = density)) +
+  geom_line(linewidth = 0.6) +
+  geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.5) +
+  labs(
+    title = "Phân phối lệch phải",
+    x = "Tỷ lệ sinh lời",
+    y = "Mật độ xác suất"
+  ) +
+  coord_cartesian(ylim = ylim_all) +
+  theme_minimal(base_size = 10, base_family = base_family) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 10),
+    axis.title = element_text(size = 9)
+  )
+
+p1 + p2
+```
 
 Trong bối cảnh thị trường chứng khoán, độ lệch có ý nghĩa thực tiễn lớn. Phân phối lệch trái hàm ý rằng các mức sinh lời âm lớn có khả năng xuất hiện đáng kể hơn so với các mức sinh lời dương lớn. Điều này đặc biệt quan trọng đối với quản trị rủi ro vì các khoản lỗ lớn thường liên quan đến phần đuôi trái của phân phối.
 
@@ -270,255 +450,562 @@ Trong bối cảnh thị trường chứng khoán, độ lệch có ý nghĩa th
 
 Bên cạnh độ lệch, **độ nhọn** (kurtosis) được dùng để phản ánh mức độ tập trung của phân phối quanh trung tâm và mức độ dày của hai đuôi phân phối. Độ nhọn lý thuyết được xác định bởi:
 
-$$Kurtosis=\frac{E[(r_t-\mu)^4]}{\sigma^4}$$
+$$
+Kurtosis=\frac{E[(r_t-\mu)^4]}{\sigma^4}
+$$
 
 Trong thực nghiệm, độ nhọn mẫu được tính như sau:
 
-$$Kurtosis=\frac{\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^4}{\left[\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^2\right]^2}$$
+$$
+Kurtosis=\frac{\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^4}{\left[\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^2\right]^2}
+$$
 
-Đối với phân phối chuẩn, độ nhọn bằng 3. Nếu độ nhọn lớn hơn 3, phân phối được xem là có **đuôi dày** và **đỉnh nhọn hơn** phân phối chuẩn. Điều này có nghĩa là xác suất xuất hiện các giá trị cực đoan, đặc biệt là các mức tăng hoặc giảm rất mạnh, lớn hơn so với trường hợp chuẩn tắc.
+Đối với phân phối chuẩn, độ nhọn bằng 3. Nếu độ nhọn lớn hơn 3, phân phối được xem là có **đuôi dày** và **đỉnh nhọn hơn** phân phối chuẩn. Điều này có nghĩa là xác suất xuất hiện các giá trị cực đoan, đặc biệt là các mức tăng hoặc giảm rất mạnh, lớn hơn so với trường hợp chuẩn tắc. Để minh hoạ trực quan cho độ nhọn của phân phối, Hình @fig-minh-hoa-kurtosis so sánh phân phối chuẩn với một phân phối có đuôi dày hơn phân phối chuẩn. Cả hai phân phối đều đối xứng quanh giá trị trung tâm, nhưng phân phối có đuôi dày thể hiện đỉnh nhọn hơn ở khu vực trung tâm và xác suất lớn hơn ở các vùng xa trung tâm. Điều này hàm ý rằng xác suất xuất hiện các giá trị tỷ lệ sinh lời cực đoan, đặc biệt là những phiên tăng mạnh hoặc giảm mạnh, lớn hơn so với trường hợp phân phối chuẩn.
+
+```{r}
+#| label: fig-minh-hoa-kurtosis
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "So sánh phân phối chuẩn và phân phối có đuôi dày hơn phân phối chuẩn."
+#| fig-width: 7.0
+#| fig-height: 4.0
+#| out-width: 100%
+#| fig-pos: "H"
+#| #dev: cairo_pdf
+#| dev: ragg_png
+#| dpi: 300
+library(ggplot2)
+
+x <- seq(-5, 5, length.out = 1000)
+base_family <- "Arial"
+
+# Phân phối chuẩn chuẩn hoá
+y_norm <- dnorm(x, mean = 0, sd = 1)
+
+# Phân phối Student-t có đuôi dày hơn
+df_t <- 8
+scale_t <- sqrt((df_t - 2) / df_t)
+y_t <- dt(x / scale_t, df = df_t) / scale_t
+
+df_plot <- data.frame(
+  x = rep(x, 2),
+  density = c(y_norm, y_t),
+  distribution = factor(
+    c(rep("Phân phối chuẩn", length(x)),
+      rep("Phân phối đuôi dày", length(x))),
+    levels = c("Phân phối chuẩn", "Phân phối đuôi dày")
+  )
+)
+
+ggplot(df_plot, aes(x = x, y = density, linetype = distribution)) +
+  geom_line(linewidth = 0.7) +
+  labs(
+    x = "Tỷ lệ sinh lời",
+    y = "Mật độ xác suất",
+    linetype = NULL
+  ) +
+  theme_minimal(base_size = 10, base_family = base_family) +
+  theme(
+    legend.position = "bottom",
+    axis.title = element_text(size = 9)
+  )
+```
 
 Đây là đặc điểm rất quan trọng của dữ liệu tài chính. Nếu nhà nghiên cứu giả định phân phối chuẩn trong khi dữ liệu thực tế có đuôi dày, thì xác suất xảy ra các biến động cực đoan sẽ bị đánh giá thấp. Hệ quả là các mô hình đo lường rủi ro, đặc biệt là VaR, có thể đưa ra kết quả quá lạc quan.
 
-#### Phân phối chuẩn như một điểm tham chiếu
-
-Trong nhiều mô hình cơ bản, tỷ lệ sinh lời thường được giả định là có phân phối chuẩn:
-
-$$r_t \sim N(\mu,\sigma^2)$$
-
-Giả định này có ưu điểm là đơn giản, dễ diễn giải và thuận tiện cho tính toán. Dưới giả định chuẩn, phân phối tỷ lệ sinh lời được mô tả hoàn toàn bởi hai tham số: trung bình (\mu) và độ lệch chuẩn (\sigma). Nếu biết hai tham số này, ta có thể xác định xác suất để tỷ lệ sinh lời rơi vào một khoảng giá trị nhất định.
-
-Tuy nhiên, trong thực tế, phân phối chuẩn chỉ nên được xem là một **điểm tham chiếu ban đầu**, chứ không phải luôn là mô tả phù hợp cho dữ liệu tỷ lệ sinh lời chứng khoán. Các nghiên cứu thực nghiệm thường cho thấy chuỗi tỷ lệ sinh lời có độ lệch khác 0, độ nhọn lớn hơn 3, và có xác suất xảy ra các biến động cực đoan lớn hơn dự báo từ phân phối chuẩn.
-
-Do đó, khi phân tích dữ liệu tài chính, nhà nghiên cứu thường bắt đầu bằng việc so sánh phân phối thực nghiệm của tỷ lệ sinh lời với phân phối chuẩn, từ đó đánh giá xem giả định chuẩn có phù hợp hay không.
-
-#### Phân phối có điều kiện của tỷ lệ sinh lời
-
-Phần trình bày ở trên chủ yếu xem tỷ lệ sinh lời như một biến ngẫu nhiên có một phân phối xác suất tổng quát, tức là xét theo nghĩa **phân phối vô điều kiện**. Tuy nhiên, trong tài chính định lượng, cách nhìn này mới chỉ phản ánh bức tranh trung bình của toàn bộ chuỗi, mà chưa phản ánh đầy đủ trạng thái thông tin của thị trường tại từng thời điểm.
-
-Trên thực tế, nhà đầu tư và nhà quản trị rủi ro không quan tâm nhiều đến câu hỏi: “Tỷ lệ sinh lời nói chung có phân phối như thế nào trong toàn bộ giai đoạn quan sát?”, mà quan tâm hơn đến câu hỏi: “Với tất cả thông tin hiện có đến thời điểm (t-1), tỷ lệ sinh lời tại thời điểm (t) sẽ có phân phối như thế nào?”. Câu hỏi thứ hai dẫn đến khái niệm **phân phối có điều kiện**.
-
-Ký hiệu $\mathcal{F}_{t-1}$ là tập thông tin sẵn có tại thời điểm (t-1), bao gồm toàn bộ các giá trị quá khứ của tỷ lệ sinh lời, các cú sốc trước đó, và trong một số trường hợp có thể bao gồm thêm các biến giải thích khác. Khi đó, phân phối có điều kiện của tỷ lệ sinh lời tại thời điểm (t) được ký hiệuR là:
-
-$$r_t \mid \mathcal{F}_{t-1}$$
-
-hoặc biểu diễn bằng hàm phân phối có điều kiện:
-
-$$F_t(r \mid \mathcal{F}_{t-1}) = P(r_t \leq r \mid \mathcal{F}_{t-1})$$
-
-Biểu thức này cho biết xác suất để tỷ lệ sinh lời tại thời điểm (t) nhỏ hơn hoặc bằng một mức (r), với điều kiện đã biết toàn bộ thông tin đến thời điểm (t-1).
-
-Khái niệm phân phối có điều kiện có ý nghĩa rất quan trọng trong tài chính, vì thị trường chứng khoán không vận động trong một môi trường tĩnh. Cùng một mức tỷ lệ sinh lời kỳ vọng, nhưng nếu thị trường vừa trải qua một giai đoạn biến động mạnh thì rủi ro trong ngày tiếp theo có thể rất khác so với khi thị trường đang ổn định. Nói cách khác, **phân phối của tỷ lệ sinh lời không chỉ phụ thuộc vào bản thân tài sản, mà còn phụ thuộc vào trạng thái thông tin hiện hành của thị trường**.
-
-Từ phân phối có điều kiện, ta có thể xác định các đặc trưng có điều kiện quan trọng.
-
-Thứ nhất, **kỳ vọng có điều kiện** của tỷ lệ sinh lời tại thời điểm (t) là:
-
-$$E(r_t \mid \mathcal{F}_{t-1}) = \mu_t$$
-
-Đại lượng này phản ánh mức sinh lời trung bình kỳ vọng tại thời điểm (t), khi đã biết thông tin quá khứ.
-
-Thứ hai, **phương sai có điều kiện** của tỷ lệ sinh lời là:
-
-$$Var(r_t \mid \mathcal{F}_{t-1}) = \sigma_t^2$$
-
-Đây là đại lượng đặc biệt quan trọng, vì nó đo lường mức độ biến động của tỷ lệ sinh lời tại thời điểm (t) trong điều kiện đã biết trạng thái thông tin hiện tại. Căn bậc hai của nó, (\sigma\_t), thường được gọi là **độ biến động có điều kiện** (conditional volatility).
-
-Từ đó, có thể biểu diễn tỷ lệ sinh lời dưới dạng tổng quát:
-
-$$r_t = \mu_t + \varepsilon_t$$
-
-trong đó
-
-$$\varepsilon_t = \sigma_t z_t$$
-
-với (z_t) là nhiễu chuẩn hóa thỏa mãn:
-
-$$E(z_t \mid \mathcal{F}_{t-1}) = 0, \qquad Var(z_t \mid \mathcal{F}_{t-1}) = 1$$
-
-Biểu diễn này rất quan trọng vì nó cho thấy chuỗi tỷ lệ sinh lời có thể được tách thành hai phần: phần trung bình có điều kiện (\mu\_t) và phần sai số ngẫu nhiên (\varepsilon\_t), trong đó mức độ dao động của sai số được quyết định bởi (\sigma\_t). Nếu (\sigma\_t) thay đổi theo thời gian, thì rủi ro của thị trường cũng thay đổi theo thời gian.
-
-Chính từ đây, ta có nền tảng cho các mô hình volatility hiện đại. Các mô hình ARCH và GARCH không cố gắng mô hình hóa toàn bộ phân phối vô điều kiện của tỷ lệ sinh lời, mà tập trung vào việc mô hình hóa **phương sai có điều kiện** (\sigma\_t\^2). Nói cách khác, các mô hình này trả lời câu hỏi: với thông tin hiện có, mức độ biến động của tỷ lệ sinh lời trong kỳ tiếp theo sẽ là bao nhiêu?
-
-Tương tự, các mô hình VaR hiện đại cũng dựa trên tư tưởng phân phối có điều kiện. Nếu (q\_{\alpha,t}) là phân vị bậc (\alpha) của phân phối có điều kiện của (r_t), thì VaR có điều kiện tại mức ý nghĩa (\alpha) có thể được xây dựng từ chính phân vị này. Về bản chất, VaR không còn là một con số cố định cho mọi thời kỳ, mà là một đại lượng biến đổi theo trạng thái thông tin và mức độ biến động của thị trường.
-
-Cần phân biệt rõ giữa **phân phối vô điều kiện** và **phân phối có điều kiện**. Phân phối vô điều kiện mô tả đặc điểm chung của toàn bộ chuỗi trong cả giai đoạn nghiên cứu, chẳng hạn như trung bình chung, độ lệch chung và độ nhọn chung. Trong khi đó, phân phối có điều kiện phản ánh hành vi của tỷ lệ sinh lời tại một thời điểm cụ thể, khi đã xét đến thông tin quá khứ. Chính vì vậy, nếu mục tiêu là đo lường rủi ro theo thời gian thực hoặc dự báo rủi ro ngắn hạn, thì phân phối có điều kiện là khái niệm phù hợp hơn nhiều so với phân phối vô điều kiện.
-
-Tóm lại, việc đưa vào khái niệm phân phối có điều kiện cho phép chuyển từ cách nhìn thống kê tĩnh sang cách nhìn động đối với tỷ lệ sinh lời. Đây là bước chuyển rất quan trọng, vì toàn bộ các mô hình volatility và VaR trong các chương sau thực chất đều xoay quanh việc ước lượng và dự báo các đặc trưng của phân phối có điều kiện, đặc biệt là kỳ vọng có điều kiện, phương sai có điều kiện và các phân vị có điều kiện của tỷ lệ sinh lời.
-
-#### Các đặc điểm phân phối điển hình của tỷ lệ sinh lời chứng khoán
-
-Từ góc độ thực nghiệm, chuỗi tỷ lệ sinh lời trên thị trường chứng khoán thường bộc lộ một số đặc điểm phân phối điển hình.
-
-Thứ nhất, tỷ lệ sinh lời thường có **giá trị trung bình nhỏ**, đặc biệt ở tần suất ngày. Điều này cho thấy phần lớn thông tin đáng quan tâm không nằm ở mức trung bình mà nằm ở sự dao động quanh trung bình.
-
-Thứ hai, phân phối của tỷ lệ sinh lời thường **không tuân theo phân phối chuẩn**, mà có xu hướng **lệch** và **đuôi dày**. Điều này phản ánh thực tế rằng thị trường chứng khoán có thể xuất hiện các phiên tăng mạnh hoặc giảm mạnh với xác suất cao hơn nhiều so với dự đoán từ mô hình chuẩn.
-
-Thứ ba, mức độ phân tán của tỷ lệ sinh lời thường **không ổn định theo thời gian**. Nói cách khác, biến động của tỷ lệ sinh lời có thể tăng mạnh trong các giai đoạn khủng hoảng, bất ổn chính sách hoặc cú sốc thông tin, rồi giảm trở lại trong các giai đoạn thị trường ổn định hơn.
-
-Thứ tư, các giai đoạn biến động lớn thường có xu hướng tập trung thành cụm. Điều này hàm ý rằng sau một cú sốc lớn, thị trường thường không quay lại trạng thái bình thường ngay lập tức, mà mức độ biến động cao có thể kéo dài trong một khoảng thời gian.
-
-Những đặc điểm trên cho thấy việc mô tả phân phối của tỷ lệ sinh lời chỉ bằng trung bình và phương sai cố định là chưa đủ. Cần có các mô hình linh hoạt hơn để phản ánh sự thay đổi của biến động theo thời gian cũng như hành vi của phần đuôi phân phối.
-
-#### Một số kiểm định thực nghiệm về phân phối tỷ lệ sinh lời
-
-Trong nghiên cứu thực nghiệm, các đặc điểm phân phối nêu trên thường được xem xét thông qua thống kê mô tả và một số kiểm định. Chẳng hạn, để đánh giá mức độ lệch và nhọn của phân phối, nhà nghiên cứu thường tính hệ số skewness và kurtosis. Để kiểm tra giả thuyết phân phối chuẩn, một kiểm định phổ biến là kiểm định Jarque–Bera:
-
-$$JB=\frac{T}{6}\left(S^2+\frac{(K-3)^2}{4}\right)$$
-
-trong đó (S) là độ lệch mẫu và (K) là độ nhọn mẫu. Nếu giá trị (JB) đủ lớn, giả thuyết phân phối chuẩn sẽ bị bác bỏ.
-
-Kiểm định này đặc biệt hữu ích trong giai đoạn khảo sát dữ liệu ban đầu vì nó giúp xác định liệu có thể sử dụng giả định chuẩn trong các mô hình tiếp theo hay không. Nếu dữ liệu bác bỏ mạnh giả định chuẩn, nhà nghiên cứu thường phải cân nhắc các phân phối thay thế hoặc các mô hình có khả năng phản ánh tốt hơn đặc điểm đuôi dày của chuỗi tỷ lệ sinh lời.
-
-#### Ý nghĩa của việc nghiên cứu phân phối tỷ lệ sinh lời
-
-Việc nghiên cứu phân phối của tỷ lệ sinh lời có ý nghĩa nền tảng đối với toàn bộ phân tích tài chính định lượng. Trước hết, các đặc trưng như trung bình, phương sai, độ lệch và độ nhọn giúp mô tả một cách hệ thống bản chất thống kê của dữ liệu. Tiếp theo, chính các đặc điểm này định hướng cho việc lựa chọn mô hình phù hợp trong các chương sau.
-
-Nếu chuỗi tỷ lệ sinh lời có phương sai thay đổi theo thời gian, thì các mô hình volatility động như ARCH/GARCH sẽ phù hợp hơn các mô hình phương sai không đổi. Nếu phân phối có đuôi dày hoặc lệch mạnh, thì các mô hình VaR dựa trên giả định chuẩn đơn giản có thể không còn phù hợp. Như vậy, phân tích phân phối không chỉ là bước mô tả dữ liệu, mà còn là cơ sở để lựa chọn công cụ đo lường rủi ro thích hợp.
-
-Tóm lại, có thể xem phân phối của tỷ lệ sinh lời là “bức tranh thống kê tổng quát” về hành vi của chuỗi. Hiểu được bức tranh đó là điều kiện tiên quyết để đi tiếp sang nghiên cứu biến động tỷ lệ sinh lời và giá trị chịu rủi ro.
-
-### Đặc điểm phân phối của tỷ lệ sinh lời giá chứng khoán {#sec-distributional-properties-returns}
-
-Trong phân tích tài chính và kinh tế lượng tài chính, tỷ lệ sinh lời giá chứng khoán thường được xem là biến số trung tâm thay vì mức giá chứng khoán. Không chỉ phản ánh trực tiếp mức lãi hoặc lỗ của nhà đầu tư trong một khoảng thời gian nhất định, tỷ lệ sinh lời còn là cơ sở để xây dựng các mô hình đo lường biến động và rủi ro thị trường. Tuy nhiên, khác với nhiều biến kinh tế vĩ mô thông thường, tỷ lệ sinh lời giá chứng khoán thường có những đặc điểm phân phối rất riêng. Chính các đặc điểm này làm cho việc mô hình hóa chuỗi tỷ lệ sinh lời trở thành một chủ đề quan trọng trong tài chính hiện đại.
-
-Về mặt khái quát, nếu ký hiệu (P_t) là mức giá chứng khoán tại thời điểm (t), thì tỷ lệ sinh lời giản đơn trong kỳ ((t-1,t)) được xác định bởi:
-
-$$R_t=\frac{P_t-P_{t-1}}{P_{t-1}}=\frac{P_t}{P_{t-1}}-1$$
-
-Trong khi đó, tỷ lệ sinh lời kép liên tục, hay còn gọi là log-return, được xác định bởi:
-
-$$r_t=\ln\left(\frac{P_t}{P_{t-1}}\right)$$
-
-Trong thực nghiệm tài chính, đặc biệt là khi nghiên cứu biến động và giá trị chịu rủi ro, log-return thường được sử dụng phổ biến hơn do có nhiều tính chất thuận lợi về mặt thống kê và cộng gộp theo thời gian. Dù sử dụng dạng nào, các chuỗi tỷ lệ sinh lời trên thị trường chứng khoán thường bộc lộ một số đặc điểm phân phối cơ bản như sau.
+### Một số đặc điểm phân phối điển hình của tỷ lệ sinh lời chứng khoán
 
 #### Tỷ lệ sinh lời dao động quanh một giá trị trung bình nhỏ
 
 Một trong những đặc điểm thường gặp nhất của chuỗi tỷ lệ sinh lời là giá trị trung bình theo thời gian thường khá nhỏ, đặc biệt nếu xét ở tần suất ngày. Nói cách khác, phần lớn biến động của chuỗi không đến từ sự thay đổi của giá trị trung bình mà đến từ sự thay đổi về mức độ phân tán xung quanh trung bình đó.
 
-Nếu có (T) quan sát của chuỗi tỷ lệ sinh lời ({r_t}\_{t=1}\^T), trung bình mẫu được tính như sau:
+Nếu có $T$ quan sát của chuỗi tỷ lệ sinh lời $\{r_t\}_{t=1}^T$, trung bình mẫu được tính như sau:
 
-$$\bar{r}=\frac{1}{T}\sum_{t=1}^{T} r_t$$
+$$
+\bar{r}=\frac{1}{T}\sum_{t=1}^{T} r_t
+$$
 
-Trên thực tế, đối với dữ liệu ngày của các chỉ số chứng khoán, giá trị $(\bar{r})$) thường rất nhỏ so với độ lệch chuẩn của chuỗi. Điều này hàm ý rằng nếu chỉ nhìn vào giá trị trung bình thì khó có thể nhận diện được đầy đủ bản chất rủi ro của chuỗi tỷ lệ sinh lời. Trái lại, sự quan tâm cần đặt nhiều hơn vào mức độ biến động của chuỗi.
+Trên thực tế, đối với dữ liệu ngày của các chỉ số chứng khoán, giá trị $\bar{r}$ thường rất nhỏ so với độ lệch chuẩn của chuỗi. Điều này hàm ý rằng nếu chỉ nhìn vào giá trị trung bình thì khó có thể nhận diện được đầy đủ bản chất rủi ro của chuỗi tỷ lệ sinh lời. Trái lại, sự quan tâm cần đặt nhiều hơn vào mức độ biến động của chuỗi.
 
-Về trực giác kinh tế, điều này phản ánh thực tế rằng giá chứng khoán có thể tăng và giảm liên tục qua từng ngày, làm cho các mức sinh lời dương và âm phần nào triệt tiêu lẫn nhau khi lấy trung bình. Tuy nhiên, mức độ dao động quanh trung bình lại có thể rất lớn, đặc biệt trong các giai đoạn thị trường bất ổn.
+Về ý nghĩa kinh tế, điều này phản ánh thực tế rằng giá chứng khoán có thể tăng và giảm liên tục qua từng ngày, làm cho các mức sinh lời dương và âm phần nào triệt tiêu lẫn nhau khi lấy trung bình. Tuy nhiên, mức độ dao động quanh trung bình lại có thể rất lớn, đặc biệt trong các giai đoạn thị trường bất ổn.
 
 #### Phân phối của tỷ lệ sinh lời thường không tuân theo phân phối chuẩn
 
-Trong nhiều mô hình đơn giản, người ta thường giả định rằng tỷ lệ sinh lời có phân phối chuẩn. Nếu điều này đúng, chuỗi tỷ lệ sinh lời có thể được mô tả như:
+Trong nhiều mô hình cơ bản, tỷ lệ sinh lời thường được giả định là có phân phối chuẩn:
 
-$$r_t \sim N(\mu,\sigma^2)$$
+$$
+r_t \sim N(\mu,\sigma^2)
+$$
 
-trong đó (\mu) là kỳ vọng và (\sigma\^2) là phương sai. Tuy nhiên, bằng chứng thực nghiệm trên các thị trường chứng khoán thường cho thấy giả định này chỉ mang tính xấp xỉ thô sơ. Phân phối thực tế của tỷ lệ sinh lời thường có **đỉnh cao hơn** và **đuôi dày hơn** so với phân phối chuẩn.
+Giả định này có ưu điểm là đơn giản, dễ diễn giải và thuận tiện cho tính toán. Dưới giả định chuẩn, phân phối tỷ lệ sinh lời được mô tả hoàn toàn bởi hai tham số: trung bình $\mu$ và độ lệch chuẩn $\sigma$. Nếu biết hai tham số này, ta có thể xác định xác suất để tỷ lệ sinh lời rơi vào một khoảng giá trị nhất định.
 
-Để nhận diện điều này, hai đại lượng thống kê thường được sử dụng là **độ lệch** và **độ nhọn**.
-
-Độ lệch mẫu được xác định bởi:
-
-$$Skewness=\frac{\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^3}{\left[\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^2\right]^{3/2}}$$
-
-Độ nhọn mẫu được xác định bởi:
-
-$$Kurtosis=\frac{\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^4}{\left[\frac{1}{T}\sum_{t=1}^{T}(r_t-\bar{r})^2\right]^2}$$
-
-Đối với phân phối chuẩn, độ lệch bằng 0 và độ nhọn bằng 3. Trong thực tế, nhiều chuỗi tỷ lệ sinh lời chứng khoán có độ nhọn lớn hơn 3, hiện tượng này được gọi là **phân phối nhọn** hay **đuôi dày**. Điều đó có nghĩa là xác suất xảy ra các biến động cực đoan, cả tăng mạnh lẫn giảm mạnh, lớn hơn so với dự đoán từ phân phối chuẩn.
-
-Đặc điểm này có ý nghĩa rất quan trọng. Nếu vẫn giả định phân phối chuẩn khi chuỗi thực tế có đuôi dày, nhà nghiên cứu có thể đánh giá thấp xác suất xuất hiện các khoản lỗ lớn. Đây chính là một trong những lý do khiến các mô hình đo lường rủi ro hiện đại thường mở rộng từ phân phối chuẩn sang các phân phối như Student-(t), GED hoặc các tiếp cận cực trị.
-
-#### Phân phối của tỷ lệ sinh lời có thể bất đối xứng
-
-Ngoài hiện tượng đuôi dày, chuỗi tỷ lệ sinh lời còn có thể có **phân phối bất đối xứng**. Điều này có nghĩa là các biến động dương và biến động âm không xuất hiện với cấu trúc xác suất giống nhau.
-
-Độ lệch (Skewness) là thước đo phản ánh tính bất đối xứng của phân phối:
-
-- Nếu (Skewness \> 0), phân phối lệch phải, tức là đuôi phải dài hơn.
-- Nếu (Skewness \< 0), phân phối lệch trái, tức là đuôi trái dài hơn.
-- Nếu (Skewness = 0), phân phối có tính đối xứng.
-
-Trong dữ liệu chứng khoán, đặc biệt ở các thị trường mới nổi, phân phối tỷ lệ sinh lời thường có xu hướng lệch trái. Điều này hàm ý rằng những phiên giảm sâu có thể xảy ra đột ngột và mạnh hơn so với các phiên tăng mạnh cùng cường độ. Về mặt quản trị rủi ro, đây là một đặc điểm rất đáng chú ý vì phần đuôi trái của phân phối chính là khu vực liên quan trực tiếp đến các khoản lỗ cực đoan.
-
-Trong bối cảnh nghiên cứu VaR, nếu phân phối có lệch trái đáng kể mà mô hình lại áp dụng giả định đối xứng, kết quả ước lượng rủi ro có thể bị sai lệch đáng kể, đặc biệt ở các mức xác suất thấp như 1% hoặc 5%.
+Tuy nhiên, trong thực tế, phân phối chuẩn chỉ nên được xem là một **điểm tham chiếu ban đầu**, chứ không phải luôn là mô tả phù hợp cho dữ liệu tỷ lệ sinh lời chứng khoán. Nhiều chuỗi tỷ lệ sinh lời chứng khoán có độ nhọn lớn hơn 3, hiện tượng này được gọi là **phân phối nhọn** hay **đuôi dày**. Điều đó có nghĩa là xác suất xảy ra các biến động cực đoan, cả tăng mạnh lẫn giảm mạnh, lớn hơn so với dự đoán từ phân phối chuẩn. Đặc điểm này có ý nghĩa rất quan trọng. Nếu vẫn giả định phân phối chuẩn khi chuỗi thực tế có đuôi dày, nhà nghiên cứu có thể đánh giá thấp xác suất xuất hiện các khoản lỗ lớn. Đây chính là một trong những lý do khiến các mô hình đo lường rủi ro hiện đại thường mở rộng từ phân phối chuẩn sang các phân phối như Student-(t), GED hoặc các tiếp cận cực trị.
 
 #### Chuỗi tỷ lệ sinh lời thường ít tự tương quan tuyến tính, nhưng bình phương tỷ lệ sinh lời lại có tự tương quan
 
-Một đặc điểm nổi bật khác của chuỗi tỷ lệ sinh lời là bản thân tỷ lệ sinh lời thường có mức tự tương quan tuyến tính thấp, đặc biệt trên dữ liệu ngày. Hệ số tự tương quan bậc (k) của chuỗi tỷ lệ sinh lời được xác định bởi:
+Một đặc điểm rất quan trọng của chuỗi tỷ lệ sinh lời là: bản thân tỷ lệ sinh lời thường ít có tự tương quan tuyến tính, nhưng bình phương tỷ lệ sinh lời lại thường có tự tương quan dương. Điều này có nghĩa là rất khó dự báo trực tiếp xem tỷ lệ sinh lời của phiên tiếp theo sẽ dương hay âm chỉ dựa trên các phiên trước đó. Nói cách khác, thị trường thường không cho thấy một quy luật rõ ràng theo kiểu “hôm nay tăng thì ngày mai cũng tăng” hoặc “hôm nay giảm thì ngày mai cũng giảm”.
 
-$$\rho_k=\frac{\sum_{t=k+1}^{T}(r_t-\bar{r})(r_{t-k}-\bar{r})}{\sum_{t=1}^{T}(r_t-\bar{r})^2}$$
+Tuy nhiên, nếu xét đến độ lớn của biến động thay vì dấu của tỷ lệ sinh lời, ta lại thường quan sát thấy một quy luật rõ hơn. Cụ thể, những giai đoạn thị trường biến động mạnh thường kéo dài qua nhiều phiên liên tiếp, còn những giai đoạn thị trường yên ắng cũng có xu hướng tiếp diễn trong một khoảng thời gian. Vì vậy, mặc dù khó dự báo chiều biến động của tỷ lệ sinh lời, ta lại có thể dự báo phần nào mức độ biến động của nó.
 
-Trong nhiều trường hợp, các hệ số tự tương quan của chuỗi (r_t) không lớn và không có ý nghĩa thống kê rõ rệt. Điều này hàm ý rằng việc dự báo trực tiếp chiều tăng hay giảm của tỷ lệ sinh lời trong ngắn hạn là rất khó.
+Đặc điểm này hàm ý rằng khả năng dự báo trong dữ liệu tài chính chủ yếu nằm ở phương sai hơn là ở trung bình. Đây cũng là cơ sở thực nghiệm quan trọng dẫn đến sự phát triển của các mô hình ARCH, GARCH và các mô hình đo lường biến động có điều kiện khác sẽ được mô tả ở chương sau.
 
-Tuy nhiên, nếu thay chuỗi (r_t) bằng chuỗi (r_t\^2) hoặc (\|r_t\|), người ta thường quan sát thấy tự tương quan dương khá rõ. Điều này có nghĩa là mặc dù khó dự báo dấu của tỷ lệ sinh lời, nhưng lại có thể dự báo phần nào **mức độ biến động** của nó. Nói cách khác, các giai đoạn biến động mạnh thường đi liền với nhau, và các giai đoạn biến động thấp cũng có xu hướng kéo dài thành cụm.
+Để minh hoạ trực quan cho đặc điểm này, @fig-minh-hoa-acf-returns trình bày chuỗi tỷ lệ sinh lời và bình phương tỷ lệ sinh lời theo thời gian. Trong khi chuỗi tỷ lệ sinh lời dao động lên xuống khá thất thường và khó nhận ra quy luật rõ ràng về dấu, thì chuỗi bình phương tỷ lệ sinh lời lại cho thấy các cụm biến động lớn và nhỏ xuất hiện nối tiếp nhau. Nói cách khác, thị trường thường khó dự báo theo hướng tăng hay giảm, nhưng lại dễ nhận thấy trạng thái biến động mạnh hay yếu kéo dài trong một khoảng thời gian.
 
-Đây là dấu hiệu thực nghiệm nền tảng dẫn tới việc xây dựng các mô hình ARCH và GARCH, trong đó phương sai điều kiện tại thời điểm hiện tại phụ thuộc vào các cú sốc và phương sai trong quá khứ.
+```{r}
+#| label: fig-minh-hoa-acf-returns
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Minh hoạ chuỗi tỷ lệ sinh lời và bình phương tỷ lệ sinh lời."
+#| fig-width: 7.2
+#| fig-height: 3.6
+#| fig-pos: "H"
+#| out-width: 100%
+#| dev: ragg_png
+#| dpi: 300
+
+library(ggplot2)
+library(patchwork)
+
+base_family <- "Arial"
+
+set.seed(123)
+
+n <- 250
+sigma <- rep(c(0.008, 0.03, 0.012, 0.025, 0.01), each = 50)
+returns <- rnorm(n, mean = 0, sd = sigma)
+
+df_ret <- data.frame(
+  time = 1:n,
+  return = returns,
+  sq_return = returns^2
+)
+
+p1 <- ggplot(df_ret, aes(x = time, y = return)) +
+  geom_line(linewidth = 0.3) +
+  geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.4) +
+  labs(
+    title = "Chuỗi tỷ lệ sinh lời",
+    x = "Thời gian",
+    y = "Tỷ lệ sinh lời"
+  ) +
+  theme_minimal(base_size = 10, base_family = base_family) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 10),
+    axis.title = element_text(size = 9)
+  )
+
+p2 <- ggplot(df_ret, aes(x = time, y = sq_return)) +
+  geom_line(linewidth = 0.3) +
+  labs(
+    title = "Bình phương tỷ lệ sinh lời",
+    x = "Thời gian",
+    y = expression(r[t]^2)
+  ) +
+  theme_minimal(base_size = 10, base_family = base_family) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 10),
+    axis.title = element_text(size = 9)
+  )
+
+p1 + p2
+```
 
 #### Hiện tượng cụm biến động
 
 Hiện tượng cụm biến động (volatility clustering) là một trong những đặc điểm quan trọng nhất của chuỗi tỷ lệ sinh lời tài chính. Nội dung cốt lõi của hiện tượng này là: **các giai đoạn biến động lớn có xu hướng xuất hiện gần nhau, và các giai đoạn biến động nhỏ cũng có xu hướng xuất hiện gần nhau**.
 
-Nếu quan sát đồ thị chuỗi tỷ lệ sinh lời theo thời gian, ta thường thấy có những khoảng thời gian mà chuỗi dao động rất mạnh liên tục trong nhiều phiên, xen kẽ với những khoảng thời gian tương đối yên ắng. Dù giá trị trung bình của tỷ lệ sinh lời không thay đổi nhiều, mức độ phân tán của chuỗi lại thay đổi đáng kể theo thời gian.
+Nếu quan sát đồ thị chuỗi tỷ lệ sinh lời theo thời gian, ta thường thấy có những khoảng thời gian mà chuỗi dao động rất mạnh liên tục trong nhiều phiên, xen kẽ với những khoảng thời gian tương đối yên ắng. Dù giá trị trung bình của tỷ lệ sinh lời không thay đổi nhiều, mức độ phân tán của chuỗi lại thay đổi đáng kể theo thời gian. Để minh hoạ hiện tượng cụm biến động, @fig-volatility-clustering trình bày chuỗi tỷ lệ sinh lời theo thời gian và độ biến động lăn tương ứng. Ở panel phía trên, có thể thấy chuỗi tỷ lệ sinh lời không dao động đều qua toàn bộ thời kỳ, mà xuất hiện những giai đoạn các quan sát nằm sát nhau quanh mức trung bình xen kẽ với những giai đoạn dao động mạnh liên tục trong nhiều phiên. Ở panel phía dưới, độ biến động lăn thay đổi rõ rệt theo thời gian, cho thấy mức độ rủi ro của chuỗi không cố định mà tăng lên hoặc giảm xuống tùy theo trạng thái thị trường.
 
-Hiện tượng này cho thấy giả định phương sai không đổi theo thời gian là không phù hợp đối với dữ liệu tài chính. Thay vào đó, cần xem xét các mô hình trong đó phương sai là một đại lượng động, thay đổi tùy theo trạng thái thị trường. Đây chính là nền tảng của lớp mô hình phương sai có điều kiện.
+```{r}
+#| label: fig-volatility-clustering
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Minh hoạ hiện tượng cụm biến động của chuỗi tỷ lệ sinh lời."
+#| fig-width: 7.0
+#| fig-height: 5.6
+#| fig-pos: "H"
+#| out-width: 100%
+#| dev: ragg_png
+#| dpi: 300
+
+
+library(ggplot2)
+library(patchwork)
+library(zoo)
+
+base_family <- "Arial"
+
+set.seed(123)
+
+n <- 300
+sigma <- c(
+  rep(0.008, 70),
+  rep(0.030, 60),
+  rep(0.010, 70),
+  rep(0.025, 50),
+  rep(0.009, 50)
+)
+
+returns <- rnorm(n, mean = 0.0005, sd = sigma)
+
+df_plot <- data.frame(
+  time = 1:n,
+  return = returns
+)
+
+window_size <- 20
+df_plot$rolling_vol <- rollapply(
+  df_plot$return,
+  width = window_size,
+  FUN = sd,
+  fill = NA,
+  align = "right"
+)
+
+p1 <- ggplot(df_plot, aes(x = time, y = return)) +
+  geom_line(linewidth = 0.3) +
+  geom_hline(yintercept = mean(df_plot$return), linetype = "dashed", linewidth = 0.4) +
+  labs(
+    title = "Chuỗi tỷ lệ sinh lời",
+    x = "Thời gian",
+    y = "Tỷ lệ sinh lời"
+  ) +
+  theme_minimal(base_size = 10, base_family = base_family) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 10),
+    axis.title = element_text(size = 9)
+  )
+
+p2 <- ggplot(df_plot, aes(x = time, y = rolling_vol)) +
+  geom_line(linewidth = 0.4) +
+  labs(
+    title = paste0("Độ biến động lăn (cửa sổ ", window_size, " phiên)"),
+    x = "Thời gian",
+    y = "Volatility"
+  ) +
+  theme_minimal(base_size = 10, base_family = base_family) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 10),
+    axis.title = element_text(size = 9)
+  )
+
+p1 / p2
+```
 
 Xét dưới góc độ kinh tế, cụm biến động phản ánh thực tế rằng thông tin trên thị trường không được hấp thụ một cách độc lập từng ngày. Khi xuất hiện một cú sốc lớn, chẳng hạn như khủng hoảng tài chính, thay đổi chính sách tiền tệ, hoặc sự kiện bất thường về kinh tế - chính trị, tác động của cú sốc đó có thể kéo dài trong nhiều phiên giao dịch liên tiếp, khiến biến động thị trường duy trì ở mức cao trong một khoảng thời gian.
 
-#### Phương sai của tỷ lệ sinh lời thay đổi theo thời gian
+Đặc điểm này cho thấy giả định phương sai không đổi theo thời gian là không phù hợp đối với dữ liệu tài chính. Mặc dù tỷ lệ sinh lời vẫn dao động quanh một mức trung bình tương đối ổn định, mức độ phân tán của chuỗi lại thay đổi đáng kể theo thời gian. Vì vậy, để mô tả đúng bản chất của dữ liệu tài chính, cần sử dụng các mô hình trong đó phương sai là một đại lượng động, có thể thay đổi theo trạng thái thị trường.
 
-Trong thống kê cổ điển, nhiều mô hình giả định rằng phương sai của sai số là hằng số. Tuy nhiên, đối với chuỗi tỷ lệ sinh lời chứng khoán, giả định này thường không phù hợp. Thay vào đó, phương sai có xu hướng thay đổi theo thời gian, hay còn gọi là hiện tượng **phương sai thay đổi có điều kiện**.
+#### Phân phối có điều kiện của tỷ lệ sinh lời
 
-Có thể biểu diễn ý tưởng này một cách khái quát như sau:
+Từ những đặc điểm phân phối của tỷ lệ sinh lời kể trên, có thể thấy các tham số của phân phối xác suất ở trên không cố định qua thời gian mà có thể thay đổi tuỳ thuộc vào trạng thái và diễn biến thong tin trên thị trường. Nói cách khác, khi đo lường rủi ro đối với tỷ lệ sinh lời, nhà đầu tư và nhà quản trị rủi ro không quan tâm nhiều đến câu hỏi: “Tỷ lệ sinh lời nói chung có phân phối như thế nào trong toàn bộ giai đoạn quan sát?”, mà quan tâm hơn đến câu hỏi: “Với tất cả thông tin hiện có đến thời điểm $t-1$, tỷ lệ sinh lời tại thời điểm $t$ sẽ có phân phối như thế nào?”. Nói cách khác, thay vì dựa trên **phân phối vô điều kiện** của tỷ lệ sinh lời, chúng ta sẽ quan tâm tới **phân phối có điều kiện** theo thời điểm của tài sản. Cụ thể, phân phối vô điều kiện mô tả đặc điểm chung của toàn bộ chuỗi trong cả giai đoạn nghiên cứu, chẳng hạn như trung bình chung, độ lệch chung và độ nhọn chung. Trong khi đó, phân phối có điều kiện phản ánh hành vi của tỷ lệ sinh lời tại một thời điểm cụ thể, khi đã xét đến thông tin quá khứ. Chính vì vậy, nếu mục tiêu là đo lường rủi ro theo thời gian thực hoặc dự báo rủi ro ngắn hạn, thì phân phối có điều kiện là khái niệm phù hợp hơn nhiều so với phân phối vô điều kiện.
 
-$$r_t = \mu_t + \varepsilon_t$$
+Ký hiệu $\mathcal{F}_{t-1}$ là tập thông tin sẵn có tại thời điểm $t-1$, bao gồm toàn bộ các giá trị quá khứ của tỷ lệ sinh lời, các cú sốc trước đó, và trong một số trường hợp có thể bao gồm thêm các biến giải thích khác. Khi đó, phân phối có điều kiện của tỷ lệ sinh lời tại thời điểm $t$ được ký hiệu là:
+
+$$
+r_t \mid \mathcal{F}_{t-1}
+$$
+
+hoặc biểu diễn bằng hàm phân phối có điều kiện:
+
+$$
+F_t(r \mid \mathcal{F}_{t-1}) = P(r_t \leq r \mid \mathcal{F}_{t-1})
+$$
+
+Biểu thức này cho biết xác suất để tỷ lệ sinh lời tại thời điểm $t$ nhỏ hơn hoặc bằng một mức $r$, với điều kiện đã biết toàn bộ thông tin đến thời điểm $t-1$.
+
+Khái niệm phân phối có điều kiện có ý nghĩa rất quan trọng trong tài chính, vì thị trường chứng khoán không vận động trong một môi trường tĩnh. Cùng một mức tỷ lệ sinh lời kỳ vọng, nhưng nếu thị trường vừa trải qua một giai đoạn biến động mạnh thì rủi ro trong ngày tiếp theo có thể rất khác so với khi thị trường đang ổn định. Nói cách khác, **phân phối của tỷ lệ sinh lời không chỉ phụ thuộc vào bản thân tài sản, mà còn phụ thuộc vào trạng thái thông tin hiện hành của thị trường**.
+
+Từ phân phối có điều kiện, ta có thể xác định các tham số phân phối có điều kiện quan trọng.
+
+Thứ nhất, **giá trị kỳ vọng có điều kiện** của tỷ lệ sinh lời tại thời điểm $t$ là:
+
+$$
+E(r_t \mid \mathcal{F}_{t-1}) = \mu_t
+$$
+
+Đại lượng này phản ánh mức sinh lời trung bình kỳ vọng tại thời điểm $t$, khi đã biết thông tin quá khứ.
+
+Thứ hai, **phương sai có điều kiện** của tỷ lệ sinh lời là:
+
+$$
+Var(r_t \mid \mathcal{F}_{t-1}) = \sigma_t^2
+$$
+
+Đây là đại lượng đặc biệt quan trọng, vì nó đo lường mức độ biến động của tỷ lệ sinh lời tại thời điểm $t$ trong điều kiện đã biết trạng thái thông tin hiện tại. Căn bậc hai của phương sai, $\sigma_t$, thường được gọi là **độ biến động có điều kiện** (conditional volatility).
+
+Từ đó, có thể biểu diễn tỷ lệ sinh lời dưới dạng tổng quát:
+
+$$
+r_t = \mu_t + \varepsilon_t
+$$
+
+trong đó
+
+$$
+\varepsilon_t = \sigma_t z_t
+$$
+
+với $z_t$ là nhiễu chuẩn hóa thỏa mãn:
+
+$$
+E(z_t \mid \mathcal{F}_{t-1}) = 0, \qquad Var(z_t \mid \mathcal{F}_{t-1}) = 1
+$$
+
+Biểu diễn này rất quan trọng vì nó cho thấy chuỗi tỷ lệ sinh lời có thể được tách thành hai phần: phần trung bình có điều kiện $\mu_t$ và phần sai số ngẫu nhiên $\varepsilon_t$, trong đó mức độ dao động của sai số được quyết định bởi $\sigma_t$. Nếu (\sigma\_t) thay đổi theo thời gian, thì rủi ro của thị trường cũng thay đổi theo thời gian.
+
+Tóm lại, việc đưa vào khái niệm phân phối có điều kiện cho phép chuyển từ cách nhìn thống kê tĩnh sang cách nhìn động đối với tỷ lệ sinh lời. Đây là bước chuyển rất quan trọng, vì toàn bộ các mô hình đo lường biến động và giá trị chịu rủi ro trong các chương sau thực chất đều xoay quanh việc ước lượng và dự báo các đặc trưng của phân phối có điều kiện, đặc biệt là kỳ vọng có điều kiện, phương sai có điều kiện và các phân vị có điều kiện của tỷ lệ sinh lời.
+
+## Biến động của tỷ lệ sinh lời tài sản {#sec-volatility-returns}
+
+Biến động tỷ lệ sinh lời (volatility) là một khái niệm nền tảng trong tài chính định lượng, quản trị rủi ro, định giá tài sản và định giá phái sinh. Trong phân tích đầu tư, tỷ lệ sinh lời cho biết tài sản đem lại mức lãi hoặc lỗ như thế nào qua thời gian. Tuy nhiên, để đánh giá đầy đủ một khoản đầu tư, chỉ nhìn vào mức sinh lời là chưa đủ. Nhà đầu tư còn cần biết một câu hỏi quan trọng hơn: mức sinh lời đó ổn định đến đâu, hay dao động mạnh đến mức nào?.Nếu tỷ lệ sinh lời được xem là đại lượng phản ánh kết quả đầu tư, thì biến động phản ánh mức độ bất định của kết quả đó. Một tài sản có thể có mức sinh lời kỳ vọng tương đối hấp dẫn, nhưng nếu tỷ lệ sinh lời của nó lên xuống mạnh qua các kỳ thì rủi ro mà nhà đầu tư phải đối mặt cũng lớn hơn. Vì vậy, trong tài chính hiện đại, biến động thường được xem là đại diện trung tâm của rủi ro thị trường.
+
+### Khái niệm biến động trong tài chính {#sec-concept-volatility}
+
+Biến động tỷ lệ sinh lời thể hiện mức độ dao động của tỷ lệ sinh lời quanh giá trị kỳ vọng. Xét về mặt thống kê, cách đo đơn giản và phổ biến nhất của biến động là độ lệch chuẩn của tỷ lệ sinh lời như sau: 
+$$
+\sigma = \sqrt{\mathrm{Var}(r_t)}
+$$
+
+Công thức này cho thấy biến động gắn trực tiếp với phương sai của tỷ lệ sinh lời. Nếu các quan sát $r_t$ phân tán mạnh quanh giá trị trung bình, mức độ biến động sẽ lớn; ngược lại, nếu tỷ lệ sinh lời dao động hẹp trong một khoảng nhỏ, mức độ biến động sẽ thấp.Mức độ biến động của tỷ lệ sinh lời không nói cho ta biết tài sản chắc chắn sẽ sinh lời cao hay thấp; nó cho biết kết quả đầu tư **khó dự đoán đến mức nào**. Một cổ phiếu có thể có mức sinh lời kỳ vọng hấp dẫn, nhưng nếu biến động tỷ lệ sinh lời rất cao thì khoảng biến thiên thực tế của kết quả đầu tư cũng rất rộng. Do đó, biến động tỷ lệ sinh lời thể hiện rõ sự đánh đổi căn bản trong đầu tư giữa **lợi nhuận kỳ vọng** và **rủi ro**.
+
+
+Ví dụ, giả sử có hai tài sản A và B đều có tỷ lệ sinh lời bình quân ngày xấp xỉ 0,05%. Nếu tỷ lệ sinh lời của A thường chỉ dao động quanh khoảng từ -0,4% đến 0,5%, còn tỷ lệ sinh lời của B thường dao động trong khoảng từ -2,0% đến 2,2%, thì mặc dù mức sinh lời trung bình tương đương nhau, nhà đầu tư sẽ cảm nhận B rủi ro hơn nhiều. Lý do là kết quả đầu tư vào B khó dự đoán hơn và dễ xuất hiện các phiên lỗ lớn hơn.
+
+Trong quản trị rủi ro,  biến động của tỷ lệ sinh lời quan trọng vì ít nhất ba lý do. Thứ nhất,  biến động của tỷ lệ sinh lờ là đầu vào trực tiếp trong nhiều thước đo rủi ro như giá trị chịu rủi ro (VaR) hay giá trị thiếu hụt vốn kỳ vọng (ES). Thứ hai,  biến động của tỷ lệ sinh lời quyết định độ rộng của phân phối dự báo, từ đó ảnh hưởng đến đánh giá tổn thất tiềm tàng. Thứ ba,  biến động của tỷ lệ sinh lời còn quyết định độ rộng của phân phối dự báo, từ đó ảnh hưởng trực tiếp đến đánh giá tổn thất tiềm năng của một vị thế đầu tư.
+
+Để có cảm nhận ban đầu về biến động tỷ lệ sinh lời, @fig-rolling-vol-vn minh họa độ lệch chuẩn trượt 30 ngày của tỷ lệ sinh lời ngày trên chỉ số VN-Index. Có thể thấy, biến động tỷ lệ sinh lời của VN-Index tăng mạnh ở những giai đoạn thị trường có mức độ rủi ro cao và biến động mạnh như giai đoạn khủng hoảng tài chính toàn cầu 2007-2009, giai đoạn của đại dịch Covid-19 hay giai đoạn gần đây do khủng hoảng địa chính trị và năng lượng đầu năm 2026 do căng thẳng và chiến tranh  giữa Mỹ/Isarel - Iran. 
+
+```{r}
+#| label: fig-rolling-vol-vn
+#| fig-cap: "Biến động trượt 30 ngày của tỷ lệ sinh lời logarit ngày trên chỉ số VN-Index."
+#| fig-pos: "H"
+#| echo: false
+#| message: false
+#| warning: false
+#| dev: ragg_png
+#| dpi: 300
+
+library(readr)
+library(dplyr)
+library(tibble)
+library(ggplot2)
+library(zoo)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(scales)
+library(lubridate)
+
+base_family <- "Arial"
+
+df_vni = read_csv("../data/VNI.csv", col_types = cols(Date = col_date(format = "%m/%d/%Y"), 
+                                                   Vol. = col_skip(), `Change %` = col_skip())) %>% 
+  arrange(Date) %>% 
+  filter(!is.na(Price)) %>% 
+  mutate(
+    log_return = c(NA, diff(log(Price))) * 100,
+    simple_return = c(NA, Price[-1] / Price[-n()] - 1) * 100,
+    sq_return = log_return^2,
+    rolling_vol_30 = zoo::rollapply(
+      log_return,
+      width = 30,
+      FUN = sd,
+      fill = NA,
+      align = "right"
+    )
+  )
+
+ggplot(df_vni, aes(x = Date, y = rolling_vol_30)) +
+  geom_line(linewidth = 0.4) +
+  labs(
+    x = NULL,
+    y = "Độ lệch chuẩn trượt 30 ngày (%)"
+  ) +
+  theme_minimal(base_family = base_family)
+```
+
+### Các phương pháp đo lường biến động tỷ lệ sinh lời {#sec-volatility-measures}
+
+#### Biến động tỷ lệ sinh lời quá khứ không điều kiện (Unconditional Volatility)
+
+Các đơn giản nhất để đo lường biến động của tỷ lệ sinh lời là sử dụng độ lệch chuẩn của chuỗi tỷ lệ sinh lời tài sản trong một khoảng thời gian quá khứ mà không có điều kiện rằng buộc về phân phối của tỷ lệ sinh lời (Unconditional volatility). Cụ thể, nếu đo lường biến động tỷ lệ sinh lời dựa trên cửa sổ ước lượng với $m$ quan sát thì biến động tỷ lệ sinh lời có thể đo lường như sau: 
+$$
+\hat{\sigma}_{t,m}
+=
+\sqrt{
+\frac{1}{m-1}
+\sum_{i=0}^{m-1}
+\left(r_{t-i} - \bar{r}_t\right)^2
+}
+$$
+Trong đó, $\bar r_t$ là tỷ lệ sinh lời trung bình trong cửa sổ $m$ kỳ gần nhất. Cách đo này phù hợp khi mục tiêu chỉ là mô tả nhanh mức độ dao động gần đây của thị trường. Theo Choudhry (xxx) thì phương pháp này cho phép đo lường biến động của tỷ lệ sinh lời một cách trực quan, dựa trên hiệu suất quá khứ và những thông tin đã xảy ra.  Tuy nhiên, nó có một hạn chế quan trọng: mọi quan sát trong cửa sổ thường được đối xử gần như ngang nhau, trong khi thông tin mới nhất trên thị trường thường đáng chú ý hơn thông tin cũ hơn.
+
+#### Biến động tỷ lệ sinh lời có điều kiện (Conditional Volatility)
+
+Thay vì xem xét biến động tỷ lệ sinh lời cố định theo các cửa sổ ước lượng, phương pháp ước lượng và đo lường biến động tỷ lệ sinh lời thường được áp dụng trong phân tích và đo lường rủi ro là  biến động tỷ lệ sinh lời có điều kiện (conditional volatility). Cụ thể,  biến động tỷ lệ sinh lời tại thời điểm $t$ không còn được xem là một hằng số, mà là một đại lượng phụ thuộc vào thông tin sẵn có đến thời điểm $t-1$. Đây chính là nền tảng của các mô hình ARCH, GARCH và các mở rộng của chúng.
+
+Ví dụ, trong mô hình GARCH(1,1), ta có:
+
+$$
+r_t = \mu_t + a_t, \qquad a_t = \sigma_t \varepsilon_t,
+$$
 
 với
 
-$$\varepsilon_t = \sigma_t z_t$$
+$$
+\sigma_t^2 = \omega + \alpha a_{t-1}^2 + \beta \sigma_{t-1}^2,
+$$
+trong đó $\sigma_t^2$ là phương sai có điều kiện tại thời điểm $t$. Công thức này có ý nghĩa rất trực giác: biến động tỷ lệ sinh lời hôm nay được quyết định bởi “cú sốc” của ngày hôm qua $\left(a_{t-1}^2\right)$ và mức biến động tỷ lệ sinh lời dự kiến từ hôm qua $\left(\sigma_{t-1}^2\right)$. Khi thị trường vừa trải qua một cú sốc lớn, biến động tỷ lệ sinh lời hiện tại thường tăng lên. Khi biến động tỷ lệ sinh lời  đã ở mức cao, biến động này có xu hướng duy trì cao thêm một thời gian.
 
-trong đó ($z_t$) là nhiễu chuẩn hóa có kỳ vọng bằng 0 và phương sai bằng 1, còn $\sigma_t^2$ là phương sai có điều kiện tại thời điểm $t$. Nếu $\sigma_t^2$ thay đổi theo thời gian, thì mức độ rủi ro của chuỗi cũng thay đổi theo từng giai đoạn.
+Như vậy, biến động tỷ lệ sinh lời có điều kiên phù hợp hơn historical volatility khi mục tiêu không chỉ là mô tả quá khứ, mà còn là mô hình hóa và dự báo rủi ro.
 
-Đặc điểm này đặc biệt quan trọng đối với đo lường volatility và VaR. Nếu nhà nghiên cứu sử dụng một độ lệch chuẩn cố định cho toàn bộ mẫu, mô hình sẽ không phản ánh được đúng trạng thái thị trường hiện tại. Trong các giai đoạn thị trường biến động mạnh, rủi ro sẽ bị đánh giá thấp; ngược lại, trong các giai đoạn yên ắng, rủi ro có thể bị đánh giá quá cao.
+#### Biến động tỷ lệ sinh lời hàm ý (Implied Volatility)
 
-#### Tính dừng tương đối của chuỗi tỷ lệ sinh lời
+Một cách đo lường biến động tỷ lệ sinh lời nữa thường được sử dụng trên thực tế là biến động tỷ lệ sinh lời hàm ý, được xác định từ mức chênh lệch giá quyền chọn mua và bán trên thị trường của tài sản. Thay vì nhìn vào chuỗi tỷ lệ sinh lời trong quá khứ, nhà đầu tư có thể nhìn vào mức giá quyền chọn hiện tại và hỏi ngược lại: nếu đưa giá này vào mô hình định giá quyền chọn, thì thị trường đang “ngầm hàm ý” mức biến động tỷ lệ sinh lời trong tương lai như thế nào?
 
-Một lý do quan trọng khiến tỷ lệ sinh lời được sử dụng thay cho mức giá là vì chuỗi tỷ lệ sinh lời thường có tính dừng mạnh hơn nhiều so với chuỗi giá. Về trực giác, giá chứng khoán thường có xu hướng tăng hoặc giảm theo thời gian và mang đặc điểm xu thế, trong khi tỷ lệ sinh lời thường dao động quanh một mức trung bình tương đối ổn định.
+Điểm quan trọng ở đây là biến động tỷ lệ sinh lời hàm ý thường phản ánh kỳ vọng của thị trường về biến động trong tương lai gần. Vì vậy, nó đặc biệt quan trọng trong định giá phái sinh và trong việc đọc tín hiệu thị trường. Khác với biến động tỷ lệ sinh lời không điều kiện,  biến động tỷ lệ sinh lời hàm ý không phải là thước đo “quá khứ”, mà là một thước đo chứa đựng thông tin kỳ vọng chung của thị trường
 
-Một chuỗi được gọi là dừng yếu nếu kỳ vọng, phương sai và hiệp phương sai của nó không thay đổi theo thời gian. Dù trong thực tế chuỗi tỷ lệ sinh lời không phải lúc nào cũng dừng hoàn toàn theo nghĩa chặt, nhưng so với chuỗi giá, nó thường gần với giả định dừng hơn nhiều. Điều này làm cho việc mô hình hóa bằng các công cụ chuỗi thời gian trở nên khả thi hơn.
+#### Biến động tỷ lệ sinh lời thực tế {#sec-realized-vol}
 
-Tuy nhiên, cần lưu ý rằng tính dừng của tỷ lệ sinh lời chủ yếu đúng với bản thân chuỗi $r_t$, còn phương sai có điều kiện của chuỗi thì vẫn có thể thay đổi đáng kể theo thời gian. Nói cách khác, chuỗi tỷ lệ sinh lời có thể dừng về trung bình nhưng không đồng nhất về phương sai. Đây là một đặc điểm rất điển hình của dữ liệu tài chính.
+Biến động tỷ lệ sinh lời thực tế (realized volatility) là một thước đo biến động được xây dựng từ*dữ liệu tần suất cao trong ngày. Cụ thể, biến động tỷ lệ sinh lời thực tế được đo lường bằn cách chia một ngày giao dịch thành nhiều khoảng nhỏ, tính tỷ lệ sinh lời nội ngày trên từng khoảng, rồi cộng dồn thông tin từ các tỷ lệ sinh lời này để tạo ra một thước đo biến động của cả ngày. Phương pháp đo lường này dựa trên quan sát rằng nếu giá tài sản dao động liên tục trong ngày, thì quan sát giá ở tần suất càng cao sẽ cho thấy bức tranh càng đầy đủ hơn về mức độ biến động thực sự đã xảy ra trong ngày đó. Vì vậy, thay vì chỉ dùng giá đóng cửa của hai ngày liên tiếp, biến động tỷ lệ sinh lời thực tế khai thác toàn bộ các dao động nội ngày để đo biến động một cách chi tiết hơn.
 
-#### Kiểm định một số đặc điểm phân phối trong thực nghiệm
+Giả sử trong ngày $t$, ta chia thời gian giao dịch thành $M$ khoảng nhỏ. Ký hiệu $r_{t,j}$ là tỷ lệ sinh lời logarit trong khoảng nhỏ thứ $j$, với $j = 1, 2, \ldots, M$. Khi đó, realized volatility trong ngày $t$ được viết dưới dạng:
 
-Trong nghiên cứu thực nghiệm, các đặc điểm phân phối nêu trên thường được kiểm tra bằng các thống kê mô tả và kiểm định thống kê thích hợp. Chẳng hạn:
+$$
+RV_t = \sum_{j=1}^{M} r_{t,j}^2.
+$$
 
-- Trung bình, độ lệch chuẩn, độ lệch và độ nhọn giúp mô tả sơ bộ hình dạng của phân phối.
-- Kiểm định Jarque–Bera thường được sử dụng để đánh giá giả thuyết phân phối chuẩn.
-- Kiểm định Ljung–Box được dùng để kiểm tra tự tương quan của chuỗi tỷ lệ sinh lời hoặc bình phương tỷ lệ sinh lời.
-- Kiểm định ARCH-LM được dùng để phát hiện hiện tượng phương sai thay đổi có điều kiện.
+Như vậy, về mặt bản chất, $RV_t$ không phải là biến động tỷ lệ sinh lời  “dự báo”, mà là  biến động tỷ lệ sinh lời **đã diễn ra** trong ngày $t$, được ước lượng từ dữ liệu nội ngày. Vì vậy, biến động tỷ lệ sinh lời thực tế thường được xem là một thước đo gần với **biến động thực tế quan sát được** hơn so với các thước đo chỉ dựa trên dữ liệu đóng cửa hằng ngày. Do đó,  biến động tỷ lệ sinh lời thực tế thường được sử dụng như một **chuẩn so sánh** (benchmark target hoặc proxy) cho các mô hình dự báo biến động tỷ lệ sinh lời. 
 
-Thống kê Jarque–Bera có dạng:
+### Vai trò của biến động tỷ lệ sinh lời trong phân tích tài chính và quản trị rủi ro
 
-$$JB=\frac{T}{6}\left(S^2+\frac{(K-3)^2}{4}\right)$$
+*Vai trò của biến động tỷ lệ sinh lời trong phân bổ danh mục*
 
-trong đó (S) là độ lệch mẫu và (K) là độ nhọn mẫu. Nếu giá trị thống kê này đủ lớn, giả thuyết chuỗi có phân phối chuẩn sẽ bị bác bỏ.
+Trong lý thuyết danh mục, biến động tỷ lệ sinh lời gắn trực tiếp với khái niệm rủi ro. Một tài sản có thể có mức sinh lời kỳ vọng hấp dẫn, nhưng nếu biến động tỷ lệ sinh lời quá cao thì việc nắm giữ tỷ trọng lớn của tài sản đó có thể làm danh mục trở nên quá rủi ro. Dưới khuôn khổ lý thuyết về quản trị danh mục hiện đại dựa trên lợi nhuận - rủi ro (Mean -Variance Portfolio Theory), quyết định phân bổ vốn phải cân nhắc đồng thời lợi nhuận kỳ vọn và  biến động tỷ lệ sinh lời của từng tài sản và tương quan giữa các tài sản và vị thế trong danh mục. 
 
-Việc thực hiện các kiểm định này không chỉ mang ý nghĩa mô tả dữ liệu mà còn có vai trò định hướng cho lựa chọn mô hình. Chẳng hạn, nếu chuỗi có đuôi dày và hiện tượng ARCH rõ rệt, các mô hình GARCH với phân phối Student-(t) thường sẽ phù hợp hơn so với mô hình phương sai không đổi dưới giả định chuẩn.
+*Vai trò của biến động tỷ lệ sinh lời trong trong phái sinh*
 
-#### Ý nghĩa của các đặc điểm phân phối đối với nghiên cứu biến động và giá trị chịu rủi ro
+Đối với thị trường phái sinh, biến động tỷ lệ sinh lời còn là một “đối tượng giao dịch” theo nghĩa rộng. Ví dụ, chỉ số về biến động tỷ lệ sinh lời hàm ý dựa trên chỉ số giá chứng khoán của Mỹ, VIX, là cơ sở cho các công cụ tài chính. Điều này cho thấy biến động tỷ lệ sinh lời không chỉ là một tham số ẩn trong mô hình, mà còn là một thông tin thị trường có thể được theo dõi, định giá và giao dịch.
 
-Các đặc điểm phân phối của tỷ lệ sinh lời không chỉ là những hiện tượng thống kê mang tính mô tả, mà còn quyết định trực tiếp đến cách thức lựa chọn mô hình trong nghiên cứu tài chính. Có thể tóm lược ý nghĩa của chúng như sau.
+## Giá trị chịu rủi ro {#sec-var}
 
-Thứ nhất, việc tỷ lệ sinh lời có phân phối đuôi dày cho thấy các mô hình dựa trên giả định chuẩn đơn giản có thể đánh giá thấp xác suất xuất hiện những khoản lỗ cực đoan.
+### Khái niệm giá trị chịu rủi ro
 
-Thứ hai, hiện tượng cụm biến động và phương sai thay đổi theo thời gian cho thấy cần sử dụng các mô hình phương sai có điều kiện như ARCH, GARCH và các biến thể của chúng để mô tả tốt hơn động thái rủi ro của thị trường.
+VaR là một trong những thước đo rủi ro nổi tiếng nhất trong tài chính hiện đại. Nếu biến động tỷ lệ sinh lời trả lời câu hỏi *“mức độ dao động của tỷ lệ sinh lời lớn đến đâu?”*, thì giá trị chịu rủi ro (VaR) trả lời cho câu hỏi *“trong điều kiện thông thường, với một mức tin cậy cho trước, khoản lỗ lớn nhất có thể là bao nhiêu?”*. Ưu điểm lớn nhất của VaR là việc định lượng rủi ro thành*một con số duy nhấ*, có thể diễn đạt trực tiếp bằng tiền. Điều này khiến VaR trở thành một công cụ rất hữu ích trong giao tiếp quản trị, kiểm soát hạn mức và báo cáo rủi ro. 
 
-Thứ ba, tính bất đối xứng của phân phối và của phản ứng biến động trước thông tin tốt/xấu gợi ý sự cần thiết của các mô hình bất đối xứng như EGARCH hoặc GJR-GARCH.
+Ví dụ, giả sử một danh mục đầu tư có *VaR 99% một ngày bằng 2 tỷ đồng* thì có nghĩa là *với mức tin cậy 99%, trong một ngày giao dịch, khoản lỗ của danh mục dự kiến sẽ không vượt quá 2 tỷ đồng trong điều kiện thị trường thông thường*. Nói ngược lại,  có khoảng 1% xác suất tổn thất thực tế sẽ lớn hơn con số đó. Như vậy,  VaR là mức lỗ lớn nhất có thể xảy ra với một mức tin cậy xác định trong một khoảng thời gian nắm giữ nhất định, được xác định từ ba thành phần: mức tin cậy (confidence level), khoảng thời gian nắm giữ (holding period) và*phân phối của lợi nhuận hay tổn thất (loss distribution).
 
-Thứ tư, việc bản thân chuỗi tỷ lệ sinh lời ít tự tương quan nhưng bình phương tỷ lệ sinh lời lại có tự tương quan cho thấy khả năng dự báo nằm chủ yếu ở phương sai hơn là ở trung bình.
 
-Như vậy, nghiên cứu đặc điểm phân phối của tỷ lệ sinh lời là bước khởi đầu có tính nền tảng cho toàn bộ phân tích tiếp theo về biến động và giá trị chịu rủi ro. Trước khi lựa chọn mô hình đo lường volatility hay VaR, nhà nghiên cứu cần hiểu rõ dữ liệu của mình có những đặc trưng thống kê nào, vì chính các đặc trưng đó sẽ quyết định mức độ phù hợp và hiệu quả của từng lớp mô hình.
+Thành phần thứ nhất là **mức tin cậy**. Đây là mức xác suất mà tại đó nhà quản trị muốn mô tả rủi ro, chẳng hạn 95% hoặc 99%. Nếu mức tin cậy càng cao, VaR thường càng lớn về độ lớn tuyệt đối, vì ta đang đi sâu hơn vào phần đuôi bất lợi của phân phối tổn thất.Trên thực tế, 95% và 99% là hai mức độ tin cậy thườn được sử dụng. 
 
-#### Kết luận tiểu mục
+Thành phần thứ hai là **khoảng thời gian nắm giữ**. VaR một ngày, VaR mười ngày hay VaR một tháng là những con số khác nhau vì mức độ rủi ro tích lũy phụ thuộc vào độ dài của khoảng thời gian đo lường. Trên thực tế, lựa chọn về khoảng thời gian nắm giữ phải phản ánh khoảng thời gian cần thiết để thoát hoặc giảm vị thế của tài sản hoặc danh mục đầu tư.
 
-Tóm lại, tỷ lệ sinh lời giá chứng khoán là một biến ngẫu nhiên có những đặc điểm phân phối khác biệt so với nhiều loại dữ liệu kinh tế thông thường. Chuỗi này thường dao động quanh một giá trị trung bình nhỏ, có phân phối nhọn và đuôi dày, có thể bất đối xứng, ít tự tương quan ở bản thân chuỗi nhưng lại thể hiện rõ hiện tượng cụm biến động và phương sai thay đổi theo thời gian. Những đặc điểm này lý giải vì sao các mô hình tài chính hiện đại không chỉ quan tâm đến giá trị trung bình của tỷ lệ sinh lời mà đặc biệt nhấn mạnh việc mô hình hóa động học của phương sai và phần đuôi phân phối.
+Thành phần thứ ba là **phân phối tổn thất**. Về bản chất, VaR là một **phân vị** của phân phối tổn thất. Nếu ký hiệu $L$ là biến ngẫu nhiên biểu diễn tổn thất của danh mục, thì VaR ở mức tin cậy $\alpha$ được viết như sau:
 
-Trên cơ sở đó, các phần tiếp theo của chương sẽ đi sâu hơn vào khái niệm biến động của tỷ lệ sinh lời, trước khi trình bày các mô hình đo lường volatility và giá trị chịu rủi ro được sử dụng phổ biến trong nghiên cứu và thực hành.
+$$
+VaR_{\alpha}(L) = \inf \left\{ \ell : P(L \le \ell) \ge \alpha \right\}.
+$$
+
+Công thức này cho thấy VaR chính là **phân vị bậc $\alpha$** của phân phối tổn thất. Ví dụ, $VaR_{0.99}$ là mức tổn thất mà xác suất để tổn thất không vượt quá mức đó đạt ít nhất 99%.
+
+Nếu làm việc với **tỷ lệ sinh lời** thay vì tổn thất, ta thường chuyển đổi như sau. Giả sử $r_t$ là tỷ lệ sinh lời của danh mục ở thời điểm $t$, thì một cách đơn giản để định nghĩa tổn thất theo phần trăm là:
+
+$$
+L_t = -r_t.
+$$
+
+Khi đó, VaR của danh mục có thể được tính từ phân vị bên phải của $L_t$, hoặc tương đương là từ phân vị bên trái của $r_t$.
+
+Để minh họa rõ hơn, giả sử một danh mục có giá trị thị trường hiện tại là $V$. Nếu $q_{\alpha}$ là phân vị bên trái của phân phối tỷ lệ sinh lời tại mức xác suất $1-\alpha$, thì VaR theo tiền tệ có thể viết:
+
+$$
+VaR_{\alpha} = -V \times q_{1-\alpha}.
+$$
+
+Chẳng hạn, nếu danh mục trị giá 100 tỷ đồng và phân vị 1% của tỷ lệ sinh lời ngày là $-2.3\%$, thì:
+
+$$
+VaR_{0.99} = -100 \times (-0.023) = 2.3 \text{ tỷ đồng}.
+$$
+
+Diễn giải đúng là: với mức tin cậy 99%, khoản lỗ trong một ngày dự kiến không vượt quá 2,3 tỷ đồng trong điều kiện bình thường.
+
+Hình @fig-var-left-tail minh họa VaR như một phân vị ở phần đuôi trái của phân phối tỷ lệ sinh lờ thực tế của VN-index. Trong khi đó, nếu chuyển sang tổn thất, đó chính là một phân vị ở phần đuôi phải của phân phối loss.
+
+```{r}
+#| label: fig-var-left-tail
+#| fig-cap: "VaR như một phân vị ở phần đuôi trái của phân phối tỷ lệ sinh lời ngày của VN-Index."
+#| fig-pos: "H"
+#| echo: false
+#| message: false
+#| warning: false
+#| dev: ragg_png
+#| dpi: 300
+
+library(ggplot2)
+library(dplyr)
+
+base_family <- "Arial"
+
+var_cutoff_99 <- quantile(df_vni$log_return, probs = 0.01, na.rm = TRUE)
+
+ggplot(df_vni, aes(x = log_return)) +
+  geom_histogram(aes(y = after_stat(density)),
+                 bins = 50, alpha = 0.6) +
+  geom_density(linewidth = 0.7) +
+  geom_vline(xintercept = var_cutoff_99, linetype = "dashed", linewidth = 0.8) +
+  annotate(
+    "text",
+    x = var_cutoff_99,
+    y = 0.12,
+    label = paste0("Phân vị 1% = ", round(var_cutoff_99, 2), "%"),
+    hjust = 1.1,
+    family = base_family
+  ) +
+  labs(
+    x = "Tỷ lệ sinh lời ngày (%)",
+    y = "Mật độ"
+  ) +
+  theme_minimal(base_family = base_family)
+```
+
+### Đặc điểm của giá trị chịu rủi ro
+
+#### Ưu điểm của giá trị chịu rủi ro
+
+Ưu điểm đầu của VaR là tính thông tin. Theo Choudhry (xxx) VaR chuyển rủi ro của một vị thế hoặc một danh mục thành một con số tính bằng tiền, nhờ đó rất thuận tiện cho việc giao tiếp quản trị và ra quyết định. Trong thực tế, một con số như “VaR 1 ngày, mức tin cậy 99%, bằng 12 tỷ đồng” dễ được hiểu hơn nhiều so với một mô tả dài về phân phối đầy đủ của lợi nhuận và tổn thất.
+
+Ưu điểm thứ hai là khả năng chuẩn hóa. Vì VaR luôn được gắn với mức tin cậy và khoảng thời gian nắm giữ, nó tạo ra một khuôn khổ khá thống nhất để so sánh rủi ro giữa các giao dịch, các danh mục hoặc các thời kỳ khác nhau. Chính nhờ tính chuẩn hóa này mà VaR từng trở thành một ngôn ngữ chung trong quản trị rủi ro thị trường.
+
+Ưu điểm thứ ba là khả năng tích hợp vào hệ thống kiểm soát nội bộ. Một định chế tài chính có thể thiết lập hạn mức VaR cho từng đơn vị kinh doanh, tổng hợp VaR ở cấp danh mục lớn hơn, rồi theo dõi mức sử dụng hạn mức hằng ngày. Ở góc độ vận hành, đây là một lợi thế rất thực dụng của VaR.
+
+#### Nhước điểm của giá trị chịu rủi ro
+
+Tuy nhiên, VaR có những hạn chế quan trọng.
+
+Hạn chế thứ nhất là phụ thuộc vào mô hình và giả định phân phối. Nếu phân phối lợi nhuận được giả định không phù hợp, VaR sẽ cho tín hiệu sai về mức độ rủi ro. 
+
+Hạn chế thứ hai là VaR không cho biết mức lỗ trung bình khi đã vượt ngưỡng. Tsay (xxx) nhấn mạnh rất rõ rằng VaR chỉ là một phân vị với xác suất đuôi cho trước; nó không mô tả hành vi của phần đuôi phía sau ngưỡng đó. Hai phân phối tổn thất có thể có cùng VaR nhưng có phân phối ở đuôi rất khác nhau, nghĩa là rủi ro thực sự khác nhau dù VaR giống nhau. Điểm này đặc biệt quan trọng trong quản trị rủi ro. Giả sử hai danh mục cùng có VaR 99% một ngày bằng 3 tỷ đồng. Danh mục thứ nhất khi vượt ngưỡng thường lỗ khoảng 3,2–3,5 tỷ đồng. Danh mục thứ hai khi vượt ngưỡng có thể lỗ 6–8 tỷ đồng. Rõ ràng rủi ro đuôi của hai danh mục không giống nhau, nhưng VaR lại không cho biết điều đó.
+
+Để khắc phục nhược điểm “không nhìn vào phần lỗ vượt ngưỡng”,giá trị tổn thất kỳ vọng (ES - Expected Shortfall) gần đây đang được sử dụng như một công cụ đo lường rủi ro đuôi bổ sung cho VaR. ES được định nghĩa là mức lỗ kỳ vọng với điều kiện VaR đã bị vượt qua.Nếu $L$ là tổn thất và $VaR_{\alpha}$ là ngưỡng VaR tại mức tin cậy $\alpha$, thì ES có thể viết:
+$$
+ES_\alpha(L) = E(L|L > VaR_\alpha(L))
+$$
+
+Công thức này cho thấy ES trả lời một câu hỏi khác với VaR. VaR hỏi: *“ngưỡng tổn thất tại mức tin cậy này là bao nhiêu?”* Còn ES hỏi: *“nếu đã rơi vào vùng xấu hơn ngưỡng đó, mức lỗ trung bình sẽ là bao nhiêu?”* Chính vì vậy, trong ứng dụng thực tiễn, VaR và ES không nên được xem là hai thước đo cạnh tranh tuyệt đối với nhau, mà là hai công cụ phản ánh hai lớp thông tin khác nhau của rủi ro. VaR rất hữu ích để truyền đạt nhanh và kiểm soát hạn mức; ES hữu ích hơn khi nhà quản trị muốn hiểu độ sâu của phần đuôi tổn thất.
+
+### Vai trò của giá trị chịu rủi ro trong thực tiễn tài chính {#sec-var-practice}
+
+Ứng dụng đầu tiên và trực tiếp nhất của VaR là trong **kiểm soát rủi ro thị trường**. Với một danh mục trái phiếu, cổ phiếu, ngoại hối hoặc công cụ phái sinh, VaR giúp trả lời câu hỏi rất thực tế: nếu thị trường vận động bình thường trong một ngày hoặc trong một khoảng thời gian nắm giữ xác định, khoản lỗ lớn nhất có thể nằm ở mức nào với một độ tin cậy cho trước? Câu trả lời này đặc biệt hữu ích vì nó gắn với tiền, chứ không chỉ là một độ lệch chuẩn trừu tượng. Trong quản trị hằng ngày, nhiều tổ chức sử dụng VaR như một chỉ báo nhanh để theo dõi xem mức độ rủi ro hiện tại của danh mục có đang tăng lên hay không.
+
+Ứng dụng thứ hai là trong **thiết lập hạn mức rủi ro**. Một định chế tài chính có thể không giới hạn từng vị thế đơn lẻ theo cảm tính, mà giới hạn theo tổng rủi ro mà các vị thế đó tạo ra. Khi đó, VaR trở thành một công cụ đặc biệt phù hợp. Thay vì chỉ nói một bàn giao dịch được phép nắm giữ bao nhiêu hợp đồng hay bao nhiêu trái phiếu, tổ chức có thể quy định rằng VaR của bàn giao dịch đó không được vượt quá một mức nhất định. Cách làm này có ưu điểm là đưa kiểm soát rủi ro về đúng bản chất kinh tế của vấn đề: điều quan trọng không phải số lượng vị thế, mà là tổn thất tiềm tàng mà các vị thế đó có thể gây ra cho tổ chức.
+
+Ứng dụng thứ ba là trong **báo cáo quản trị rủi ro**. Ở cấp điều hành, ban lãnh đạo thường không cần xem toàn bộ phân phối xác suất của từng danh mục, nhưng lại cần một thước đo đủ rõ để trả lời những câu hỏi như: mức rủi ro hiện tại có đang nằm trong khẩu vị rủi ro hay không, hoặc rủi ro toàn danh mục đã tăng hay giảm so với tuần trước. VaR phục vụ tốt mục tiêu này vì nó có thể được tổng hợp theo nhiều cấp: theo sản phẩm, theo đơn vị kinh doanh và theo toàn bộ sổ kinh doanh của ngân hàng. Trong môi trường quản trị hiện đại, việc có một chỉ số rủi ro vừa có ý nghĩa thống kê vừa dễ truyền đạt là một lợi thế lớn của VaR.
+
+Ứng dụng thứ tư là trong **phân bổ vốn kinh tế và đánh giá hiệu quả sử dụng rủi ro**. Khi một tổ chức phải quyết định nên dành bao nhiêu vốn cho từng hoạt động kinh doanh, họ không chỉ nhìn vào lợi nhuận kỳ vọng mà còn nhìn vào mức rủi ro mà hoạt động đó tạo ra. VaR, với tư cách là một thước đo tổn thất tiềm tàng, thường được dùng như một căn cứ để so sánh giữa lợi nhuận và rủi ro. Nói cách khác, VaR giúp chuyển câu hỏi “bộ phận nào kiếm được nhiều tiền hơn?” thành một câu hỏi đầy đủ hơn: *“bộ phận nào tạo ra lợi nhuận tốt hơn trên mỗi đơn vị rủi ro chấp nhận?”* Đây là một bước chuyển rất quan trọng từ quản trị theo doanh thu sang quản trị theo rủi ro – lợi nhuận.
+
+VaR cũng có vai trò quan trọng trong **khung giám sát ngân hàng theo Basel**. Cụ thể, VaR là một công cụ trung tâm trong đo lường rủi ro thị trường của sổ kinh daonh trong khung quản trị rủi ro của Hiệp ước Basel. Điều này phản ánh đúng ưu điểm của VaR: nó cho phép lượng hóa rủi ro danh mục thành một con số tương đối chuẩn hóa, có thể gắn với yêu cầu vốn và quy trình giám sát. 
