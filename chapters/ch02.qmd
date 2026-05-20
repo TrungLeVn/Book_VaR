@@ -1,12 +1,12 @@
 # Mô hình đo lường biến động của tỷ lệ sinh lời giá chứng khoán
 
-Chương 1 đã trình bày tỷ lệ sinh lời tài sản, các đặc điểm thống kê thường gặp của chuỗi tỷ lệ sinh lời tài chính và vai trò của phân phối trong đo lường rủi ro. Chương này chuyển trọng tâm sang **biến động tỷ lệ sinh lời** (*return volatility*). Đây là biến số trung tâm trong dự báo rủi ro thị trường, vì VaR và Expected Shortfall phụ thuộc trực tiếp vào phân phối có điều kiện của tỷ lệ sinh lời, trong đó phương sai có điều kiện thường là thành phần quan trọng nhất [@Choudhry2013; @Tsay2013].
+Chương 1 đã giới thiệu tỷ lệ sinh lời, các đặc điểm thống kê cơ bản của chuỗi tỷ lệ sinh lời tài chính và vai trò của phân phối trong đo lường rủi ro. Chương này chuyển trọng tâm sang **mức độ biến động của tỷ lệ sinh lời** (*return volatility*). Trong quản trị rủi ro thị trường, volatility là đại lượng trung tâm vì nó chi phối độ rộng của phân phối tỷ lệ sinh lời có điều kiện, qua đó ảnh hưởng trực tiếp đến dự báo VaR và Expected Shortfall [@Choudhry2013; @Tsay2013].
 
-Volatility không quan sát trực tiếp như giá hay tỷ lệ sinh lời. Nhà phân tích chỉ quan sát được giá thị trường, từ đó tính tỷ lệ sinh lời. Volatility phải được ước lượng từ dữ liệu quá khứ, từ mô hình thống kê, hoặc từ thông tin hàm ý trong giá công cụ phái sinh. Vì vậy, câu hỏi trung tâm của chương là: **làm thế nào để đo lường và mô hình hóa volatility theo cách phản ánh được đặc điểm thực nghiệm của dữ liệu tài chính?**
+Volatility không quan sát trực tiếp như giá chứng khoán. Nhà phân tích chỉ quan sát được giá, từ đó tính tỷ lệ sinh lời, rồi ước lượng volatility bằng các phương pháp thống kê hoặc mô hình kinh tế lượng. Vì vậy, câu hỏi cốt lõi của chương là: **làm thế nào để đo lường và dự báo volatility theo cách phản ánh được đặc điểm của chuỗi tỷ lệ sinh lời tài chính?**
 
-Chương được thiết kế theo logic từ đơn giản đến phức tạp. Trước hết, ta bắt đầu với phương sai mẫu, độ lệch chuẩn mẫu và historical volatility. Sau đó, chương trình bày rolling volatility, EWMA/RiskMetrics và nhóm mô hình phương sai có điều kiện ARCH/GARCH. Đối với phần minh họa thực nghiệm, chương sử dụng dữ liệu VN-Index làm ví dụ mặc định. Cách tiếp cận này giúp người đọc thấy rõ mối liên hệ giữa lý thuyết, code R và dữ liệu thị trường Việt Nam.
+Chương được thiết kế theo logic từ đơn giản đến nâng cao. Mục 2.1 trình bày phương sai mẫu, độ lệch chuẩn mẫu và historical volatility. Mục 2.2 mở rộng sang rolling volatility, trong đó volatility được cập nhật bằng cửa sổ dữ liệu trượt. Mục 2.3 trình bày EWMA/RiskMetrics, tức một bước chuyển từ trọng số bằng nhau sang trọng số giảm dần theo thời gian. Mục 2.4 giới thiệu nhóm mô hình phương sai có điều kiện, gồm ARCH, GARCH và các biến thể quan trọng. Mục 2.5 bổ sung hai nhóm thước đo volatility khác: implied volatility và realized volatility. Các ví dụ trong chương sử dụng chuỗi tỷ lệ sinh lời mô phỏng để minh họa cơ chế mô hình. Việc áp dụng các mô hình này cho VN-Index và thị trường chứng khoán Việt Nam được trình bày trong Chương 3.
 
-Mục tiêu của chương không phải là chứng minh đầy đủ mọi tính chất toán học của từng mô hình, mà là giúp người đọc hiểu được: mô hình giả định điều gì, sử dụng thông tin quá khứ như thế nào, phản ứng với cú sốc thị trường ra sao, và có hàm ý gì đối với VaR động. Đây cũng là cách tiếp cận phổ biến trong các giáo trình kinh tế lượng tài chính ứng dụng [@Tsay2010; @Tsay2013; @Brooks2019].
+Mục tiêu của chương không phải là đưa ra kết luận thực nghiệm về một thị trường cụ thể, mà là giúp người đọc hiểu: mỗi phương pháp đo lường volatility được xây dựng như thế nào, sử dụng thông tin quá khứ ra sao, tham số có ý nghĩa gì, ưu điểm và hạn chế là gì, và khi nào nên chuyển từ mô hình đơn giản sang mô hình nâng cao. Cách tiếp cận này bám sát mạch trình bày trong các giáo trình kinh tế lượng tài chính ứng dụng như Tsay và Brooks [@Tsay2010; @Tsay2013; @Brooks2019].
 
 ```{r}
 #| label: setup-ch02
@@ -14,7 +14,7 @@ Mục tiêu của chương không phải là chứng minh đầy đủ mọi tí
 
 pkgs <- c(
   "ggplot2", "dplyr", "tidyr", "zoo", "knitr",
-  "scales", "tibble", "quantmod", "FinTS", "xts", "rugarch"
+  "scales", "tibble", "FinTS", "rugarch"
 )
 
 missing_pkgs <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
@@ -35,8 +35,35 @@ knitr::opts_chunk$set(
   dev = "cairo_pdf"
 )
 
-base_family <- "sans"
+base_family <- "Arial"
 base_size <- 13
+
+book_cols <- c(
+  "return" = "#2B2B2B",
+  "true_sigma" = "#0072B2",
+  "historical" = "#999999",
+  "rolling_20" = "#D55E00",
+  "rolling_60" = "#0072B2",
+  "rolling_120" = "#009E73",
+  "ewma_090" = "#CC79A7",
+  "ewma_094" = "#E69F00",
+  "ewma_097" = "#56B4E9",
+  "garch" = "#D55E00",
+  "gjr" = "#009E73"
+)
+
+book_ltys <- c(
+  "Volatility thật trong mô phỏng" = "solid",
+  "Historical volatility" = "dashed",
+  "Rolling 20 kỳ" = "solid",
+  "Rolling 60 kỳ" = "longdash",
+  "Rolling 120 kỳ" = "dotdash",
+  "EWMA, lambda = 0.90" = "solid",
+  "EWMA, lambda = 0.94" = "longdash",
+  "EWMA, lambda = 0.97" = "dotdash",
+  "GARCH chuẩn" = "solid",
+  "GJR-GARCH" = "longdash"
+)
 
 theme_book <- function() {
   theme_minimal(base_family = base_family, base_size = base_size) +
@@ -75,49 +102,24 @@ ewma_vol <- function(x, lambda = 0.94) {
   sqrt(sigma2)
 }
 
-make_demo_vnindex <- function() {
-  set.seed(2026)
-
-  dates <- seq.Date(as.Date("2010-01-04"), as.Date("2026-03-19"), by = "day")
-  dates <- dates[as.POSIXlt(dates)$wday %in% 1:5]
-
-  n <- length(dates)
-  vol <- rep(c(0.012, 0.022, 0.010, 0.015), c(850, 450, 900, max(n - 2200, 1)))
-  vol <- vol[seq_len(n)]
-
-  price <- 500 * exp(cumsum(rnorm(n, mean = 0.0002, sd = vol)))
-
-  out <- xts::xts(
-    cbind(
-      Open = price,
-      High = price * 1.005,
-      Low = price * 0.995,
-      Close = price,
-      Volume = NA_real_,
-      Adjusted = price
-    ),
-    order.by = dates
-  )
-
-  colnames(out) <- paste0(
-    "VNINDEX.",
-    c("Open", "High", "Low", "Close", "Volume", "Adjusted")
-  )
-
-  out
-}
-
-fit_garch_model <- function(x, model = "sGARCH") {
+fit_garch_model <- function(x, model = "sGARCH", dist = "std") {
   spec <- rugarch::ugarchspec(
     variance.model = list(model = model, garchOrder = c(1, 1)),
     mean.model = list(armaOrder = c(0, 0), include.mean = TRUE),
-    distribution.model = "std"
+    distribution.model = dist
   )
 
-  rugarch::ugarchfit(spec = spec, data = x, solver = "hybrid")
+  tryCatch(
+    rugarch::ugarchfit(spec = spec, data = x, solver = "hybrid"),
+    error = function(e) NULL
+  )
 }
 
-coef_table <- function(fit) {
+coef_table_simple <- function(fit) {
+  if (is.null(fit)) {
+    return(tibble(`Tham số` = "Không ước lượng được", `Ước lượng` = NA_real_))
+  }
+
   tibble(
     `Tham số` = names(coef(fit)),
     `Ước lượng` = round(as.numeric(coef(fit)), 6)
@@ -126,61 +128,75 @@ coef_table <- function(fit) {
 ```
 
 ```{r}
-#| label: load-vnindex
-#| warning: false
-#| message: false
+#| label: simulate-return-series
+#| include: false
 
-vnindex_xts <- tryCatch(
-  quantmod::getSymbols(
-    "^VNINDEX",
-    src = "yahoo",
-    from = "2010-01-01",
-    auto.assign = FALSE
-  ),
-  error = function(e) NULL
+set.seed(2026)
+
+n_obs <- 1500
+
+true_sigma <- c(
+  rep(0.008, 350),
+  rep(0.022, 300),
+  rep(0.011, 450),
+  rep(0.017, 400)
 )
 
-if (!is.null(vnindex_xts) && NROW(vnindex_xts) > 500) {
-  data_source_note <- "Dữ liệu VN-Index được tải từ Yahoo Finance với mã ^VNINDEX."
-} else {
-  vnindex_xts <- make_demo_vnindex()
-  data_source_note <- paste(
-    "Không tải được dữ liệu VN-Index trực tuyến.",
-    "File sử dụng chuỗi mô phỏng để minh họa code.",
-    "Khi render chính thức, nên thay bằng dữ liệu VN-Index nội bộ."
+true_sigma <- true_sigma[seq_len(n_obs)]
+
+# Sai số Student-t được chuẩn hóa để có phương sai xấp xỉ bằng 1.
+df_t <- 6
+z_t <- rt(n_obs, df = df_t) / sqrt(df_t / (df_t - 2))
+
+r_demo <- true_sigma * z_t
+
+df_return <- tibble(
+  time = 1:n_obs,
+  return = r_demo,
+  abs_return = abs(r_demo),
+  squared_return = r_demo^2,
+  true_sigma = true_sigma,
+  regime = case_when(
+    time <= 350 ~ "Biến động thấp",
+    time <= 650 ~ "Biến động cao",
+    time <= 1100 ~ "Biến động trung bình",
+    TRUE ~ "Biến động tăng trở lại"
   )
-}
-
-r_vnindex_xts <- na.omit(diff(log(Cl(vnindex_xts))))
-
-df_vnindex <- tibble(
-  date = as.Date(index(r_vnindex_xts)),
-  return = as.numeric(r_vnindex_xts)
-) |>
-  filter(is.finite(return))
+)
 ```
 
 ```{r}
-#| label: tbl-vnindex-source
-#| tbl-cap: "Thông tin dữ liệu sử dụng trong Chương 2"
-#| warning: false
-#| message: false
+#| label: tbl-demo-series
+#| tbl-cap: "Thông tin chuỗi tỷ lệ sinh lời mô phỏng sử dụng trong Chương 2"
 
-tibble(
-  `Nội dung` = c("Tài sản", "Tần suất", "Biến sử dụng", "Nguồn dữ liệu"),
+initial_table <- tibble(
+  `Nội dung` = c(
+    "Loại dữ liệu",
+    "Số quan sát",
+    "Cấu trúc volatility",
+    "Phân phối cú sốc",
+    "Mục đích sử dụng"
+  ),
   `Thông tin` = c(
-    "VN-Index",
-    "Ngày giao dịch",
-    "Tỷ lệ sinh lời logarit",
-    data_source_note
+    "Chuỗi tỷ lệ sinh lời mô phỏng",
+    format(n_obs, big.mark = "."),
+    "Thay đổi theo bốn giai đoạn",
+    "Student-t chuẩn hóa",
+    "Minh họa cơ chế mô hình"
   )
-) |>
-  knitr::kable(align = "ll")
+)
+
+initial_table |>
+  knitr::kable(align = "ll", booktabs = TRUE)
 ```
+
+Bảng @tbl-demo-series mô tả chuỗi tỷ lệ sinh lời mô phỏng được sử dụng trong chương. Chuỗi này không đại diện cho một thị trường cụ thể. Nó chỉ được thiết kế để thể hiện các đặc điểm thường gặp trong dữ liệu tài chính, như volatility thay đổi theo thời gian, quan sát cực đoan và các giai đoạn rủi ro cao. Cách tiếp cận này giúp chương giữ vai trò là chương phương pháp, trước khi chuyển sang phân tích VN-Index trong Chương 3.
 
 ## Mô hình đo lường mức độ biến động giản đơn
 
-Cách tiếp cận đơn giản nhất để đo lường volatility là sử dụng phương sai hoặc độ lệch chuẩn của tỷ lệ sinh lời trong một giai đoạn quan sát. Giả sử ta có chuỗi tỷ lệ sinh lời $r_1, r_2, \ldots, r_T$. Trung bình mẫu của tỷ lệ sinh lời là:
+Điểm khởi đầu tự nhiên nhất trong đo lường volatility là phương sai và độ lệch chuẩn của tỷ lệ sinh lời. Cách tiếp cận này không đòi hỏi mô hình kinh tế lượng phức tạp, nhưng giữ vai trò nền tảng vì hầu hết các mô hình volatility hiện đại đều phát triển từ ý tưởng: mức độ biến động có thể được đo bằng quy mô dao động của tỷ lệ sinh lời quanh giá trị trung bình.
+
+Giả sử ta có chuỗi tỷ lệ sinh lời $r_1, r_2, \ldots, r_T$. Trung bình mẫu của tỷ lệ sinh lời là:
 
 $$
 \bar{r} = \frac{1}{T}\sum_{t=1}^{T} r_t.
@@ -198,99 +214,125 @@ $$
 s = \sqrt{s^2}.
 $$
 
-Trong tài chính, độ lệch chuẩn của tỷ lệ sinh lời thường được gọi là **historical volatility** nếu được ước lượng từ dữ liệu quá khứ. Nếu dữ liệu là tỷ lệ sinh lời ngày, độ lệch chuẩn mẫu phản ánh volatility bình quân theo ngày. Để quy đổi sang volatility năm, người ta thường dùng công thức:
+Trong tài chính, độ lệch chuẩn của tỷ lệ sinh lời thường được gọi là **historical volatility** nếu được ước lượng từ dữ liệu quá khứ. Nếu chuỗi tỷ lệ sinh lời có tần suất ngày, độ lệch chuẩn mẫu phản ánh volatility bình quân theo ngày. Để quy đổi sang volatility năm, người ta thường dùng công thức:
 
 $$
 \sigma_{\text{annual}} = \sigma_{\text{daily}}\sqrt{252}.
 $$
 
-Con số 252 thường được sử dụng vì thị trường chứng khoán có khoảng 252 ngày giao dịch trong một năm. Tuy nhiên, quy tắc căn bậc hai của thời gian chỉ chính xác dưới các giả định mạnh: tỷ lệ sinh lời độc lập, cùng phân phối và có phương sai không đổi. Với dữ liệu tài chính thực tế, đặc biệt là dữ liệu ngày, các giả định này thường không hoàn toàn phù hợp do tồn tại volatility clustering, đuôi dày và giai đoạn thị trường căng thẳng.
+Con số 252 thường được sử dụng vì thị trường chứng khoán có khoảng 252 ngày giao dịch trong một năm. Tuy nhiên, quy tắc căn bậc hai của thời gian chỉ phù hợp dưới giả định tỷ lệ sinh lời độc lập, cùng phân phối và có phương sai không đổi. Đây là giả định mạnh. Khi dữ liệu có volatility clustering, tự tương quan trong bình phương tỷ lệ sinh lời hoặc thay đổi trạng thái thị trường, quy tắc này chỉ nên được xem là một xấp xỉ thực hành [@Brooks2019; @Tsay2013].
 
 ### Volatility không điều kiện
 
-Phương sai mẫu và độ lệch chuẩn mẫu đo lường mức biến động trung bình trong toàn bộ giai đoạn quan sát. Đây là cách tiếp cận **không điều kiện** (*unconditional volatility*), vì volatility được xem như một con số cố định cho cả chuỗi dữ liệu:
+Phương sai mẫu và độ lệch chuẩn mẫu đo mức biến động trung bình trong toàn bộ giai đoạn quan sát. Đây là cách tiếp cận **không điều kiện** (*unconditional volatility*), vì volatility được xem như một con số cố định cho cả chuỗi dữ liệu:
 
 $$
 Var(r_t) = \sigma^2, \quad \forall t.
 $$
 
-Cách nhìn này hữu ích khi mục tiêu là mô tả tổng quát mức độ biến động của một tài sản trong một giai đoạn. Ví dụ, ta có thể dùng độ lệch chuẩn mẫu để so sánh mức độ biến động trung bình của VN-Index với một chỉ số quốc tế. Tuy nhiên, trong quản trị rủi ro ngắn hạn, volatility không điều kiện có hạn chế rõ rệt. Nếu thị trường chuyển từ trạng thái ổn định sang trạng thái căng thẳng, một con số volatility bình quân cho toàn kỳ sẽ phản ứng chậm và có thể đánh giá thấp rủi ro hiện tại.
+Cách tiếp cận này phù hợp khi mục tiêu là mô tả nhanh rủi ro trung bình của một tài sản hoặc tạo benchmark đơn giản trước khi dùng mô hình động. Hạn chế của nó là không phản ánh được sự thay đổi của rủi ro theo thời gian. Nếu chuỗi tỷ lệ sinh lời chuyển từ giai đoạn ổn định sang giai đoạn biến động cao, một con số volatility bình quân cho toàn mẫu sẽ phản ứng chậm và có thể làm sai lệch đánh giá rủi ro ngắn hạn.
 
 ```{r}
-#| label: tbl-simple-vol-vnindex
-#| tbl-cap: "Volatility giản đơn của VN-Index"
+#| label: tbl-simple-vol-demo
+#| tbl-cap: "Volatility giản đơn của chuỗi tỷ lệ sinh lời mô phỏng"
 
-daily_mean <- mean(df_vnindex$return)
-daily_sd <- sd(df_vnindex$return)
+sample_mean <- mean(df_return$return)
+sample_sd <- sd(df_return$return)
+annualized_sd <- sample_sd * sqrt(252)
 
-tibble(
+simple_vol_table <- tibble(
   `Chỉ tiêu` = c(
-    "Trung bình ngày",
-    "Volatility ngày",
-    "Volatility năm hóa",
+    "Trung bình mỗi kỳ",
+    "Volatility mỗi kỳ",
+    "Volatility năm hóa nếu dữ liệu là ngày",
     "Số quan sát"
   ),
   `Giá trị` = c(
-    fmt_pct(daily_mean, 0.001),
-    fmt_pct(daily_sd, 0.01),
-    fmt_pct(daily_sd * sqrt(252), 0.1),
-    format(nrow(df_vnindex), big.mark = ".")
+    fmt_pct(sample_mean, accuracy = 0.001),
+    fmt_pct(sample_sd, accuracy = 0.01),
+    fmt_pct(annualized_sd, accuracy = 0.1),
+    format(nrow(df_return), big.mark = ".")
   )
-) |>
-  knitr::kable(align = "lr")
+)
+
+simple_vol_table |>
+  knitr::kable(align = "lr", booktabs = TRUE)
 ```
 
-Bảng @tbl-simple-vol-vnindex cho thấy cách tính volatility giản đơn từ chuỗi tỷ lệ sinh lời ngày của VN-Index. Đây là một bước khởi đầu cần thiết, nhưng chưa đủ để mô tả rủi ro thay đổi theo thời gian. Trong thực tế, rủi ro của VN-Index trong một giai đoạn khủng hoảng không thể được đại diện đầy đủ bằng cùng một con số volatility bình quân của toàn bộ mẫu.
+Bảng @tbl-simple-vol-demo cho thấy cách tính volatility giản đơn từ một chuỗi tỷ lệ sinh lời. Đây là bước khởi đầu cần thiết, nhưng không đủ để mô tả rủi ro thay đổi theo thời gian. Trong thực tế, một nhà quản trị rủi ro không chỉ cần biết volatility trung bình của cả giai đoạn, mà còn cần biết volatility hiện tại đang thấp, cao hay đang chuyển trạng thái.
 
 ```{r}
-#| label: fig-vnindex-return-simple-vol
-#| fig-cap: "Tỷ lệ sinh lời VN-Index và độ lệch chuẩn toàn mẫu"
+#| label: fig-simple-vol-limit
+#| fig-cap: "Historical volatility không phản ánh đầy đủ biến động thay đổi theo thời gian"
 #| fig-width: 8
 #| fig-height: 4.8
-#| warning: false
-#| message: false
-#| dev: cairo_pdf
 
-sample_sd <- sd(df_vnindex$return, na.rm = TRUE)
+avg_sigma <- sd(df_return$return)
 
-ggplot(df_vnindex, aes(x = date, y = return)) +
-  geom_line(linewidth = 0.28) +
+df_simple_plot <- df_return |>
+  select(time, abs_return, true_sigma) |>
+  pivot_longer(
+    cols = c(abs_return, true_sigma),
+    names_to = "series",
+    values_to = "value"
+  ) |>
+  mutate(
+    series = recode(
+      series,
+      abs_return = "|Tỷ lệ sinh lời|",
+      true_sigma = "Volatility thật trong mô phỏng"
+    )
+  )
+
+ggplot(df_simple_plot, aes(x = time, y = value, color = series, linetype = series)) +
+  geom_line(linewidth = 0.55, alpha = 0.9) +
   geom_hline(
-    yintercept = c(-sample_sd, sample_sd),
+    yintercept = avg_sigma,
+    color = book_cols["historical"],
     linetype = "dashed",
-    linewidth = 0.55
+    linewidth = 0.7
   ) +
   annotate(
     "label",
-    x = df_vnindex$date[round(nrow(df_vnindex) * 0.18)],
-    y = sample_sd * 1.7,
-    label = "± độ lệch chuẩn toàn mẫu",
+    x = 150,
+    y = avg_sigma * 1.35,
+    label = "Historical volatility\ntoàn mẫu",
     family = base_family,
-    size = 3.6,
-    label.size = 0.25
+    size = 3.4,
+    label.size = 0.2
   ) +
-  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = label_pct(1)) +
+  scale_color_manual(values = c(
+    "|Tỷ lệ sinh lời|" = book_cols["return"],
+    "Volatility thật trong mô phỏng" = book_cols["true_sigma"]
+  )) +
+  scale_linetype_manual(values = c(
+    "|Tỷ lệ sinh lời|" = "solid",
+    "Volatility thật trong mô phỏng" = "longdash"
+  )) +
   labs(
-    title = "Một volatility bình quân không phản ánh đầy đủ rủi ro thay đổi theo thời gian",
-    subtitle = "VN-Index có các cụm biến động lớn trong một số giai đoạn thị trường căng thẳng",
+    title = "Một volatility bình quân có thể che khuất các trạng thái rủi ro khác nhau",
+    subtitle = "Đường ngang thể hiện historical volatility toàn mẫu; đường volatility thật chỉ có trong mô phỏng",
     x = "Thời gian",
-    y = "Tỷ lệ sinh lời ngày"
+    y = "Mức biến động",
+    color = NULL,
+    linetype = NULL
   ) +
   theme_book()
 ```
 
-Hình @fig-vnindex-return-simple-vol minh họa một vấn đề cơ bản của volatility không điều kiện. Đường gạch ngang cho biết độ lệch chuẩn toàn mẫu, nhưng chuỗi tỷ lệ sinh lời có những giai đoạn dao động mạnh hơn hẳn. Đây là bằng chứng trực quan cho thấy cần chuyển từ một thước đo volatility tĩnh sang các thước đo động.
+Hình @fig-simple-vol-limit minh họa hạn chế của historical volatility. Khi dữ liệu có các giai đoạn biến động cao và thấp, một độ lệch chuẩn toàn mẫu chỉ cho biết mức rủi ro bình quân. Nó không cho biết thị trường đang ở trạng thái nào tại từng thời điểm.
 
-| Thước đo | Ý tưởng | Hạn chế |
-|---|---|---|
-| Phương sai mẫu | Bình phương độ lệch | Khó diễn giải trực tiếp |
-| Độ lệch chuẩn mẫu | Căn bậc hai phương sai | Giả định volatility cố định |
-| Volatility năm hóa | Nhân $\sqrt{252}$ | Cần giả định mạnh |
-| Volatility không điều kiện | Một mức $\sigma$ | Không bắt kịp trạng thái thị trường |
+| Thước đo | Ý tưởng | Ưu điểm | Hạn chế |
+|---|---|---|---|
+| Phương sai mẫu | Bình phương độ lệch | Nền tảng thống kê | Đơn vị khó diễn giải |
+| Độ lệch chuẩn mẫu | Căn bậc hai phương sai | Dễ hiểu | Giả định tĩnh |
+| Historical volatility | Tính từ dữ liệu quá khứ | Benchmark đơn giản | Phản ứng chậm |
+| Volatility không điều kiện | Một mức $\sigma$ | Gọn, trực quan | Không xử lý clustering |
 
 ## Mô hình trung bình trượt
 
-Một cải tiến trực quan so với volatility toàn mẫu là chỉ sử dụng một cửa sổ dữ liệu gần hiện tại để ước lượng volatility. Đây là cách tiếp cận **rolling window** hoặc **moving average volatility**. Tại mỗi thời điểm $t$, ta chỉ dùng $m$ quan sát gần nhất:
+Một cải tiến trực quan so với historical volatility toàn mẫu là chỉ sử dụng một cửa sổ dữ liệu gần hiện tại để ước lượng volatility. Đây là cách tiếp cận **trung bình trượt** hoặc **rolling window volatility**. Tại mỗi thời điểm $t$, nhà phân tích dùng $m$ quan sát gần nhất:
 
 $$
 r_{t-m+1}, r_{t-m+2}, \ldots, r_t.
@@ -316,7 +358,7 @@ $$
 r_{t-i}.
 $$
 
-Với dữ liệu tỷ lệ sinh lời ngày, trung bình thường nhỏ hơn nhiều so với volatility. Vì vậy, trong một số ứng dụng quản trị rủi ro, người ta dùng xấp xỉ:
+Với dữ liệu tỷ lệ sinh lời ngày, trung bình ngắn hạn thường nhỏ hơn volatility. Vì vậy, trong một số ứng dụng quản trị rủi ro, phương sai rolling có thể được xấp xỉ bằng trung bình các squared returns:
 
 $$
 \hat{\sigma}_{t}^{2}
@@ -326,57 +368,73 @@ $$
 r_{t-i}^{2}.
 $$
 
-Công thức này cho thấy moving average volatility là trung bình của các squared returns trong một cửa sổ cố định. Mỗi quan sát trong cửa sổ được gán trọng số bằng nhau. Cú sốc xảy ra hôm qua và cú sốc xảy ra ở ngày đầu tiên của cửa sổ có cùng trọng số; cú sốc rơi ra ngoài cửa sổ thì không còn tác động đến volatility ước lượng.
+Công thức trên cho thấy rolling volatility vẫn là một mô hình đơn giản: mọi quan sát trong cửa sổ đều có trọng số bằng nhau. Quan sát xảy ra ở kỳ gần nhất và quan sát xảy ra ở kỳ đầu tiên của cửa sổ có cùng ảnh hưởng đến volatility hiện tại. Ngược lại, quan sát vừa rơi ra khỏi cửa sổ lập tức mất toàn bộ ảnh hưởng.
 
 ### Lựa chọn độ dài cửa sổ
 
-Tham số quan trọng nhất của rolling volatility là độ dài cửa sổ $m$. Nếu $m$ nhỏ, volatility phản ứng nhanh với thay đổi gần đây của thị trường, nhưng đường volatility sẽ nhiễu hơn. Nếu $m$ lớn, volatility mượt hơn, nhưng phản ứng chậm hơn khi thị trường chuyển trạng thái.
+Tham số quan trọng nhất của rolling volatility là độ dài cửa sổ $m$. Cửa sổ ngắn phản ứng nhanh với thông tin mới, nhưng đường volatility thường nhiễu. Cửa sổ dài tạo ra đường volatility mượt hơn, nhưng phản ứng chậm khi thị trường chuyển trạng thái. Do đó, rolling volatility luôn đi kèm một đánh đổi giữa **độ nhạy** và **độ mượt**.
 
-Cửa sổ 20 ngày thường được xem gần tương đương một tháng giao dịch. Cửa sổ 60 ngày tương đương khoảng một quý giao dịch. Cửa sổ 252 ngày tương đương khoảng một năm giao dịch. Không có lựa chọn duy nhất đúng cho mọi bối cảnh. Việc chọn cửa sổ phụ thuộc vào mục tiêu phân tích: mô tả dữ liệu, báo cáo rủi ro nội bộ, dự báo VaR ngắn hạn, hay đánh giá phản ứng của thị trường trong một sự kiện cụ thể.
+Nếu dữ liệu là ngày giao dịch, cửa sổ 20 kỳ thường tương ứng khoảng một tháng, 60 kỳ tương ứng khoảng một quý, còn 120 hoặc 252 kỳ tương ứng giai đoạn dài hơn. Tuy nhiên, trong chương này, các cửa sổ này chỉ được dùng như ví dụ minh họa. Khi áp dụng cho dữ liệu thật trong Chương 3, việc chọn cửa sổ cần gắn với mục tiêu dự báo, tần suất dữ liệu và đặc điểm thị trường.
 
 ```{r}
-#| label: fig-vnindex-rolling-volatility
-#| fig-cap: "Rolling volatility của VN-Index với các độ dài cửa sổ khác nhau"
+#| label: fig-rolling-volatility-demo
+#| fig-cap: "Rolling volatility với các độ dài cửa sổ khác nhau"
 #| fig-width: 8
 #| fig-height: 4.8
 
-windows <- c(20, 60, 120)
-
-df_roll <- tibble(
-  date = df_vnindex$date,
-  setNames(
-    as.data.frame(lapply(windows, \(w) roll_sd(df_vnindex$return, w))),
-    paste0("Cửa sổ ", windows, " ngày")
+df_roll <- df_return |>
+  mutate(
+    `Rolling 20 kỳ` = roll_sd(return, 20),
+    `Rolling 60 kỳ` = roll_sd(return, 60),
+    `Rolling 120 kỳ` = roll_sd(return, 120),
+    `Volatility thật trong mô phỏng` = true_sigma
+  ) |>
+  select(time, `Rolling 20 kỳ`, `Rolling 60 kỳ`, `Rolling 120 kỳ`, `Volatility thật trong mô phỏng`) |>
+  pivot_longer(
+    cols = -time,
+    names_to = "method",
+    values_to = "volatility"
   )
-) |>
-  pivot_longer(-date, names_to = "window", values_to = "volatility")
 
-ggplot(df_roll, aes(date, volatility, linetype = window)) +
+ggplot(df_roll, aes(x = time, y = volatility, color = method, linetype = method)) +
   geom_line(linewidth = 0.75, na.rm = TRUE) +
   scale_y_continuous(labels = label_pct(0.5)) +
+  scale_color_manual(values = c(
+    "Rolling 20 kỳ" = book_cols["rolling_20"],
+    "Rolling 60 kỳ" = book_cols["rolling_60"],
+    "Rolling 120 kỳ" = book_cols["rolling_120"],
+    "Volatility thật trong mô phỏng" = book_cols["true_sigma"]
+  )) +
+  scale_linetype_manual(values = c(
+    "Rolling 20 kỳ" = "solid",
+    "Rolling 60 kỳ" = "longdash",
+    "Rolling 120 kỳ" = "dotdash",
+    "Volatility thật trong mô phỏng" = "dashed"
+  )) +
   labs(
     title = "Cửa sổ ngắn phản ứng nhanh hơn nhưng nhiễu hơn",
-    subtitle = "Cửa sổ dài tạo đường volatility mượt hơn nhưng có độ trễ khi thị trường chuyển trạng thái",
+    subtitle = "Cửa sổ dài tạo volatility mượt hơn nhưng phản ứng chậm khi trạng thái rủi ro thay đổi",
     x = "Thời gian",
-    y = "Rolling volatility ngày",
-    linetype = "Độ dài cửa sổ"
+    y = "Volatility ước lượng",
+    color = NULL,
+    linetype = NULL
   ) +
   theme_book()
 ```
 
-Hình @fig-vnindex-rolling-volatility minh họa trade-off giữa độ nhạy và độ mượt. Cửa sổ ngắn phản ứng nhanh với các giai đoạn thị trường biến động mạnh, nhưng cũng dao động nhiều hơn. Cửa sổ dài ổn định hơn, nhưng có thể phản ứng chậm khi rủi ro tăng đột ngột.
+Hình @fig-rolling-volatility-demo cho thấy rolling volatility giúp mô hình phản ứng tốt hơn so với historical volatility toàn mẫu. Tuy nhiên, các đường rolling vẫn bị chi phối mạnh bởi lựa chọn cửa sổ. Cửa sổ 20 kỳ theo sát thay đổi hơn, nhưng biến động nhiều. Cửa sổ 120 kỳ mượt hơn, nhưng có độ trễ rõ rệt.
 
 ### Hạn chế của trọng số bằng nhau
 
-Rolling volatility dễ hiểu và dễ triển khai, nhưng có hai hạn chế quan trọng. Thứ nhất, các quan sát trong cửa sổ có trọng số bằng nhau. Thứ hai, một quan sát cực đoan có thể làm volatility thay đổi đột ngột khi nó rơi khỏi cửa sổ. Điều này có thể tạo ra sự thiếu ổn định trong VaR nếu VaR được tính trực tiếp từ rolling volatility.
+Điểm yếu cốt lõi của rolling volatility là **equal weighting**. Nếu dùng cửa sổ 60 kỳ, cú sốc ở kỳ $t-1$ và cú sốc ở kỳ $t-60$ có cùng trọng số. Trong khi đó, cú sốc ở kỳ $t-61$ không còn vai trò gì. Cách xử lý này có thể tạo ra hai vấn đề. Một là volatility phản ứng chậm nếu cửa sổ dài. Hai là volatility có thể thay đổi đột ngột khi một quan sát cực đoan rơi khỏi cửa sổ.
 
-Về mặt quản trị rủi ro, nhà phân tích thường muốn một thước đo vừa phản ứng với thông tin mới, vừa không biến động quá cơ học vì một quan sát ra khỏi cửa sổ. EWMA là bước phát triển tự nhiên theo hướng này, vì nó cho phép trọng số giảm dần theo thời gian thay vì bằng nhau trong một cửa sổ cố định.
+EWMA khắc phục một phần hạn chế này bằng cách gán trọng số giảm dần theo thời gian. Đây là nội dung của mục tiếp theo.
 
 ## Mô hình trung bình trượt với trọng số thay đổi
 
-Mô hình trung bình trượt với trọng số thay đổi khắc phục một phần hạn chế của rolling volatility bằng cách gán trọng số lớn hơn cho các quan sát gần hiện tại và trọng số nhỏ hơn cho các quan sát xa hơn trong quá khứ. Cách tiếp cận phổ biến nhất là **Exponentially Weighted Moving Average** (EWMA), gắn liền với khuôn khổ RiskMetrics [@RiskMetrics1996].
+Mô hình trung bình trượt với trọng số thay đổi cho phép các quan sát gần hiện tại có ảnh hưởng lớn hơn các quan sát xa trong quá khứ. Cách tiếp cận phổ biến nhất là **Exponentially Weighted Moving Average** (EWMA), gắn với khuôn khổ RiskMetrics [@RiskMetrics1996; @Brooks2019].
 
-EWMA cập nhật volatility hiện tại từ volatility quá khứ và cú sốc mới nhất:
+EWMA cập nhật phương sai hiện tại từ phương sai quá khứ và cú sốc mới nhất:
 
 $$
 \hat{\sigma}_{t}^{2}
@@ -386,9 +444,9 @@ $$
 (1-\lambda)r_{t-1}^{2},
 $$
 
-trong đó $0 < \lambda < 1$ là hệ số suy giảm (*decay factor*). Nếu $\lambda$ lớn, volatility quá khứ được duy trì lâu hơn và mô hình phản ứng chậm hơn với cú sốc mới. Nếu $\lambda$ nhỏ, cú sốc mới có trọng số lớn hơn và mô hình phản ứng nhanh hơn.
+trong đó $0<\lambda<1$ là hệ số suy giảm (*decay factor*). Nếu $\lambda$ lớn, volatility quá khứ được duy trì lâu hơn và mô hình phản ứng chậm hơn với cú sốc mới. Nếu $\lambda$ nhỏ, cú sốc mới có trọng số lớn hơn và mô hình phản ứng nhanh hơn.
 
-Khi khai triển đệ quy, EWMA có dạng:
+Khi khai triển đệ quy, EWMA có thể viết dưới dạng trung bình có trọng số của các squared returns trong quá khứ:
 
 $$
 \hat{\sigma}_{t}^{2}
@@ -398,173 +456,150 @@ $$
 \lambda^{j-1} r_{t-j}^{2}.
 $$
 
-Công thức này cho thấy trọng số của các cú sốc quá khứ giảm theo cấp số nhân. Quan sát càng xa hiện tại thì trọng số càng nhỏ. Đây là khác biệt cơ bản giữa EWMA và moving average đơn giản.
+Công thức này cho thấy trọng số của cú sốc quá khứ giảm theo cấp số nhân. Quan sát càng xa hiện tại thì trọng số càng nhỏ. Đây là khác biệt cơ bản giữa EWMA và rolling volatility.
 
-### Hệ số suy giảm và half-life
+### Decay factor và half-life
 
-Hệ số $\lambda$ kiểm soát mức độ bền vững của volatility. Trong RiskMetrics, giá trị $\lambda = 0.94$ thường được sử dụng cho dữ liệu ngày trong nhiều ứng dụng thị trường tài chính [@RiskMetrics1996; @Choudhry2013]. Một cách trực quan để hiểu $\lambda$ là thông qua **chu kỳ bán rã** (*half-life*), tức là số kỳ cần để trọng số của một cú sốc giảm còn một nửa:
+Một cách trực quan để hiểu $\lambda$ là thông qua **chu kỳ bán rã** (*half-life*), tức số kỳ cần để trọng số của một cú sốc giảm còn một nửa:
 
 $$
 HL = \frac{\log(0.5)}{\log(\lambda)}.
 $$
 
-Nếu $\lambda = 0.94$, half-life xấp xỉ 11 ngày giao dịch. Điều này có nghĩa là sau khoảng 11 ngày, ảnh hưởng của một cú sốc đến volatility EWMA giảm còn một nửa.
+Nếu $\lambda = 0.94$, half-life xấp xỉ 11 kỳ. Nghĩa là sau khoảng 11 kỳ, ảnh hưởng của một cú sốc đến volatility EWMA giảm còn một nửa. Giá trị $\lambda$ càng lớn, ký ức của mô hình về cú sốc càng dài.
 
 ```{r}
-#| label: fig-ewma-weights
+#| label: fig-ewma-weights-demo
 #| fig-cap: "Trọng số EWMA giảm dần theo thời gian"
 #| fig-width: 8
 #| fig-height: 4.8
 
 lambda_values <- c(0.90, 0.94, 0.97)
+lag_max <- 80
 
-df_weights <- tidyr::crossing(
-  lag = 1:80,
+df_weights <- expand.grid(
+  lag = 1:lag_max,
   lambda = lambda_values
 ) |>
+  as_tibble() |>
   mutate(
     weight = (1 - lambda) * lambda^(lag - 1),
     lambda_label = paste0("lambda = ", lambda)
   )
 
-ggplot(df_weights, aes(lag, weight, linetype = lambda_label)) +
+ggplot(df_weights, aes(x = lag, y = weight, color = lambda_label, linetype = lambda_label)) +
   geom_line(linewidth = 0.8) +
   scale_y_continuous(labels = label_pct(0.1)) +
+  scale_color_manual(values = c(
+    "lambda = 0.9" = book_cols["ewma_090"],
+    "lambda = 0.94" = book_cols["ewma_094"],
+    "lambda = 0.97" = book_cols["ewma_097"]
+  )) +
+  scale_linetype_manual(values = c(
+    "lambda = 0.9" = "solid",
+    "lambda = 0.94" = "longdash",
+    "lambda = 0.97" = "dotdash"
+  )) +
   labs(
     title = "Hệ số lambda càng lớn, trọng số giảm càng chậm",
     subtitle = "EWMA gán trọng số lớn hơn cho cú sốc gần hiện tại và trọng số nhỏ hơn cho cú sốc xa hơn",
     x = "Độ trễ của cú sốc",
     y = "Trọng số",
-    linetype = "Hệ số suy giảm"
+    color = NULL,
+    linetype = NULL
   ) +
   theme_book()
 ```
 
-Hình @fig-ewma-weights cho thấy khi $\lambda$ tăng, trọng số giảm chậm hơn. Với $\lambda = 0.97$, các cú sốc xa hơn vẫn có ảnh hưởng đáng kể đến volatility hiện tại. Với $\lambda = 0.90$, trọng số tập trung mạnh hơn vào các quan sát gần nhất.
-
 ```{r}
-#| label: tbl-ewma-half-life
+#| label: tbl-ewma-half-life-demo
 #| tbl-cap: "Half-life tương ứng với một số giá trị lambda"
-#| warning: false
-#| message: false
 
-tibble(
+half_life_table <- tibble(
   `Lambda` = c(0.90, 0.94, 0.97),
-  `Half-life, ngày` = round(log(0.5) / log(c(0.90, 0.94, 0.97)), 1)
-) |>
-  knitr::kable(align = "rr")
+  `Half-life, kỳ` = round(log(0.5) / log(c(0.90, 0.94, 0.97)), 1)
+)
+
+half_life_table |>
+  knitr::kable(align = "rr", booktabs = TRUE)
 ```
 
-Bảng @tbl-ewma-half-life giúp diễn giải ý nghĩa của $\lambda$. Giá trị $\lambda$ càng lớn, cú sốc càng tồn tại lâu trong volatility ước lượng. Vì vậy, lựa chọn $\lambda$ không chỉ là một tham số kỹ thuật mà còn phản ánh quan điểm về tốc độ thị trường hấp thụ thông tin mới.
+Bảng @tbl-ewma-half-life-demo và Hình @fig-ewma-weights-demo cho thấy vai trò của decay factor. EWMA phản ứng linh hoạt hơn moving average có trọng số bằng nhau, nhưng vẫn đơn giản hơn GARCH vì không cần ước lượng nhiều tham số.
 
-### EWMA và VaR động
+### EWMA như bước đệm tới GARCH
 
-EWMA có quan hệ trực tiếp với VaR tham số. Nếu giả định tỷ lệ sinh lời có điều kiện tuân theo phân phối chuẩn với trung bình gần bằng không:
-
-$$
-r_t \mid \mathcal{F}_{t-1} \sim N(0, \sigma_t^2),
-$$
-
-thì VaR 1 ngày ở mức tin cậy 99% có thể xấp xỉ:
-
-$$
-VaR_{0.99,t}
-=
-2.33 \hat{\sigma}_t.
-$$
-
-Khi volatility EWMA tăng, VaR tăng. Khi volatility EWMA giảm, VaR giảm. Do đó, EWMA cho phép VaR phản ứng với trạng thái thị trường hiện tại thay vì dùng một volatility cố định. Tuy nhiên, EWMA vẫn có hạn chế: mô hình không có thành phần hằng số trong phương trình phương sai, không có mức phương sai dài hạn rõ ràng, và không mô tả cơ chế quay về trung bình (*mean reversion*) như GARCH.
+EWMA có thể được xem như một bước đệm từ rolling volatility sang mô hình GARCH. Nó đã đưa vào ý tưởng volatility có điều kiện và cập nhật theo thông tin quá khứ. Tuy nhiên, EWMA không có thành phần hằng số và không có mức phương sai dài hạn rõ ràng. Vì vậy, EWMA không mô tả cơ chế mean reversion theo cách GARCH thực hiện.
 
 ```{r}
-#| label: fig-ewma-vs-rolling-vnindex
-#| fig-cap: "So sánh rolling volatility và EWMA volatility của VN-Index"
+#| label: fig-ewma-vs-rolling-demo
+#| fig-cap: "So sánh rolling volatility và EWMA volatility"
 #| fig-width: 8
 #| fig-height: 4.8
 
-df_compare_vol <- tibble(
-  date = df_vnindex$date,
-  `Rolling 60 ngày` = roll_sd(df_vnindex$return, 60),
-  `EWMA, lambda = 0.94` = ewma_vol(df_vnindex$return, 0.94)
-) |>
-  pivot_longer(-date, names_to = "method", values_to = "volatility")
+df_ewma_compare <- df_return |>
+  mutate(
+    `Rolling 60 kỳ` = roll_sd(return, 60),
+    `EWMA, lambda = 0.90` = ewma_vol(return, 0.90),
+    `EWMA, lambda = 0.94` = ewma_vol(return, 0.94),
+    `EWMA, lambda = 0.97` = ewma_vol(return, 0.97),
+    `Volatility thật trong mô phỏng` = true_sigma
+  ) |>
+  select(time, `Rolling 60 kỳ`, starts_with("EWMA"), `Volatility thật trong mô phỏng`) |>
+  pivot_longer(
+    cols = -time,
+    names_to = "method",
+    values_to = "volatility"
+  )
 
-ggplot(df_compare_vol, aes(date, volatility, linetype = method)) +
-  geom_line(linewidth = 0.75, na.rm = TRUE) +
+ggplot(df_ewma_compare, aes(x = time, y = volatility, color = method, linetype = method)) +
+  geom_line(linewidth = 0.7, na.rm = TRUE) +
   scale_y_continuous(labels = label_pct(0.5)) +
+  scale_color_manual(values = c(
+    "Rolling 60 kỳ" = book_cols["rolling_60"],
+    "EWMA, lambda = 0.90" = book_cols["ewma_090"],
+    "EWMA, lambda = 0.94" = book_cols["ewma_094"],
+    "EWMA, lambda = 0.97" = book_cols["ewma_097"],
+    "Volatility thật trong mô phỏng" = book_cols["true_sigma"]
+  )) +
+  scale_linetype_manual(values = c(
+    "Rolling 60 kỳ" = "solid",
+    "EWMA, lambda = 0.90" = "solid",
+    "EWMA, lambda = 0.94" = "longdash",
+    "EWMA, lambda = 0.97" = "dotdash",
+    "Volatility thật trong mô phỏng" = "dashed"
+  )) +
   labs(
     title = "EWMA cập nhật volatility liên tục hơn rolling volatility",
-    subtitle = "EWMA tránh được một phần thay đổi đột ngột do quan sát cực đoan rơi khỏi cửa sổ",
+    subtitle = "Lambda nhỏ phản ứng nhanh hơn; lambda lớn duy trì ảnh hưởng của cú sốc lâu hơn",
     x = "Thời gian",
-    y = "Volatility ngày",
-    linetype = "Phương pháp"
+    y = "Volatility ước lượng",
+    color = NULL,
+    linetype = NULL
   ) +
   theme_book()
 ```
 
-Hình @fig-ewma-vs-rolling-vnindex cho thấy EWMA thường tạo ra đường volatility liên tục hơn so với rolling volatility. Rolling volatility có thể thay đổi mạnh khi một quan sát cực đoan ra khỏi cửa sổ, trong khi EWMA giảm dần ảnh hưởng của cú sốc theo thời gian.
-
-| Phương pháp | Trọng số | Điểm mạnh | Điểm yếu |
-|---|---|---|---|
-| Historical volatility | Toàn mẫu | Đơn giản | Tĩnh |
-| Rolling volatility | Bằng nhau | Trực quan | Nhạy với cửa sổ |
-| EWMA | Giảm dần | Phản ứng liên tục | Không mean reversion |
-| GARCH | Ước lượng | Linh hoạt | Cần mô hình hóa |
-
-Ba nhóm thước đo trên tạo nền tảng thực nghiệm trước khi đi vào ARCH/GARCH. Historical volatility là thước đo tĩnh; rolling volatility là thước đo động nhưng cơ học; EWMA là thước đo động có trọng số suy giảm. GARCH tiếp tục phát triển logic này bằng cách mô hình hóa phương sai có điều kiện trong một khuôn khổ kinh tế lượng đầy đủ hơn.
+Hình @fig-ewma-vs-rolling-demo cho thấy EWMA tạo ra đường volatility liên tục hơn rolling volatility. Tuy nhiên, EWMA vẫn chưa phải là mô hình kinh tế lượng đầy đủ cho phương sai có điều kiện. GARCH mở rộng logic này bằng cách cho volatility hiện tại phụ thuộc đồng thời vào cú sốc mới và chính volatility quá khứ.
 
 ## Mô hình phương sai có điều kiện
 
-Các thước đo như historical volatility, rolling volatility và EWMA cho phép volatility thay đổi theo thời gian, nhưng vẫn chưa phải là một mô hình kinh tế lượng hoàn chỉnh. Điểm còn thiếu là một phương trình mô hình hóa trực tiếp quy luật vận động của phương sai có điều kiện (*conditional variance*) dựa trên cú sốc trong quá khứ và chính volatility quá khứ. Mục này trình bày nhóm mô hình ARCH/GARCH và các biến thể, là nền tảng quan trọng của mô hình VaR động [@Engle1982; @Bollerslev1986; @Tsay2010; @Brooks2019].
+Các phương pháp historical volatility, rolling volatility và EWMA đều có giá trị thực hành, nhưng chúng chưa mô hình hóa đầy đủ cơ chế tạo ra volatility. Nhóm mô hình phương sai có điều kiện đặt volatility vào một cấu trúc kinh tế lượng rõ ràng. Ý tưởng cốt lõi là phương sai tại thời điểm $t$ phụ thuộc vào thông tin có sẵn tại thời điểm $t-1$.
 
-### Ý tưởng chung: conditional heteroskedasticity
-
-Điểm xuất phát của nhóm mô hình ARCH/GARCH là giả định tỷ lệ sinh lời $r_t$ có thể được tách thành phương trình trung bình và phương trình sai số:
+Một cấu trúc chung có thể viết như sau:
 
 $$
 r_t = \mu_t + \varepsilon_t,
 $$
 
-trong đó $\mu_t$ là kỳ vọng có điều kiện và $\varepsilon_t$ là cú sốc không dự báo được tại thời điểm $t$. Cú sốc này được viết dưới dạng:
-
 $$
 \varepsilon_t = \sigma_t z_t,
 $$
 
-trong đó $\sigma_t^2$ là phương sai có điều kiện tại thời điểm $t$, còn $z_t$ là sai số chuẩn hóa với $E(z_t)=0$ và $Var(z_t)=1$.
+trong đó $\mu_t$ là kỳ vọng có điều kiện, $\varepsilon_t$ là cú sốc không dự báo được, $\sigma_t^2$ là phương sai có điều kiện, còn $z_t$ là sai số chuẩn hóa với $E(z_t)=0$ và $Var(z_t)=1$. Trong dữ liệu tỷ lệ sinh lời ngày, phương trình trung bình thường đơn giản, còn trọng tâm phân tích nằm ở phương trình phương sai [@Engle1982; @Bollerslev1986; @Tsay2010; @Brooks2019].
 
-Điểm quan trọng là $\sigma_t^2$ có thể thay đổi theo thời gian. Khi thị trường bình ổn, $\sigma_t^2$ thấp. Khi thị trường xuất hiện cú sốc lớn, $\sigma_t^2$ tăng và có thể duy trì ở mức cao trong nhiều phiên. Đây chính là cách ARCH/GARCH mô hình hóa volatility clustering.
+### Kiểm định ARCH effect
 
-Trong ứng dụng thực nghiệm, $\mu_t$ thường được mô hình hóa đơn giản bằng một hằng số hoặc một mô hình ARMA bậc thấp. Với dữ liệu tỷ lệ sinh lời ngày, trung bình thường nhỏ, nên trọng tâm phân tích thường nằm ở phương trình phương sai hơn là phương trình trung bình.
-
-```{r}
-#| label: fig-vnindex-abs-return
-#| fig-cap: "Dấu hiệu volatility clustering trong tỷ lệ sinh lời tuyệt đối của VN-Index"
-#| fig-width: 8
-#| fig-height: 4.8
-#| warning: false
-#| message: false
-
-df_vnindex |>
-  mutate(abs_return = abs(return)) |>
-  ggplot(aes(x = date, y = abs_return)) +
-  geom_line(linewidth = 0.28) +
-  scale_y_continuous(labels = percent_format(accuracy = 1)) +
-  labs(
-    title = "Các cú sốc lớn của VN-Index thường xuất hiện theo cụm",
-    subtitle = "Tỷ lệ sinh lời tuyệt đối cao trong một ngày thường đi cùng giai đoạn biến động cao kéo dài",
-    x = "Thời gian",
-    y = "|Tỷ lệ sinh lời|"
-  ) +
-  theme_book()
-```
-
-Hình @fig-vnindex-abs-return minh họa trực quan hiện tượng volatility clustering. Các ngày có biến động lớn không phân bố đều theo thời gian mà thường tập trung thành từng cụm. Đây là lý do mô hình phương sai cố định thường không phù hợp với dữ liệu tỷ lệ sinh lời tài chính.
-
-### Kiểm định ARCH effect trước khi ước lượng GARCH
-
-Trước khi ước lượng GARCH, ta nên kiểm tra xem chuỗi tỷ lệ sinh lời có bằng chứng về ARCH effect hay không. Ý tưởng trực quan là nếu bình phương phần dư hiện tại có thể được giải thích bởi bình phương phần dư trong quá khứ, thì phương sai của chuỗi có cấu trúc phụ thuộc theo thời gian.
-
-Một cách kiểm định phổ biến là ARCH-LM. Với phần dư $\hat{\varepsilon}_t$ từ phương trình trung bình, ta hồi quy:
+Trước khi sử dụng mô hình ARCH/GARCH, cần kiểm tra xem chuỗi tỷ lệ sinh lời có bằng chứng về phương sai có điều kiện thay đổi theo thời gian hay không. Một kiểm định phổ biến là ARCH-LM. Với phần dư $\hat{\varepsilon}_t$ từ phương trình trung bình, ta hồi quy:
 
 $$
 \hat{\varepsilon}_t^2
@@ -574,12 +609,9 @@ a_0
 a_1 \hat{\varepsilon}_{t-1}^2
 +
 a_2 \hat{\varepsilon}_{t-2}^2
-+
-\cdots
-+
++\cdots+
 a_m \hat{\varepsilon}_{t-m}^2
-+
-v_t.
++v_t.
 $$
 
 Giả thuyết không là không có ARCH effect đến bậc $m$:
@@ -588,15 +620,13 @@ $$
 H_0: a_1 = a_2 = \cdots = a_m = 0.
 $$
 
-Nếu bác bỏ $H_0$, dữ liệu có bằng chứng về phương sai có điều kiện thay đổi theo thời gian. Đây là cơ sở thực nghiệm để sử dụng ARCH/GARCH.
+Nếu bác bỏ $H_0$, chuỗi có bằng chứng về phương sai thay đổi có điều kiện. Khi đó, việc sử dụng ARCH/GARCH có cơ sở thực nghiệm.
 
 ```{r}
-#| label: tbl-arch-lm-vnindex
-#| tbl-cap: "Kiểm định ARCH-LM cho tỷ lệ sinh lời VN-Index"
-#| warning: false
-#| message: false
+#| label: tbl-arch-lm-demo
+#| tbl-cap: "Kiểm định ARCH-LM cho chuỗi tỷ lệ sinh lời mô phỏng"
 
-arch_lm_result <- FinTS::ArchTest(df_vnindex$return, lags = 12)
+arch_lm_result <- FinTS::ArchTest(df_return$return, lags = 12)
 
 tibble(
   `Kiểm định` = "ARCH-LM",
@@ -604,14 +634,14 @@ tibble(
   `Thống kê` = round(unname(arch_lm_result$statistic), 3),
   `p-value` = signif(arch_lm_result$p.value, 4)
 ) |>
-  knitr::kable(align = "lrrr")
+  knitr::kable(align = "lrrr", booktabs = TRUE)
 ```
 
-Bảng @tbl-arch-lm-vnindex cho biết có hay không bằng chứng thống kê về ARCH effect trong chuỗi tỷ lệ sinh lời VN-Index. Nếu p-value nhỏ, ta bác bỏ giả thuyết không và có cơ sở để sử dụng mô hình GARCH. Tuy nhiên, kết quả kiểm định không nên được đọc một cách cơ học. Nó cần được kết hợp với đồ thị tỷ lệ sinh lời, đồ thị tỷ lệ sinh lời tuyệt đối và hiểu biết về các giai đoạn thị trường.
+Bảng @tbl-arch-lm-demo minh họa cách kiểm định ARCH effect. Trong ứng dụng thực tế, kiểm định này cần được thực hiện trên tỷ lệ sinh lời hoặc phần dư từ phương trình trung bình trước khi lựa chọn mô hình GARCH.
 
-### Mô hình ARCH(q)
+### Mô hình ARCH
 
-Mô hình Autoregressive Conditional Heteroskedasticity bậc $q$, ký hiệu ARCH$(q)$, giả định phương sai có điều kiện phụ thuộc vào bình phương cú sốc trong quá khứ:
+Mô hình **Autoregressive Conditional Heteroskedasticity** bậc $q$, ký hiệu ARCH$(q)$, giả định phương sai có điều kiện phụ thuộc vào bình phương cú sốc trong quá khứ:
 
 $$
 \sigma_t^2
@@ -621,25 +651,23 @@ $$
 \alpha_1 \varepsilon_{t-1}^2
 +
 \alpha_2 \varepsilon_{t-2}^2
-+
-\cdots
-+
++\cdots+
 \alpha_q \varepsilon_{t-q}^2.
 $$
 
-Để đảm bảo $\sigma_t^2 > 0$, các ràng buộc thường dùng là:
+Để đảm bảo phương sai dương, các ràng buộc thường dùng là:
 
 $$
 \omega > 0, \qquad \alpha_i \ge 0.
 $$
 
-ARCH giải thích volatility clustering bằng logic đơn giản: cú sốc lớn trong quá khứ làm phương sai có điều kiện hiện tại tăng lên. Nếu hôm qua thị trường biến động mạnh, volatility hôm nay có xu hướng cao hơn.
+ARCH có diễn giải kinh tế trực quan: cú sốc lớn trong quá khứ làm volatility hiện tại tăng lên. Nói cách khác, “tin tức” hôm nay thay đổi volatility ngày mai. Đây là lý do ARCH giải thích được volatility clustering: ngày biến động mạnh thường đi sau ngày biến động mạnh.
 
-Tuy nhiên, ARCH có hạn chế rõ rệt. Trong dữ liệu tài chính, volatility thường có tính bền vững cao. Để mô tả persistence này bằng ARCH, ta có thể cần bậc $q$ lớn. Khi đó số tham số tăng nhanh, mô hình trở nên cồng kềnh và khó ước lượng. GARCH được phát triển để giải quyết hạn chế này.
+Tuy nhiên, ARCH có hạn chế. Trong nhiều chuỗi tài chính, volatility có tính dai dẳng cao. Nếu chỉ dùng ARCH, nhà phân tích có thể cần bậc $q$ lớn để mô tả persistence. Khi đó số tham số tăng, mô hình trở nên cồng kềnh và khó ước lượng ổn định. GARCH được phát triển để khắc phục hạn chế này.
 
-### Mô hình GARCH(p, q)
+### Mô hình GARCH
 
-Mô hình Generalized ARCH, ký hiệu GARCH$(p,q)$, mở rộng ARCH bằng cách cho phép phương sai có điều kiện phụ thuộc cả vào cú sốc bình phương trong quá khứ và chính phương sai có điều kiện quá khứ:
+Mô hình **Generalized ARCH**, ký hiệu GARCH$(p,q)$, mở rộng ARCH bằng cách đưa thêm phương sai có điều kiện quá khứ vào phương trình volatility:
 
 $$
 \sigma_t^2
@@ -651,7 +679,7 @@ $$
 \sum_{j=1}^{p}\beta_j \sigma_{t-j}^2.
 $$
 
-Trong thực nghiệm, GARCH(1,1) là mô hình được sử dụng rất phổ biến:
+Trong thực nghiệm, mô hình GARCH(1,1) được sử dụng rất phổ biến:
 
 $$
 \sigma_t^2
@@ -663,9 +691,9 @@ $$
 \beta_1 \sigma_{t-1}^2.
 $$
 
-Ý nghĩa các tham số có thể diễn giải như sau. Tham số $\alpha_1$ đo mức độ phản ứng tức thời của volatility với cú sốc mới. Tham số $\beta_1$ đo độ bền của volatility trong quá khứ. Tổng $\alpha_1+\beta_1$ phản ánh mức độ persistence. Nếu tổng này gần 1, volatility giảm rất chậm sau cú sốc lớn.
+Tham số $\alpha_1$ đo mức phản ứng tức thời của volatility trước cú sốc mới. Tham số $\beta_1$ đo độ bền của volatility quá khứ. Tổng $\alpha_1+\beta_1$ phản ánh **persistence of volatility**. Nếu tổng này gần 1, cú sốc volatility mất nhiều thời gian để triệt tiêu.
 
-Phương sai không điều kiện của GARCH(1,1) tồn tại nếu:
+Với GARCH(1,1), điều kiện thường dùng để phương sai không điều kiện hữu hạn là:
 
 $$
 \alpha_1 + \beta_1 < 1.
@@ -679,85 +707,123 @@ E(\sigma_t^2)
 \frac{\omega}{1-\alpha_1-\beta_1}.
 $$
 
-Điều kiện này giúp phân biệt GARCH với EWMA. EWMA không có mức phương sai dài hạn rõ ràng, trong khi GARCH có cơ chế mean reversion nếu $\alpha_1+\beta_1<1$.
+Đây là điểm phân biệt quan trọng giữa GARCH và EWMA. EWMA không có mức phương sai dài hạn rõ ràng; GARCH có cơ chế quay về mức volatility dài hạn nếu quá trình là dừng.
 
-### Phân phối sai số trong mô hình GARCH
+### Forecasting volatility trong GARCH
 
-Một quyết định quan trọng khi ước lượng GARCH là chọn phân phối cho $z_t$. Lựa chọn đơn giản nhất là phân phối chuẩn chuẩn hóa. Tuy nhiên, dữ liệu tỷ lệ sinh lời tài chính thường có đuôi dày, do đó phân phối chuẩn có thể đánh giá thấp xác suất xảy ra cú sốc cực đoan.
+Một ưu điểm lớn của GARCH là mô hình cung cấp công thức dự báo volatility. Với GARCH(1,1), dự báo phương sai một bước tới có dạng:
 
-Trong `rugarch`, một số lựa chọn phân phối thường dùng gồm:
+$$
+\hat{\sigma}_{t+1|t}^2
+=
+\hat{\omega}
++
+\hat{\alpha}\hat{\varepsilon}_{t}^{2}
++
+\hat{\beta}\hat{\sigma}_{t}^{2}.
+$$
 
-| Ký hiệu trong `rugarch` | Phân phối | Khi nên cân nhắc |
-|---|---|---|
-| `norm` | Chuẩn | Mô hình nền |
-| `std` | Student-t | Đuôi dày |
-| `sstd` | Skewed Student-t | Đuôi dày và lệch |
-| `ged` | GED | Đuôi linh hoạt |
-| `sged` | Skewed GED | Lệch và đuôi linh hoạt |
+Dự báo nhiều bước tới sẽ dần tiến về phương sai dài hạn nếu $\hat{\alpha}+\hat{\beta}<1$. Do đó, GARCH không chỉ là mô hình đo lường volatility trong mẫu, mà còn là mô hình dự báo volatility có cơ chế mean reversion. Đây là lý do GARCH thường được sử dụng trong VaR động, định giá phái sinh và quản trị rủi ro thị trường [@Tsay2010; @Brooks2019].
 
-Trong chương này, ví dụ thực nghiệm sử dụng Student-t (`std`) vì đây là lựa chọn tự nhiên khi dữ liệu có đuôi dày. Các phân phối bất đối xứng như `sstd` sẽ phù hợp hơn khi phân phối phần dư chuẩn hóa vẫn còn lệch sau khi đã mô hình hóa volatility.
-
-### Ước lượng GARCH(1,1) cho VN-Index bằng `rugarch`
-
-Đoạn mã dưới đây ước lượng GARCH(1,1) với phân phối Student-t cho VN-Index. Để tránh lỗi khi render nếu máy chưa cài `rugarch`, chunk kiểm tra package trước khi chạy. Khi viết sách bản hoàn chỉnh, nên cài `rugarch` và để chunk chạy bình thường.
 ```{r}
-#| label: fit-garch-models
-#| include: false
+#| label: tbl-garch-demo-coef
+#| tbl-cap: "Minh họa ước lượng GARCH(1,1)-Student-t trên chuỗi mô phỏng"
 
-fit_garch <- fit_garch_model(df_vnindex$return, model = "sGARCH")
-fit_gjr <- fit_garch_model(df_vnindex$return, model = "gjrGARCH")
+fit_garch_demo <- fit_garch_model(df_return$return, model = "sGARCH", dist = "std")
 
-df_sigma <- tibble(
-  date = df_vnindex$date,
-  `GARCH(1,1)` = as.numeric(sigma(fit_garch)),
-  `GJR-GARCH(1,1)` = as.numeric(sigma(fit_gjr))
-)
+garch_demo_table <- coef_table_simple(fit_garch_demo)
+
+garch_demo_table |>
+  knitr::kable(align = "lr", booktabs = TRUE)
 ```
 
-```{r}
-#| label: tbl-fit-garch-vnindex
-#| tbl-cap: "Ước lượng mô hình GARCH(1,1)-Student-t cho VN-Index"
-
-coef_table(fit_garch) |>
-  knitr::kable(align = "lr")
-```
-
-Bảng @tbl-fit-garch-vnindex cần được diễn giải theo logic kinh tế lượng. Nếu hệ số `alpha1` dương và có ý nghĩa, volatility phản ứng với cú sốc mới. Nếu `beta1` lớn, volatility có tính dai dẳng. Nếu `alpha1 + beta1` gần 1, cú sốc volatility mất nhiều thời gian để triệt tiêu. Nếu tham số `shape` của phân phối Student-t thấp, phần dư chuẩn hóa có đuôi dày hơn phân phối chuẩn.
+Bảng @tbl-garch-demo-coef chỉ có mục tiêu minh họa cách đọc tham số. Trong ứng dụng thực nghiệm, việc diễn giải cần kết hợp dấu, độ lớn, ý nghĩa thống kê, diagnostics phần dư và khả năng dự báo ngoài mẫu.
 
 ```{r}
-#| label: fig-garch-sigma-vnindex
-#| fig-cap: "Volatility có điều kiện từ mô hình GARCH(1,1)-Student-t cho VN-Index"
+#| label: fig-garch-conditional-vol-demo
+#| fig-cap: "Volatility có điều kiện từ mô hình GARCH(1,1)-Student-t"
 #| fig-width: 8
 #| fig-height: 4.8
 
-df_sigma |>
-  select(date, sigma = `GARCH(1,1)`) |>
-  ggplot(aes(date, sigma)) +
-  geom_line(linewidth = 0.55) +
-  scale_y_continuous(labels = label_pct(0.5)) +
-  labs(
-    title = "GARCH tạo ra volatility có điều kiện thay đổi theo thời gian",
-    subtitle = "Volatility tăng trong giai đoạn cú sốc lớn và giảm dần khi thị trường ổn định",
-    x = "Thời gian",
-    y = "Volatility có điều kiện"
-  ) +
-  theme_book()
+if (!is.null(fit_garch_demo)) {
+  df_garch_plot <- tibble(
+    time = df_return$time,
+    `GARCH chuẩn` = as.numeric(rugarch::sigma(fit_garch_demo)),
+    `Volatility thật trong mô phỏng` = df_return$true_sigma
+  ) |>
+    pivot_longer(
+      cols = -time,
+      names_to = "series",
+      values_to = "sigma"
+    )
+
+  ggplot(df_garch_plot, aes(x = time, y = sigma, color = series, linetype = series)) +
+    geom_line(linewidth = 0.75) +
+    scale_y_continuous(labels = label_pct(0.5)) +
+    scale_color_manual(values = c(
+      "GARCH chuẩn" = book_cols["garch"],
+      "Volatility thật trong mô phỏng" = book_cols["true_sigma"]
+    )) +
+    scale_linetype_manual(values = c(
+      "GARCH chuẩn" = "solid",
+      "Volatility thật trong mô phỏng" = "dashed"
+    )) +
+    labs(
+      title = "GARCH tạo ra volatility có điều kiện thay đổi theo thời gian",
+      subtitle = "Đường GARCH được ước lượng từ tỷ lệ sinh lời; volatility thật chỉ có trong mô phỏng",
+      x = "Thời gian",
+      y = "Volatility",
+      color = NULL,
+      linetype = NULL
+    ) +
+    theme_book()
+} else {
+  ggplot() +
+    annotate("text", x = 0, y = 0, label = "Không ước lượng được mô hình GARCH.", family = base_family) +
+    theme_void(base_family = base_family)
+}
 ```
 
-Hình @fig-garch-sigma-vnindex cho thấy volatility có điều kiện thay đổi theo thời gian. So với rolling volatility, GARCH có nền tảng mô hình rõ hơn vì volatility hiện tại được giải thích bởi cú sốc mới và volatility quá khứ.
+Hình @fig-garch-conditional-vol-demo minh họa ý tưởng chính: volatility có điều kiện thay đổi theo thời gian và phản ứng với các cú sốc của tỷ lệ sinh lời. Trong dữ liệu thực, đường volatility thật không quan sát được; trong mô phỏng, nó giúp kiểm tra trực quan mô hình học được gì từ dữ liệu.
 
-### IGARCH và persistence cực cao
+### Các biến thể của mô hình GARCH
 
-Nếu $\alpha_1+\beta_1=1$, mô hình trở thành Integrated GARCH (IGARCH). Khi đó, cú sốc volatility có ảnh hưởng rất dai dẳng. Về mặt trực giác, volatility không quay về một mức phương sai dài hạn hữu hạn như GARCH dừng. Trong thực nghiệm, nếu ước lượng cho thấy $\alpha_1+\beta_1$ rất gần 1, nhà phân tích cần thận trọng. Điều này có thể phản ánh persistence thật sự của thị trường, nhưng cũng có thể do mẫu dữ liệu bao gồm nhiều giai đoạn khủng hoảng hoặc do mô hình chưa đủ linh hoạt.
+GARCH chuẩn là mô hình nền, nhưng dữ liệu tài chính thường có các đặc điểm mà GARCH chuẩn không xử lý đầy đủ. Do đó, nhiều biến thể GARCH được phát triển để mô tả persistence cực cao, quan hệ rủi ro--lợi suất, bất đối xứng và đuôi dày [@Tsay2010; @Brooks2019].
 
-IGARCH có quan hệ gần với EWMA. Nếu bỏ thành phần hằng số và đặt $\alpha = 1-\lambda$, $\beta=\lambda$, phương trình GARCH trở nên tương tự EWMA. Vì vậy, EWMA có thể được xem như một trường hợp đặc biệt rất hạn chế của mô hình phương sai có điều kiện.
+| Biến thể | Ý tưởng chính | Khi nên cân nhắc |
+|---|---|---|
+| IGARCH | Persistence gần đơn vị | Cú sốc volatility rất dai dẳng |
+| GARCH-M | Volatility đi vào mean | Kiểm tra risk premium |
+| EGARCH | Log variance | Bất đối xứng, không cần ràng buộc dương |
+| GJR/TGARCH | Biến chỉ báo shock âm | Leverage effect |
+| APARCH | Lũy thừa volatility linh hoạt | Phản ứng phi tuyến |
 
-### GARCH-M: rủi ro và lợi suất kỳ vọng
+IGARCH là trường hợp đặc biệt trong đó $\alpha+\beta=1$. Khi đó, cú sốc volatility có tác động rất dai dẳng và mô hình không có phương sai dài hạn hữu hạn theo nghĩa thông thường. EWMA có thể được xem như một dạng IGARCH hạn chế vì phương trình EWMA không có thành phần hằng số và trọng số được quyết định bởi một decay factor cố định.
 
-Mô hình GARCH-in-Mean (GARCH-M) đưa volatility vào phương trình trung bình:
+Các mô hình EGARCH, TGARCH, GJR-GARCH và APARCH xử lý vấn đề bất đối xứng. Chúng đặc biệt quan trọng với thị trường cổ phiếu, nơi cú sốc âm thường làm volatility tăng mạnh hơn cú sốc dương có cùng độ lớn tuyệt đối. Đây là nội dung được trình bày kỹ hơn ở mục 2.4.6.
+
+### Mô hình GARCH với các phân phối xác suất
+
+Trong mô hình GARCH, ta cần giả định phân phối cho sai số chuẩn hóa $z_t$. Lựa chọn đơn giản nhất là phân phối chuẩn. Tuy nhiên, tỷ lệ sinh lời tài chính thường có đuôi dày và có thể bất đối xứng. Nếu vẫn dùng phân phối chuẩn, mô hình có thể đánh giá thấp xác suất xảy ra cú sốc cực đoan. Điều này đặc biệt quan trọng khi volatility forecast được dùng làm đầu vào cho VaR [@Tsay2010; @Brooks2019].
+
+Trong `rugarch`, một số phân phối thường dùng gồm:
+
+| Ký hiệu | Phân phối | Đặc điểm |
+|---|---|---|
+| `norm` | Gaussian | Mô hình nền |
+| `std` | Student-t | Đuôi dày |
+| `sstd` | Skewed Student-t | Đuôi dày và lệch |
+| `ged` | Generalized Error | Độ dày đuôi linh hoạt |
+| `sged` | Skewed GED | Lệch và đuôi linh hoạt |
+
+Việc chọn phân phối không chỉ ảnh hưởng đến log-likelihood, AIC/BIC hoặc phần dư chuẩn hóa, mà còn ảnh hưởng trực tiếp đến phân vị được dùng trong VaR. Vì vậy, trong thực nghiệm, GARCH-normal thường được dùng như benchmark, còn GARCH-Student-t hoặc GARCH-skewed-t thường được cân nhắc khi dữ liệu có kurtosis cao hoặc đuôi trái dày.
+
+### Mô hình GARCH-M
+
+Mô hình GARCH-in-Mean đưa volatility vào phương trình trung bình. Một dạng thường dùng là:
 
 $$
-r_t = \mu + \delta \sigma_t^2 + \varepsilon_t
+r_t = \mu + \delta \sigma_t^2 + \varepsilon_t,
 $$
 
 hoặc:
@@ -766,70 +832,13 @@ $$
 r_t = \mu + \delta \sigma_t + \varepsilon_t.
 $$
 
-Tham số $\delta$ thường được diễn giải như phần bù rủi ro. Nếu $\delta > 0$, volatility cao hơn gắn với tỷ lệ sinh lời kỳ vọng cao hơn. Ý tưởng này phù hợp với trực giác tài chính rằng tài sản rủi ro hơn cần có phần bù rủi ro cao hơn. Tuy nhiên, trong dữ liệu ngày, quan hệ giữa volatility và lợi suất kỳ vọng thường yếu và không ổn định. Vì vậy, GARCH-M nên được xem là một mở rộng có điều kiện, không phải mô hình nền cho mọi ứng dụng VaR.
+Tham số $\delta$ được diễn giải như phần bù rủi ro. Nếu $\delta>0$, volatility cao hơn gắn với tỷ lệ sinh lời kỳ vọng cao hơn. Ý tưởng này phù hợp với trực giác tài chính: tài sản rủi ro hơn cần có phần bù rủi ro cao hơn. Tuy nhiên, trong dữ liệu tần suất ngày, quan hệ giữa volatility và tỷ lệ sinh lời kỳ vọng thường yếu, không ổn định và nhạy với đặc điểm mẫu. Do đó, GARCH-M nên được xem là mô hình mở rộng để kiểm tra giả thuyết risk--return tradeoff, không phải mô hình nền cho mọi bài toán volatility.
 
-### Leverage effect và mô hình bất đối xứng
+### Mô hình GARCH với hiệu ứng chệch của biến động
 
-Một đặc điểm thực nghiệm quan trọng của thị trường chứng khoán là cú sốc âm thường làm volatility tăng mạnh hơn cú sốc dương có cùng độ lớn tuyệt đối. Hiện tượng này thường được gọi là **leverage effect** hoặc hiệu ứng bất đối xứng của volatility. GARCH chuẩn là mô hình đối xứng, vì nó dùng $\varepsilon_{t-1}^2$. Do đó, GARCH chuẩn không phân biệt cú sốc dương và cú sốc âm có cùng độ lớn.
+Một đặc điểm thực nghiệm quan trọng của thị trường cổ phiếu là **leverage effect**: cú sốc âm thường làm volatility tăng mạnh hơn cú sốc dương có cùng độ lớn tuyệt đối. GARCH chuẩn không xử lý được hiện tượng này vì nó sử dụng $\varepsilon_{t-1}^2$, tức cú sốc dương và âm có cùng độ lớn sẽ có cùng ảnh hưởng.
 
-Để mô hình hóa bất đối xứng, có thể sử dụng EGARCH, GJR-GARCH hoặc TGARCH. Trong chương này, ta dùng GJR-GARCH(1,1) làm minh họa chính vì công thức dễ diễn giải và được hỗ trợ trực tiếp trong `rugarch`.
-
-### GJR-GARCH(1,1)
-
-Mô hình GJR-GARCH(1,1) có dạng:
-
-$$
-\sigma_t^2
-=
-\omega
-+
-\alpha \varepsilon_{t-1}^2
-+
-\gamma \varepsilon_{t-1}^2 I(\varepsilon_{t-1}<0)
-+
-\beta \sigma_{t-1}^2.
-$$
-
-Trong đó $I(\varepsilon_{t-1}<0)$ là biến chỉ báo, nhận giá trị 1 nếu cú sốc quá khứ là âm và 0 nếu ngược lại. Nếu $\gamma > 0$, cú sốc âm làm volatility tăng mạnh hơn cú sốc dương. Đây là cơ chế giúp GJR-GARCH phù hợp hơn với dữ liệu cổ phiếu hoặc chỉ số chứng khoán.
-
-```{r}
-#| label: tbl-fit-gjr-vnindex
-#| tbl-cap: "Ước lượng mô hình GJR-GARCH(1,1)-Student-t cho VN-Index"
-
-coef_table(fit_gjr) |>
-  knitr::kable(align = "lr")
-```
-
-Nếu tham số bất đối xứng `gamma1` trong kết quả GJR-GARCH dương, dữ liệu cho thấy cú sốc âm làm tăng volatility mạnh hơn cú sốc dương. Đây là kết quả có ý nghĩa thực tiễn trong quản trị rủi ro: thị trường giảm mạnh thường làm rủi ro tăng nhanh hơn so với thị trường tăng mạnh.
-
-```{r}
-#| label: fig-garch-gjr-comparison
-#| fig-cap: "So sánh volatility có điều kiện từ GARCH(1,1) và GJR-GARCH(1,1)"
-#| fig-width: 8
-#| fig-height: 4.8
-
-df_sigma |>
-  pivot_longer(-date, names_to = "model", values_to = "sigma") |>
-  ggplot(aes(date, sigma, linetype = model)) +
-  geom_line(linewidth = 0.6) +
-  scale_y_continuous(labels = label_pct(0.5)) +
-  labs(
-    title = "GJR-GARCH cho phép phản ứng bất đối xứng trước cú sốc âm",
-    subtitle = "Hai mô hình có thể tạo ra volatility khác nhau trong các giai đoạn thị trường giảm mạnh",
-    x = "Thời gian",
-    y = "Volatility có điều kiện",
-    linetype = "Mô hình"
-  ) +
-  theme_book()
-```
-
-Hình @fig-garch-gjr-comparison cho phép so sánh trực quan hai mô hình. Nếu thị trường có hiệu ứng bất đối xứng rõ, đường volatility của GJR-GARCH có thể phản ứng mạnh hơn trong các giai đoạn giảm sâu.
-
-### EGARCH và APARCH: các mở rộng cần biết
-
-Ngoài GJR-GARCH, hai mô hình mở rộng quan trọng là EGARCH và APARCH.
-
-EGARCH mô hình hóa log phương sai có điều kiện:
+EGARCH mô hình hóa log phương sai có điều kiện [@Nelson1991]:
 
 $$
 \log(\sigma_t^2)
@@ -849,9 +858,23 @@ E|z_t|
 \frac{\varepsilon_{t-1}}{\sigma_{t-1}}.
 $$
 
-Ưu điểm của EGARCH là $\sigma_t^2$ luôn dương vì mô hình làm việc với log phương sai. Tham số $\gamma$ cho phép phản ứng bất đối xứng. Nếu $\gamma < 0$, cú sốc âm làm volatility tăng mạnh hơn cú sốc dương.
+Vì mô hình làm việc với log variance, $\sigma_t^2$ luôn dương. Tham số $\gamma$ cho phép phản ứng bất đối xứng. Nếu $\gamma<0$, cú sốc âm làm volatility tăng mạnh hơn cú sốc dương.
 
-APARCH cho phép lũy thừa của volatility được ước lượng từ dữ liệu:
+GJR-GARCH đưa biến chỉ báo shock âm vào phương trình phương sai [@Glosten1993]:
+
+$$
+\sigma_t^2
+=
+\omega
++
+\alpha \varepsilon_{t-1}^2
++
+\gamma \varepsilon_{t-1}^2 I(\varepsilon_{t-1}<0)
++
+\beta \sigma_{t-1}^2.
+$$
+
+Nếu $\gamma>0$, shock âm làm volatility tăng mạnh hơn shock dương. TGARCH có logic tương tự nhưng thường được viết theo phương trình độ lệch chuẩn thay vì phương sai [@Zakoian1994]. APARCH tổng quát hóa thêm bằng cách cho phép lũy thừa của volatility được ước lượng từ dữ liệu [@Ding1993]:
 
 $$
 \sigma_t^\delta
@@ -866,109 +889,204 @@ $$
 \beta \sigma_{t-1}^\delta.
 $$
 
-APARCH linh hoạt hơn vì tham số $\delta$ không bị cố định bằng 2 như trong mô hình GARCH chuẩn. Tuy nhiên, mô hình càng linh hoạt thì việc ước lượng, kiểm định và diễn giải càng cần thận trọng hơn.
+```{r}
+#| label: fig-news-impact-curve
+#| fig-cap: "News impact curve của GARCH chuẩn và GJR-GARCH"
+#| fig-width: 8
+#| fig-height: 4.8
 
-### Kiểm định chẩn đoán sau ước lượng
+eps_grid <- seq(-0.06, 0.06, length.out = 300)
+omega_demo <- 0.000005
+alpha_demo <- 0.08
+beta_sigma_demo <- 0.0001
+gamma_demo <- 0.12
 
-Sau khi ước lượng GARCH, không nên chỉ nhìn vào dấu và ý nghĩa của hệ số. Cần kiểm tra xem mô hình đã xử lý được cấu trúc phụ thuộc trong phần dư hay chưa. Phần dư chuẩn hóa được tính:
+news_df <- tibble(
+  shock = eps_grid,
+  `GARCH chuẩn` = omega_demo + alpha_demo * shock^2 + beta_sigma_demo,
+  `GJR-GARCH` = omega_demo + alpha_demo * shock^2 + gamma_demo * shock^2 * (shock < 0) + beta_sigma_demo
+) |>
+  pivot_longer(
+    cols = c(`GARCH chuẩn`, `GJR-GARCH`),
+    names_to = "model",
+    values_to = "variance"
+  )
+
+ggplot(news_df, aes(x = shock, y = sqrt(variance), color = model, linetype = model)) +
+  geom_line(linewidth = 0.9) +
+  geom_vline(xintercept = 0, color = "grey55", linetype = "dashed") +
+  scale_x_continuous(labels = label_pct(1)) +
+  scale_y_continuous(labels = label_pct(0.5)) +
+  scale_color_manual(values = c(
+    "GARCH chuẩn" = book_cols["garch"],
+    "GJR-GARCH" = book_cols["gjr"]
+  )) +
+  scale_linetype_manual(values = c(
+    "GARCH chuẩn" = "solid",
+    "GJR-GARCH" = "longdash"
+  )) +
+  labs(
+    title = "Mô hình bất đối xứng cho phép shock âm làm volatility tăng mạnh hơn",
+    subtitle = "Với GARCH chuẩn, shock dương và âm cùng độ lớn có tác động như nhau; với GJR-GARCH, shock âm có thể tạo volatility cao hơn",
+    x = "Cú sốc quá khứ",
+    y = "Volatility hàm ý từ news impact curve",
+    color = NULL,
+    linetype = NULL
+  ) +
+  theme_book()
+```
+
+Hình @fig-news-impact-curve minh họa khác biệt giữa GARCH chuẩn và mô hình bất đối xứng. Đây là lý do trong thực nghiệm với thị trường cổ phiếu, nhà phân tích thường so sánh GARCH với GJR-GARCH hoặc EGARCH thay vì chỉ dùng một mô hình chuẩn duy nhất.
+
+### Chẩn đoán mô hình GARCH
+
+Sau khi ước lượng GARCH, không nên chỉ nhìn vào hệ số. Cần kiểm tra phần dư chuẩn hóa:
 
 $$
 \hat{z}_t = \frac{\hat{\varepsilon}_t}{\hat{\sigma}_t}.
 $$
 
-Nếu mô hình phù hợp, $\hat{z}_t$ không nên còn tự tương quan đáng kể và $\hat{z}_t^2$ không nên còn ARCH effect rõ rệt. Do đó, các kiểm định sau thường được sử dụng:
+Nếu mô hình phù hợp, $\hat{z}_t$ không nên còn tự tương quan rõ rệt, và $\hat{z}_t^2$ không nên còn ARCH effect đáng kể. Các kiểm định thường dùng gồm Ljung--Box trên $\hat{z}_t$, Ljung--Box trên $\hat{z}_t^2$, ARCH-LM trên phần dư chuẩn hóa, Q--Q plot và các tiêu chí thông tin như AIC/BIC. Chẩn đoán mô hình là bước bắt buộc trước khi dùng volatility forecast cho VaR hoặc các quyết định quản trị rủi ro.
 
-| Nội dung kiểm tra | Công cụ | Mục tiêu |
-|---|---|---|
-| Tự tương quan phần dư | Ljung-Box trên $\hat{z}_t$ | Mean equation |
-| ARCH còn lại | Ljung-Box trên $\hat{z}_t^2$ | Variance equation |
-| ARCH-LM còn lại | ARCH-LM | Heteroskedasticity |
-| Phân phối phần dư | Q-Q plot, JB | Tail behavior |
-| So sánh mô hình | AIC, BIC | Lựa chọn mô hình |
+## Các mô hình đo lường mức độ biến động khác
+
+Các mô hình từ 2.1 đến 2.4 chủ yếu sử dụng chuỗi tỷ lệ sinh lời quá khứ. Trong thực hành, volatility còn có thể được suy ra từ giá quyền chọn hoặc đo từ dữ liệu tần suất cao. Hai nhóm thước đo này mở rộng góc nhìn của nhà phân tích: historical và GARCH volatility nhìn vào quá khứ; implied volatility phản ánh kỳ vọng thị trường; realized volatility cố gắng đo biến động đã xảy ra trong một khoảng thời gian với độ chi tiết cao hơn.
+
+### Mức độ biến động tiềm ẩn
+
+**Implied volatility** là volatility được suy ra từ giá quyền chọn. Nếu ta có giá quyền chọn thị trường $C^{mkt}$ và một mô hình định giá quyền chọn như Black--Scholes, implied volatility $\sigma_{IV}$ là nghiệm của phương trình:
+
+$$
+C^{mkt} = C^{BS}(S, K, r, T, \sigma_{IV}),
+$$
+
+trong đó $S$ là giá tài sản cơ sở, $K$ là giá thực hiện, $r$ là lãi suất phi rủi ro và $T$ là thời gian đến đáo hạn. Khác với historical volatility, implied volatility là thước đo hướng về tương lai (*forward-looking*). Nó phản ánh mức volatility mà thị trường quyền chọn đang định giá vào tài sản cơ sở [@Tsay2013; @Brooks2019].
+
+Implied volatility có vai trò quan trọng trong các thị trường phát triển vì quyền chọn được giao dịch sâu và thanh khoản. Tuy nhiên, implied volatility phụ thuộc vào mô hình định giá quyền chọn và có thể bị ảnh hưởng bởi cung cầu quyền chọn, rủi ro thanh khoản và cấu trúc kỳ hạn. Với các thị trường mà quyền chọn chỉ số hoặc quyền chọn cổ phiếu chưa phát triển, nhà phân tích thường không có dữ liệu implied volatility đáng tin cậy. Khi đó, historical volatility, EWMA, GARCH và range-based volatility trở thành các lựa chọn thực tế hơn.
+
+### Mức độ biến động thực tế
+
+**Realized volatility** đo biến động đã xảy ra bằng cách cộng các bình phương tỷ lệ sinh lời trong một khoảng thời gian. Nếu một ngày giao dịch được chia thành $M$ khoảng nhỏ và $r_{t,j}$ là tỷ lệ sinh lời trong khoảng thứ $j$ của ngày $t$, realized variance được tính bằng:
+
+$$
+RV_t = \sum_{j=1}^{M} r_{t,j}^2.
+$$
+
+Realized volatility là căn bậc hai của realized variance:
+
+$$
+\sqrt{RV_t}.
+$$
+
+Ưu điểm của realized volatility là sử dụng nhiều thông tin hơn tỷ lệ sinh lời đóng cửa--đóng cửa. Khi có dữ liệu intraday chất lượng cao, realized volatility thường là proxy hữu ích cho volatility thực tế và được dùng trong đánh giá dự báo volatility. Tuy nhiên, dữ liệu tần suất cao cũng có vấn đề riêng, như nhiễu vi mô thị trường (*microstructure noise*), bid--ask bounce, giao dịch không đồng bộ và lỗi ghi nhận dữ liệu [@Tsay2013; @Tsay2010].
 
 ```{r}
-#| label: tbl-garch-diagnostics
-#| tbl-cap: "Chẩn đoán phần dư chuẩn hóa của mô hình GARCH(1,1)"
-
-z_garch <- as.numeric(residuals(fit_garch, standardize = TRUE))
-z_garch <- z_garch[is.finite(z_garch)]
-
-tests <- list(
-  "Ljung-Box trên z" = Box.test(z_garch, lag = 12, type = "Ljung-Box"),
-  "Ljung-Box trên z^2" = Box.test(z_garch^2, lag = 12, type = "Ljung-Box"),
-  "ARCH-LM trên z" = FinTS::ArchTest(z_garch, lags = 12)
-)
-
-tibble(
-  `Kiểm định` = names(tests),
-  `Thống kê` = round(vapply(tests, \(x) unname(x$statistic), numeric(1)), 3),
-  `p-value` = signif(vapply(tests, \(x) x$p.value, numeric(1)), 4)
-) |>
-  knitr::kable(align = "lrr")
-```
-
-Nếu các kiểm định trên phần dư chuẩn hóa không còn ý nghĩa thống kê, mô hình đã xử lý tương đối tốt cấu trúc phụ thuộc trong volatility. Nếu phần dư chuẩn hóa vẫn còn ARCH effect, mô hình phương sai chưa đủ linh hoạt. Khi đó, có thể cân nhắc GJR-GARCH, EGARCH, APARCH, thay đổi phân phối sai số hoặc thay đổi phương trình trung bình.
-
-### GARCH và VaR
-
-Mục tiêu cuối cùng của việc mô hình hóa volatility trong cuốn sách này không chỉ là dự báo $\sigma_t$, mà là đo lường rủi ro thị trường. Nếu mô hình GARCH cung cấp dự báo một bước trước của volatility, ta có thể đưa dự báo này vào công thức VaR tham số.
-
-Giả sử:
-
-$$
-r_{t+1} \mid \mathcal{F}_t
-\sim
-D(\mu_{t+1}, \sigma_{t+1}^2),
-$$
-
-trong đó $D$ là phân phối có điều kiện, chẳng hạn chuẩn hoặc Student-t. Khi đó, VaR một ngày phụ thuộc vào phân vị của phân phối $D$ và volatility dự báo $\sigma_{t+1}$. Nếu dùng phân phối chuẩn:
-
-$$
-VaR_{0.99,t+1}^{return}
-=
--
-\left(
-\mu_{t+1}
-+
-z_{0.01}\sigma_{t+1}
-\right).
-$$
-
-Nếu dùng Student-t, phân vị chuẩn $z_{0.01}$ được thay bằng phân vị Student-t đã chuẩn hóa. Điều này cho thấy lựa chọn phân phối sai số trong GARCH có ảnh hưởng trực tiếp đến VaR. Với dữ liệu có đuôi dày, GARCH-Student-t thường tạo ra VaR thận trọng hơn so với GARCH-Normal.
-
-```{r}
-#| label: fig-garch-var-vnindex
-#| fig-cap: "Minh họa VaR 99% một ngày dựa trên GARCH(1,1)-Student-t"
+#| label: fig-realized-volatility-demo
+#| fig-cap: "Minh họa realized volatility từ dữ liệu intraday mô phỏng"
 #| fig-width: 8
 #| fig-height: 4.8
 
-mu <- as.numeric(coef(fit_garch)["mu"])
-shape <- as.numeric(coef(fit_garch)["shape"])
-q_01 <- rugarch::qdist("std", p = 0.01, mu = 0, sigma = 1, shape = shape)
+set.seed(2027)
 
-df_var_garch <- df_vnindex |>
+n_days <- 120
+m_intraday <- 24
+intraday_sigma <- c(rep(0.006, 40), rep(0.016, 35), rep(0.010, 45))
+
+intraday_df <- expand.grid(
+  day = 1:n_days,
+  interval = 1:m_intraday
+) |>
+  as_tibble() |>
+  arrange(day, interval) |>
   mutate(
-    loss = -return,
-    VaR_99 = -(mu + q_01 * as.numeric(sigma(fit_garch)))
+    day_sigma = intraday_sigma[day],
+    r_intra = rnorm(n(), mean = 0, sd = day_sigma / sqrt(m_intraday))
   )
 
-ggplot(df_var_garch, aes(date)) +
-  geom_line(aes(y = loss), linewidth = 0.25) +
-  geom_line(aes(y = VaR_99), linewidth = 0.6, linetype = "dashed") +
-  scale_y_continuous(labels = label_pct(1)) +
+rv_df <- intraday_df |>
+  group_by(day) |>
+  summarise(
+    realized_vol = sqrt(sum(r_intra^2)),
+    true_daily_sigma = first(day_sigma),
+    .groups = "drop"
+  ) |>
+  pivot_longer(
+    cols = c(realized_vol, true_daily_sigma),
+    names_to = "series",
+    values_to = "volatility"
+  ) |>
+  mutate(
+    series = recode(
+      series,
+      realized_vol = "Realized volatility",
+      true_daily_sigma = "Volatility thật trong mô phỏng"
+    )
+  )
+
+ggplot(rv_df, aes(x = day, y = volatility, color = series, linetype = series)) +
+  geom_line(linewidth = 0.8) +
+  scale_y_continuous(labels = label_pct(0.5)) +
+  scale_color_manual(values = c(
+    "Realized volatility" = book_cols["rolling_20"],
+    "Volatility thật trong mô phỏng" = book_cols["true_sigma"]
+  )) +
+  scale_linetype_manual(values = c(
+    "Realized volatility" = "solid",
+    "Volatility thật trong mô phỏng" = "dashed"
+  )) +
   labs(
-    title = "VaR động tăng khi GARCH volatility tăng",
-    subtitle = "Đường gạch biểu diễn VaR 99%; các điểm lỗ vượt đường này là exceedances",
-    x = "Thời gian",
-    y = "Tỷ lệ lỗ và VaR"
+    title = "Realized volatility sử dụng thông tin trong ngày",
+    subtitle = "Ví dụ mô phỏng cho thấy realized volatility có thể theo sát trạng thái biến động khi dữ liệu intraday đủ tốt",
+    x = "Ngày",
+    y = "Volatility",
+    color = NULL,
+    linetype = NULL
   ) +
   theme_book()
 ```
 
-Hình @fig-garch-var-vnindex tạo cầu nối giữa chương này và các chương về VaR. Volatility có điều kiện không phải là đích cuối cùng; nó là đầu vào để tính phân phối lỗ có điều kiện và từ đó tính VaR động.
+Hình @fig-realized-volatility-demo minh họa realized volatility bằng dữ liệu intraday mô phỏng. Trong dữ liệu thực tế, realized volatility thường được dùng làm proxy cho volatility không quan sát được khi đánh giá độ chính xác của các mô hình forecast volatility.
 
-### Tóm lược mục 2.4
+Khi không có dữ liệu intraday nhưng có dữ liệu Open--High--Low--Close, có thể dùng các thước đo range-based volatility. Ví dụ, Parkinson variance sử dụng giá cao nhất và thấp nhất trong ngày [@Parkinson1980]:
 
-Nhóm mô hình ARCH/GARCH cung cấp một khuôn khổ kinh tế lượng để mô hình hóa phương sai có điều kiện. ARCH dùng bình phương cú sốc quá khứ; GARCH bổ sung volatility quá khứ và cho phép persistence được mô hình hóa gọn hơn. GJR-GARCH bổ sung bất đối xứng, phù hợp với thị trường cổ phiếu khi cú sốc âm làm rủi ro tăng mạnh hơn cú sốc dương.
+$$
+\sigma^2_{P,t}
+=
+\frac{1}{4\log(2)}
+\left[
+\log\left(\frac{H_t}{L_t}\right)
+\right]^2.
+$$
 
-Trong thực hành, GARCH(1,1) thường là mô hình nền tốt. GJR-GARCH(1,1) là lựa chọn tự nhiên khi có bằng chứng về leverage effect. Các mô hình như EGARCH và APARCH cung cấp thêm độ linh hoạt, nhưng cần được sử dụng cùng kiểm định chẩn đoán và so sánh mô hình cẩn thận. Phần cuối chương sẽ quay lại vấn đề này bằng cách so sánh các mô hình volatility khác nhau theo AIC, BIC, kiểm định phần dư và hiệu quả dự báo VaR.
+Garman--Klass variance sử dụng thêm giá mở cửa và đóng cửa [@GarmanKlass1980]:
+
+$$
+\sigma^2_{GK,t}
+=
+0.5
+\left[
+\log\left(\frac{H_t}{L_t}\right)
+\right]^2
+-
+(2\log 2 - 1)
+\left[
+\log\left(\frac{C_t}{O_t}\right)
+\right]^2.
+$$
+
+Các thước đo OHLC hữu ích khi dữ liệu intraday khó tiếp cận nhưng dữ liệu giá mở cửa, cao nhất, thấp nhất và đóng cửa có sẵn. Trong Chương 3, các thước đo này có thể được dùng như proxy để so sánh dự báo volatility của rolling volatility, EWMA và GARCH-type models.
+
+| Nhóm thước đo | Dữ liệu cần | Hướng nhìn | Vai trò thực nghiệm |
+|---|---|---|---|
+| Historical/Rolling | Giá đóng cửa | Quá khứ | Benchmark |
+| EWMA | Giá đóng cửa | Quá khứ có trọng số | RiskMetrics |
+| GARCH-type | Tỷ lệ sinh lời | Có điều kiện | Forecast volatility |
+| Implied volatility | Quyền chọn | Kỳ vọng thị trường | Forward-looking |
+| Realized volatility | Intraday | Biến động đã xảy ra | Proxy đánh giá forecast |
+| Range-based | OHLC | Biến động trong ngày | Proxy khi thiếu intraday |
+
+## Tóm lược chương
+
+Chương này đã trình bày hệ thống các phương pháp đo lường và mô hình hóa volatility theo logic từ đơn giản đến nâng cao. Historical volatility và rolling volatility trực quan, dễ tính, nhưng có hạn chế về phản ứng với thay đổi trạng thái. EWMA cải thiện bằng cách gán trọng số lớn hơn cho thông tin gần hiện tại, nhưng vẫn thiếu cơ chế mean reversion rõ ràng. ARCH và GARCH đưa volatility vào một cấu trúc phương sai có điều kiện, cho phép mô hình hóa volatility clustering và dự báo volatility. Các biến thể như IGARCH, GARCH-M, EGARCH, GJR-GARCH, TGARCH và APARCH mở rộng GARCH chuẩn để xử lý persistence cao, quan hệ rủi ro--lợi suất và bất đối xứng.
+
+Bên cạnh các mô hình dựa trên tỷ lệ sinh lời quá khứ, implied volatility và realized volatility cung cấp hai hướng tiếp cận bổ sung. Implied volatility phản ánh kỳ vọng thị trường từ giá quyền chọn, còn realized volatility sử dụng dữ liệu tần suất cao để đo biến động đã xảy ra. Chương 3 sẽ sử dụng khung phương pháp này để đo lường, dự báo và so sánh volatility của VN-Index.
