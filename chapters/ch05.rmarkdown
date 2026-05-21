@@ -318,7 +318,7 @@ vn_daily <- vn_raw |>
   ) |>
   filter(!is.na(ret))
 
-estimation_window <- 500
+estimation_window <- 1250
 holding_period <- 1
 alpha_levels <- c(0.05, 0.01)
 alpha_labels <- c("0.05" = "95%", "0.01" = "99%")
@@ -1432,4 +1432,3 @@ Chương này đã áp dụng khung phương pháp của Chương 4 vào VN-Inde
 Kết quả chương cần được đọc theo logic so sánh ngoài mẫu. Một mô hình được xem là phù hợp hơn nếu có tỷ lệ vi phạm gần xác suất kỳ vọng, không tạo cụm vi phạm rõ rệt, có quantile loss thấp, và không tạo tail severity quá lớn trong các ngày vi phạm. Nếu mô hình phức tạp không cải thiện rõ ràng so với mô hình đơn giản, lựa chọn mô hình đơn giản hơn có thể hợp lý hơn trong môi trường quản trị rủi ro thực tế. Ngược lại, nếu dữ liệu cho thấy volatility clustering, đuôi dày và bất đối xứng mạnh, các mô hình Student-t, GARCH bất đối xứng hoặc EVT cần được ưu tiên trong hệ thống cảnh báo rủi ro.
 
 Chương tiếp theo có thể mở rộng phân tích từ chỉ số thị trường sang danh mục cổ phiếu, danh mục cổ phiếu--trái phiếu, hoặc danh mục có yếu tố phòng vệ như vàng và tỷ giá. Khi chuyển từ một chỉ số sang danh mục nhiều tài sản, vấn đề không chỉ là volatility riêng lẻ mà còn là tương quan động, tail dependence và hiệu ứng đa dạng hóa trong giai đoạn khủng hoảng.
-
