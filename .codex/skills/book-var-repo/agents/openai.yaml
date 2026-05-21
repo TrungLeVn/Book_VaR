@@ -1,0 +1,3 @@
+display_name: Book_VaR Repo Assistant
+short_description: Workflow guidance for this Book_VaR Quarto/R repository.
+default_prompt: Help me make safe, minimal, validated changes in the Book_VaR repository.
