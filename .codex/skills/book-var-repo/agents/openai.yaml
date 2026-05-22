@@ -1,0 +1,3 @@
+display_name: Book_VaR Writing & Review Assistant
+short_description: Expert guidance for writing, revising, and teaching volatility and VaR chapters in this Quarto book.
+default_prompt: Help me revise and review Book_VaR chapters for technical correctness and student-friendly pedagogy.

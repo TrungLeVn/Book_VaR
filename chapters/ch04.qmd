@@ -4,7 +4,10 @@ Chương 1 đã giới thiệu tỷ lệ sinh lời, phân phối tỷ lệ sinh
 
 Về mặt phương pháp, VaR và ES không tách rời khỏi volatility. Hầu hết mô hình VaR đều cần một cách mô tả phân phối tỷ lệ sinh lời hoặc phân phối lỗ trong tương lai. Phân phối này có thể được xây dựng từ dữ liệu lịch sử, từ giả định tham số như chuẩn hoặc Student-t, từ mô phỏng Monte Carlo, từ mô hình volatility có điều kiện như EWMA/GARCH, hoặc từ mô hình trực tiếp của phân vị có điều kiện. Vì vậy, Chương 4 đóng vai trò là chương nền tảng cho Chương 5: Chương 4 giải thích cơ chế mô hình, còn Chương 5 sẽ dùng cùng khung phương pháp để đánh giá VaR và ES thực nghiệm cho VN-Index [@Choudhry2013; @Tsay2013; @Tsay2010; @Brooks2019; @Jorion2007].
 
-Chương này sử dụng chuỗi tỷ lệ sinh lời mô phỏng để minh họa. Mục tiêu không phải là đưa ra kết luận về một thị trường cụ thể, mà là giúp người đọc hiểu rõ: VaR và ES được định nghĩa như thế nào; historical simulation, parametric VaR, GARCH VaR và semi-parametric VaR khác nhau ra sao; vì sao giả định phân phối ảnh hưởng mạnh đến rủi ro đuôi; và tại sao mọi mô hình VaR phải được kiểm định ngược trước khi sử dụng trong quản trị rủi ro.
+Chương này sử dụng chuỗi tỷ lệ sinh lời mô phỏng để minh họa.
+
+Trong chương này, các ví dụ định lượng được trình bày theo logic hai tầng: (i) **in-sample** để hiểu cơ chế và hiệu chỉnh tham số mô hình VaR/ES; (ii) **out-of-sample** để đánh giá khả năng cảnh báo rủi ro trong thực tế thông qua backtesting. Cách tách này giúp tránh nhầm lẫn giữa “mô hình khớp dữ liệu quá khứ tốt” và “mô hình dự báo rủi ro tương lai đáng tin cậy”.
+Mục tiêu không phải là đưa ra kết luận về một thị trường cụ thể, mà là giúp người đọc hiểu rõ: VaR và ES được định nghĩa như thế nào; historical simulation, parametric VaR, GARCH VaR và semi-parametric VaR khác nhau ra sao; vì sao giả định phân phối ảnh hưởng mạnh đến rủi ro đuôi; và tại sao mọi mô hình VaR phải được kiểm định ngược trước khi sử dụng trong quản trị rủi ro.
 
 ```{r}
 #| label: setup-ch04
@@ -318,7 +321,21 @@ tibble(
   knitr::kable(align = "ll", booktabs = TRUE)
 ```
 
-Bảng @tbl-demo-data-ch04 mô tả dữ liệu minh họa của chương. Việc sử dụng chuỗi mô phỏng có chủ đích giúp tách phần phương pháp khỏi phần kết luận thực nghiệm. Trong dữ liệu thực, volatility thật không quan sát được; trong dữ liệu mô phỏng, volatility được tạo ra từ quá trình có điều kiện, vì vậy người học có thể thấy rõ tại sao VaR cần thay đổi khi điều kiện thị trường thay đổi.
+Bảng @tbl-demo-data-ch04 mô tả dữ liệu minh họa của chương.
+
+
+## Ma trận giả định (Assumption matrix) và rủi ro sai đặc tả
+
+| Nhóm mô hình | Giả định cốt lõi | Ưu điểm | Failure mode thường gặp | Hệ quả quản trị rủi ro |
+|---|---|---|---|---|
+| Historical Simulation | Phân phối trong cửa sổ lịch sử đại diện cho tương lai gần | Trực quan, ít giả định tham số | Chậm thích nghi khi chế độ thị trường đổi nhanh | Dễ đánh giá thiếu rủi ro trong pha stress mới xuất hiện |
+| Parametric Normal | Lỗ có điều kiện gần chuẩn | Dễ triển khai, tính toán nhanh | Đuôi trái mỏng hơn dữ liệu thực | VaR/ES có thể thấp giả tạo ở mức tin cậy cao |
+| Parametric Student-t | Đuôi dày với bậc tự do hữu hạn | Bắt tốt tail risk hơn chuẩn | Nhạy với ước lượng bậc tự do khi mẫu nhỏ | Sai số tham số làm vốn rủi ro dao động mạnh |
+| EWMA/GARCH-type | Volatility có điều kiện, phụ thuộc quá khứ | Phản ứng động theo cụm biến động | Sai đặc tả phân phối/phương trình phương sai | Vi phạm VaR có thể dồn cụm khi mô hình phản ứng chậm |
+| Quantile-based / Semi-parametric | Mô tả trực tiếp phân vị hoặc đuôi | Linh hoạt với bất đối xứng/đuôi | Bất ổn ở vùng đuôi khi dữ liệu cực trị ít | Quyết định vốn nhạy với lựa chọn cửa sổ/ngưỡng |
+
+Bảng ma trận này nhấn mạnh điểm cốt lõi ở bậc cao học: mọi mô hình VaR/ES đều là xấp xỉ có điều kiện. Vì vậy, chọn mô hình không chỉ là bài toán độ khớp thống kê, mà là bài toán cân bằng giữa độ nhạy dự báo, tính ổn định tham số và hậu quả vốn khi mô hình sai đặc tả.
+ Việc sử dụng chuỗi mô phỏng có chủ đích giúp tách phần phương pháp khỏi phần kết luận thực nghiệm. Trong dữ liệu thực, volatility thật không quan sát được; trong dữ liệu mô phỏng, volatility được tạo ra từ quá trình có điều kiện, vì vậy người học có thể thấy rõ tại sao VaR cần thay đổi khi điều kiện thị trường thay đổi.
 
 Gọi $r_{t+1}$ là tỷ lệ sinh lời của tài sản hoặc danh mục trong kỳ tiếp theo. Nếu xét rủi ro theo biến lỗ, ta định nghĩa:
 
@@ -1365,6 +1382,18 @@ tibble(
 ```
 
 Bảng @tbl-pot-var-es-demo chỉ là minh họa nhập môn. Trong nghiên cứu thực nghiệm, EVT/POT nên được ước lượng cẩn trọng hơn, thường bằng maximum likelihood, kèm kiểm tra độ nhạy theo ngưỡng và backtesting ngoài mẫu. Với VN-Index, EVT/POT có thể được dùng như mô hình mở rộng hoặc robustness check cho các mức tin cậy cao.
+
+
+
+## Chính sách chấp nhận mô hình (model acceptance policy)
+
+Để dùng trong quản trị rủi ro, mô hình VaR không nên được chọn theo cảm tính. Một khung quyết định thực hành có thể dùng:
+
+- **Giữ mô hình (Pass):** không bị bác bỏ nghiêm trọng bởi Kupiec/Christoffersen, DQ không cho thấy sai lệch hệ thống, và quantile loss nằm trong nhóm tốt.
+- **Hiệu chỉnh tham số (Recalibrate):** failure rate lệch vừa phải hoặc có dấu hiệu cụm vi phạm trong một số giai đoạn; cần rút ngắn cửa sổ, đổi phân phối, hoặc cập nhật tần suất ước lượng.
+- **Thay mô hình (Replace):** vi phạm kéo dài ở vùng đuôi, nhiều kiểm định bác bỏ đồng thời, hoặc mô hình phản ứng chậm có hệ thống trước các cú sốc mới.
+
+Về quản trị, tần suất rà soát nên gắn với nhịp vận hành: theo tháng cho theo dõi thường kỳ và theo quý cho đánh giá lại mô hình; kích hoạt rà soát đột xuất khi thị trường chuyển chế độ mạnh.
 
 ## Tóm lược chương
 

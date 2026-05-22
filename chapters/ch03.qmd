@@ -936,6 +936,9 @@ ic_comparison |>
 
 Bảng @tbl-garch-ic-comparison so sánh mức độ phù hợp trong mẫu của các mô hình. AIC và BIC thấp hơn thường cho thấy mô hình phù hợp hơn sau khi đã phạt số lượng tham số. Tuy nhiên, lựa chọn mô hình không nên chỉ dựa vào AIC/BIC; cần kiểm tra phần dư chuẩn hóa và hiệu quả dự báo ngoài mẫu.
 
+Diễn giải theo góc độ quản trị rủi ro: mô hình có AIC/BIC tốt trong mẫu nhưng dự báo ngoài mẫu kém có thể làm tổ chức **đánh giá sai vốn yêu cầu** trong giai đoạn biến động mạnh. Vì vậy, các mô hình được giữ lại cho Chương 5 nên là các mô hình vừa vượt qua chẩn đoán trong mẫu, vừa có dấu hiệu ổn định ở dự báo ngoài mẫu.
+
+
 ```{r}
 #| label: tbl-garch-coefficients
 #| tbl-cap: "Hệ số ước lượng của các mô hình GARCH-type"
