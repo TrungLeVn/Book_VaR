@@ -21,17 +21,25 @@ Purpose: keep English-Vietnamese terms, abbreviations, and notation consistent a
 | semi-parametric | bán tham số | NA | Ch. 3 | `bán tham số` | Use for quantile-based or hybrid methods when appropriate. |
 | Extreme Value Theory | lý thuyết giá trị cực trị | EVT | Ch. 3 | `EVT` after first definition. | Use with caution; distinguish block maxima and POT if relevant. |
 | Peaks-over-threshold | vượt ngưỡng | POT | Ch. 3 | `POT` | Define threshold selection issue. |
+| misspecification risk | rủi ro sai đặc tả | NA | Ch. 3 | `rủi ro sai đặc tả` | Use when model assumptions can distort tail-risk measurement. |
 | backtesting | kiểm định ngược | NA | Ch. 4 | `backtesting` or `kiểm định ngược` | First use pattern: `kiểm định ngược (backtesting)`. |
 | out-of-sample | ngoài mẫu | OOS | Ch. 4 | `ngoài mẫu` | Use `OOS` only in tables or diagrams. |
 | in-sample | trong mẫu | NA | Ch. 4 | `trong mẫu` | Keep paired with `ngoài mẫu` where useful. |
+| unconditional coverage | tính phủ không điều kiện | NA | Ch. 4 | `tính phủ không điều kiện` | Usually linked to exceedance frequency tests such as Kupiec. |
+| conditional coverage | tính phủ có điều kiện | NA | Ch. 4 | `tính phủ có điều kiện` | Use when coverage and independence are assessed jointly. |
 | rolling window | cửa sổ trượt | NA | Ch. 2 or Ch. 4 | `cửa sổ trượt` | Specify window length and update rule. |
 | forecast horizon | chân trời dự báo | NA | Ch. 4 or Ch. 6 | `chân trời dự báo` | State unit: day, week, etc. |
 | exceedance | vi phạm VaR | NA | Ch. 4 | `vi phạm VaR` | Use when realized loss exceeds VaR. |
 | violation rate | tỷ lệ vi phạm | NA | Ch. 4 | `tỷ lệ vi phạm` | Compare with target tail probability. |
 | tail severity | mức độ nghiêm trọng vùng đuôi | NA | Ch. 4 | `tail severity` after definition if concise. | Tie to ES and losses conditional on exceedance. |
+| Dynamic Quantile test | kiểm định phân vị động | DQ | Ch. 4 | `DQ` after first definition if concise. | Use for hit-based dynamic specification checks in VaR evaluation. |
+| model acceptance policy | chính sách chấp nhận mô hình | NA | Ch. 4 | `chính sách chấp nhận mô hình` | Reserve for pass/recalibrate/replace logic after evaluation. |
 | ARCH effect | hiệu ứng ARCH | ARCH | Ch. 2 or Ch. 5 | `hiệu ứng ARCH` | Define through conditional heteroskedasticity. |
 | GARCH | mô hình GARCH | GARCH | Ch. 2 | `GARCH` | Expand once: Generalized Autoregressive Conditional Heteroskedasticity. |
 | EWMA | trung bình trượt hàm mũ | EWMA | Ch. 2 | `EWMA` | Define decay factor and half-life when used. |
+| historical volatility | biến động lịch sử | NA | Ch. 2 | `biến động lịch sử` | Use when volatility is estimated directly from past return data. |
+| unconditional volatility | biến động không điều kiện | NA | Ch. 2 | `biến động không điều kiện` | Distinguish from model-implied conditional volatility. |
+| half-life | chu kỳ bán rã | NA | Ch. 2 | `chu kỳ bán rã` | Useful for interpreting EWMA memory length. |
 | RiskMetrics | RiskMetrics | NA | Ch. 2 or Ch. 6 | `RiskMetrics` | Treat as method family/name; source-check if making historical claims. |
 | VN-Index | VN-Index | NA | Ch. 5 | `VN-Index` | Use consistently; avoid `VNINDEX` in prose unless referring to a variable name. |
 

@@ -13,16 +13,17 @@ Purpose: track planned and existing figures/tables, their labels, source files, 
 
 ## Active Chapter Register
 
-The active `chapters/ch01.qmd` to `chapters/ch08.qmd` files are currently blueprint-style outlines. They do not yet contain final executable figure/table chunks in the active chapter files.
+Most active `chapters/ch01.qmd` to `chapters/ch08.qmd` files began as blueprint-style outlines. `chapters/ch01.qmd` to `chapters/ch04.qmd` now contain initial migrated drafts with active conceptual figure/table chunks; later chapters do not yet contain final executable figure/table chunks.
 
 | ID | Title or purpose | Type | Active chapter | Source/code file | Data source | Status | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `fig-ch01-return-language` | Price-to-return and return-distribution intuition | Figure | Ch. 1 | To be migrated from `chapters/legacy-ch01.qmd` | Simulated or VN-Index data, TBD | Planned | Should support the conceptual bridge from prices to returns. |
-| `tbl-ch01-risk-language` | Core terms: return, loss, volatility, VaR, ES | Table | Ch. 1 | New or adapted from legacy material | Conceptual | Planned | Should align with `terminology.md`. |
-| `tbl-ch02-volatility-to-tail-risk` | Volatility model -> implication for tail-risk measurement | Table | Ch. 2 | New synthesis table | Conceptual | Planned | Explicitly listed as missing in Ch. 2 outline. |
-| `fig-ch03-model-taxonomy` | Taxonomy of VaR/ES model families and assumptions | Figure | Ch. 3 | New or adapted from `legacy-ch04.qmd` | Conceptual | Planned | Explicitly listed as missing in Ch. 3 outline. |
-| `tbl-ch04-backtesting-tests` | Test statistic -> interpretation -> practical implication | Table | Ch. 4 | New or adapted from `legacy-ch04.qmd` | Method references | Planned | Explicitly listed as missing in Ch. 4 outline. |
-| `fig-ch04-backtesting-workflow` | End-to-end model evaluation workflow | Figure | Ch. 4 | New | Conceptual | Planned | Should connect model forecast to acceptance policy. |
+| `fig-ch01-return-language` | Price-to-return and return-distribution intuition | Figure | Ch. 1 | `chapters/ch01.qmd`, adapted from `chapters/legacy-ch01.qmd` | Simulated conceptual data | Draft/migrated | Two-panel conceptual figure for price, return, and left-tail intuition. |
+| `tbl-ch01-risk-language` | Core terms: return, loss, volatility, VaR, ES | Table | Ch. 1 | `chapters/ch01.qmd`, adapted from legacy material | Conceptual | Draft/migrated | Should remain aligned with `terminology.md` as later chapters add notation. |
+| `fig-ch02-ewma-weights` | EWMA weights over lag structure | Figure | Ch. 2 | `chapters/ch02.qmd`, adapted from `chapters/legacy-ch02.qmd` | Simulated conceptual data | Draft/migrated | Supports the transition from equal weighting to exponentially decaying weights. |
+| `tbl-ch02-volatility-to-tail-risk` | Volatility model -> implication for tail-risk measurement | Table | Ch. 2 | `chapters/ch02.qmd`, adapted from legacy synthesis logic | Conceptual | Draft/migrated | Central bridge table for Ch. 2; should stay conceptual rather than empirical. |
+| `fig-ch03-model-taxonomy` | Taxonomy of VaR/ES model families and assumptions | Figure | Ch. 3 | `chapters/ch03.qmd`, adapted from `chapters/legacy-ch04.qmd` | Conceptual | Draft/migrated | Uses a conceptual assumption-versus-tail-focus map to distinguish model families. |
+| `tbl-ch04-backtesting-tests` | Test statistic -> interpretation -> practical implication | Table | Ch. 4 | `chapters/ch04.qmd`, adapted from `chapters/legacy-ch04.qmd` and selective evaluation logic from `chapters/legacy-ch05.qmd` | Method references | Draft/migrated | Central reading table for coverage, independence, DQ, and ES/tail severity. |
+| `fig-ch04-backtesting-workflow` | End-to-end model evaluation workflow | Figure | Ch. 4 | `chapters/ch04.qmd` | Conceptual | Draft/migrated | Connects OOS design, forecast generation, backtesting, and model-acceptance policy. |
 | `tbl-ch05-data-design` | VN-Index sample, variables, transformations, windows | Table | Ch. 5 | Adapt from `legacy-ch05.qmd` | `data/VNI.csv`, `data/vni_data.xlsx` | Planned; source-check needed | Must record exact sample period and provenance. |
 | `fig-ch05-vnindex-price` | VN-Index level over sample | Figure | Ch. 5 | `legacy-ch05.qmd`; generated file exists under `chapters/ch05_files/figure-pdf/` | VN-Index data | Draft/generated | Verify code, data period, and caption before reuse. |
 | `fig-ch05-vnindex-returns` | VN-Index returns and volatility clustering | Figure | Ch. 5 | `legacy-ch05.qmd`; generated file exists under `chapters/ch05_files/figure-pdf/` | VN-Index data | Draft/generated | Useful visual entry point for Ch. 5. |
@@ -40,7 +41,7 @@ The active `chapters/ch01.qmd` to `chapters/ch08.qmd` files are currently bluepr
 | `chapters/legacy-ch01.qmd` | Conceptual figures/tables on returns, VaR, ES, diagnostics, volatility. | Ch. 1 and selected support for Ch. 2/Ch. 3. | Source material; not yet migrated. |
 | `chapters/legacy-ch02.qmd` | Rolling volatility, EWMA, GARCH, diagnostics, realized volatility examples. | Ch. 2 and Ch. 6. | Source material; not yet migrated. |
 | `chapters/legacy-ch03.qmd` | VN-Index volatility measures, GARCH results, forecast comparison figures/tables. | Ch. 5 and Ch. 6. | Source material; not yet migrated. |
-| `chapters/legacy-ch04.qmd` | VaR/ES model taxonomy, historical/parametric/semi-parametric/EVT examples, backtesting. | Ch. 3 and Ch. 4. | Source material; not yet migrated. |
+| `chapters/legacy-ch04.qmd` | VaR/ES model taxonomy, historical/parametric/semi-parametric/EVT examples, backtesting. | Ch. 3 and Ch. 4. | Partially migrated to active Ch. 3 and Ch. 4; audit remaining labels before reusing executable chunks. |
 | `chapters/legacy-ch05.qmd` | VN-Index VaR/ES empirical comparison, backtesting, tail severity. | Ch. 5, Ch. 7, Ch. 8. | Source material; not yet migrated. |
 | `chapters/ch03_files/figure-pdf/` | Generated volatility and VN-Index figures from prior render/cache state. | Audit against current chapter plan before reuse. | Generated; do not edit manually. |
 | `chapters/ch05_files/figure-pdf/` | Generated VN-Index and VaR/ES figures from prior render/cache state. | Audit against current chapter plan before reuse. | Generated; do not edit manually. |

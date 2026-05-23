@@ -8,59 +8,169 @@ Chương này đặt ra ngôn ngữ chung cho toàn bộ chuyên khảo. Mục t
 
 Luận điểm mà chương này chuẩn bị là: rủi ro thị trường không thể được hiểu chỉ bằng mức biến động trung bình; phải đặt trọng tâm vào cấu trúc phân phối của tỷ suất sinh lời, đặc biệt là phần đuôi trái, và vào cách các đặc điểm này thay đổi theo thời gian.
 
-## Cấu trúc đề xuất
+Chương này vì vậy làm bốn việc nền tảng. Trước hết, nó giải thích vì sao chuỗi giá cần được chuyển thành chuỗi tỷ suất sinh lời trước khi bước vào phân tích rủi ro. Tiếp đó, nó đặt ngôn ngữ về phân phối, tổn thất và rủi ro đuôi trái của chuỗi tỷ suất sinh lời. Trên nền đó, chương này làm rõ vai trò của volatility như một thước đo quy mô rủi ro, nhưng đồng thời chỉ ra rằng volatility không thể thay thế cho phân tích đuôi. Cuối cùng, chương này giới thiệu trực giác của giá trị chịu rủi ro (Value-at-Risk, VaR) và Expected Shortfall (ES) như hai cách nói súc tích về tổn thất ở vùng đuôi, từ đó chuẩn bị cầu nối sang các chương về biến động có điều kiện và mô hình rủi ro đuôi.
 
 ### 1.1. Từ giá tài sản đến tỷ suất sinh lời
 
-- Giữ lại từ [legacy-ch01.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch01.qmd:34):
-  - `Tỷ lệ sinh lời tài sản`
-  - `Giá tài sản và tỷ lệ sinh lời trong phân tích định lượng tài chính`
-  - `Đo lường tỷ lệ sinh lời`
-- Vai trò sau khi biên tập lại:
-  - mở bằng câu hỏi nghiên cứu thay vì giọng giáo trình
-  - giữ các bảng và hình minh họa trực giác đang có
+Trong phân tích rủi ro thị trường, đối tượng trung tâm không phải là mức giá tuyệt đối của tài sản mà là mức thay đổi của giá trị đầu tư qua thời gian. Một mức tăng 2.000 đồng có ý nghĩa rất khác nhau nếu nó xảy ra trên một tài sản giá 20.000 đồng hay một tài sản giá 200.000 đồng. Vì vậy, cùng một thay đổi tuyệt đối về giá có thể tạo ra những mức sinh lời hoàn toàn khác nhau. Điều nhà đầu tư và nhà quản trị rủi ro cần so sánh không phải là chênh lệch giá đơn thuần, mà là tỷ lệ thay đổi của vốn đầu tư.
+
+Nếu ký hiệu `P_t` là giá tài sản tại thời điểm `t`, thì tỷ suất sinh lời giản đơn của một kỳ được viết là
+
+$$
+R_t = \frac{P_t}{P_{t-1}} - 1.
+$$
+
+Trong khi đó, tỷ suất sinh lời logarit được viết là
+
+$$
+r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) = \ln(P_t) - \ln(P_{t-1}).
+$$
+
+Tỷ suất sinh lời giản đơn thuận tiện cho diễn giải lãi và lỗ theo nghĩa đầu tư. Tỷ suất sinh lời logarit thuận tiện hơn cho mô hình hóa chuỗi thời gian vì có thể cộng trực tiếp qua thời gian. Do trọng tâm của cuốn sách là đo lường biến động, dự báo và rủi ro đuôi, ký hiệu `r_t` sẽ được dùng như ngôn ngữ chuẩn cho tỷ suất sinh lời trong phần lớn các chương sau.
+
+```{r}
+#| label: fig-ch01-return-language
+#| fig-cap: "Từ chuỗi giá sang tỷ suất sinh lời và trực giác về vùng đuôi trái"
+#| fig-width: 8
+#| fig-height: 5.6
+#| echo: false
+#| warning: false
+#| message: false
+
+library(ggplot2)
+library(gridExtra)
+library(tibble)
+
+set.seed(20260523)
+
+sim_returns <- c(NA_real_, rnorm(179, mean = 0.0004, sd = 0.012))
+log_price <- log(100) + cumsum(ifelse(is.na(sim_returns), 0, sim_returns))
+
+sim_df <- tibble(
+  t = seq_along(log_price),
+  price = exp(log_price),
+  return = sim_returns
+)
+
+base_family <- "Arial"
+
+p_price <- ggplot(sim_df, aes(x = t, y = price)) +
+  geom_line(linewidth = 0.6, color = "black") +
+  labs(
+    title = "Chuỗi giá",
+    x = "Thời điểm",
+    y = "Giá"
+  ) +
+  theme_minimal(base_family = base_family, base_size = 11)
+
+p_return <- ggplot(subset(sim_df, !is.na(return)), aes(x = return, fill = return < 0)) +
+  geom_histogram(bins = 28, color = "white", linewidth = 0.2) +
+  geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.5) +
+  scale_fill_manual(values = c("TRUE" = "grey45", "FALSE" = "grey78"), guide = "none") +
+  labs(
+    title = "Phân phối tỷ suất sinh lời",
+    x = "Tỷ suất sinh lời",
+    y = "Tần suất"
+  ) +
+  theme_minimal(base_family = base_family, base_size = 11)
+
+gridExtra::grid.arrange(p_price, p_return, ncol = 2)
+```
+
+Hình @fig-ch01-return-language cho thấy trực giác quan trọng nhất của chương mở đầu. Ở panel bên trái, chuỗi giá cho biết mức định giá của tài sản theo thời gian, nhưng không cho thấy trực tiếp quy mô lãi và lỗ tương đối của vị thế đầu tư. Ở panel bên phải, chuỗi tỷ suất sinh lời được đặt trên một thang đo thống kê thuận tiện hơn: phần bên trái của phân phối gắn với các kỳ sinh lời âm và vì vậy là điểm xuất phát tự nhiên của phân tích tổn thất.
+
+Lý do thứ hai khiến tỷ suất sinh lời quan trọng hơn giá trong nghiên cứu rủi ro là đặc điểm thống kê của hai loại chuỗi. Chuỗi giá thường thay đổi mức nền theo thời gian, trong khi chuỗi tỷ suất sinh lời thường dao động quanh một mức trung tâm nhỏ hơn và vì vậy phù hợp hơn cho mô hình hóa thống kê. Nói ngắn gọn, giá là dữ liệu quan sát gốc, còn tỷ suất sinh lời là ngôn ngữ phân tích.
 
 ### 1.2. Các đặc điểm thực nghiệm của chuỗi tỷ suất sinh lời
 
-- Giữ lại từ [legacy-ch01.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch01.qmd:232):
-  - `Các moment và phân phối của tỷ lệ sinh lời`
-  - `Phân phối có điều kiện và ý nghĩa trong mô hình hóa rủi ro`
-  - `Các đặc điểm thực nghiệm điển hình của tỷ lệ sinh lời tài chính`
-  - `Kiểm định và chẩn đoán sơ bộ chuỗi tỷ lệ sinh lời`
-- Vai trò sau khi biên tập lại:
-  - nhấn mạnh stylized facts như nền của rủi ro đuôi
-  - giảm các đoạn giải thích quá nhập môn nếu lặp
+Khi đã chuyển dữ liệu giá thành dữ liệu tỷ suất sinh lời, câu hỏi tiếp theo không còn là “giá tăng hay giảm bao nhiêu”, mà là “phân phối của tỷ suất sinh lời có hình dạng như thế nào”. Phân tích rủi ro vì vậy bắt đầu từ phân phối của `r_t`: mức trung tâm của chuỗi ở đâu, độ phân tán lớn hay nhỏ, phân phối có cân đối không, và đặc biệt là xác suất xuất hiện các giá trị âm lớn đến mức nào.
+
+Đối với nghiên cứu rủi ro đuôi, phần quan trọng nhất của phân phối không phải là trung tâm mà là đuôi trái. Nếu nhà đầu tư đang nắm giữ vị thế mua thông thường, các tỷ suất sinh lời âm lớn chính là nguồn của rủi ro thị trường. Đó là lý do cuốn sách này dùng cụm `rủi ro đuôi` để chỉ xác suất và mức độ nghiêm trọng của các quan sát nằm sâu ở phần đuôi trái của phân phối tỷ suất sinh lời.
+
+Để làm rõ cầu nối từ tỷ suất sinh lời sang tổn thất, ta đặt:
+
+$$
+L_t = -r_t.
+$$
+
+Với quy ước này, một tỷ suất sinh lời âm trở thành một giá trị tổn thất dương. Nhờ đó, phần đuôi trái của phân phối tỷ suất sinh lời có thể được diễn giải tương đương như phần đuôi phải của phân phối tổn thất. Sự chuyển đổi ký hiệu này không phải là thủ thuật trình bày nhỏ; nó là bước cần thiết để các thước đo như VaR và ES có thể được phát biểu một cách rõ ràng ở các chương sau.
+
+```{r}
+#| label: tbl-ch01-risk-language
+#| tbl-cap: "Ngôn ngữ cốt lõi của Chương 1"
+#| echo: false
+#| warning: false
+#| message: false
+
+library(knitr)
+
+tibble::tibble(
+  `Khái niệm` = c(
+    "Tỷ suất sinh lời",
+    "Tổn thất",
+    "Volatility",
+    "VaR",
+    "Expected Shortfall (ES)"
+  ),
+  `Ký hiệu gợi ý` = c("r_t", "L_t = -r_t", "sigma hoặc sigma_t", "VaR_{alpha,t}", "ES_{alpha,t}"),
+  `Cách hiểu ngắn` = c(
+    "Mức thay đổi tương đối của giá trị đầu tư qua một kỳ",
+    "Cách viết lại tỷ suất sinh lời để tập trung vào phía bất lợi",
+    "Thước đo quy mô dao động của tỷ suất sinh lời",
+    "Ngưỡng tổn thất ở một xác suất đuôi cho trước",
+    "Mức tổn thất trung bình khi đã vượt qua ngưỡng VaR"
+  ),
+  `Vai trò trong cuốn sách` = c(
+    "Dữ liệu đầu vào cơ sở cho toàn bộ phân tích",
+    "Ngôn ngữ để phát biểu rủi ro đuôi",
+    "Cầu nối từ phân phối sang mô hình động",
+    "Thước đo ngưỡng rủi ro",
+    "Thước đo độ nghiêm trọng của rủi ro đuôi"
+  )
+) |>
+  knitr::kable(booktabs = TRUE, align = "llll")
+```
+
+Bảng @tbl-ch01-risk-language tóm tắt năm khái niệm sẽ được dùng lặp lại trong toàn bộ cuốn sách. Việc khóa ngôn ngữ ngay từ chương đầu có hai tác dụng. Thứ nhất, nó tránh sự nhập nhằng giữa tỷ suất sinh lời, tổn thất, volatility và thước đo rủi ro. Thứ hai, nó giúp người đọc theo dõi mạch lập luận liên tục từ mô tả phân phối đến mô hình hóa và đánh giá rủi ro.
+
+Về mặt thực nghiệm, chuỗi tỷ suất sinh lời tài chính thường có một số đặc điểm lặp lại: mức trung bình nhỏ so với độ biến động, khả năng xuất hiện các quan sát cực đoan cao hơn so với phân phối chuẩn, và các giai đoạn yên ắng đan xen với các giai đoạn dao động mạnh. Chương này chưa đi sâu vào kiểm định hay chẩn đoán các đặc điểm đó. Điều quan trọng ở đây là hiểu rằng rủi ro thị trường không chỉ liên quan đến “mức sinh lời trung bình”, mà còn liên quan đến hình dạng của phân phối và đến cách hình dạng đó thay đổi theo thời gian.
 
 ### 1.3. Từ volatility đến rủi ro đuôi
 
-- Giữ lại có chọn lọc từ [legacy-ch01.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch01.qmd:564):
-  - `Biến động của tỷ lệ sinh lời tài sản`
-  - `Khái niệm biến động trong tài chính`
-  - `Ý nghĩa của các đặc điểm thống kê đối với nghiên cứu biến động và VaR`
-  - `Biến động tỷ lệ sinh lời và các cách đo lường cơ bản`
-- Vai trò sau khi biên tập lại:
-  - chỉ giữ phần nào phục vụ trực tiếp cầu nối sang VaR/ES
-  - cắt bớt chi tiết đo lường volatility sẽ được xử lý sâu hơn ở Chương 2
+Trong thực hành tài chính, volatility thường là thước đo đầu tiên được dùng để mô tả mức độ rủi ro của một chuỗi tỷ suất sinh lời. Theo trực giác đơn giản nhất, volatility càng cao thì các quan sát của `r_t` càng phân tán rộng quanh mức trung tâm, và tổn thất tiềm năng trong ngắn hạn càng khó kiểm soát. Ở mức cơ bản, volatility có thể được hiểu như độ lệch chuẩn của tỷ suất sinh lời:
+
+$$
+\sigma = \sqrt{Var(r_t)}.
+$$
+
+Tuy nhiên, cần nhấn mạnh ngay từ chương đầu rằng volatility chỉ là thước đo quy mô dao động, chứ chưa phải là toàn bộ câu trả lời cho rủi ro đuôi. Hai phân phối có cùng volatility vẫn có thể hàm chứa mức rủi ro đuôi rất khác nhau nếu chúng khác nhau về độ lệch, độ dày đuôi hoặc động học theo thời gian. Nói cách khác, volatility giúp xác định “thang đo” của rủi ro, nhưng chưa đủ để mô tả đầy đủ xác suất xuất hiện các khoản lỗ cực đoan.
+
+Điểm này đặc biệt quan trọng đối với cấu trúc của cuốn sách. Nếu chỉ nhìn vào volatility vô điều kiện, người đọc có thể kết luận rằng rủi ro chỉ tăng hoặc giảm như một con số trung bình. Nhưng trong dữ liệu tài chính, mức biến động thường thay đổi theo thời gian, và các giai đoạn biến động mạnh thường đi kèm với xác suất tổn thất lớn hơn. Vì vậy, bước tiếp theo hợp lý không phải là liệt kê thật nhiều cách đo volatility, mà là chuyển sang câu hỏi động hơn: volatility vận động theo thời gian như thế nào, và sự vận động đó ảnh hưởng ra sao đến đo lường rủi ro đuôi?
+
+Đây cũng là lý do Chương 2 sẽ tập trung vào biến động có điều kiện. Chương 1 chỉ cần xác lập rằng volatility là một ngôn ngữ đo quy mô rủi ro, đồng thời nhắc rõ rằng rủi ro đuôi còn phụ thuộc vào phần đuôi của phân phối và vào cách phân phối đó thay đổi trong các trạng thái thị trường khác nhau.
 
 ### 1.4. VaR và Expected Shortfall như ngôn ngữ của rủi ro đuôi
 
-- Giữ lại từ [legacy-ch01.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch01.qmd:908):
-  - `Giá trị chịu rủi ro`
-  - `Khái niệm VaR: mức tin cậy, kỳ nắm giữ và vị thế rủi ro`
-  - `VaR, volatility và phân phối tỷ lệ sinh lời`
-  - `Ba cách tiếp cận cơ bản trong ước lượng VaR`
-  - `Ví dụ minh họa đơn giản về VaR tham số và VaR lịch sử`
-  - `VaR và Expected Shortfall`
-  - `Những lưu ý khi diễn giải VaR`
-- Vai trò sau khi biên tập lại:
-  - dùng như phần định vị khái niệm, không biến thành chương phương pháp hoàn chỉnh
+Sau khi đã có ngôn ngữ về tỷ suất sinh lời, tổn thất, phân phối và volatility, ta có thể phát biểu trực giác của giá trị chịu rủi ro (Value-at-Risk, VaR). Với một xác suất đuôi `alpha`, `VaR_{alpha,t}` là ngưỡng tổn thất sao cho xác suất khoản lỗ ở kỳ kế tiếp vượt quá ngưỡng đó bằng `alpha`. Nếu viết trên biến tổn thất `L_{t+1}`, ý tưởng này có thể được tóm tắt bởi
 
-## Nguồn nội dung chính
+$$
+P(L_{t+1} > VaR_{\alpha,t}) = \alpha.
+$$
 
-- [legacy-ch01.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch01.qmd)
+Điểm cần giữ ở chương mở đầu không phải là một họ công thức cụ thể, mà là ý nghĩa của VaR như một ngưỡng cảnh báo. VaR trả lời câu hỏi: trong điều kiện hiện tại, tổn thất có thể lớn đến mức nào nếu ta chỉ nhìn vào một vùng xác suất đuôi đã chọn trước? Chính vì vậy, VaR là cách nói gọn về rủi ro đuôi, chứ không chỉ là một con số kỹ thuật.
 
-## Thiếu nội dung cần viết thêm sau bước bố cục
+Tuy nhiên, VaR vẫn chưa mô tả đầy đủ độ nghiêm trọng của các kịch bản xấu nhất. Một khi khoản lỗ đã vượt qua ngưỡng VaR, người quản trị rủi ro vẫn cần biết mức lỗ trung bình trong vùng vượt ngưỡng đó là bao nhiêu. Đây là vai trò của Expected Shortfall (ES), được định nghĩa trên biến tổn thất bởi
 
-- một đoạn mở đầu nêu thẳng câu hỏi trung tâm của chuyên khảo
-- một đoạn kết chương kiểu `Synthesis` thay cho giọng `Tóm lược`
-- một tiểu mục ngắn về vì sao thị trường Việt Nam là bối cảnh phù hợp cho nghiên cứu rủi ro đuôi
+$$
+ES_{\alpha,t} = E(L_{t+1} \mid L_{t+1} > VaR_{\alpha,t}).
+$$
+
+Nếu VaR cho biết vị trí bắt đầu của vùng tổn thất cực đoan, thì ES cho biết mức độ nghiêm trọng trung bình bên trong vùng đó. Vì vậy, VaR và ES không nên được hiểu như hai khái niệm cạnh tranh tuyệt đối. Trong logic của cuốn sách này, VaR là ngưỡng rủi ro, còn ES là thước đo độ sâu của vùng rủi ro đuôi.
+
+Việc chuyển từ volatility sang VaR và ES cũng giúp nhìn rõ cấu trúc của bài toán rủi ro thị trường. Muốn ước lượng VaR hoặc ES một cách đáng tin cậy, nhà nghiên cứu cần ít nhất ba khối thông tin: dữ liệu tỷ suất sinh lời hoặc tổn thất, quy mô dao động của chuỗi, và giả định về phần đuôi hoặc phân phối của chuỗi. Chương 1 dừng lại ở trực giác này. Nó chưa trả lời mô hình nào là tốt nhất, cũng chưa phân loại đầy đủ các họ mô hình VaR/ES. Hai nhiệm vụ đó sẽ được dành cho các chương sau.
+
+## Tóm lược và cầu nối sang Chương 2
+
+Chương mở đầu đã xác lập bốn điểm nền tảng cho toàn bộ chuyên khảo. Thứ nhất, phân tích rủi ro thị trường phải đi từ chuỗi giá sang chuỗi tỷ suất sinh lời. Thứ hai, phần đuôi trái của phân phối tỷ suất sinh lời là nơi rủi ro đuôi xuất hiện, và việc chuyển sang biến tổn thất giúp phát biểu bài toán này rõ hơn. Thứ ba, volatility là thước đo quy mô rủi ro quan trọng nhưng không đủ để mô tả toàn bộ rủi ro đuôi. Thứ tư, VaR và ES cung cấp ngôn ngữ súc tích để tóm tắt ngưỡng tổn thất và mức độ nghiêm trọng của vùng tổn thất cực đoan.
+
+Từ đây, câu hỏi hợp lý tiếp theo là: nếu volatility thay đổi theo thời gian, thì ta phải mô hình hóa sự thay đổi đó như thế nào trước khi bước vào bài toán VaR và ES? Chương 2 trả lời câu hỏi này bằng cách chuyển từ volatility như một thước đo tĩnh sang biến động có điều kiện như một đầu vào động cho đo lường rủi ro đuôi.
