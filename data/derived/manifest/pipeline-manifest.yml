@@ -1,0 +1,62 @@
+policy:
+  heavy_compute_in_qmd: false
+  cache_root: "data/derived"
+  cache_format:
+    - ".rds"
+    - ".meta.yml"
+  recompute:
+    default: "explicit"
+    force_env: "BOOKVAR_RECOMPUTE=1"
+  missing_cache_behavior: "fail_with_instruction"
+
+pipelines:
+  ch01_concept_examples:
+    script: "scripts/run_ch01_examples.R"
+    outputs:
+      - "data/derived/ch01/return_language_example.rds"
+    dependencies:
+      - "chapters/ch01.qmd"
+    recomputation: "only when example inputs or code change"
+  ch02_volatility_examples:
+    script: "scripts/run_ch02_examples.R"
+    outputs:
+      - "data/derived/ch02/ewma_weight_grid.rds"
+    dependencies:
+      - "chapters/ch02.qmd"
+    recomputation: "only when example inputs or code change"
+  ch04_backtesting_examples:
+    script: "scripts/run_ch04_examples.R"
+    outputs:
+      - "data/derived/ch04/backtesting_example_paths.rds"
+    dependencies:
+      - "chapters/ch04.qmd"
+    recomputation: "only when example inputs or code change"
+  ch05_data_pipeline:
+    script: "scripts/run_ch05_data_pipeline.R"
+    outputs:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "data/derived/ch05/stylized_facts.rds"
+    dependencies:
+      - "data/VNI.csv"
+      - "data/vni_data.xlsx"
+      - "chapters/ch05.qmd"
+    recomputation: "when raw data, cleaning rules, or return definition change"
+  ch06_volatility_pipeline:
+    script: "scripts/run_ch06_volatility_pipeline.R"
+    outputs:
+      - "data/derived/ch06/volatility_candidates.rds"
+      - "data/derived/ch06/volatility_forecasts.rds"
+    dependencies:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "chapters/ch06.qmd"
+    recomputation: "when model set, horizons, or evaluation metrics change"
+  ch07_var_es_pipeline:
+    script: "scripts/run_ch07_var_es_pipeline.R"
+    outputs:
+      - "data/derived/ch07/var_es_forecasts.rds"
+      - "data/derived/ch07/backtesting_summary.rds"
+    dependencies:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "data/derived/ch06/volatility_forecasts.rds"
+      - "chapters/ch07.qmd"
+    recomputation: "when VaR/ES models, alphas, window rules, or backtesting settings change"

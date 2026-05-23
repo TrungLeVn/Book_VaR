@@ -39,7 +39,16 @@ Each chapter must help the reader do at least one of these tasks: understand a c
 - Before changing render settings, read `_quarto.yml`.
 - Before running or changing R code, check whether `renv::restore()` is needed.
 - Treat R chunks and surrounding prose as one unit. If code changes a result, revise the interpretation, caption, and figure/table register.
+- Quarto chapter files should normally not perform heavy computation during render.
+- Heavy computation includes reusable data cleaning across chapters, model estimation, rolling estimation, GARCH fitting, forecasting, VaR/ES computation, EVT/POT, and backtesting.
+- Heavy computation must be implemented in R functions and pipeline scripts outside `.qmd` files.
+- Derived outputs should be saved under `data/derived/` as `.rds` objects with companion `.meta.yml` metadata files.
+- Each metadata file should record input files, input hash, parameter hash, `code_version`, `created_at`, and R version.
+- QMD files should load cached outputs and focus on tables, figures, exposition, and interpretation.
+- Recompute should be explicit through scripts or by setting `BOOKVAR_RECOMPUTE=1`.
+- If required cached outputs are missing, the relevant chapter should fail with a clear instruction rather than silently running long estimation during render.
 - Production book chunks should normally hide code unless the section explicitly teaches the R workflow.
+- R chunks kept inside `.qmd` files should be limited to display logic or lightweight pedagogical examples that run quickly.
 - Use stable Quarto labels: figures `fig-...`, tables `tbl-...`, code listings `lst-...`; refer to them with Quarto cross-references rather than hard-coded numbers.
 - Do not manually edit generated outputs in `_book/`, `_freeze/`, `chapters/*_files/`, or `chapters/*_cache/` unless the task is specifically about build artifacts.
 
@@ -67,5 +76,6 @@ Each chapter must help the reader do at least one of these tasks: understand a c
 - Start from chapter role: what this chapter contributes to the book's central promise and what the reader should be able to do after reading it.
 - Keep chapter boundaries clear: Ch. 1 defines the risk language; Ch. 2 bridges volatility to tail risk; Ch. 3 maps VaR/ES model architectures; Ch. 4 designs evaluation; Ch. 5 establishes VN-Index data; Ch. 6 evaluates volatility forecasts; Ch. 7 compares VaR/ES models; Ch. 8 synthesizes implications.
 - When migrating legacy material, adapt it to the active chapter's role instead of copying whole sections mechanically.
+- When a chapter needs empirical or computational outputs, build them through external R functions and scripts first, then have the chapter read the saved results from `data/derived/`.
 - After substantive chapter edits, check chapter flow, terminology, figure/table labels, bibliography references, R chunk dependencies, captions, and empirical interpretations.
 - Do not revise manuscript chapters during book-brief or project-state tasks unless explicitly requested.

@@ -17,6 +17,16 @@
 - Treat R code chunks and surrounding explanations as one unit; avoid changing one without checking the other.
 - When editing references, keep citation keys stable unless the user asks otherwise.
 - Do not casually rewrite generated files in `_book/` or `_freeze/` unless the task is specifically about render outputs.
+- Quarto chapter files should normally not perform heavy computation during render.
+- Heavy computation includes reusable data cleaning, model estimation, rolling estimation, GARCH fitting, volatility forecasting, VaR/ES computation, EVT/POT, backtesting, repeated simulation, and other long loops.
+- Heavy computation should be implemented in R functions and pipeline scripts outside `.qmd` files.
+- Pipeline outputs should be written under `data/derived/` as `.rds` objects with companion `.meta.yml` metadata files.
+- Metadata for derived outputs should record input files, input hash, parameter hash, `code_version`, `created_at`, and R version.
+- QMD files should normally load cached outputs from `data/derived/` and focus on tables, figures, exposition, and interpretation.
+- R chunks inside `.qmd` files are allowed only for display tasks or lightweight pedagogical examples that run quickly.
+- Recompute should be explicit through scripts or by setting `BOOKVAR_RECOMPUTE=1`.
+- If required cached outputs are missing, chapter code should fail with a clear instruction rather than silently running long estimation during render.
+- Generated files under `_book/`, `_freeze/`, `chapters/*_files/`, and `chapters/*_cache/` must not be edited manually.
 
 ## Verification
 
