@@ -1,62 +1,586 @@
+manifest_version: 1
+last_updated: "2026-05-23"
+
 policy:
-  heavy_compute_in_qmd: false
   cache_root: "data/derived"
-  cache_format:
+  cache_formats:
     - ".rds"
     - ".meta.yml"
-  recompute:
-    default: "explicit"
-    force_env: "BOOKVAR_RECOMPUTE=1"
-  missing_cache_behavior: "fail_with_instruction"
+  heavy_compute_in_qmd: false
+  default_code_version: "bookvar_code_version() stored in each .meta.yml"
+  default_recompute_rule: "explicit script run or BOOKVAR_RECOMPUTE=1"
+  missing_cache_rule: "chapter render should fail with a clear instruction if a required cached output is missing"
 
-pipelines:
-  ch01_concept_examples:
-    script: "scripts/run_ch01_examples.R"
-    outputs:
-      - "data/derived/ch01/return_language_example.rds"
-    dependencies:
+outputs:
+  - output_id: "ch01_return_language_example"
+    output_path: "data/derived/ch01/return_language_example.rds"
+    metadata_path: "data/derived/ch01/return_language_example.meta.yml"
+    producing_script: "scripts/run_ch01_examples.R"
+    producing_function: "run_ch01_concept_examples()"
+    input_files:
       - "chapters/ch01.qmd"
-    recomputation: "only when example inputs or code change"
-  ch02_volatility_examples:
-    script: "scripts/run_ch02_examples.R"
-    outputs:
-      - "data/derived/ch02/ewma_weight_grid.rds"
-    dependencies:
+      - "R/pipelines/ch01_concept_examples.R"
+      - "R/helpers/figure_helpers.R"
+      - "R/helpers/cache_helpers.R"
+    parameter_set:
+      example_seed: "planned"
+      example_length: "planned"
+      return_scale: "planned"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch01.qmd"
+    consumed_by_figures_tables:
+      - "fig-ch01-return-language"
+    fact_ledger_items: []
+    status: "implemented"
+
+  - output_id: "ch02_ewma_weight_grid"
+    output_path: "data/derived/ch02/ewma_weight_grid.rds"
+    metadata_path: "data/derived/ch02/ewma_weight_grid.meta.yml"
+    producing_script: "scripts/run_ch02_examples.R"
+    producing_function: "run_ch02_volatility_examples()"
+    input_files:
       - "chapters/ch02.qmd"
-    recomputation: "only when example inputs or code change"
-  ch04_backtesting_examples:
-    script: "scripts/run_ch04_examples.R"
-    outputs:
-      - "data/derived/ch04/backtesting_example_paths.rds"
-    dependencies:
+      - "R/pipelines/ch02_volatility_examples.R"
+      - "R/helpers/figure_helpers.R"
+      - "R/helpers/cache_helpers.R"
+    parameter_set:
+      lambda_grid: "planned"
+      max_lag: "planned"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch02.qmd"
+    consumed_by_figures_tables:
+      - "fig-ch02-ewma-weights"
+    fact_ledger_items: []
+    status: "implemented"
+
+  - output_id: "ch04_backtesting_example_paths"
+    output_path: "data/derived/ch04/backtesting_example_paths.rds"
+    metadata_path: "data/derived/ch04/backtesting_example_paths.meta.yml"
+    producing_script: "scripts/run_ch04_examples.R"
+    producing_function: "run_ch04_backtesting_examples()"
+    input_files:
       - "chapters/ch04.qmd"
-    recomputation: "only when example inputs or code change"
-  ch05_data_pipeline:
-    script: "scripts/run_ch05_data_pipeline.R"
-    outputs:
-      - "data/derived/ch05/vnindex_daily.rds"
-      - "data/derived/ch05/stylized_facts.rds"
-    dependencies:
-      - "data/VNI.csv"
+      - "R/pipelines/ch04_backtesting_examples.R"
+      - "R/models/backtesting_tests.R"
+      - "R/helpers/figure_helpers.R"
+      - "R/helpers/cache_helpers.R"
+    parameter_set:
+      example_seed: "planned"
+      alpha_levels:
+        - 0.01
+        - 0.05
+      sample_size: "planned"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch04.qmd"
+    consumed_by_figures_tables:
+      - "fig-ch04-backtesting-workflow"
+    fact_ledger_items:
+      - "Backtesting tests such as Kupiec, Christoffersen, and DQ are standard tools for VaR evaluation."
+    status: "implemented"
+
+  - output_id: "ch05_vnindex_daily"
+    output_path: "data/derived/ch05/vnindex_daily.rds"
+    metadata_path: "data/derived/ch05/vnindex_daily.meta.yml"
+    producing_script: "scripts/run_ch05_data_pipeline.R"
+    producing_function: "run_ch05_data_pipeline()"
+    input_files:
       - "data/vni_data.xlsx"
+      - "data/VNI.csv"
+      - "R/data/prepare_vnindex.R"
+      - "R/pipelines/ch05_data_pipeline.R"
+    parameter_set:
+      source_priority:
+        - "data/vni_data.xlsx"
+        - "data/VNI.csv"
+      return_type: "log_return"
+      return_scale: 100
+      duplicate_date_rule: "keep first after sorting"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
       - "chapters/ch05.qmd"
-    recomputation: "when raw data, cleaning rules, or return definition change"
-  ch06_volatility_pipeline:
-    script: "scripts/run_ch06_volatility_pipeline.R"
-    outputs:
-      - "data/derived/ch06/volatility_candidates.rds"
-      - "data/derived/ch06/volatility_forecasts.rds"
-    dependencies:
-      - "data/derived/ch05/vnindex_daily.rds"
       - "chapters/ch06.qmd"
-    recomputation: "when model set, horizons, or evaluation metrics change"
-  ch07_var_es_pipeline:
-    script: "scripts/run_ch07_var_es_pipeline.R"
-    outputs:
-      - "data/derived/ch07/var_es_forecasts.rds"
-      - "data/derived/ch07/backtesting_summary.rds"
-    dependencies:
-      - "data/derived/ch05/vnindex_daily.rds"
-      - "data/derived/ch06/volatility_forecasts.rds"
       - "chapters/ch07.qmd"
-    recomputation: "when VaR/ES models, alphas, window rules, or backtesting settings change"
+    consumed_by_figures_tables:
+      - "tbl-ch05-data-design"
+      - "fig-ch05-vnindex-price"
+      - "fig-ch05-vnindex-returns"
+    fact_ledger_items:
+      - "VN-Index is the central empirical proxy for Vietnamese stock-market risk in this book."
+      - "Original data provider"
+      - "Download/extraction date"
+      - "Sample start/end"
+      - "Frequency"
+      - "Price field"
+      - "Missing-value treatment"
+      - "Return definition"
+    status: "planned"
+
+  - output_id: "ch05_research_design"
+    output_path: "data/derived/ch05/research_design.rds"
+    metadata_path: "data/derived/ch05/research_design.meta.yml"
+    producing_script: "scripts/run_ch05_data_pipeline.R"
+    producing_function: "run_ch05_data_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/pipelines/ch05_data_pipeline.R"
+    parameter_set:
+      estimation_window: 500
+      holding_period: 1
+      alpha_levels:
+        - 0.05
+        - 0.01
+      refit_every: 25
+      pot_threshold_prob: 0.90
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch05.qmd"
+    consumed_by_figures_tables:
+      - "tbl-ch05-data-design"
+    fact_ledger_items:
+      - "Original data provider"
+      - "Download/extraction date"
+      - "Sample start/end"
+      - "Frequency"
+      - "Price field"
+      - "Return definition"
+    status: "planned"
+
+  - output_id: "ch05_descriptive_statistics"
+    output_path: "data/derived/ch05/descriptive_statistics.rds"
+    metadata_path: "data/derived/ch05/descriptive_statistics.meta.yml"
+    producing_script: "scripts/run_ch05_data_pipeline.R"
+    producing_function: "run_ch05_data_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/data/prepare_vnindex.R"
+      - "R/pipelines/ch05_data_pipeline.R"
+    parameter_set:
+      statistics:
+        - "mean"
+        - "sd"
+        - "min"
+        - "max"
+        - "skewness"
+        - "excess_kurtosis"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch05.qmd"
+    consumed_by_figures_tables:
+      - "fig-ch05-vnindex-returns"
+    fact_ledger_items:
+      - "VN-Index return data contain stylized facts relevant to volatility and tail-risk modeling."
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch05_stationarity_tests"
+    output_path: "data/derived/ch05/stationarity_tests.rds"
+    metadata_path: "data/derived/ch05/stationarity_tests.meta.yml"
+    producing_script: "scripts/run_ch05_data_pipeline.R"
+    producing_function: "run_ch05_data_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/data/prepare_vnindex.R"
+      - "R/pipelines/ch05_data_pipeline.R"
+    parameter_set:
+      tests:
+        - "ADF"
+        - "PP"
+        - "KPSS"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch05.qmd"
+    consumed_by_figures_tables: []
+    fact_ledger_items:
+      - "VN-Index return data contain stylized facts relevant to volatility and tail-risk modeling."
+    status: "planned"
+
+  - output_id: "ch05_dependence_tests"
+    output_path: "data/derived/ch05/dependence_tests.rds"
+    metadata_path: "data/derived/ch05/dependence_tests.meta.yml"
+    producing_script: "scripts/run_ch05_data_pipeline.R"
+    producing_function: "run_ch05_data_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/data/prepare_vnindex.R"
+      - "R/pipelines/ch05_data_pipeline.R"
+    parameter_set:
+      lag: 12
+      tests:
+        - "Ljung-Box"
+        - "ARCH-LM"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch05.qmd"
+      - "chapters/ch06.qmd"
+    consumed_by_figures_tables: []
+    fact_ledger_items:
+      - "VN-Index return data contain stylized facts relevant to volatility and tail-risk modeling."
+    status: "planned"
+
+  - output_id: "ch06_historical_volatility"
+    output_path: "data/derived/ch06/historical_volatility.rds"
+    metadata_path: "data/derived/ch06/historical_volatility.meta.yml"
+    producing_script: "scripts/run_ch06_volatility_pipeline.R"
+    producing_function: "run_ch06_volatility_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/models/volatility_models.R"
+      - "R/pipelines/ch06_volatility_pipeline.R"
+    parameter_set:
+      annualization_factor: 252
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch06.qmd"
+    consumed_by_figures_tables: []
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch06_rolling_volatility"
+    output_path: "data/derived/ch06/rolling_volatility.rds"
+    metadata_path: "data/derived/ch06/rolling_volatility.meta.yml"
+    producing_script: "scripts/run_ch06_volatility_pipeline.R"
+    producing_function: "run_ch06_volatility_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/models/volatility_models.R"
+      - "R/pipelines/ch06_volatility_pipeline.R"
+    parameter_set:
+      windows:
+        - 20
+        - 60
+        - 120
+        - 252
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch06.qmd"
+    consumed_by_figures_tables:
+      - "fig-ch06-volatility-forecast-comparison"
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch06_ewma_volatility"
+    output_path: "data/derived/ch06/ewma_volatility.rds"
+    metadata_path: "data/derived/ch06/ewma_volatility.meta.yml"
+    producing_script: "scripts/run_ch06_volatility_pipeline.R"
+    producing_function: "run_ch06_volatility_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/models/volatility_models.R"
+      - "R/pipelines/ch06_volatility_pipeline.R"
+    parameter_set:
+      lambda_values:
+        - 0.90
+        - 0.94
+        - 0.97
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch06.qmd"
+    consumed_by_figures_tables:
+      - "fig-ch06-volatility-forecast-comparison"
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch06_garch_model_summaries"
+    output_path: "data/derived/ch06/garch_model_summaries.rds"
+    metadata_path: "data/derived/ch06/garch_model_summaries.meta.yml"
+    producing_script: "scripts/run_ch06_volatility_pipeline.R"
+    producing_function: "run_ch06_volatility_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/models/volatility_models.R"
+      - "R/pipelines/ch06_volatility_pipeline.R"
+    parameter_set:
+      models:
+        - "GARCH-normal"
+        - "GARCH-Student-t"
+        - "GJR-GARCH-Student-t"
+        - "EGARCH-Student-t"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch06.qmd"
+    consumed_by_figures_tables:
+      - "tbl-ch06-volatility-candidates"
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch06_garch_diagnostics"
+    output_path: "data/derived/ch06/garch_diagnostics.rds"
+    metadata_path: "data/derived/ch06/garch_diagnostics.meta.yml"
+    producing_script: "scripts/run_ch06_volatility_pipeline.R"
+    producing_function: "run_ch06_volatility_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/models/volatility_models.R"
+      - "R/pipelines/ch06_volatility_pipeline.R"
+    parameter_set:
+      tests:
+        - "AIC/BIC"
+        - "persistence"
+        - "Ljung-Box on z"
+        - "Ljung-Box on z^2"
+        - "ARCH-LM on z"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch06.qmd"
+    consumed_by_figures_tables:
+      - "tbl-ch06-volatility-candidates"
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch06_range_based_volatility"
+    output_path: "data/derived/ch06/range_based_volatility.rds"
+    metadata_path: "data/derived/ch06/range_based_volatility.meta.yml"
+    producing_script: "scripts/run_ch06_volatility_pipeline.R"
+    producing_function: "run_ch06_volatility_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/models/volatility_models.R"
+      - "R/pipelines/ch06_volatility_pipeline.R"
+    parameter_set:
+      window: 20
+      methods:
+        - "close-to-close"
+        - "Parkinson"
+        - "Garman-Klass"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch06.qmd"
+    consumed_by_figures_tables: []
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch06_forecast_eval"
+    output_path: "data/derived/ch06/forecast_eval.rds"
+    metadata_path: "data/derived/ch06/forecast_eval.meta.yml"
+    producing_script: "scripts/run_ch06_volatility_pipeline.R"
+    producing_function: "run_ch06_volatility_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/models/volatility_models.R"
+      - "R/pipelines/ch06_volatility_pipeline.R"
+    parameter_set:
+      horizons:
+        - 1
+        - 5
+        - 10
+        - 20
+      forecast_step: 20
+      max_forecast_origins: 50
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch06.qmd"
+      - "chapters/ch07.qmd"
+    consumed_by_figures_tables:
+      - "fig-ch06-volatility-forecast-comparison"
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch06_forecast_losses"
+    output_path: "data/derived/ch06/forecast_losses.rds"
+    metadata_path: "data/derived/ch06/forecast_losses.meta.yml"
+    producing_script: "scripts/run_ch06_volatility_pipeline.R"
+    producing_function: "run_ch06_volatility_pipeline()"
+    input_files:
+      - "data/derived/ch06/forecast_eval.rds"
+      - "R/models/volatility_models.R"
+      - "R/pipelines/ch06_volatility_pipeline.R"
+    parameter_set:
+      metrics:
+        - "RMSE"
+        - "MAE"
+        - "QLIKE"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch06.qmd"
+    consumed_by_figures_tables:
+      - "fig-ch06-volatility-forecast-comparison"
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch06_best_by_metric"
+    output_path: "data/derived/ch06/best_by_metric.rds"
+    metadata_path: "data/derived/ch06/best_by_metric.meta.yml"
+    producing_script: "scripts/run_ch06_volatility_pipeline.R"
+    producing_function: "run_ch06_volatility_pipeline()"
+    input_files:
+      - "data/derived/ch06/forecast_losses.rds"
+      - "R/models/volatility_models.R"
+      - "R/pipelines/ch06_volatility_pipeline.R"
+    parameter_set:
+      summary_rule: "legacy best-by-metric table from forecast losses"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch06.qmd"
+    consumed_by_figures_tables:
+      - "tbl-ch06-volatility-candidates"
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch07_all_forecasts"
+    output_path: "data/derived/ch07/all_forecasts.rds"
+    metadata_path: "data/derived/ch07/all_forecasts.meta.yml"
+    producing_script: "scripts/run_ch07_var_es_pipeline.R"
+    producing_function: "run_ch07_var_es_pipeline()"
+    input_files:
+      - "data/derived/ch05/vnindex_daily.rds"
+      - "R/models/var_es_models.R"
+      - "R/models/backtesting_tests.R"
+      - "R/pipelines/ch07_var_es_pipeline.R"
+    parameter_set:
+      model_families:
+        - "historical"
+        - "normal rolling"
+        - "student-t rolling"
+        - "EWMA-normal"
+        - "GARCH-t"
+        - "GJR-GARCH-t"
+        - "quantile regression"
+        - "EVT-POT"
+      alpha_levels:
+        - 0.05
+        - 0.01
+      estimation_window: 500
+      refit_every: 25
+      pot_threshold_prob: 0.90
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch07.qmd"
+    consumed_by_figures_tables:
+      - "fig-ch07-var-comparison"
+    fact_ledger_items:
+      - "Latest values or last-sample VaR/ES results from VN-Index are reported."
+      - "EVT/POT is appropriate only with careful threshold selection and sensitivity checks."
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch07_model_summary"
+    output_path: "data/derived/ch07/model_summary.rds"
+    metadata_path: "data/derived/ch07/model_summary.meta.yml"
+    producing_script: "scripts/run_ch07_var_es_pipeline.R"
+    producing_function: "run_ch07_var_es_pipeline()"
+    input_files:
+      - "R/pipelines/ch07_var_es_pipeline.R"
+      - "chapters/legacy-ch05.qmd"
+    parameter_set:
+      table_origin: "legacy tbl-ch05-model-summary adapted for external testing"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch07.qmd"
+      - "chapters/ch08.qmd"
+    consumed_by_figures_tables:
+      - "tbl-ch07-model-summary"
+    fact_ledger_items: []
+    status: "planned"
+
+  - output_id: "ch07_backtesting_summary"
+    output_path: "data/derived/ch07/backtesting_summary.rds"
+    metadata_path: "data/derived/ch07/backtesting_summary.meta.yml"
+    producing_script: "scripts/run_ch07_var_es_pipeline.R"
+    producing_function: "run_ch07_var_es_pipeline()"
+    input_files:
+      - "data/derived/ch07/all_forecasts.rds"
+      - "R/models/backtesting_tests.R"
+      - "R/pipelines/ch07_var_es_pipeline.R"
+    parameter_set:
+      backtests:
+        - "Kupiec"
+        - "Christoffersen"
+        - "DQ"
+      scoring_rule: "quantile_loss_return"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch07.qmd"
+      - "chapters/ch08.qmd"
+    consumed_by_figures_tables:
+      - "tbl-ch07-backtesting-summary"
+    fact_ledger_items:
+      - "Backtesting tests such as Kupiec, Christoffersen, and DQ are standard tools for VaR evaluation."
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch07_tail_severity"
+    output_path: "data/derived/ch07/tail_severity.rds"
+    metadata_path: "data/derived/ch07/tail_severity.meta.yml"
+    producing_script: "scripts/run_ch07_var_es_pipeline.R"
+    producing_function: "run_ch07_var_es_pipeline()"
+    input_files:
+      - "data/derived/ch07/all_forecasts.rds"
+      - "R/models/backtesting_tests.R"
+      - "R/pipelines/ch07_var_es_pipeline.R"
+    parameter_set:
+      metrics:
+        - "mean_loss_when_exceed"
+        - "mean_var_when_exceed"
+        - "mean_excess_loss"
+        - "tail_loss_ratio"
+        - "mean_es_when_available"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch07.qmd"
+      - "chapters/ch08.qmd"
+    consumed_by_figures_tables:
+      - "tbl-ch07-backtesting-summary"
+    fact_ledger_items:
+      - "Any exact numerical result from data, including sample size, return moments, VaR/ES values, violation rates, test statistics, and p-values."
+    status: "planned"
+
+  - output_id: "ch08_implication_summary"
+    output_path: "data/derived/ch08/implication_summary.rds"
+    metadata_path: "data/derived/ch08/implication_summary.meta.yml"
+    producing_script: "scripts/run_ch07_var_es_pipeline.R"
+    producing_function: "postponed until Ch. 8 synthesis is connected to tested Ch. 7 outputs"
+    input_files:
+      - "data/derived/ch07/model_summary.rds"
+      - "data/derived/ch07/backtesting_summary.rds"
+      - "data/derived/ch07/tail_severity.rds"
+      - "chapters/ch08.qmd"
+    parameter_set:
+      synthesis_dimensions:
+        - "finding"
+        - "method_implication"
+        - "risk_management_implication"
+        - "limitation"
+        - "future_extension"
+    code_version: "bookvar_code_version()"
+    recomputation_policy: "explicit"
+    consumed_by_chapters:
+      - "chapters/ch08.qmd"
+    consumed_by_figures_tables:
+      - "tbl-ch08-implication-map"
+    fact_ledger_items:
+      - "Specific market episodes explain high-volatility periods in VN-Index."
+      - "Basel market-risk rules use VaR/ES in specific ways."
+    status: "planned"
