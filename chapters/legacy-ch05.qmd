@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
   echo = FALSE,
   warning = FALSE,
   message = FALSE,
-  dev = "cairo_pdf",
+  dev = "ragg_png",
   fig.align = "center"
 )
 
@@ -318,7 +318,7 @@ vn_daily <- vn_raw |>
   ) |>
   filter(!is.na(ret))
 
-estimation_window <- 1250
+estimation_window <- 500
 holding_period <- 1
 alpha_levels <- c(0.05, 0.01)
 alpha_labels <- c("0.05" = "95%", "0.01" = "99%")
@@ -1239,6 +1239,9 @@ knitr::kable(backtest_table, align = c("l", "c", rep("c", 9)))
 
 Bảng @tbl-ch05-backtesting-summary là bảng trọng tâm của chương. Một mô hình tốt không nhất thiết có số vi phạm bằng đúng kỳ vọng, vì dữ liệu thực tế có nhiễu mẫu. Tuy nhiên, mô hình cần tránh hai sai lệch rõ ràng: tỷ lệ vi phạm quá cao, cho thấy đánh giá thấp rủi ro; hoặc tỷ lệ vi phạm quá thấp, cho thấy VaR quá bảo thủ. Nếu Kupiec không bác bỏ nhưng Christoffersen hoặc DQ test bác bỏ, vấn đề có thể không nằm ở số lượng vi phạm mà ở tính phụ thuộc theo thời gian của vi phạm. Điều này thường xảy ra khi mô hình phản ứng chậm với các cụm biến động.
 
+Diễn giải cho quyết định quản trị: nếu một mô hình có p-value backtesting chấp nhận được nhưng `Lỗ/VaR TB` quá cao ở các ngày vi phạm, tổ chức vẫn nên xem đó là cảnh báo về **mức độ nghiêm trọng tổn thất** và cân nhắc bổ sung ES/stress testing trong hạn mức rủi ro.
+
+
 ```{r}
 #| label: fig-ch05-violation-rate
 #| fig-cap: "Tỷ lệ vi phạm VaR so với tỷ lệ kỳ vọng"
@@ -1424,6 +1427,15 @@ knitr::kable(implication_table, align = c("l", "l"))
 ```
 
 Bảng @tbl-ch05-risk-management-implications chuyển kết quả định lượng thành gợi ý thực hành. Với thị trường Việt Nam, mô hình VaR nên được xem là một quy trình quản trị rủi ro động: dữ liệu được cập nhật hằng ngày, VaR được tính lại, vi phạm được ghi nhận, mô hình được backtest định kỳ và các tham số được rà soát khi thị trường thay đổi chế độ.
+
+
+
+## Glossary song ngữ (VN/EN) cho các thuật ngữ trọng tâm
+
+- **Cụm biến động (Volatility clustering):** Hiện tượng các giai đoạn biến động cao/thấp có xu hướng xuất hiện theo cụm, làm cho rủi ro không phân bố đều theo thời gian. Hàm ý thực hành là nên ưu tiên mô hình VaR động (EWMA/GARCH) thay cho VaR tĩnh khi thị trường chuyển chế độ nhanh.
+- **Vi phạm VaR (Exceedance):** Sự kiện lỗ thực tế vượt ngưỡng VaR dự báo trong kỳ. Tần suất và cấu trúc thời gian của exceedance là đầu vào trực tiếp cho kiểm định Kupiec/Christoffersen/DQ.
+- **Kiểm định ngược (Backtesting):** Quy trình so sánh dự báo VaR với lỗ thực tế ngoài mẫu để đánh giá tính đầy đủ của mô hình. Backtesting tốt là điều kiện cần trước khi đưa mô hình vào giám sát vốn rủi ro hằng ngày.
+- **Rủi ro đuôi (Tail risk):** Rủi ro xuất hiện các khoản lỗ cực đoan ở vùng đuôi trái của phân phối lợi suất/lỗ. VaR phản ánh ngưỡng xác suất, còn ES và tail severity phản ánh mức độ nghiêm trọng khi đã rơi vào vùng đuôi.
 
 ## Tóm lược chương
 

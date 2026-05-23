@@ -7,7 +7,18 @@ book:
   date: "3/19/2026"
   chapters:
     - index.qmd
+    - chapters/part01.qmd
     - chapters/ch01.qmd
+    - chapters/ch02.qmd
+    - chapters/part02.qmd
+    - chapters/ch03.qmd
+    - chapters/ch04.qmd
+    - chapters/part03.qmd
+    - chapters/ch05.qmd
+    - chapters/ch06.qmd
+    - chapters/ch07.qmd
+    - chapters/part04.qmd
+    - chapters/ch08.qmd
     - references.qmd
 
 bibliography: references.bib
