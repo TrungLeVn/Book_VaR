@@ -1,6 +1,6 @@
 # Figure And Table Register
 
-Last updated: 2026-05-23
+Last updated: 2026-05-24
 
 Purpose: track planned and existing figures/tables, their labels, source files, data, chapter use, and status.
 
@@ -20,6 +20,7 @@ Most active `chapters/ch01.qmd` to `chapters/ch08.qmd` files began as blueprint-
 | `fig-ch01-return-language` | Price-to-return and return-distribution intuition | Figure | Ch. 1 | `chapters/ch01.qmd`, adapted from `chapters/legacy-ch01.qmd` | Simulated conceptual data | Draft/migrated | Two-panel conceptual figure for price, return, and left-tail intuition. |
 | `tbl-ch01-risk-language` | Core terms: return, loss, volatility, VaR, ES | Table | Ch. 1 | `chapters/ch01.qmd`, adapted from legacy material | Conceptual | Draft/migrated | Should remain aligned with `terminology.md` as later chapters add notation. |
 | `fig-ch02-ewma-weights` | EWMA weights over lag structure | Figure | Ch. 2 | `chapters/ch02.qmd`, adapted from `chapters/legacy-ch02.qmd` | Simulated conceptual data | Draft/migrated | Supports the transition from equal weighting to exponentially decaying weights. |
+| `tbl-ch02-ewma-half-life` | Half-life interpretation for illustrative EWMA lambda choices | Table | Ch. 2 | `chapters/ch02.qmd`, adapted from `chapters/legacy-ch02.qmd` | Conceptual | Draft/migrated | Helps translate lambda into an intuitive memory horizon for risk updates. |
 | `tbl-ch02-volatility-to-tail-risk` | Volatility model -> implication for tail-risk measurement | Table | Ch. 2 | `chapters/ch02.qmd`, adapted from legacy synthesis logic | Conceptual | Draft/migrated | Central bridge table for Ch. 2; should stay conceptual rather than empirical. |
 | `fig-ch03-model-taxonomy` | Taxonomy of VaR/ES model families and assumptions | Figure | Ch. 3 | `chapters/ch03.qmd`, adapted from `chapters/legacy-ch04.qmd` | Conceptual | Draft/migrated | Uses a conceptual assumption-versus-tail-focus map to distinguish model families. |
 | `tbl-ch04-backtesting-tests` | Test statistic -> interpretation -> practical implication | Table | Ch. 4 | `chapters/ch04.qmd`, adapted from `chapters/legacy-ch04.qmd` and selective evaluation logic from `chapters/legacy-ch05.qmd` | Method references | Draft/migrated | Central reading table for coverage, independence, DQ, and ES/tail severity. |

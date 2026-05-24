@@ -1,6 +1,6 @@
 # Terminology And Notation Register
 
-Last updated: 2026-05-23
+Last updated: 2026-05-24
 
 Purpose: keep English-Vietnamese terms, abbreviations, and notation consistent across the book.
 
@@ -19,8 +19,12 @@ Purpose: keep English-Vietnamese terms, abbreviations, and notation consistent a
 | historical simulation | mô phỏng lịch sử | HS | Ch. 3 | `mô phỏng lịch sử` | Use `HS` only in tables if space is tight. |
 | parametric VaR | VaR tham số | NA | Ch. 3 | `VaR tham số` | Always state distributional assumption. |
 | semi-parametric | bán tham số | NA | Ch. 3 | `bán tham số` | Use for quantile-based or hybrid methods when appropriate. |
+| coherent risk measure | thước đo rủi ro coherent | NA | Ch. 3 | `thước đo rủi ro coherent` | When first used, explain through core axioms rather than only translating the label. |
 | Extreme Value Theory | lý thuyết giá trị cực trị | EVT | Ch. 3 | `EVT` after first definition. | Use with caution; distinguish block maxima and POT if relevant. |
 | Peaks-over-threshold | vượt ngưỡng | POT | Ch. 3 | `POT` | Define threshold selection issue. |
+| filtered historical simulation | mô phỏng lịch sử có lọc | FHS | Ch. 3 | `FHS` if space is tight | Clarify that volatility filtering moves the method toward a semi-parametric logic. |
+| CAViaR | mô hình CAViaR | CAViaR | Ch. 3 | `CAViaR` | Expand once: Conditional Autoregressive Value at Risk. |
+| elicitability | tính elicitable | NA | Ch. 3 | `tính elicitable` with explanation | Use only with a short explanation about scoring-based forecast evaluation. |
 | misspecification risk | rủi ro sai đặc tả | NA | Ch. 3 | `rủi ro sai đặc tả` | Use when model assumptions can distort tail-risk measurement. |
 | backtesting | kiểm định ngược | NA | Ch. 4 | `backtesting` or `kiểm định ngược` | First use pattern: `kiểm định ngược (backtesting)`. |
 | out-of-sample | ngoài mẫu | OOS | Ch. 4 | `ngoài mẫu` | Use `OOS` only in tables or diagrams. |
@@ -41,6 +45,8 @@ Purpose: keep English-Vietnamese terms, abbreviations, and notation consistent a
 | unconditional volatility | biến động không điều kiện | NA | Ch. 2 | `biến động không điều kiện` | Distinguish from model-implied conditional volatility. |
 | half-life | chu kỳ bán rã | NA | Ch. 2 | `chu kỳ bán rã` | Useful for interpreting EWMA memory length. |
 | RiskMetrics | RiskMetrics | NA | Ch. 2 or Ch. 6 | `RiskMetrics` | Treat as method family/name; source-check if making historical claims. |
+| implied volatility | biến động hàm ý | NA | Ch. 2 | `biến động hàm ý` | Explain that it is inferred from option prices rather than directly observed. |
+| realized volatility | biến động thực tế | NA | Ch. 2 or Ch. 6 | `biến động thực tế` | Clarify that it is usually a high-frequency-data proxy for latent volatility. |
 | VN-Index | VN-Index | NA | Ch. 5 | `VN-Index` | Use consistently; avoid `VNINDEX` in prose unless referring to a variable name. |
 
 ## Notation Register

@@ -1,12 +1,12 @@
 # Book Brief
 
-Last updated: 2026-05-23
+Last updated: 2026-05-24
 
 This file is the operational brief for the Quarto book project. Use it before revising chapters, adding R code, changing empirical results, or restructuring the manuscript.
 
 ## 1. Book Type And Positioning
 
-- The book is a Vietnamese academic monograph/textbook hybrid on volatility and Value-at-Risk forecasting for financial returns.
+- The book is a Vietnamese applied-finance monograph with teaching-oriented exposition on volatility and Value-at-Risk forecasting for financial returns.
 - Positioning: a specialized applied finance book that connects return data, volatility modeling, VaR/Expected Shortfall, backtesting, and empirical evidence from the Vietnamese stock market.
 - The book should read as one coherent argument, not as separate lecture notes, a code manual, or a collection of journal-style articles.
 - Current Quarto structure: `index.qmd`, four unnumbered part openers, eight active chapters, and `references.qmd`.
@@ -24,6 +24,13 @@ This file is the operational brief for the Quarto book project. Use it before re
 After reading this book, the reader should be able to explain, estimate, forecast, compare, and critically evaluate volatility, Value-at-Risk, and Expected Shortfall models for financial return data, using reproducible R workflows and empirical applications to Vietnamese stock market data.
 
 Each chapter must help the reader do at least one of these tasks: understand a concept, estimate a model, interpret diagnostics, compare forecasts, evaluate VaR/ES, or translate results into risk-management implications.
+
+## 3A. Target Length And Pacing
+
+- Working target for the finished manuscript: about 200 PDF pages, with a reasonable tolerance band around roughly 180-220 pages depending on appendix/reference growth.
+- Current rendered draft as of 2026-05-24 is about 84 pages, after literature-enriched expansion of Ch. 1-Ch. 3; the remaining active chapters still need substantial development in both exposition and empirical interpretation.
+- Conceptual chapters should be dense enough to teach the method clearly, but the largest page gains should come from the empirical chapters, synthesis chapter, and richer methodological interpretation.
+- Do not inflate length with repetitive definitions or long code dumps; page growth should come from better explanation, stronger transitions, richer interpretation, and carefully chosen tables/figures.
 
 ## 4. Quantitative Depth
 
@@ -60,6 +67,7 @@ Each chapter must help the reader do at least one of these tasks: understand a c
 - Avoid long author-by-author literature surveys. Convert literature into concepts, model choices, debates, or empirical design lessons.
 - Avoid repeating basic definitions across chapters. Define once, then remind briefly only when needed.
 - Preserve the book's analytical voice: from research question -> model -> empirical design -> evidence -> implication.
+- Do not add end-of-chapter review questions or discussion prompts by default; this project now follows monograph-style chapter closes based on synthesis and transition.
 
 ## 7. Source And Data Rules
 
