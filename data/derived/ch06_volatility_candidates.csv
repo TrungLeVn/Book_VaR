@@ -1,0 +1,6 @@
+model,family,main_value,carry_to_ch07,avg_rank
+Rolling 60,Historical/rolling benchmark,Fast-moving benchmark for short-memory variance,No,3.1666666666666665
+Rolling 120,Historical/rolling benchmark,Smoother benchmark with longer memory,No,2.9166666666666665
+EWMA 0.94,Volatility dynamics,Simple dynamic benchmark that reacts to new shocks,Yes,3.0833333333333335
+GARCH-Student-t,Volatility dynamics,Conditional-volatility input with heavy-tail innovations,Yes,4.083333333333333
+GJR-GARCH-Student-t,Asymmetric volatility dynamics,Conditional-volatility input that also allows asymmetric shock effects,Yes,1.75

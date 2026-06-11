@@ -5,22 +5,21 @@ toc: false
 
 # Lời mở đầu {.unnumbered}
 
-Cuốn sách này được biên soạn nhằm giới thiệu một cách có hệ thống các khái niệm, phương pháp và mô hình thường được sử dụng trong đo lường biến động của tỷ lệ sinh lời tài sản và giá trị chịu rủi ro (Value-at-Risk, VaR). Nội dung sách tập trung vào cách chuyển từ dữ liệu giá sang chuỗi tỷ lệ sinh lời, cách nhận diện các đặc điểm thống kê điển hình của dữ liệu tài chính, và cách xây dựng các mô hình phục vụ dự báo biến động cũng như định lượng rủi ro thị trường.
+Cuốn sách này được biên soạn như một chuyên khảo ứng dụng về đo lường rủi ro đuôi trên thị trường chứng khoán Việt Nam. Trục trung tâm của sách không chỉ là cách tính volatility hay Value-at-Risk (VaR), mà là cách xây dựng, so sánh và đánh giá các mô hình rủi ro thị trường một cách nhất quán trong bối cảnh dữ liệu tài chính thực tế.
 
-Trong tài chính định lượng hiện đại, chuỗi tỷ lệ sinh lời là đầu vào trung tâm cho nhiều bài toán quan trọng như ước lượng độ biến động, kiểm định rủi ro, mô hình hóa phân phối đuôi, và tính toán VaR cho tài sản hay danh mục đầu tư. Tuy nhiên, đối với người học chưa có nền tảng sâu về kinh tế lượng tài chính, các nội dung này thường được trình bày khá kỹ thuật và rời rạc. Vì vậy, cuốn sách được thiết kế theo hướng đi từ nền tảng đến ứng dụng, kết hợp diễn giải trực quan, lập luận thống kê cơ bản và minh họa thực hành bằng R.
+Trong tài chính định lượng hiện đại, chuỗi tỷ lệ sinh lời là đầu vào trung tâm cho nhiều bài toán quan trọng như ước lượng độ biến động, kiểm định rủi ro, mô hình hóa phân phối đuôi, và tính toán VaR hoặc Expected Shortfall cho tài sản hay danh mục đầu tư. Tuy nhiên, trong nhiều tài liệu, phần nền tảng lý thuyết, phần mô hình định lượng và phần ứng dụng thực nghiệm thường bị tách rời. Cuốn sách này cố gắng nối ba lớp nội dung đó thành một lập luận liền mạch.
 
-Về cấu trúc, sách được triển khai theo ba lớp nội dung chính. Thứ nhất, phần mở đầu trình bày bản chất của tỷ lệ sinh lời tài sản, các đặc điểm thống kê điển hình của dữ liệu tài chính, và cơ sở của đo lường rủi ro thị trường. Thứ hai, các chương tiếp theo giới thiệu các mô hình đo lường và dự báo biến động, từ những cách tiếp cận cơ bản đến các mô hình kinh tế lượng như ARCH, GARCH và các biến thể mở rộng. Thứ ba, sách trình bày khung khái niệm và kỹ thuật tính toán Value-at-Risk, đồng thời thảo luận các vấn đề thực hành như lựa chọn phân phối, ước lượng tham số, và kiểm định chất lượng mô hình.
+Về cấu trúc, sách được triển khai theo bốn phần. Phần I xác lập vấn đề nghiên cứu và ngôn ngữ phân tích của rủi ro đuôi. Phần II trình bày khung mô hình và tiêu chuẩn đánh giá VaR/Expected Shortfall. Phần III chuyển sang bằng chứng thực nghiệm từ VN-Index. Phần IV tổng hợp các hàm ý phương pháp và hàm ý quản trị rủi ro cho thị trường Việt Nam.
 
-Cuốn sách không nhằm thay thế các chuyên khảo kinh tế lượng tài chính ở trình độ nâng cao, mà hướng tới việc xây dựng một nền tảng đủ chắc chắn để người đọc có thể hiểu bản chất của các mô hình, đọc được các nghiên cứu thực nghiệm, và áp dụng được các kỹ thuật cơ bản trong bối cảnh dữ liệu tài chính thực tế.
+Cuốn sách không nhằm thay thế các chuyên khảo kinh tế lượng tài chính thuần lý thuyết, mà hướng tới việc xây dựng một cầu nối giữa nền tảng định lượng, logic mô hình hóa rủi ro đuôi và ứng dụng thực nghiệm trong một thị trường mới nổi.
 
-Tác giả hy vọng tài liệu này sẽ hữu ích cho sinh viên, học viên cao học, giảng viên, nhà phân tích và những người quan tâm đến đo lường rủi ro thị trường trong tài chính hiện đại.
-
+Tác giả hy vọng tài liệu này sẽ hữu ích cho học viên cao học, nghiên cứu sinh giai đoạn đầu, giảng viên, nhà phân tích và người hành nghề muốn có một tài liệu có cấu trúc chuyên khảo về volatility, VaR, Expected Shortfall và đánh giá mô hình rủi ro thị trường.
 
 **Đối tượng bạn đọc**  
-Cuốn sách hướng tới sinh viên và học viên thuộc các ngành tài chính, ngân hàng, đầu tư, kinh tế ứng dụng và khoa học dữ liệu, đồng thời cũng phù hợp với nhà nghiên cứu hoặc người hành nghề muốn có một tài liệu nhập môn có hệ thống về volatility và VaR.
+Cuốn sách hướng tới người đọc đã có nền tảng cơ bản về tài chính, xác suất thống kê và dữ liệu chuỗi thời gian, nhưng cần một khung chuyên khảo rõ ràng để nối từ mô hình volatility đến đo lường và đánh giá rủi ro đuôi.
 
 **Phương pháp trình bày**  
-Các nội dung được trình bày theo hướng từ trực quan đến mô hình, từ dữ liệu đến suy luận, và từ khái niệm đến mã lệnh thực hành. Trong toàn bộ cuốn sách, R được sử dụng làm công cụ minh họa chính.
+Các nội dung được trình bày theo hướng từ câu hỏi nghiên cứu đến mô hình, từ mô hình đến tiêu chuẩn đánh giá, và từ bằng chứng thực nghiệm đến hàm ý quản trị rủi ro. Trong toàn bộ cuốn sách, R được sử dụng như công cụ minh họa và tái lập kết quả.
 
 **Gợi ý cách đọc sách**  
-Người đọc mới nên bắt đầu từ Chương 1 để nắm các khái niệm nền tảng về tỷ lệ sinh lời và đặc điểm của dữ liệu tài chính. Sau đó có thể tiếp cận các chương về mô hình biến động và VaR theo đúng thứ tự, vì các chương sau kế thừa trực tiếp logic của các chương trước.
+Người đọc nên bắt đầu từ Chương 1 và Chương 2 để nắm ngôn ngữ phân tích và vai trò của biến động có điều kiện. Chương 3 và Chương 4 cung cấp khung mô hình và khung đánh giá. Chương 5 đến Chương 7 trình bày bằng chứng thực nghiệm cho VN-Index. Chương 8 tổng hợp các hàm ý phương pháp và thực tiễn của toàn bộ cuốn sách.
