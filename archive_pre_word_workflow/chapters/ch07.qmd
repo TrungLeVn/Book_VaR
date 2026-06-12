@@ -1,0 +1,46 @@
+# So sánh thực nghiệm các mô hình VaR và Expected Shortfall trên VN-Index
+
+## Vai trò của chương trong cuốn sách
+
+Đây là chương bằng chứng cốt lõi của chuyên khảo. Mọi lập luận ở các chương trước đều hội tụ vào câu hỏi: mô hình nào tạo ra dự báo rủi ro đuôi đáng tin cậy hơn trên dữ liệu VN-Index, và đáng tin cậy theo tiêu chí nào.
+
+## Đóng góp cho luận điểm trung tâm
+
+Chương này cung cấp bằng chứng trực tiếp để so sánh các họ mô hình VaR/ES dưới cùng một thiết kế thực nghiệm, từ đó đưa ra kết luận có điều kiện thay vì tuyên bố một mô hình thắng tuyệt đối.
+
+## Cấu trúc đề xuất
+
+### 7.1. Nhóm mô hình benchmark: historical simulation
+
+- Giữ lại từ [legacy-ch05.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch05.qmd:484):
+  - `Kết quả VaR và ES từ mô phỏng lịch sử`
+
+### 7.2. Parametric và GARCH-type VaR
+
+- Giữ lại từ [legacy-ch05.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch05.qmd:567):
+  - `Kết quả VaR từ mô hình tham số và GARCH-type VaR`
+
+### 7.3. Semi-parametric, quantile regression và EVT
+
+- Giữ lại từ [legacy-ch05.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch05.qmd:822):
+  - `Kết quả VaR từ mô hình bán tham số, hồi quy phân vị và EVT`
+
+### 7.4. Backtesting và so sánh mô hình
+
+- Giữ lại từ [legacy-ch05.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch05.qmd:1053):
+  - `Backtesting và so sánh mô hình`
+
+### 7.5. Expected Shortfall và tail severity
+
+- Giữ lại từ [legacy-ch05.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch05.qmd:1315):
+  - `ES, tail severity và diễn giải tổn thất vượt VaR`
+
+## Nguồn nội dung chính
+
+- [legacy-ch05.qmd](/Users/trungvic/Documents/Codex/2026-05-22/Git-book-VaR/Book_VaR/chapters/legacy-ch05.qmd)
+
+## Thiếu nội dung cần viết thêm sau bước bố cục
+
+- một đoạn mở đầu nói rõ tập mô hình cuối cùng được chọn từ logic của Chương 3, Chương 4 và Chương 6
+- một bảng tổng hợp `model -> strengths -> weaknesses -> suitable use-case`
+- một kết luận cuối chương theo hướng điều kiện hóa theo trạng thái thị trường, không chỉ xếp hạng chung

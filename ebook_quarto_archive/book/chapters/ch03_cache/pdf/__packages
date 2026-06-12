@@ -1,0 +1,12 @@
+ggplot2
+dplyr
+tidyr
+zoo
+knitr
+scales
+tibble
+readxl
+FinTS
+rugarch
+tseries
+moments

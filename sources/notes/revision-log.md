@@ -1,0 +1,29 @@
+# Revision Log
+
+Last updated: 2026-05-23
+
+Purpose: record major editorial, structural, methodological, and workflow decisions. Minor sentence edits do not need entries unless they change the book's argument or reproducibility.
+
+## Log
+
+| Date | Area | Change or decision | Files touched | Reason | Follow-up |
+| --- | --- | --- | --- | --- | --- |
+| 2026-05-23 | Project state | Created initial project-state files for book brief, chapter map, reference notes, terminology, fact ledger, figure/table register, and revision log. | `book-brief.md`, `chapter-map.md`, `reference-book-notes.md`, `terminology.md`, `fact-ledger.md`, `figure-table-register.md`, `revision-log.md` | Establish a book-level control layer before editing manuscript chapters. | Use these files as checkpoints before major chapter rewrites. |
+| 2026-05-23 | Book mode | Recorded current working mode as an applied scholarly monograph with teaching-oriented explanation where needed. | `book-brief.md`, `chapter-map.md` | `index.qmd` frames the project as a specialized applied monograph on volatility, VaR, ES, and VN-Index. | Revisit only if the project is repositioned as a course textbook. |
+| 2026-05-23 | Chapter structure | Recorded active four-part, eight-chapter sequence from `_quarto.yml` and current chapter outlines. | `chapter-map.md` | Preserve coherence before migrating material from legacy chapters. | Update after any change to `_quarto.yml` chapter order. |
+| 2026-05-23 | Fact control | Created fact-ledger structure and marked unstable or empirical claims as needing verification. | `fact-ledger.md` | Avoid fake currentness for market, data, Basel, regulatory, and crisis-history claims. | Fill source rows when chapters begin using specific claims. |
+| 2026-05-23 | Terminology | Created initial English-Vietnamese terminology and notation register. | `terminology.md` | Keep VaR/ES, volatility, return, loss, and model terminology consistent across old and new material. | Normalize terminology during chapter rewrites. |
+| 2026-05-23 | Figures/tables | Created initial figure/table register with planned active-chapter assets and legacy audit notes. | `figure-table-register.md` | Prevent duplicate labels, orphaned generated files, and unsupported empirical captions. | Run full label extraction before migrating code chunks. |
+| 2026-05-23 | Migration workflow | Created a dedicated migration-plan file that consolidates the current chapter-by-chapter legacy-to-active roadmap. | `migration-plan.md`, `revision-log.md` | Preserve one stable reference for future migration passes instead of reconstructing the plan from chat history. | Update the file after each major migration pass or whenever the sequence/role changes materially. |
+| 2026-05-23 | Chapter 1 migration | Rebuilt active Ch. 1 from blueprint into a foundation chapter on price, return, distribution, left-tail risk, volatility, VaR, and ES, with one migrated conceptual figure and one new risk-language table. | `chapters/ch01.qmd`, `figure-table-register.md`, `revision-log.md` | Begin legacy-to-active migration while preserving the official chapter role and avoiding premature method or empirical detail. | Check render dependencies for `gridExtra`; keep Ch. 2 as the dedicated chapter for conditional volatility. |
+| 2026-05-23 | Chapter 2 migration | Rebuilt active Ch. 2 from blueprint into a bridge chapter on conditional volatility, rolling volatility, EWMA, ARCH/GARCH logic, and the role and limits of volatility forecasts for VaR/ES. | `chapters/ch02.qmd`, `terminology.md`, `figure-table-register.md`, `revision-log.md` | Implement the approved migration plan while keeping Ch. 2 distinct from Ch. 1, Ch. 3, Ch. 4, and the empirical VN-Index chapters. | Check render dependencies for the new EWMA figure; keep any heavier ARCH/GARCH estimation examples for later empirical chapters rather than this conceptual bridge chapter. |
+| 2026-05-23 | Chapters 3-4 migration | Rebuilt active Ch. 3 and Ch. 4 from blueprints into a paired method sequence: Ch. 3 now maps VaR/ES model architectures by assumptions and tail focus, while Ch. 4 now defines OOS evaluation, backtesting, ES/tail-severity logic, and model-acceptance rules. | `chapters/ch03.qmd`, `chapters/ch04.qmd`, `terminology.md`, `figure-table-register.md`, `revision-log.md` | Implement the approved migration plan without collapsing model construction into model evaluation or importing empirical VN-Index results prematurely. | Run a later full render check; keep Ch. 7 responsible for empirical verdicts and keep any heavier estimation/backtesting code in the empirical pipeline rather than these method chapters. |
+
+## Decision Rules Going Forward
+
+- Update `book-brief.md` if the audience, book mode, software policy, jurisdiction, or empirical scope changes.
+- Update `chapter-map.md` whenever chapter order, chapter role, or inter-chapter dependencies change.
+- Update `terminology.md` when a new technical term, abbreviation, or symbol is introduced.
+- Update `fact-ledger.md` before adding current market, regulatory, Basel, historical-crisis, or exact empirical claims.
+- Update `figure-table-register.md` whenever a figure/table is added, removed, relabeled, migrated from legacy files, or regenerated from new data.
+- Record major structural rewrites here before or immediately after the change.

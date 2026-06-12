@@ -1,0 +1,8 @@
+test,statistic,p_value,null
+Jarque-Bera,140.0873,0,Normality
+"Ljung-Box return, lag 20",30.0876,0.0684,No autocorrelation
+"Ljung-Box squared return, lag 20",847.346,0,No autocorrelation
+ADF,-11.8011,0.01,Unit root
+Phillips-Perron,-2135.4677,0.01,Unit root
+KPSS,0.2947,0.1,Stationarity
+"ARCH-LM, lag 12",226.0066,0,No ARCH effect

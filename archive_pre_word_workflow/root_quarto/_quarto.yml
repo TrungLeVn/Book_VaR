@@ -1,0 +1,63 @@
+project:
+  type: book
+
+book:
+  title: "Đo lường biến động tỷ suất sinh lời và giá trị chịu rủi ro"
+  author: "Trung H. Le"
+  date: "3/19/2026"
+  chapters:
+    - index.qmd
+    - chapters/part01.qmd
+    - chapters/ch01.qmd
+    - chapters/ch02.qmd
+    - chapters/part02.qmd
+    - chapters/ch03.qmd
+    - chapters/ch04.qmd
+    - chapters/part03.qmd
+    - chapters/ch05.qmd
+    - chapters/ch06.qmd
+    - chapters/ch07.qmd
+    - chapters/part04.qmd
+    - chapters/ch08.qmd
+    - references.qmd
+
+bibliography: references.bib
+csl: apa.csl
+
+format:
+  pdf:
+    documentclass: scrreprt
+    pdf-engine: xelatex
+    latex-auto-mk: true
+    latex-auto-install: true
+    toc: true
+    number-sections: true
+    fontsize: 13pt
+    mainfont: "Times New Roman"
+    sansfont: "Arial"
+    monofont: "Courier New"
+    linestretch: 1.5
+    include-in-header:
+      text: |
+        \usepackage{float}
+        \usepackage{setspace}
+
+editor: visual
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: auto
+
+knitr:
+  opts_chunk:
+    dev: "ragg_png"
+    dpi: 300
+    fig.align: "center"
+
+crossref:
+  fig-title: "Hình"
+  tbl-title: "Bảng"
+  lst-title: "Mã"
+  sec-prefix: "Mục"
