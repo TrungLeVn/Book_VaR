@@ -1,0 +1,2 @@
+n_obs,sample_start,sample_end,mean_return_pct,sd_return_pct,min_return_pct,max_return_pct,skewness,kurtosis,jb_p,lb_return_p,lb_squared_return_p,arch_lm_p,adf_return_p,kpss_return_p
+4080,2010-01-06,2026-05-20,0.03117470159264935,1.18568205154329,-6.910236483100363,6.546904849399837,-0.7817668563875507,6.96695911110843,0,2.6105384942631815e-7,0,1.1392328372098438e-93,0.01,0.1

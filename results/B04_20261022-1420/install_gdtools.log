@@ -1,0 +1,55 @@
+The following package(s) are missing entries in the cache:
+- gridExtra
+- kableExtra
+- lubridate
+- nortest
+- rstudioapi
+- svglite
+- timechange
+These packages will need to be reinstalled.
+
+The following package(s) have broken symlinks into the cache:
+- gridExtra
+- kableExtra
+- lubridate
+- nortest
+- rstudioapi
+- svglite
+- timechange
+Use `renv::repair()` to try and reinstall these packages.
+
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+- The project is out-of-sync -- use `renv::status()` for details.
+# Downloading packages -------------------------------------------------------
+- Downloading gdtools 0.5.2 from CRAN ...       OK [file is up to date]
+Successfully downloaded 1 package in 1.5 seconds.
+
+The following package(s) will be installed:
+- gdtools [0.5.2]
+These packages will be installed into "~/Library/CloudStorage/GoogleDrive-trunglh@hvnh.edu.vn/My Drive/My Vault/03. Research/01. Ongoing Projects/02. Books/02. VaR-forecasting-Monograph/02. Drafts/renv/library/macos/R-4.5/aarch64-apple-darwin20".
+
+# Installing packages --------------------------------------------------------
+- Installing gdtools 0.5.2 ...                  OK [built from source and cached in 6.3s]
+Successfully installed 1 package in 6.3 seconds.
+gdtools 0.5.2 | flextable 0.10.3 loadable

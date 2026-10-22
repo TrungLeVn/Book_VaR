@@ -1,0 +1,2 @@
+# B04: Homebrew libintl for gdtools source build (used via R_MAKEVARS_USER only)
+LDFLAGS += -L/opt/homebrew/lib

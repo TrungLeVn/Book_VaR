@@ -1,0 +1,232 @@
+The following package(s) are missing entries in the cache:
+- gridExtra
+- kableExtra
+- lubridate
+- nortest
+- rstudioapi
+- svglite
+- timechange
+These packages will need to be reinstalled.
+
+The following package(s) have broken symlinks into the cache:
+- gridExtra
+- kableExtra
+- lubridate
+- nortest
+- rstudioapi
+- svglite
+- timechange
+Use `renv::repair()` to try and reinstall these packages.
+
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+- The project is out-of-sync -- use `renv::status()` for details.
+Warning message:
+In normalizePath(file.path(dirname(script_file), "..", "..")) :
+  path[1]="03.~+~Chuong_03/code/R/../..": No such file or directory
+Warning message:
+In normalizePath(file.path(chapter_dir, "..")) :
+  path[1]="03.~+~Chuong_03/code/R/../../..": No such file or directory
+Warning messages:
+1: In adf.test(daily$ret) : p-value smaller than printed p-value
+2: In kpss.test(daily$ret) : p-value greater than printed p-value
+Warning messages:
+1: In adf.test(daily$ret) : p-value smaller than printed p-value
+2: In adf.test(daily$ret) : p-value smaller than printed p-value
+3: In kpss.test(daily$log_price) : p-value smaller than printed p-value
+4: In kpss.test(daily$log_price) : p-value smaller than printed p-value
+5: In kpss.test(daily$ret) : p-value greater than printed p-value
+6: In kpss.test(daily$ret) : p-value greater than printed p-value
+Warning messages:
+1: In arima(data, order = c(modelinc[2], 0, modelinc[3]), include.mean = modelinc[1],  :
+  possible convergence problem: optim gave code = 1
+2: In arima(data, order = c(modelinc[2], 0, modelinc[3]), include.mean = modelinc[1],  :
+  possible convergence problem: optim gave code = 1
+There were 50 or more warnings (use warnings() to see the first 50)
+--------------------------------------------------------
+Sequential test p-value: 0.1835
+MCS p-value: 0.1835
+Model APARCH-skewed-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.276
+MCS p-value: 0.276
+Model EGARCH-skewed-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.2975
+MCS p-value: 0.2975
+Model GARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.3095
+MCS p-value: 0.3095
+Model EWMA 0.94 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.3065
+MCS p-value: 0.3095
+Model GARCH-normal is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.3675
+MCS p-value: 0.3675
+Model EGARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.3875
+MCS p-value: 0.3875
+Model Rolling 60 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.352
+MCS p-value: 0.3875
+Model Rolling 120 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.412
+MCS p-value: 0.412
+Model GJR-GARCH-skewed-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.634
+MCS p-value: 0.634
+Model APARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.3865
+MCS p-value: 0.3865
+Model Rolling 60 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.4295
+MCS p-value: 0.4295
+Model GARCH-normal is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.4825
+MCS p-value: 0.4825
+Model EWMA 0.94 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.4535
+MCS p-value: 0.4825
+Model GARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.8545
+MCS p-value: 0.8545
+Model Rolling 120 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.921
+MCS p-value: 0.921
+Model EGARCH-skewed-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.9385
+MCS p-value: 0.9385
+Model GJR-GARCH-skewed-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.9155
+MCS p-value: 0.9385
+Model APARCH-skewed-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.851
+MCS p-value: 0.9385
+Model GJR-GARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.615
+MCS p-value: 0.9385
+Model APARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.181
+MCS p-value: 0.181
+Model Rolling 60 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.5
+MCS p-value: 0.5
+Model EWMA 0.94 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.663
+MCS p-value: 0.663
+Model Rolling 120 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.807
+MCS p-value: 0.807
+Model GJR-GARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.778
+MCS p-value: 0.807
+Model GARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.909
+MCS p-value: 0.909
+Model APARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.8445
+MCS p-value: 0.909
+Model GARCH-normal is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.8115
+MCS p-value: 0.909
+Model EGARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.9955
+MCS p-value: 0.9955
+Model EGARCH-skewed-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.9635
+MCS p-value: 0.9955
+Model APARCH-skewed-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.0365
+MCS p-value: 0.0365
+Model Rolling 60 is excluded from the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.163
+MCS p-value: 0.163
+Model Rolling 120 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.533
+MCS p-value: 0.533
+Model EWMA 0.94 is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.542
+MCS p-value: 0.542
+Model GARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.813
+MCS p-value: 0.813
+Model EGARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.8315
+MCS p-value: 0.8315
+Model EGARCH-skewed-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.847
+MCS p-value: 0.847
+Model APARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.8665
+MCS p-value: 0.8665
+Model GARCH-normal is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.7645
+MCS p-value: 0.8665
+Model GJR-GARCH-Student-t is retained in the Superior Set of Models.
+--------------------------------------------------------
+Sequential test p-value: 0.55
+MCS p-value: 0.8665
+Model GJR-GARCH-skewed-t is retained in the Superior Set of Models.
+Warning message:
+Removed 448 rows containing missing values or values outside the scale range
+(`geom_line()`). 
+Warning message:
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_line()`). 
+Warning message:
+Removed 60 rows containing missing values or values outside the scale range
+(`geom_line()`). 
+Warning message:
+Removed 38 rows containing missing values or values outside the scale range
+(`geom_line()`). 
+Chapter 3 completed. See output/RUN_REPORT.md

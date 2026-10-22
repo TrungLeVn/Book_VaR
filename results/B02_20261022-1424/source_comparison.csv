@@ -1,0 +1,4 @@
+pair,overlap_start,overlap_end,n_both,only_a,only_b,only_a_dates,only_b_dates,close_maxabs,close_n_gt_0.005,close_n_gt_0.5,open_maxabs,open_n_gt_0.005,open_n_gt_0.5,high_maxabs,high_n_gt_0.005,high_n_gt_0.5,low_maxabs,low_n_gt_0.005,low_n_gt_0.5
+XLSX-CH3,2010-01-05,2026-05-20,4081,0,0,,,0.0,0,0,0.0,0,0,0.0,0,0,0.0,0,0
+XLSX-CH1,2010-01-04,2026-03-19,4041,0,0,,,0.0,0,0,0.0,0,0,0.0,0,0,0.0,0,0
+CH1-CH3,2010-01-05,2026-03-19,4040,0,0,,,0.0,0,0,0.0,0,0,0.0,0,0,0.0,0,0

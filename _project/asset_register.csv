@@ -1,0 +1,14 @@
+chapter,asset_type,canonical_path,status,notes
+ch01,manuscript,01. Chuong_01/chapter.md,active,Converted from newer manuscript DOCX
+ch02,manuscript,02. Chuong_02/chapter.md,active,Converted from newer manuscript DOCX
+ch03,manuscript,03. Chuong_03/chapter.md,active,Converted from manuscript DOCX
+ch04,manuscript,04. Chuong_04/chapter.md,active,Converted from manuscript DOCX
+ch05,manuscript,05. Chuong_05/chapter.md,active,Converted from manuscript DOCX
+ch06,manuscript,06. Chuong_06/chapter.md,scaffold,No source DOCX existed at migration
+ch01,bibliography,01. Chuong_01/references/bibliography.bib,active,General bibliography
+ch02,bibliography,02. Chuong_02/references/bibliography.bib,active,Volatility/VaR bibliography
+ch01,data,01. Chuong_01/data/raw/vnindex.csv,active,Chapter-local input
+ch04,data,04. Chuong_04/data/raw/,active,Shared VN-Index raw inputs assigned by semantic use
+ch03,output,03. Chuong_03/output/,review,Volatility/VN-Index artifacts; verify legacy output ownership
+ch04,output,04. Chuong_04/output/,review,VaR/ES methodology artifacts; verify legacy output ownership
+ch05,output,05. Chuong_05/output/,active,VaR/ES empirical artifacts

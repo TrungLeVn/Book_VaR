@@ -1,0 +1,10 @@
+Vấn đề dữ liệu,Lựa chọn khuyến nghị,Lý do,Hệ quả nếu xử lý sai
+Giá đóng cửa hay giá điều chỉnh,Ưu tiên giá điều chỉnh khi phân tích cổ phiếu riêng lẻ,"Phản ánh tốt hơn cổ tức, chia tách, cổ phiếu thưởng và quyền mua",Return có thể xuất hiện cú nhảy kỹ thuật không phản ánh rủi ro thị trường thực chất
+Cổ tức tiền mặt,Tính vào return hoặc dùng giá điều chỉnh,Cổ tức là một phần lợi ích kinh tế của nhà đầu tư,Có thể đánh giá thấp return thực tế và phóng đại biến động quanh ngày không hưởng quyền
+Chia tách/cổ phiếu thưởng,Điều chỉnh lại chuỗi giá trước khi tính return,Giá sau sự kiện có thể giảm mạnh về mặt kỹ thuật nhưng giá trị kinh tế không giảm tương ứng,"Tạo return âm giả tạo, làm sai lệch volatility và VaR"
+Phát hành quyền mua,Điều chỉnh giá hoặc xử lý riêng các quan sát bị ảnh hưởng,Quyền mua làm thay đổi giá tham chiếu và lợi ích kinh tế của cổ đông,Tạo outlier kỹ thuật trong chuỗi return
+Ngày không giao dịch,Sắp xếp theo ngày giao dịch thực tế; không nội suy giá nếu không có cơ sở,Dữ liệu thị trường không có quan sát vào ngày nghỉ,Có thể tạo return bằng 0 hoặc return giả nếu xử lý máy móc
+Dữ liệu thiếu,Kiểm tra nguyên nhân thiếu; loại bỏ hoặc xử lý theo quy tắc rõ ràng,"Dữ liệu thiếu có thể do lỗi dữ liệu, ngừng giao dịch hoặc thanh khoản thấp","Làm sai lệch thống kê mô tả, kiểm định và mô hình volatility"
+Cổ phiếu thanh khoản thấp,Cân nhắc loại khỏi mẫu hoặc phân tích riêng,Giao dịch thưa có thể làm chuỗi giá không phản ánh liên tục thông tin thị trường,"Return có nhiều giá trị bằng 0, tự tương quan giả và volatility bị bóp méo"
+Simple return hay log return,Dùng log return cho mô hình chuỗi thời gian; dùng simple return cho P&L và danh mục,Log return cộng được theo thời gian; simple return trực quan và cộng được theo tỷ trọng danh mục,Diễn giải sai kết quả hoặc không nhất quán giữa phần mô hình và phần lãi/lỗ
+Giả định tái cân bằng danh mục,Nêu rõ danh mục giữ nguyên số lượng tài sản hay tái cân bằng định kỳ,Tỷ trọng danh mục thay đổi theo biến động giá nếu không tái cân bằng,Return và VaR danh mục không thể so sánh giữa các phương án

@@ -1,0 +1,7 @@
+setting,value
+Estimation window,1250 trading days
+Forecast horizons,"1, 5, 10, 20 trading days"
+Refit frequency,Every 20 trading days
+Maximum forecast origins,50
+Actual-volatility proxy,Sum of future squared returns
+Loss functions,"RMSE, MAE, QLIKE"

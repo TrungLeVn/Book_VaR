@@ -1,0 +1,724 @@
+The following package(s) are missing entries in the cache:
+- DistributionUtils
+- FNN
+- FinTS
+- GeneralizedHyperbolic
+- MatrixModels
+- R6
+- RColorBrewer
+- Rcpp
+- RcppArmadillo
+- Rsolnp
+- S7
+- SkewHyperbolic
+- SparseM
+- TTR
+- askpass
+- base64enc
+- bit
+- bit64
+- bslib
+- cachem
+- cellranger
+- chron
+- cli
+- clipr
+- cpp11
+- crayon
+- curl
+- data.table
+- digest
+- dplyr
+- evaluate
+- farver
+- fastmap
+- flextable
+- fontBitstreamVera
+- fontLiberation
+- fontawesome
+- fontquiver
+- fracdiff
+- fs
+- future
+- future.apply
+- gdtools
+- generics
+- ggplot2
+- globals
+- glue
+- gridExtra
+- gtable
+- highr
+- hms
+- htmltools
+- isoband
+- jquerylib
+- jsonlite
+- kableExtra
+- kernlab
+- knitr
+- ks
+- labeling
+- lifecycle
+- listenv
+- lubridate
+- magrittr
+- mclust
+- memoise
+- mime
+- moments
+- multicool
+- mvtnorm
+- nloptr
+- nortest
+- numDeriv
+- officer
+- openssl
+- parallelly
+- patchwork
+- pillar
+- pkgconfig
+- pracma
+- prettyunits
+- progress
+- purrr
+- quadprog
+- quantmod
+- quantreg
+- ragg
+- rappdirs
+- readr
+- readxl
+- rematch
+- rlang
+- rmarkdown
+- rstudioapi
+- rugarch
+- sass
+- scales
+- spd
+- stringi
+- stringr
+- svglite
+- sys
+- systemfonts
+- textshaping
+- tibble
+- tidyr
+- tidyselect
+- timechange
+- tinytex
+- truncnorm
+- tseries
+- tzdb
+- urca
+- utf8
+- uuid
+- vctrs
+- viridisLite
+- vroom
+- withr
+- xfun
+- xml2
+- xts
+- yaml
+- zip
+- zoo
+These packages will need to be reinstalled.
+
+The following package(s) have broken symlinks into the cache:
+- DistributionUtils
+- FNN
+- FinTS
+- GeneralizedHyperbolic
+- MatrixModels
+- R6
+- RColorBrewer
+- Rcpp
+- RcppArmadillo
+- Rsolnp
+- S7
+- SkewHyperbolic
+- SparseM
+- TTR
+- askpass
+- base64enc
+- bit
+- bit64
+- bslib
+- cachem
+- cellranger
+- chron
+- cli
+- clipr
+- cpp11
+- crayon
+- curl
+- data.table
+- digest
+- dplyr
+- evaluate
+- farver
+- fastmap
+- flextable
+- fontBitstreamVera
+- fontLiberation
+- fontawesome
+- fontquiver
+- fracdiff
+- fs
+- future
+- future.apply
+- gdtools
+- generics
+- ggplot2
+- globals
+- glue
+- gridExtra
+- gtable
+- highr
+- hms
+- htmltools
+- isoband
+- jquerylib
+- jsonlite
+- kableExtra
+- kernlab
+- knitr
+- ks
+- labeling
+- lifecycle
+- listenv
+- lubridate
+- magrittr
+- mclust
+- memoise
+- mime
+- moments
+- multicool
+- mvtnorm
+- nloptr
+- nortest
+- numDeriv
+- officer
+- openssl
+- parallelly
+- patchwork
+- pillar
+- pkgconfig
+- pracma
+- prettyunits
+- progress
+- purrr
+- quadprog
+- quantmod
+- quantreg
+- ragg
+- rappdirs
+- readr
+- readxl
+- rematch
+- rlang
+- rmarkdown
+- rstudioapi
+- rugarch
+- sass
+- scales
+- spd
+- stringi
+- stringr
+- svglite
+- sys
+- systemfonts
+- textshaping
+- tibble
+- tidyr
+- tidyselect
+- timechange
+- tinytex
+- truncnorm
+- tseries
+- tzdb
+- urca
+- utf8
+- uuid
+- vctrs
+- viridisLite
+- vroom
+- withr
+- xfun
+- xml2
+- xts
+- yaml
+- zip
+- zoo
+Use `renv::repair()` to try and reinstall these packages.
+
+- None of the packages recorded in the lockfile are currently installed.
+- Use `renv::restore()` to restore the project library.
+# Downloading packages -------------------------------------------------------
+- Downloading dplyr 1.2.1 from CRAN ...         OK [1.4 Mb in 1.8s]
+- Downloading cli 3.6.6 from CRAN ...           OK [1.3 Mb in 1.3s]
+- Downloading generics 0.1.4 from CRAN ...      OK [79.9 Kb in 1.2s]
+- Downloading glue 1.8.1 from CRAN ...          OK [168.4 Kb in 1.1s]
+- Downloading lifecycle 1.0.5 from CRAN ...     OK [128.8 Kb in 1.1s]
+- Downloading rlang 1.3.0 from CRAN ...         OK [1.5 Mb in 1.6s]
+- Downloading magrittr 2.0.5 from CRAN ...      OK [217.9 Kb in 1.3s]
+- Downloading pillar 1.11.1 from CRAN ...       OK [642.8 Kb in 1.1s]
+- Downloading utf8 1.2.6 from CRAN ...          OK [146.6 Kb in 1.2s]
+- Downloading vctrs 0.7.3 from CRAN ...         OK [1.8 Mb in 1.4s]
+- Downloading R6 2.6.1 from CRAN ...            OK [84.7 Kb in 1.1s]
+- Downloading tibble 3.3.1 from CRAN ...        OK [629.6 Kb in 1.3s]
+- Downloading pkgconfig 2.0.3 from CRAN ...     OK [17.8 Kb in 1.2s]
+- Downloading tidyselect 1.2.1 from CRAN ...    OK [218.5 Kb in 1.3s]
+- Downloading withr 3.0.3 from CRAN ...         OK [217.6 Kb in 1.4s]
+- Downloading ggplot2 4.0.3 from CRAN ...       OK [8.1 Mb in 3.1s]
+- Downloading gtable 0.3.6 from CRAN ...        OK [217.5 Kb in 1.1s]
+- Downloading isoband 0.3.0 from CRAN ...       OK [1.6 Mb in 1.4s]
+- Downloading cpp11 0.5.5 from CRAN ...         OK [293.8 Kb in 1.1s]
+- Downloading S7 0.2.2 from CRAN ...            OK [315.5 Kb in 1.2s]
+- Downloading scales 1.4.0 from CRAN ...        OK [821.6 Kb in 1.3s]
+- Downloading farver 2.1.2 from CRAN ...        OK [1.4 Mb in 1.4s]
+- Downloading labeling 0.4.3 from CRAN ...      OK [59.6 Kb in 1.2s]
+- Downloading RColorBrewer 1.1-3 from CRAN ...  OK [50.9 Kb in 1.1s]
+- Downloading viridisLite 0.4.3 from CRAN ...   OK [1.2 Mb in 1.5s]
+- Downloading patchwork 1.3.2 from CRAN ...     OK [3.2 Mb in 2.4s]
+- Downloading zoo 1.9-1 from CRAN ...           OK [970.5 Kb in 2.3s]
+- Downloading readr 2.2.0 from CRAN ...         OK [777.9 Kb in 1.5s]
+- Downloading clipr 0.8.1 from CRAN ...         OK [52.2 Kb in 1.5s]
+- Downloading crayon 1.5.3 from CRAN ...        OK [160.1 Kb in 1.2s]
+- Downloading hms 1.1.4 from CRAN ...           OK [101.5 Kb in 1.2s]
+- Downloading vroom 1.7.1 from CRAN ...         OK [922 Kb in 1.5s]
+- Downloading bit64 4.8.6 from CRAN ...         OK [549.5 Kb in 2.0s]
+- Downloading bit 4.6.0 from CRAN ...           OK [617.4 Kb in 1.4s]
+- Downloading tzdb 0.5.0 from CRAN ...          OK [671.1 Kb in 1.4s]
+- Downloading progress 1.2.3 from CRAN ...      OK [85 Kb in 1.5s]
+- Downloading prettyunits 1.2.0 from CRAN ...   OK [148.8 Kb in 1.1s]
+- Downloading quantmod 0.4.29 from CRAN ...     OK [1 Mb in 1.4s]
+- Downloading curl 8.1.0 from CRAN ...          OK [1.1 Mb in 2.6s]
+- Downloading jsonlite 2.0.0 from CRAN ...      OK [1 Mb in 1.5s]
+- Downloading xts 0.14.3 from CRAN ...          OK [798.8 Kb in 3.3s]
+- Downloading TTR 0.24.4 from CRAN ...          OK [511.7 Kb in 3.3s]
+- Downloading flextable 0.10.3 from CRAN ...    OK [1.6 Mb in 3.2s]
+- Downloading data.table 1.18.6.1 from CRAN ... OK [2.8 Mb in 3.1s]
+- Downloading gdtools 0.5.2 from CRAN ...       OK [1.9 Mb in 3.7s]
+- Downloading fontquiver 0.2.1 from CRAN ...    OK [2.2 Mb in 3.7s]
+- Downloading fontBitstreamVera 0.1.1 from CRAN ... OK [683.3 Kb in 3.5s]
+- Downloading fontLiberation 0.1.0 from CRAN ... OK [4.3 Mb in 3.9s]
+- Downloading htmltools 0.5.9 from CRAN ...     OK [345.4 Kb in 1.1s]
+- Downloading base64enc 0.1-6 from CRAN ...     OK [28.2 Kb in 1.3s]
+- Downloading digest 0.6.39 from CRAN ...       OK [216.5 Kb in 1.5s]
+- Downloading fastmap 1.2.0 from CRAN ...       OK [66 Kb in 1.1s]
+- Downloading Rcpp 1.1.2 from CRAN ...          OK [2.2 Mb in 1.5s]
+- Downloading systemfonts 1.3.2 from CRAN ...   OK [1.7 Mb in 3.5s]
+- Downloading knitr 1.52 from CRAN ...          OK [1 Mb in 2.2s]
+- Downloading evaluate 1.0.5 from CRAN ...      OK [100.4 Kb in 1.1s]
+- Downloading highr 0.12 from CRAN ...          OK [37.1 Kb in 1.3s]
+- Downloading xfun 0.62 from CRAN ...           OK [669.4 Kb in 1.9s]
+- Downloading yaml 2.3.12 from CRAN ...         OK [111.7 Kb in 1.1s]
+- Downloading officer 0.7.7 from CRAN ...       OK [2.4 Mb in 3.4s]
+- Downloading openssl 2.4.2 from CRAN ...       OK [3.7 Mb in 2.0s]
+- Downloading askpass 1.2.1 from CRAN ...       OK [21.6 Kb in 1.0s]
+- Downloading sys 3.4.3 from CRAN ...           OK [40.1 Kb in 1.1s]
+- Downloading ragg 1.5.2 from CRAN ...          OK [2.5 Mb in 4.1s]
+- Downloading textshaping 1.0.5 from CRAN ...   OK [1.2 Mb in 3.1s]
+- Downloading stringi 1.8.9 from CRAN ...       OK [14.1 Mb in 5.2s]
+- Downloading tidyr 1.3.2 from CRAN ...         OK [1.1 Mb in 1.5s]
+- Downloading purrr 1.2.2 from CRAN ...         OK [538.4 Kb in 1.3s]
+- Downloading stringr 1.6.0 from CRAN ...       OK [325 Kb in 1.2s]
+- Downloading uuid 1.2-2 from CRAN ...          OK [48.4 Kb in 1.2s]
+- Downloading xml2 1.6.0 from CRAN ...          OK [701.6 Kb in 1.2s]
+- Downloading zip 3.0.2 from CRAN ...           OK [340.1 Kb in 1.2s]
+- Downloading rmarkdown 2.32 from CRAN ...      OK [2.5 Mb in 1.5s]
+- Downloading bslib 0.12.0 from CRAN ...        OK [5.9 Mb in 2.4s]
+- Downloading cachem 1.1.0 from CRAN ...        OK [65.9 Kb in 1.1s]
+- Downloading jquerylib 0.1.4 from CRAN ...     OK [513.5 Kb in 1.1s]
+- Downloading memoise 2.0.1 from CRAN ...       OK [47.1 Kb in 1.1s]
+- Downloading mime 0.13 from CRAN ...           OK [43.5 Kb in 1.1s]
+- Downloading sass 0.4.10 from CRAN ...         OK [2.2 Mb in 1.5s]
+- Downloading fs 2.1.0 from CRAN ...            OK [290.6 Kb in 1.3s]
+- Downloading rappdirs 0.3.4 from CRAN ...      OK [44.5 Kb in 1.2s]
+- Downloading fontawesome 0.5.3 from CRAN ...   OK [1.3 Mb in 1.4s]
+- Downloading tinytex 0.61 from CRAN ...        OK [145 Kb in 1.3s]
+- Downloading sgt 2.0-2 from CRAN ...           OK [283.1 Kb in 2.8s]
+- Downloading optimx 2025-4.9 from CRAN ...     OK [2.5 Mb in 1.5s]
+- Downloading numDeriv 2016.8-1.1 from CRAN ... OK [111.6 Kb in 1.1s]
+- Downloading nloptr 2.2.1 from CRAN ...        OK [493.2 Kb in 1.2s]
+- Downloading pracma 2.4.6 from CRAN ...        OK [1.7 Mb in 1.6s]
+- Downloading rugarch 1.5-6 from CRAN ...       OK [4.5 Mb in 3.9s]
+- Downloading Rsolnp 2.0.1 from CRAN ...        OK [637.8 Kb in 3.2s]
+- Downloading truncnorm 1.0-9 from CRAN ...     OK [20 Kb in 1.1s]
+- Downloading future.apply 1.21.0 from CRAN ... OK [194.4 Kb in 2.6s]
+- Downloading future 1.80.0 from CRAN ...       OK [1000.9 Kb in 3.2s]
+- Downloading globals 0.20.0 from CRAN ...      OK [166.4 Kb in 2.4s]
+- Downloading listenv 1.1.0 from CRAN ...       OK [127.4 Kb in 2.3s]
+- Downloading parallelly 1.48.0 from CRAN ...   OK [614.9 Kb in 1.2s]
+- Downloading RcppArmadillo 15.6.2-1 from CRAN ... OK [1 Mb in 2.0s]
+- Downloading ks 1.15.3 from CRAN ...           OK [1.6 Mb in 3.2s]
+- Downloading FNN 1.1.4.1 from CRAN ...         OK [126.9 Kb in 1.2s]
+- Downloading kernlab 0.9-33 from CRAN ...      OK [2 Mb in 1.5s]
+- Downloading mclust 6.1.3 from CRAN ...        OK [4 Mb in 1.8s]
+- Downloading multicool 1.0.2 from CRAN ...     OK [100.2 Kb in 2.5s]
+- Downloading gmp 0.7-5.1 from CRAN ...         OK [435.3 Kb in 2.7s]
+- Downloading mvtnorm 1.4-2 from CRAN ...       OK [1.1 Mb in 2.2s]
+- Downloading spd 2.0-1 from CRAN ...           OK [218.7 Kb in 1.6s]
+- Downloading chron 2.3-63 from CRAN ...        OK [185.6 Kb in 1.3s]
+- Downloading SkewHyperbolic 0.4-2 from CRAN ... OK [168.8 Kb in 1.2s]
+- Downloading DistributionUtils 0.6-2 from CRAN ... OK [170 Kb in 2.0s]
+- Downloading GeneralizedHyperbolic 0.8-7 from CRAN ... OK [577.7 Kb in 2.0s]
+- Downloading fracdiff 1.5-4 from CRAN ...      OK [99.6 Kb in 1.2s]
+- Downloading tseries 0.10-63 from CRAN ...     OK [389.7 Kb in 2.9s]
+- Downloading quadprog 1.5-8 from CRAN ...      OK [29.8 Kb in 1.2s]
+- Downloading FinTS 0.4-9 from CRAN ...         OK [4.3 Mb in 4.0s]
+- Downloading forecast 9.0.2 from CRAN ...      OK [1.6 Mb in 4.8s]
+- Downloading colorspace 2.1-4 from CRAN ...    OK [2.5 Mb in 2.7s]
+- Downloading lmtest 0.9-40 from CRAN ...       OK [392.7 Kb in 1.2s]
+- Downloading timeDate 4052.112 from CRAN ...   OK [1.4 Mb in 1.2s]
+- Downloading urca 1.3-4 from CRAN ...          OK [1 Mb in 2.1s]
+- Downloading MCS 0.2.1 from CRAN ...           OK [152.2 Kb in 2.3s]
+- Downloading car 3.1-5 from CRAN ...           OK [1.5 Mb in 1.8s]
+- Downloading abind 1.4-8 from CRAN ...         OK [63.7 Kb in 1.1s]
+- Downloading Formula 1.2-6 from CRAN ...       OK [78.2 Kb in 1.9s]
+- Downloading pbkrtest 0.5.5 from CRAN ...      OK [216.6 Kb in 1.1s]
+- Downloading lme4 2.0-6 from CRAN ...          OK [5.3 Mb in 2.9s]
+- Downloading Rdpack 2.6.6 from CRAN ...        OK [620.6 Kb in 2.5s]
+- Downloading rbibutils 2.4.1 from CRAN ...     OK [998.5 Kb in 1.4s]
+- Downloading minqa 1.2.8 from CRAN ...         OK [115.9 Kb in 1.3s]
+- Downloading reformulas 0.4.4 from CRAN ...    OK [152 Kb in 1.2s]
+- Downloading RcppEigen 0.3.4.0.2 from CRAN ... OK [1.8 Mb in 1.6s]
+- Downloading broom 1.0.13 from CRAN ...        OK [1.5 Mb in 1.4s]
+- Downloading backports 1.5.1 from CRAN ...     OK [113.2 Kb in 1.1s]
+- Downloading doBy 4.7.2 from CRAN ...          OK [4.6 Mb in 2.4s]
+- Downloading cowplot 1.2.0 from CRAN ...       OK [1.3 Mb in 1.9s]
+- Downloading Deriv 4.3.6 from CRAN ...         OK [194.4 Kb in 11s]
+- Downloading modelr 0.1.11 from CRAN ...       OK [195.8 Kb in 3.1s]
+- Downloading quantreg 6.1 from CRAN ...        OK [1.4 Mb in 2.0s]
+- Downloading SparseM 1.84-2 from CRAN ...      OK [868.6 Kb in 2.4s]
+- Downloading MatrixModels 0.5-4 from CRAN ...  OK [399.4 Kb in 1.6s]
+- Downloading carData 3.0-6 from CRAN ...       OK [1.6 Mb in 2.4s]
+- Downloading moments 0.14.1 from CRAN ...      OK [53.6 Kb in 2.2s]
+- Downloading readxl 1.6.0 from CRAN ...        OK [878.6 Kb in 2.3s]
+- Downloading cellranger 1.1.0 from CRAN ...    OK [101.4 Kb in 2.0s]
+- Downloading rematch 2.0.0 from CRAN ...       OK [16 Kb in 3.9s]
+Successfully downloaded 143 packages in 300 seconds.
+
+The following package(s) will be installed:
+- Deriv                 [4.3.6]
+- DistributionUtils     [0.6-2]
+- FNN                   [1.1.4.1]
+- FinTS                 [0.4-9]
+- Formula               [1.2-6]
+- GeneralizedHyperbolic [0.8-7]
+- MCS                   [0.2.1]
+- MatrixModels          [0.5-4]
+- R6                    [2.6.1]
+- RColorBrewer          [1.1-3]
+- Rcpp                  [1.1.2]
+- RcppArmadillo         [15.6.2-1]
+- RcppEigen             [0.3.4.0.2]
+- Rdpack                [2.6.6]
+- Rsolnp                [2.0.1]
+- S7                    [0.2.2]
+- SkewHyperbolic        [0.4-2]
+- SparseM               [1.84-2]
+- TTR                   [0.24.4]
+- abind                 [1.4-8]
+- askpass               [1.2.1]
+- backports             [1.5.1]
+- base64enc             [0.1-6]
+- bit                   [4.6.0]
+- bit64                 [4.8.6]
+- broom                 [1.0.13]
+- bslib                 [0.12.0]
+- cachem                [1.1.0]
+- car                   [3.1-5]
+- carData               [3.0-6]
+- cellranger            [1.1.0]
+- chron                 [2.3-63]
+- cli                   [3.6.6]
+- clipr                 [0.8.1]
+- colorspace            [2.1-4]
+- cowplot               [1.2.0]
+- cpp11                 [0.5.5]
+- crayon                [1.5.3]
+- curl                  [8.1.0]
+- data.table            [1.18.6.1]
+- digest                [0.6.39]
+- doBy                  [4.7.2]
+- dplyr                 [1.2.1]
+- evaluate              [1.0.5]
+- farver                [2.1.2]
+- fastmap               [1.2.0]
+- flextable             [0.10.3]
+- fontBitstreamVera     [0.1.1]
+- fontLiberation        [0.1.0]
+- fontawesome           [0.5.3]
+- fontquiver            [0.2.1]
+- forecast              [9.0.2]
+- fracdiff              [1.5-4]
+- fs                    [2.1.0]
+- future                [1.80.0]
+- future.apply          [1.21.0]
+- gdtools               [0.5.2]
+- generics              [0.1.4]
+- ggplot2               [4.0.3]
+- globals               [0.20.0]
+- glue                  [1.8.1]
+- gmp                   [0.7-5.1]
+- gtable                [0.3.6]
+- highr                 [0.12]
+- hms                   [1.1.4]
+- htmltools             [0.5.9]
+- isoband               [0.3.0]
+- jquerylib             [0.1.4]
+- jsonlite              [2.0.0]
+- kernlab               [0.9-33]
+- knitr                 [1.52]
+- ks                    [1.15.3]
+- labeling              [0.4.3]
+- lifecycle             [1.0.5]
+- listenv               [1.1.0]
+- lme4                  [2.0-6]
+- lmtest                [0.9-40]
+- magrittr              [2.0.5]
+- mclust                [6.1.3]
+- memoise               [2.0.1]
+- mime                  [0.13]
+- minqa                 [1.2.8]
+- modelr                [0.1.11]
+- moments               [0.14.1]
+- multicool             [1.0.2]
+- mvtnorm               [1.4-2]
+- nloptr                [2.2.1]
+- numDeriv              [2016.8-1.1]
+- officer               [0.7.7]
+- openssl               [2.4.2]
+- optimx                [2025-4.9]
+- parallelly            [1.48.0]
+- patchwork             [1.3.2]
+- pbkrtest              [0.5.5]
+- pillar                [1.11.1]
+- pkgconfig             [2.0.3]
+- pracma                [2.4.6]
+- prettyunits           [1.2.0]
+- progress              [1.2.3]
+- purrr                 [1.2.2]
+- quadprog              [1.5-8]
+- quantmod              [0.4.29]
+- quantreg              [6.1]
+- ragg                  [1.5.2]
+- rappdirs              [0.3.4]
+- rbibutils             [2.4.1]
+- readr                 [2.2.0]
+- readxl                [1.6.0]
+- reformulas            [0.4.4]
+- rematch               [2.0.0]
+- rlang                 [1.3.0]
+- rmarkdown             [2.32]
+- rugarch               [1.5-6]
+- sass                  [0.4.10]
+- scales                [1.4.0]
+- sgt                   [2.0-2]
+- spd                   [2.0-1]
+- stringi               [1.8.9]
+- stringr               [1.6.0]
+- sys                   [3.4.3]
+- systemfonts           [1.3.2]
+- textshaping           [1.0.5]
+- tibble                [3.3.1]
+- tidyr                 [1.3.2]
+- tidyselect            [1.2.1]
+- timeDate              [4052.112]
+- tinytex               [0.61]
+- truncnorm             [1.0-9]
+- tseries               [0.10-63]
+- tzdb                  [0.5.0]
+- urca                  [1.3-4]
+- utf8                  [1.2.6]
+- uuid                  [1.2-2]
+- vctrs                 [0.7.3]
+- viridisLite           [0.4.3]
+- vroom                 [1.7.1]
+- withr                 [3.0.3]
+- xfun                  [0.62]
+- xml2                  [1.6.0]
+- xts                   [0.14.3]
+- yaml                  [2.3.12]
+- zip                   [3.0.2]
+- zoo                   [1.9-1]
+These packages will be installed into "~/Library/CloudStorage/GoogleDrive-trunglh@hvnh.edu.vn/My Drive/My Vault/03. Research/01. Ongoing Projects/02. Books/02. VaR-forecasting-Monograph/02. Drafts/renv/library/macos/R-4.5/aarch64-apple-darwin20".
+
+# Installing packages --------------------------------------------------------
+- Installing cli 3.6.6 ...                      OK [installed binary and cached]
+- Installing generics 0.1.4 ...                 OK [installed binary and cached]
+- Installing glue 1.8.1 ...                     OK [installed binary and cached]
+- Installing rlang 1.3.0 ...                    OK [installed binary and cached]
+- Installing lifecycle 1.0.5 ...                OK [installed binary and cached]
+- Installing magrittr 2.0.5 ...                 OK [installed binary and cached]
+- Installing utf8 1.2.6 ...                     OK [installed binary and cached]
+- Installing vctrs 0.7.3 ...                    OK [installed binary and cached]
+- Installing pillar 1.11.1 ...                  OK [installed binary and cached]
+- Installing R6 2.6.1 ...                       OK [installed binary and cached]
+- Installing pkgconfig 2.0.3 ...                OK [installed binary and cached]
+- Installing tibble 3.3.1 ...                   OK [installed binary and cached]
+- Installing withr 3.0.3 ...                    OK [installed binary and cached]
+- Installing tidyselect 1.2.1 ...               OK [installed binary and cached]
+- Installing dplyr 1.2.1 ...                    OK [installed binary and cached]
+- Installing gtable 0.3.6 ...                   OK [installed binary and cached]
+- Installing cpp11 0.5.5 ...                    OK [installed binary and cached]
+- Installing isoband 0.3.0 ...                  OK [installed binary and cached]
+- Installing S7 0.2.2 ...                       OK [installed binary and cached]
+- Installing farver 2.1.2 ...                   OK [installed binary and cached]
+- Installing labeling 0.4.3 ...                 OK [installed binary and cached]
+- Installing RColorBrewer 1.1-3 ...             OK [installed binary and cached]
+- Installing viridisLite 0.4.3 ...              OK [installed binary and cached]
+- Installing scales 1.4.0 ...                   OK [installed binary and cached]
+- Installing ggplot2 4.0.3 ...                  OK [installed binary and cached in 0.1s]
+- Installing patchwork 1.3.2 ...                OK [installed binary and cached]
+- Installing zoo 1.9-1 ...                      OK [installed binary and cached]
+- Installing clipr 0.8.1 ...                    OK [installed binary and cached]
+- Installing crayon 1.5.3 ...                   OK [installed binary and cached]
+- Installing hms 1.1.4 ...                      OK [installed binary and cached]
+- Installing bit 4.6.0 ...                      OK [installed binary and cached]
+- Installing bit64 4.8.6 ...                    OK [installed binary and cached]
+- Installing tzdb 0.5.0 ...                     OK [installed binary and cached]
+- Installing prettyunits 1.2.0 ...              OK [installed binary and cached]
+- Installing progress 1.2.3 ...                 OK [installed binary and cached]
+- Installing vroom 1.7.1 ...                    OK [installed binary and cached]
+- Installing readr 2.2.0 ...                    OK [installed binary and cached]
+- Installing curl 8.1.0 ...                     OK [installed binary and cached]
+- Installing jsonlite 2.0.0 ...                 OK [installed binary and cached]
+- Installing xts 0.14.3 ...                     OK [installed binary and cached]
+- Installing TTR 0.24.4 ...                     OK [installed binary and cached]
+- Installing quantmod 0.4.29 ...                OK [installed binary and cached]
+- Installing data.table 1.18.6.1 ...            OK [installed binary and cached in 0.12s]
+- Installing fontBitstreamVera 0.1.1 ...        OK [installed binary and cached]
+- Installing fontLiberation 0.1.0 ...           OK [installed binary and cached]
+- Installing fontquiver 0.2.1 ...               OK [installed binary and cached]
+- Installing base64enc 0.1-6 ...                OK [installed binary and cached]
+- Installing digest 0.6.39 ...                  OK [installed binary and cached]
+- Installing fastmap 1.2.0 ...                  OK [installed binary and cached]
+- Installing htmltools 0.5.9 ...                OK [installed binary and cached]
+- Installing Rcpp 1.1.2 ...                     OK [installed binary and cached in 0.34s]
+- Installing systemfonts 1.3.2 ...              OK [installed binary and cached]
+- Installing gdtools 0.5.2 ...                  OK [installed binary and cached]
+- Installing evaluate 1.0.5 ...                 OK [installed binary and cached]
+- Installing xfun 0.62 ...                      OK [installed binary and cached]
+- Installing highr 0.12 ...                     OK [installed binary and cached]
+- Installing yaml 2.3.12 ...                    OK [installed binary and cached]
+- Installing knitr 1.52 ...                     OK [installed binary and cached in 0.12s]
+- Installing sys 3.4.3 ...                      OK [installed binary and cached]
+- Installing askpass 1.2.1 ...                  OK [installed binary and cached]
+- Installing openssl 2.4.2 ...                  OK [installed binary and cached]
+- Installing stringi 1.8.9 ...                  OK [installed binary and cached in 0.17s]
+- Installing textshaping 1.0.5 ...              OK [installed binary and cached]
+- Installing ragg 1.5.2 ...                     OK [installed binary and cached]
+- Installing purrr 1.2.2 ...                    OK [installed binary and cached]
+- Installing stringr 1.6.0 ...                  OK [installed binary and cached]
+- Installing tidyr 1.3.2 ...                    OK [installed binary and cached]
+- Installing uuid 1.2-2 ...                     OK [installed binary and cached]
+- Installing xml2 1.6.0 ...                     OK [installed binary and cached]
+- Installing zip 3.0.2 ...                      OK [installed binary and cached]
+- Installing officer 0.7.7 ...                  OK [installed binary and cached]
+- Installing cachem 1.1.0 ...                   OK [installed binary and cached]
+- Installing jquerylib 0.1.4 ...                OK [installed binary and cached]
+- Installing memoise 2.0.1 ...                  OK [installed binary and cached]
+- Installing mime 0.13 ...                      OK [installed binary and cached]
+- Installing fs 2.1.0 ...                       OK [installed binary and cached]
+- Installing rappdirs 0.3.4 ...                 OK [installed binary and cached]
+- Installing sass 0.4.10 ...                    OK [installed binary and cached]
+- Installing bslib 0.12.0 ...                   OK [installed binary and cached in 0.54s]
+- Installing fontawesome 0.5.3 ...              OK [installed binary and cached]
+- Installing tinytex 0.61 ...                   OK [installed binary and cached]
+- Installing rmarkdown 2.32 ...                 OK [installed binary and cached in 0.17s]
+- Installing flextable 0.10.3 ...               OK [installed binary and cached]
+- Installing numDeriv 2016.8-1.1 ...            OK [installed binary and cached]
+- Installing nloptr 2.2.1 ...                   OK [installed binary and cached]
+- Installing pracma 2.4.6 ...                   OK [installed binary and cached]
+- Installing optimx 2025-4.9 ...                OK [installed binary and cached in 0.1s]
+- Installing sgt 2.0-2 ...                      OK [installed binary and cached]
+- Installing truncnorm 1.0-9 ...                OK [installed binary and cached]
+- Installing globals 0.20.0 ...                 OK [installed binary and cached]
+- Installing listenv 1.1.0 ...                  OK [installed binary and cached]
+- Installing parallelly 1.48.0 ...              OK [installed binary and cached]
+- Installing future 1.80.0 ...                  OK [installed binary and cached in 0.13s]
+- Installing future.apply 1.21.0 ...            OK [installed binary and cached]
+- Installing RcppArmadillo 15.6.2-1 ...         OK [installed binary and cached in 0.38s]
+- Installing Rsolnp 2.0.1 ...                   OK [installed binary and cached]
+- Installing FNN 1.1.4.1 ...                    OK [installed binary and cached]
+- Installing kernlab 0.9-33 ...                 OK [installed binary and cached]
+- Installing mclust 6.1.3 ...                   OK [installed binary and cached]
+- Installing gmp 0.7-5.1 ...                    OK [installed binary and cached]
+- Installing multicool 1.0.2 ...                OK [installed binary and cached]
+- Installing mvtnorm 1.4-2 ...                  OK [installed binary and cached]
+- Installing ks 1.15.3 ...                      OK [installed binary and cached]
+- Installing spd 2.0-1 ...                      OK [installed binary and cached]
+- Installing chron 2.3-63 ...                   OK [installed binary and cached]
+- Installing DistributionUtils 0.6-2 ...        OK [installed binary and cached]
+- Installing GeneralizedHyperbolic 0.8-7 ...    OK [installed binary and cached]
+- Installing SkewHyperbolic 0.4-2 ...           OK [installed binary and cached]
+- Installing fracdiff 1.5-4 ...                 OK [installed binary and cached]
+- Installing rugarch 1.5-6 ...                  OK [installed binary and cached]
+- Installing quadprog 1.5-8 ...                 OK [installed binary and cached]
+- Installing tseries 0.10-63 ...                OK [installed binary and cached]
+- Installing FinTS 0.4-9 ...                    OK [installed binary and cached]
+- Installing colorspace 2.1-4 ...               OK [installed binary and cached in 0.12s]
+- Installing lmtest 0.9-40 ...                  OK [installed binary and cached]
+- Installing timeDate 4052.112 ...              OK [installed binary and cached]
+- Installing urca 1.3-4 ...                     OK [installed binary and cached]
+- Installing forecast 9.0.2 ...                 OK [installed binary and cached]
+- Installing MCS 0.2.1 ...                      OK [installed binary and cached]
+- Installing abind 1.4-8 ...                    OK [installed binary and cached]
+- Installing Formula 1.2-6 ...                  OK [installed binary and cached]
+- Installing rbibutils 2.4.1 ...                OK [installed binary and cached]
+- Installing Rdpack 2.6.6 ...                   OK [installed binary and cached]
+- Installing minqa 1.2.8 ...                    OK [installed binary and cached]
+- Installing reformulas 0.4.4 ...               OK [installed binary and cached]
+- Installing RcppEigen 0.3.4.0.2 ...            OK [installed binary and cached in 0.33s]
+- Installing lme4 2.0-6 ...                     OK [installed binary and cached in 0.11s]
+- Installing backports 1.5.1 ...                OK [installed binary and cached]
+- Installing broom 1.0.13 ...                   OK [installed binary and cached]
+- Installing cowplot 1.2.0 ...                  OK [installed binary and cached]
+- Installing Deriv 4.3.6 ...                    OK [installed binary and cached]
+- Installing modelr 0.1.11 ...                  OK [installed binary and cached]
+- Installing doBy 4.7.2 ...                     OK [installed binary and cached]
+- Installing pbkrtest 0.5.5 ...                 OK [installed binary and cached]
+- Installing SparseM 1.84-2 ...                 OK [installed binary and cached]
+- Installing MatrixModels 0.5-4 ...             OK [installed binary and cached]
+- Installing quantreg 6.1 ...                   OK [installed binary and cached]
+- Installing carData 3.0-6 ...                  OK [installed binary and cached]
+- Installing car 3.1-5 ...                      OK [installed binary and cached]
+- Installing moments 0.14.1 ...                 OK [installed binary and cached]
+- Installing rematch 2.0.0 ...                  OK [installed binary and cached]
+- Installing cellranger 1.1.0 ...               OK [installed binary and cached]
+- Installing readxl 1.6.0 ...                   OK [installed binary and cached]
+Successfully installed 143 packages in 19 seconds.
+Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo 
+   package loadable version
+     dplyr     TRUE   1.2.1
+    tibble     TRUE   3.3.1
+   ggplot2     TRUE   4.0.3
+    scales     TRUE   1.4.0
+ patchwork     TRUE   1.3.2
+       zoo     TRUE   1.9.1
+     readr     TRUE   2.2.0
+  quantmod     TRUE  0.4.29
+ flextable    FALSE    <NA>
+   officer     TRUE   0.7.7
+     tidyr     TRUE   1.3.2
+       sgt     TRUE   2.0.2
+   rugarch     TRUE   1.5.6
+   tseries     TRUE 0.10.63
+     FinTS     TRUE   0.4.9
+  jsonlite     TRUE   2.0.0
+  forecast     TRUE   9.0.2
+       MCS     TRUE   0.2.1
+       car     TRUE   3.1.5
+   moments     TRUE  0.14.1
+    readxl     TRUE   1.6.0
+ rmarkdown     TRUE    2.32
+     knitr     TRUE    1.52
+Error: Not loadable: flextable
+Execution halted

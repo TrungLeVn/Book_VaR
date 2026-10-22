@@ -1,0 +1,41 @@
+The following package(s) are missing entries in the cache:
+- gridExtra
+- kableExtra
+- lubridate
+- nortest
+- rstudioapi
+- svglite
+- timechange
+These packages will need to be reinstalled.
+
+The following package(s) have broken symlinks into the cache:
+- gridExtra
+- kableExtra
+- lubridate
+- nortest
+- rstudioapi
+- svglite
+- timechange
+Use `renv::repair()` to try and reinstall these packages.
+
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+Warning in Sys.setlocale() :
+  OS reports request to set locale to "" cannot be honored
+- The project is out-of-sync -- use `renv::status()` for details.
+Error in normalizePath(sub("^--file=", "", file_arg[1]), winslash = "/",  : 
+  path[1]="02.~+~Chuong_02/code/R/ch02_all_tables_figures_appendix.R": No such file or directory
+Calls: resolve_script_dir -> dirname -> normalizePath
+Execution halted

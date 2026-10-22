@@ -1,0 +1,8 @@
+105c105
+<   doc <- officer::body_add_flextable(doc, format_table_docx(data))
+---
+>   doc <- flextable::body_add_flextable(doc, format_table_docx(data))
+115c115
+<   doc <- officer::body_add_flextable(doc, format_table_docx(data))
+---
+>   doc <- flextable::body_add_flextable(doc, format_table_docx(data))

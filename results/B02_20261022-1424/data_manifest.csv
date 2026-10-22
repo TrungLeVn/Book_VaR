@@ -1,0 +1,7 @@
+series,role,path,sha256,bytes,start,end,n_sessions,ohlc,volume
+VN-Index,XLSX,04. Chuong_04/data/raw/vni_data.xlsx,79f69303fa73be87e77fb15b4c4dc4e07c3f486e5d99ed27e92bdef022447cb4,162306,2010-01-04,2026-05-20,4082,yes,no
+VN-Index,CH1,01. Chuong_01/data/raw/vnindex.csv,289e0a51aa5714eb567e31dc9699182be9fb236dec2a7617a3daf6662c75d484,332849,2007-01-02,2026-03-19,4785,yes,yes
+VN-Index,CH3,03. Chuong_03/data/raw/vnindex_daily.csv,b23d33a7c506a007ba49ca6f6f2c6d75dab4db33ffaed64805df1c8a4cc6c08e,163095,2010-01-05,2026-05-20,4081,yes,no
+VN-Index,CH4CSV,04. Chuong_04/data/raw/VNI.csv,289e0a51aa5714eb567e31dc9699182be9fb236dec2a7617a3daf6662c75d484,332849,2007-01-02,2026-03-19,4785,yes,yes
+VN-Index,"CANONICAL (derived, đề xuất)",results/B02_20261022-1424/vnindex_canonical_20100104_20260520.csv,13a5fa44f6cbfbb36d94b4a0dc04dd4918c8addf4fe46b18dfff43f015329a40,165130,2010-01-04,2026-05-20,4082,yes,no
+HNX-Index,INCOMING (chưa audit — B02 phần 2),_project/data_incoming/Dữ liệu Lịch sử HNX.csv,de05a6118e12a8a70cf623782e60a77d5a2da62853015cd4bcd584ff1b38143c,272685,,,,,

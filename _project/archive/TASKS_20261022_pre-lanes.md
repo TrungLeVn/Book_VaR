@@ -1,0 +1,289 @@
+# Tasks — Sách chuyên khảo biến động, VaR/ES Việt Nam
+
+Bảng việc dạng checkbox (dùng chung với productivity:task-management). Chi tiết mỗi việc ở `tickets/<mã>.md`. Không xoá mục Done; không tạo TASKS.md khác; nhật ký ở `../LOG.md`.
+Đợt 1: B01–B04, B11, C01, C02 · Đợt 2: C03, C04 · Đợt 3: C05 · Đợt 4: C06, B08–B10.
+
+## Active
+- [ ] **B02 — Hợp đồng dữ liệu và phiên bản dữ liệu chuẩn** - var-reproduction-analyst, —
+    - Đầu ra + tiêu chí: results/B02_<ts>/ (README, data_contract.md, data_manifest.csv); Mọi chuỗi có SHA, khoảng ngày, số phiên, quy tắc làm sạch; khuyến nghị tệp VN-Index chuẩn có căn cứ
+    - Phụ thuộc: B00 (phần HNX/ngành: B05)
+    - Nơi làm: Either
+    - Chi tiết: tickets/B02.md
+    - Trạng thái: Đang làm (từ 22/10/2026) — phần 1 VN-Index xong: results/B02_20261022-1424/ (đề xuất tệp chuẩn vni_data.xlsx → vnindex_canonical_20100104_20260520.csv, SHA 13a5fa44…); phần 2 chờ: tệp HNX đã đến _project/data_incoming/ (SHA de05a611…), chưa audit; chỉ số ngành chưa có
+- [ ] **B03 — Quy ước toàn sách và khuôn sản xuất docx/LaTeX (thử trên Ch1)** - Lead, M0/M6
+    - Đầu ra + tiêu chí: _project/production/ (reference.docx, preamble.tex, latexmkrc, build_chapter.sh, README); bản thử 01. Chuong_01/release/; pandoc ≥ 3 dựng được docx (APA, apa.csl) và LaTeX biên dịch được bằng xelatex với tiếng Việt, công thức, bảng, hình, tham chiếu chéo, bib
+    - Phụ thuộc: B01
+    - Nơi làm: Code
+    - Điểm duyệt: Design
+    - Chi tiết: tickets/B03.md
+- [ ] **B07 — Quy tắc chọn chỉ số ngành** - Lead + var-reproduction-analyst, —
+    - Đầu ra + tiêu chí: design/B07_sector_rule.md (hoặc mục trong C03-D1); Quy tắc định trước: đủ lịch sử, đủ số mã, không bị chi phối bởi 1–2 mã; danh sách ngành đạt
+    - Phụ thuộc: B05, B02
+    - Nơi làm: Either
+    - Điểm duyệt: Design
+    - Chi tiết: tickets/B07.md
+- [ ] **B08 — Đối chiếu toàn sách** - var-number-tracer, —
+    - Đầu ra + tiêu chí: reviews/reconcile_<date>_book.md; Không lệch ký hiệu/thuật ngữ/tham chiếu giữa chương; bib tổng hợp không key trùng
+    - Phụ thuộc: C01…C06-M6
+    - Nơi làm: Code
+    - Điểm duyệt: Delivery (sách)
+    - Chi tiết: tickets/B08.md
+- [ ] **B09 — Mở đầu** - var-chapter-writer, M2
+    - Đầu ra + tiêu chí: chapters/drafts/B09_mo-dau.md; Bốn mục theo đề cương 3.1; chỉ dùng kết quả đã kiểm
+    - Phụ thuộc: C06-M2
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/B09.md
+- [ ] **B10 — Phụ lục A–D** - Lead, M6
+    - Đầu ra + tiêu chí: 00. Book/appendix/ (A ký hiệu–thuật ngữ–công thức; B dữ liệu và quy trình tái lập; C mã lệnh R; D bảng bổ sung); Phụ lục C sinh từ code đã duyệt; D từ output đã kiểm
+    - Phụ thuộc: C01…C05-M6, B01
+    - Nơi làm: Code
+    - Điểm duyệt: Delivery
+    - Chi tiết: tickets/B10.md
+- [ ] **C01-M1 — Ánh xạ Chương 1 hiện có vào đề cương 3.1** - Lead, M1
+    - Đầu ra + tiêu chí: chapters/drafts/C01-M1_ch01_map.md; Mỗi tiểu mục đề cương 3.1 có: nội dung cũ chuyển vào / phần viết mới / phần bỏ; danh sách exhibit
+    - Phụ thuộc: B01
+    - Nơi làm: Either
+    - Chi tiết: tickets/C01-M1.md
+- [ ] **C01-M3 — Nội dung định lượng Chương 1: tái tạo và bổ sung** - var-reproduction-analyst, M3
+    - Đầu ra + tiêu chí: analysis/ch01/run_ch01_all.R; results/C01-M3_<ts>/; Mọi bảng/hình/số có lần chạy hoặc nhãn minh họa/chưa chạy; bảng reported vs executed; lệch được liệt kê
+    - Phụ thuộc: C01-M1, B02, B04
+    - Nơi làm: Code
+    - Chi tiết: tickets/C01-M3.md
+- [ ] **C01-M4 — Kiểm nguồn và dựng bib Chương 1** - var-source-auditor, M4
+    - Đầu ra + tiêu chí: context/ch01_citation_checks.md; context/ch01_bib_additions.bib; context/ch01_citation_map.csv; Mọi trích dẫn có trạng thái; không key trùng/mồ côi; danh sách [Missing Citation]
+    - Phụ thuộc: C01-M1
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C01-M4.md
+- [ ] **C01-M2 — Viết bù Chương 1 theo đề cương 3.1** - var-chapter-writer → Lead tích hợp, M2
+    - Đầu ra + tiêu chí: chapters/drafts/C01-M2_ch01.md → Lead tích hợp vào 01. Chuong_01/chapter.md (bản cũ → 01. Chuong_01/archive/); Tiêu đề khớp đề cương 3.1; không số/nguồn chưa kiểm; placeholder được liệt kê
+    - Phụ thuộc: C01-M1, C01-M4, C01-M3
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C01-M2.md
+- [ ] **C01-M5 — Review độc lập Chương 1** - var-monograph-reviewer, M5
+    - Đầu ra + tiêu chí: reviews/<date>_ch01_review.md; Không còn phát hiện major mở (sửa tối đa 2 vòng)
+    - Phụ thuộc: C01-M2
+    - Nơi làm: Either
+    - Chi tiết: tickets/C01-M5.md
+- [ ] **C01-M6 — Gói Chương 1: docx, LaTeX, script, dữ liệu, bib** - Lead + var-replication-tester + var-number-tracer, M6
+    - Đầu ra + tiêu chí: 01. Chuong_01/release/ch01_vYYYYMMDD.docx; 01. Chuong_01/release/latex/; 01. Chuong_01/code/R/run_ch01_all.R; 01. Chuong_01/data/DATA_MANIFEST.csv; 01. Chuong_01/references/bibliography.bib; 01. Chuong_01/REPRODUCE.md; Docx và LaTeX dựng từ chapter.md; LaTeX biên dịch; smoke test 100% exhibit; trace số không lệch
+    - Phụ thuộc: C01-M5, B03
+    - Nơi làm: Code
+    - Điểm duyệt: Delivery
+    - Chi tiết: tickets/C01-M6.md
+- [ ] **C02-M1 — Ánh xạ Chương 2 hiện có vào đề cương 3.1** - Lead, M1
+    - Đầu ra + tiêu chí: chapters/drafts/C02-M1_ch02_map.md; Mỗi tiểu mục đề cương 3.1 có: nội dung cũ chuyển vào / phần viết mới / phần bỏ; danh sách exhibit
+    - Phụ thuộc: B01
+    - Nơi làm: Either
+    - Chi tiết: tickets/C02-M1.md
+- [ ] **C02-M3 — Nội dung định lượng Chương 2: tái tạo và bổ sung** - var-reproduction-analyst, M3
+    - Đầu ra + tiêu chí: analysis/ch02/run_ch02_all.R; results/C02-M3_<ts>/; Mọi bảng/hình/số có lần chạy hoặc nhãn minh họa/chưa chạy; bảng reported vs executed; lệch được liệt kê
+    - Phụ thuộc: C02-M1, B02, B04
+    - Nơi làm: Code
+    - Chi tiết: tickets/C02-M3.md
+- [ ] **C02-M4 — Kiểm nguồn và dựng bib Chương 2** - var-source-auditor, M4
+    - Đầu ra + tiêu chí: context/ch02_citation_checks.md; context/ch02_bib_additions.bib; context/ch02_citation_map.csv; Mọi trích dẫn có trạng thái; không key trùng/mồ côi; danh sách [Missing Citation]
+    - Phụ thuộc: C02-M1
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C02-M4.md
+- [ ] **C02-M2 — Viết bù Chương 2 theo đề cương 3.1** - var-chapter-writer → Lead tích hợp, M2
+    - Đầu ra + tiêu chí: chapters/drafts/C02-M2_ch02.md → Lead tích hợp vào 02. Chuong_02/chapter.md (bản cũ → 02. Chuong_02/archive/); Tiêu đề khớp đề cương 3.1; không số/nguồn chưa kiểm; placeholder được liệt kê
+    - Phụ thuộc: C02-M1, C02-M4, C02-M3
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C02-M2.md
+- [ ] **C02-M5 — Review độc lập Chương 2** - var-monograph-reviewer, M5
+    - Đầu ra + tiêu chí: reviews/<date>_ch02_review.md; Không còn phát hiện major mở (sửa tối đa 2 vòng)
+    - Phụ thuộc: C02-M2
+    - Nơi làm: Either
+    - Chi tiết: tickets/C02-M5.md
+- [ ] **C02-M6 — Gói Chương 2: docx, LaTeX, script, dữ liệu, bib** - Lead + var-replication-tester + var-number-tracer, M6
+    - Đầu ra + tiêu chí: 02. Chuong_02/release/ch02_vYYYYMMDD.docx; 02. Chuong_02/release/latex/; 02. Chuong_02/code/R/run_ch02_all.R; 02. Chuong_02/data/DATA_MANIFEST.csv; 02. Chuong_02/references/bibliography.bib; 02. Chuong_02/REPRODUCE.md; Docx và LaTeX dựng từ chapter.md; LaTeX biên dịch; smoke test 100% exhibit; trace số không lệch
+    - Phụ thuộc: C02-M5, B03
+    - Nơi làm: Code
+    - Điểm duyệt: Delivery
+    - Chi tiết: tickets/C02-M6.md
+- [ ] **C03-M1 — Ánh xạ Chương 3 hiện có vào đề cương 3.1** - Lead, M1
+    - Đầu ra + tiêu chí: chapters/drafts/C03-M1_ch03_map.md; Mỗi tiểu mục đề cương 3.1 có: nội dung cũ chuyển vào / phần viết mới / phần bỏ; danh sách exhibit
+    - Phụ thuộc: B01
+    - Nơi làm: Either
+    - Chi tiết: tickets/C03-M1.md
+- [ ] **C03-D1 — Thiết kế thực nghiệm Chương 3** - Lead (+ var-reproduction-analyst, var-monograph-reviewer), —
+    - Đầu ra + tiêu chí: design/C03-D1_design.md; Mọi lựa chọn có lý do, định trước khi xem kết quả; tác giả duyệt
+    - Phụ thuộc: C03-M1, B02
+    - Nơi làm: Either
+    - Điểm duyệt: Design
+    - Chi tiết: tickets/C03-D1.md
+- [ ] **C03-M3 — Nội dung định lượng Chương 3: tái tạo và bổ sung** - var-reproduction-analyst, M3
+    - Đầu ra + tiêu chí: analysis/ch03/run_ch03_all.R; results/C03-M3_<ts>/; Mọi bảng/hình/số có lần chạy hoặc nhãn minh họa/chưa chạy; bảng reported vs executed; lệch được liệt kê
+    - Phụ thuộc: C03-M1, B02, B04, C03-D1
+    - Nơi làm: Code
+    - Chi tiết: tickets/C03-M3.md
+- [ ] **C03-M4 — Kiểm nguồn và dựng bib Chương 3** - var-source-auditor, M4
+    - Đầu ra + tiêu chí: context/ch03_citation_checks.md; context/ch03_bib_additions.bib; context/ch03_citation_map.csv; Mọi trích dẫn có trạng thái; không key trùng/mồ côi; danh sách [Missing Citation]
+    - Phụ thuộc: C03-M1
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C03-M4.md
+- [ ] **C03-E — Kiểm kết quả và đối chiếu số Chương 3** - var-monograph-reviewer + var-number-tracer, —
+    - Đầu ra + tiêu chí: reviews/<date>_ch03_results-audit.md; reviews/reconcile_<date>_ch03.md; Không phát hiện major mở; mọi số dùng được có nguồn traced
+    - Phụ thuộc: C03-M3
+    - Nơi làm: Either
+    - Điểm duyệt: Evidence
+    - Chi tiết: tickets/C03-E.md
+- [ ] **C03-M2 — Viết bù Chương 3 theo đề cương 3.1** - var-chapter-writer → Lead tích hợp, M2
+    - Đầu ra + tiêu chí: chapters/drafts/C03-M2_ch03.md → Lead tích hợp vào 03. Chuong_03/chapter.md (bản cũ → 03. Chuong_03/archive/); Tiêu đề khớp đề cương 3.1; không số/nguồn chưa kiểm; placeholder được liệt kê
+    - Phụ thuộc: C03-M1, C03-M4, C03-E
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C03-M2.md
+- [ ] **C03-M5 — Review độc lập Chương 3** - var-monograph-reviewer, M5
+    - Đầu ra + tiêu chí: reviews/<date>_ch03_review.md; Không còn phát hiện major mở (sửa tối đa 2 vòng)
+    - Phụ thuộc: C03-M2
+    - Nơi làm: Either
+    - Chi tiết: tickets/C03-M5.md
+- [ ] **C03-M6 — Gói Chương 3: docx, LaTeX, script, dữ liệu, bib** - Lead + var-replication-tester + var-number-tracer, M6
+    - Đầu ra + tiêu chí: 03. Chuong_03/release/ch03_vYYYYMMDD.docx; 03. Chuong_03/release/latex/; 03. Chuong_03/code/R/run_ch03_all.R; 03. Chuong_03/data/DATA_MANIFEST.csv; 03. Chuong_03/references/bibliography.bib; 03. Chuong_03/REPRODUCE.md; Docx và LaTeX dựng từ chapter.md; LaTeX biên dịch; smoke test 100% exhibit; trace số không lệch
+    - Phụ thuộc: C03-M5, B03
+    - Nơi làm: Code
+    - Điểm duyệt: Delivery
+    - Chi tiết: tickets/C03-M6.md
+- [ ] **C04-M1 — Ánh xạ Chương 4 hiện có vào đề cương 3.1** - Lead, M1
+    - Đầu ra + tiêu chí: chapters/drafts/C04-M1_ch04_map.md; Mỗi tiểu mục đề cương 3.1 có: nội dung cũ chuyển vào / phần viết mới / phần bỏ; danh sách exhibit
+    - Phụ thuộc: B01
+    - Nơi làm: Either
+    - Chi tiết: tickets/C04-M1.md
+- [ ] **C04-M3 — Nội dung định lượng Chương 4: tái tạo và bổ sung** - var-reproduction-analyst, M3
+    - Đầu ra + tiêu chí: analysis/ch04/run_ch04_all.R; results/C04-M3_<ts>/; Mọi bảng/hình/số có lần chạy hoặc nhãn minh họa/chưa chạy; bảng reported vs executed; lệch được liệt kê
+    - Phụ thuộc: C04-M1, B02, B04
+    - Nơi làm: Code
+    - Chi tiết: tickets/C04-M3.md
+- [ ] **C04-M4 — Kiểm nguồn và dựng bib Chương 4** - var-source-auditor, M4
+    - Đầu ra + tiêu chí: context/ch04_citation_checks.md; context/ch04_bib_additions.bib; context/ch04_citation_map.csv; Mọi trích dẫn có trạng thái; không key trùng/mồ côi; danh sách [Missing Citation]
+    - Phụ thuộc: C04-M1
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C04-M4.md
+- [ ] **C04-M2 — Viết bù Chương 4 theo đề cương 3.1** - var-chapter-writer → Lead tích hợp, M2
+    - Đầu ra + tiêu chí: chapters/drafts/C04-M2_ch04.md → Lead tích hợp vào 04. Chuong_04/chapter.md (bản cũ → 04. Chuong_04/archive/); Tiêu đề khớp đề cương 3.1; không số/nguồn chưa kiểm; placeholder được liệt kê
+    - Phụ thuộc: C04-M1, C04-M4, C04-M3
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C04-M2.md
+- [ ] **C04-M5 — Review độc lập Chương 4** - var-monograph-reviewer, M5
+    - Đầu ra + tiêu chí: reviews/<date>_ch04_review.md; Không còn phát hiện major mở (sửa tối đa 2 vòng)
+    - Phụ thuộc: C04-M2
+    - Nơi làm: Either
+    - Chi tiết: tickets/C04-M5.md
+- [ ] **C04-M6 — Gói Chương 4: docx, LaTeX, script, dữ liệu, bib** - Lead + var-replication-tester + var-number-tracer, M6
+    - Đầu ra + tiêu chí: 04. Chuong_04/release/ch04_vYYYYMMDD.docx; 04. Chuong_04/release/latex/; 04. Chuong_04/code/R/run_ch04_all.R; 04. Chuong_04/data/DATA_MANIFEST.csv; 04. Chuong_04/references/bibliography.bib; 04. Chuong_04/REPRODUCE.md; Docx và LaTeX dựng từ chapter.md; LaTeX biên dịch; smoke test 100% exhibit; trace số không lệch
+    - Phụ thuộc: C04-M5, B03
+    - Nơi làm: Code
+    - Điểm duyệt: Delivery
+    - Chi tiết: tickets/C04-M6.md
+- [ ] **C05-M1 — Ánh xạ Chương 5 hiện có vào đề cương 3.1** - Lead, M1
+    - Đầu ra + tiêu chí: chapters/drafts/C05-M1_ch05_map.md; Mỗi tiểu mục đề cương 3.1 có: nội dung cũ chuyển vào / phần viết mới / phần bỏ; danh sách exhibit
+    - Phụ thuộc: B01
+    - Nơi làm: Either
+    - Chi tiết: tickets/C05-M1.md
+- [ ] **C05-D1 — Thiết kế thực nghiệm Chương 5** - Lead (+ var-reproduction-analyst, var-monograph-reviewer), —
+    - Đầu ra + tiêu chí: design/C05-D1_design.md; Mọi lựa chọn có lý do, định trước khi xem kết quả; tác giả duyệt
+    - Phụ thuộc: C05-M1, B02, C03-E
+    - Nơi làm: Either
+    - Điểm duyệt: Design
+    - Chi tiết: tickets/C05-D1.md
+- [ ] **C05-M3 — Nội dung định lượng Chương 5: tái tạo và bổ sung** - var-reproduction-analyst, M3
+    - Đầu ra + tiêu chí: analysis/ch05/run_ch05_all.R; results/C05-M3_<ts>/; Mọi bảng/hình/số có lần chạy hoặc nhãn minh họa/chưa chạy; bảng reported vs executed; lệch được liệt kê
+    - Phụ thuộc: C05-M1, B02, B04, C05-D1
+    - Nơi làm: Code
+    - Chi tiết: tickets/C05-M3.md
+- [ ] **C05-M4 — Kiểm nguồn và dựng bib Chương 5** - var-source-auditor, M4
+    - Đầu ra + tiêu chí: context/ch05_citation_checks.md; context/ch05_bib_additions.bib; context/ch05_citation_map.csv; Mọi trích dẫn có trạng thái; không key trùng/mồ côi; danh sách [Missing Citation]
+    - Phụ thuộc: C05-M1
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C05-M4.md
+- [ ] **C05-E — Kiểm kết quả và đối chiếu số Chương 5** - var-monograph-reviewer + var-number-tracer, —
+    - Đầu ra + tiêu chí: reviews/<date>_ch05_results-audit.md; reviews/reconcile_<date>_ch05.md; Không phát hiện major mở; mọi số dùng được có nguồn traced
+    - Phụ thuộc: C05-M3
+    - Nơi làm: Either
+    - Điểm duyệt: Evidence
+    - Chi tiết: tickets/C05-E.md
+- [ ] **C05-M2 — Viết bù Chương 5 theo đề cương 3.1** - var-chapter-writer → Lead tích hợp, M2
+    - Đầu ra + tiêu chí: chapters/drafts/C05-M2_ch05.md → Lead tích hợp vào 05. Chuong_05/chapter.md (bản cũ → 05. Chuong_05/archive/); Tiêu đề khớp đề cương 3.1; không số/nguồn chưa kiểm; placeholder được liệt kê
+    - Phụ thuộc: C05-M1, C05-M4, C05-E
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C05-M2.md
+- [ ] **C05-M5 — Review độc lập Chương 5** - var-monograph-reviewer, M5
+    - Đầu ra + tiêu chí: reviews/<date>_ch05_review.md; Không còn phát hiện major mở (sửa tối đa 2 vòng)
+    - Phụ thuộc: C05-M2
+    - Nơi làm: Either
+    - Chi tiết: tickets/C05-M5.md
+- [ ] **C05-M6 — Gói Chương 5: docx, LaTeX, script, dữ liệu, bib** - Lead + var-replication-tester + var-number-tracer, M6
+    - Đầu ra + tiêu chí: 05. Chuong_05/release/ch05_vYYYYMMDD.docx; 05. Chuong_05/release/latex/; 05. Chuong_05/code/R/run_ch05_all.R; 05. Chuong_05/data/DATA_MANIFEST.csv; 05. Chuong_05/references/bibliography.bib; 05. Chuong_05/REPRODUCE.md; Docx và LaTeX dựng từ chapter.md; LaTeX biên dịch; smoke test 100% exhibit; trace số không lệch
+    - Phụ thuộc: C05-M5, B03
+    - Nơi làm: Code
+    - Điểm duyệt: Delivery
+    - Chi tiết: tickets/C05-M6.md
+- [ ] **C06-M1 — Ánh xạ Chương 6 hiện có vào đề cương 3.1** - Lead, M1
+    - Đầu ra + tiêu chí: chapters/drafts/C06-M1_ch06_map.md; Mỗi tiểu mục đề cương 3.1 có: nội dung cũ chuyển vào / phần viết mới / phần bỏ; danh sách exhibit
+    - Phụ thuộc: B01
+    - Nơi làm: Either
+    - Chi tiết: tickets/C06-M1.md
+- [ ] **C06-M4 — Kiểm nguồn và dựng bib Chương 6** - var-source-auditor, M4
+    - Đầu ra + tiêu chí: context/ch06_citation_checks.md; context/ch06_bib_additions.bib; context/ch06_citation_map.csv; context/literature_map_ch06.md; Mọi trích dẫn có trạng thái; không key trùng/mồ côi; danh sách [Missing Citation]
+    - Phụ thuộc: C06-M1
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C06-M4.md
+- [ ] **C06-M2 — Viết bù Chương 6 theo đề cương 3.1** - var-chapter-writer → Lead tích hợp, M2
+    - Đầu ra + tiêu chí: chapters/drafts/C06-M2_ch06.md → Lead tích hợp vào 06. Chuong_06/chapter.md (bản cũ → 06. Chuong_06/archive/); Tiêu đề khớp đề cương 3.1; không số/nguồn chưa kiểm; placeholder được liệt kê
+    - Phụ thuộc: C06-M1, C06-M4, C03-E, C05-E
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/C06-M2.md
+- [ ] **C06-M5 — Review độc lập Chương 6** - var-monograph-reviewer, M5
+    - Đầu ra + tiêu chí: reviews/<date>_ch06_review.md; Không còn phát hiện major mở (sửa tối đa 2 vòng)
+    - Phụ thuộc: C06-M2
+    - Nơi làm: Either
+    - Chi tiết: tickets/C06-M5.md
+- [ ] **C06-M6 — Gói Chương 6: docx, LaTeX, script, dữ liệu, bib** - Lead + var-replication-tester + var-number-tracer, M6
+    - Đầu ra + tiêu chí: 06. Chuong_06/release/ch06_vYYYYMMDD.docx; 06. Chuong_06/release/latex/; 06. Chuong_06/code/R/run_ch06_all.R; 06. Chuong_06/data/DATA_MANIFEST.csv; 06. Chuong_06/references/bibliography.bib; 06. Chuong_06/REPRODUCE.md; Docx và LaTeX dựng từ chapter.md; LaTeX biên dịch; smoke test 100% exhibit; trace số không lệch (Ch6: không có code/dữ liệu — ghi not needed)
+    - Phụ thuộc: C06-M5, B03
+    - Nơi làm: Code
+    - Điểm duyệt: Delivery
+    - Chi tiết: tickets/C06-M6.md
+
+## Waiting On
+- [ ] **B04 — Môi trường R đầy đủ (renv)** since 2026-10-22 - Lead + var-reproduction-analyst, —
+    - Đầu ra + tiêu chí: results/B04_<ts>/README.md; renv.lock đề xuất; R chạy được mọi script Ch1–Ch3 hiện có; lockfile liệt kê đủ gói
+    - Phụ thuộc: —
+    - Nơi làm: Code
+    - Trạng thái: đã chạy results/B04_20261022-1420/ — môi trường đủ gói, renv.lock.proposed (R 4.5.3, 154 gói); Ch3 chạy nguyên trạng, trùng byte output 16/08; Ch1, Ch2 lỗi code officer::body_add_flextable
+    - Cần quyết định: (1) thay renv.lock bằng bản đề xuất (R 4.5.3); (2) sửa 1 dòng officer:: → flextable:: ở Ch1, Ch2 ngay hay trong C01-M3/C02-M3; (3) chụp bản cố định S&P 500 cho Ch1 thay vì tải Yahoo
+    - Chi tiết: tickets/B04.md
+- [ ] **B01 — Kiến trúc sách: đề cương dạng md, bảng ký hiệu, bảng thuật ngữ** since 2026-10-22 - Lead + tác giả, M0
+    - Đầu ra + tiêu chí: 00. Book/architecture.md; 00. Book/glossary.md; 00. Book/notation.md; Khớp 100% outline_v3.docx (46 mục, 78 tiểu mục); mỗi thuật ngữ tiêu đề có cặp Anh–Việt; ký hiệu thống nhất (r_t, σ_t, VaR_α, ES_α, h, L_t …)
+    - Phụ thuộc: B00
+    - Nơi làm: Either (Cowork, 22/10/2026)
+    - Chi tiết: tickets/B01.md
+    - Trạng thái: bản nháp xong 22/10/2026 — 00. Book/architecture.md, glossary.md, notation.md (46 mục/78 tiểu mục khớp outline_v3.docx)
+    - Cần quyết định: (1) xác nhận thuật ngữ A16/A17/A20 và phần B glossary; (2) quy ước ký hiệu notation.md mục F (α = xác suất đuôi; r_t theo %; η cho độ lệch; dấu phẩy thập phân); (3) đổi tiêu đề 3.7.1, 5.8.1 "VN30 và HNX-Index" (VN30 đã bỏ) → outline 3.2
+- [ ] **B11 — Dữ kiện thị trường Việt Nam có ngày hiệu lực** since 2026-10-22 - var-source-auditor + tác giả, —
+    - Đầu ra + tiêu chí: context/vn_market_facts.md; Mỗi dữ kiện có văn bản/nguồn chính thức và ngày hiệu lực
+    - Phụ thuộc: B00
+    - Nơi làm: Cowork
+    - Chi tiết: tickets/B11.md
+    - Trạng thái: context/vn_market_facts.md (22/10/2026; 69 dòng: 20 verified, 32 verified (secondary), 6 hỗn hợp, 11 unverified) — chưa đạt tiêu chí 100% có nguồn chính thức + ngày
+    - Cần quyết định: (1) chỉ số ngành HOSE nào dùng (để tra ngày gốc); (2) có cần số văn bản cho các mốc biên độ trước 2010 không; (3) tác giả cung cấp bản gốc: bộ nguyên tắc HNX-Index, Phụ lục IV TT 14/2025/TT-NHNN, quy chế VNX 2025
+- [ ] **B05 — Tác giả cung cấp dữ liệu HNX-Index và chỉ số ngành HOSE** since 2026-10-22 - tác giả, —
+    - Đầu ra + tiêu chí: Đặt tệp vào _project/data_incoming/ (Lead chuyển, ghi SHA); Cùng nguồn, ngày cuối 20/05/2026, OHLC (+ khối lượng nếu có), danh sách mã chỉ số ngành và ngày gốc
+    - Phụ thuộc: —
+    - Nơi làm: —
+    - Cần quyết định: Nguồn dữ liệu (FiinPro/Bloomberg/khác) và thời điểm gửi
+    - Chi tiết: tickets/B05.md
+    - Ghi nhận 22/10/2026: đã nhận "_project/data_incoming/Dữ liệu Lịch sử HNX.csv" (SHA-256 de05a6118e12a8a70cf623782e60a77d5a2da62853015cd4bcd584ff1b38143c); còn chờ chỉ số ngành và xác nhận nguồn
+- [ ] **B06 — Git: xử lý repo hỏng trong Google Drive** since 2026-10-22 - tác giả + Lead, —
+    - Đầu ra + tiêu chí: Repo sạch (clone mới ngoài Drive hoặc quyết định không dùng git); git fsck không lỗi; quy trình đồng bộ Drive ↔ repo được ghi vào AGENTS.md
+    - Phụ thuộc: —
+    - Nơi làm: Code
+    - Cần quyết định: (a) clone lại ngoài Drive — khuyến nghị; (b) tạm không dùng git, dựa vào manifest SHA; (c) sửa repo tại chỗ (rủi ro do Drive đồng bộ .git)
+    - Chi tiết: tickets/B06.md
+
+## Someday
+
+## Done
+- [x] ~~**B00 — Thiết lập đội agent và file trạng thái**~~ (22/10/2026)
+    - Bằng chứng: team/TEAM.md; LOG.md dòng B00
+    - Chi tiết: tickets/B00.md

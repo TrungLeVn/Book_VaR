@@ -1,0 +1,7 @@
+Tiêu chí,Tỷ lệ sinh lời giản đơn,Tỷ lệ sinh lời logarit
+Công thức cơ bản,R_t = (P_t - P_{t-1}) / P_{t-1},r_t = ln(P_t / P_{t-1})
+Diễn giải kinh tế,"Trực quan, phản ánh lãi/lỗ tương đối trong một kỳ","Ít trực quan hơn, nhưng thuận tiện về mặt toán học"
+Tổng hợp theo thời gian,Tổng hợp bằng phép nhân lãi kép,Có thể cộng trực tiếp qua thời gian
+Tổng hợp theo danh mục,Danh mục là trung bình gia quyền của return thành phần,Không có tính chất trung bình gia quyền chính xác
+Phù hợp nhất khi,"Phân tích hiệu quả đầu tư, P&L, return danh mục, phân bổ tài sản","Mô hình hóa chuỗi thời gian, volatility, GARCH, VaR động"
+Cách dùng trong cuốn sách,Dùng khi diễn giải lãi/lỗ và danh mục,Dùng chủ yếu trong các mô hình volatility và VaR/ES

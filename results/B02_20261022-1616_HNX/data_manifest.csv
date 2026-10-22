@@ -1,0 +1,4 @@
+series,role,path,sha256,bytes,start,end,n_sessions,ohlc,volume
+HNX-Index,"RAW (incoming, Investing.com)",_project/data_incoming/Dữ liệu Lịch sử HNX.csv,de05a6118e12a8a70cf623782e60a77d5a2da62853015cd4bcd584ff1b38143c,272685,2010-01-04,2026-10-22,4191,yes,yes
+HNX-Index,"CANONICAL (derived, đề xuất)",results/B02_20261022-1616_HNX/hnxindex_canonical_20100104_20260520.csv,79c130bed33c9e2123c8a664cc87442502e067ceb580703b5a59360581bc322c,152783,2010-01-04,2026-05-20,4083,yes,no
+VN-Index,"CANONICAL (derived, B02 phần 1)",results/B02_20261022-1424/vnindex_canonical_20100104_20260520.csv,13a5fa44f6cbfbb36d94b4a0dc04dd4918c8addf4fe46b18dfff43f015329a40,165130,2010-01-04,2026-05-20,4082,yes,no

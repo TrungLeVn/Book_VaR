@@ -1,0 +1,29 @@
+The following package(s) are missing entries in the cache:
+- gridExtra
+- kableExtra
+- lubridate
+- nortest
+- rstudioapi
+- svglite
+- timechange
+These packages will need to be reinstalled.
+
+The following package(s) have broken symlinks into the cache:
+- gridExtra
+- kableExtra
+- lubridate
+- nortest
+- rstudioapi
+- svglite
+- timechange
+Use `renv::repair()` to try and reinstall these packages.
+
+- The project is out-of-sync -- use `renv::status()` for details.
+The following package(s) are in an inconsistent state:
+
+ package    installed recorded used
+ cellranger y         y        n   
+ readxl     y         y        n   
+ rematch    y         y        n   
+
+See `?renv::status` for advice on resolving these issues.

@@ -1,0 +1,45 @@
+horizon,model,in_mcs_90
+1,Rolling 60,TRUE
+1,Rolling 120,TRUE
+1,EWMA 0.94,TRUE
+1,GARCH-normal,TRUE
+1,GARCH-Student-t,TRUE
+1,GJR-GARCH-Student-t,TRUE
+1,GJR-GARCH-skewed-t,TRUE
+1,EGARCH-Student-t,TRUE
+1,EGARCH-skewed-t,TRUE
+1,APARCH-Student-t,TRUE
+1,APARCH-skewed-t,TRUE
+5,Rolling 60,TRUE
+5,Rolling 120,TRUE
+5,EWMA 0.94,TRUE
+5,GARCH-normal,TRUE
+5,GARCH-Student-t,TRUE
+5,GJR-GARCH-Student-t,TRUE
+5,GJR-GARCH-skewed-t,TRUE
+5,EGARCH-Student-t,TRUE
+5,EGARCH-skewed-t,TRUE
+5,APARCH-Student-t,TRUE
+5,APARCH-skewed-t,TRUE
+10,Rolling 60,TRUE
+10,Rolling 120,TRUE
+10,EWMA 0.94,TRUE
+10,GARCH-normal,TRUE
+10,GARCH-Student-t,TRUE
+10,GJR-GARCH-Student-t,TRUE
+10,GJR-GARCH-skewed-t,TRUE
+10,EGARCH-Student-t,TRUE
+10,EGARCH-skewed-t,TRUE
+10,APARCH-Student-t,TRUE
+10,APARCH-skewed-t,TRUE
+20,Rolling 60,FALSE
+20,Rolling 120,TRUE
+20,EWMA 0.94,TRUE
+20,GARCH-normal,TRUE
+20,GARCH-Student-t,TRUE
+20,GJR-GARCH-Student-t,TRUE
+20,GJR-GARCH-skewed-t,TRUE
+20,EGARCH-Student-t,TRUE
+20,EGARCH-skewed-t,TRUE
+20,APARCH-Student-t,TRUE
+20,APARCH-skewed-t,TRUE

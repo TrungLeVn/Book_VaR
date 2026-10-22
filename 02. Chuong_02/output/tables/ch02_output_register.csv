@@ -1,0 +1,25 @@
+type,number,title,section,placement,file,data_type,note
+figure,Hình 2.1,Mô phỏng biến động tỷ lệ sinh lời theo các cửa sổ ước lượng với độ dài khác nhau,2.1,main text,fig_2_1_simulated_returns_rolling_volatility.png,simulation,Đã chỉnh lại numbering để khớp bản Word
+figure,Hình 2.2,Trọng số suy giảm trong trung bình trượt hàm mũ,2.1,main text,fig_2_2_ewma_weights.png,simulation,EWMA weights
+figure,Hình 2.3,Phản ứng của trung bình trượt hàm mũ trước một cú sốc biến động,2.1,main text,fig_2_3_ewma_shock_response.png,simulation,Single shock
+figure,Hình 2.4,"So sánh biến động lịch sử, cửa sổ trượt và trung bình trượt hàm mũ",2.1,main text,fig_2_4_historical_rolling_ewma_comparison.png,simulation,Comparison
+figure,Hình 2.5,Cụm biến động trong chuỗi tỷ suất sinh lời mô phỏng,2.2,main text,fig_2_5_volatility_clustering_simulation.png,simulation,GARCH simulated returns
+figure,Hình 2.6,"Đường phản ứng tin tức của GARCH, GJR-GARCH và EGARCH",2.2,main text,fig_2_6_news_impact_curves.png,simulation,Parameters for illustration only
+figure,Hình A2.2,Độ dai dẳng biến động khi alpha + beta thay đổi,2.2,appendix,fig_A2_2_garch_persistence_alpha_beta.png,simulation,Persistence illustration
+figure,Hình 2.7,So sánh phân phối chuẩn và Student-t chuẩn hóa,2.3,main text,fig_2_7_normal_student_t_density.png,simulation,Standardized t density
+figure,Hình 2.8,Phân vị đuôi trái dưới các giả định phân phối khác nhau,2.3,main text,fig_2_8_left_tail_quantiles.png,simulation,1 percent left tail
+figure,Hình A2.3,Ảnh hưởng của bậc tự do đến độ dày đuôi Student-t,2.3,appendix,fig_A2_3_student_t_degrees_of_freedom.png,simulation,Degrees of freedom
+figure,Hình A2.4,"Minh họa phân phối lệch trái, đối xứng và lệch phải",2.3,appendix,fig_A2_4_left_right_skewed_distributions.png,simulation,Uses sgt package
+figure,Hình A2.4A,Minh họa phân phối SGT khi thay đổi các tham số,2.3,appendix,fig_A2_4A_sgt_parameter_effects.png,simulation,Uses sgt::dsgt
+figure,Hình A2.4B,Minh họa phân phối SGED khi thay đổi các tham số,2.3,appendix,fig_A2_4B_sged_parameter_effects.png,simulation,Uses sgt::dsgt with q = Inf
+figure,Hình A2.5,Minh họa chẩn đoán sai số chuẩn hóa sau khi lọc biến động,2.4,appendix,fig_A2_5_standardized_residual_diagnostics.png,simulation,ACF of z and z squared
+figure,Hình A2.6,Minh họa mô hình phù hợp và mô hình sai đặc tả qua ACF của z^2,2.4,appendix,fig_A2_6_misspecification_acf_squared_residuals.png,simulation,Correct filtering vs constant volatility
+figure,Hình A2.7,Thiết kế dự báo cửa sổ trượt và cửa sổ mở rộng,2.4,appendix,fig_A2_7_rolling_recursive_forecast_windows.png,simulation,Forecast window schematic
+table,Bảng 2.1,Bản đồ trực giác các mô hình ARCH/GARCH,2.2,main text,table_2_1_arch_garch_model_map.docx,author synthesis,Also exported as CSV
+table,Bảng 2.2,So sánh các giả định phân phối của sai số chuẩn hóa z_t,2.3,main text,table_2_2_standardized_error_distributions.docx,author synthesis,Also exported as CSV
+table,Bảng 2.3,Checklist lựa chọn mô hình và chẩn đoán,2.4,main text,table_2_3_model_selection_diagnostic_checklist.docx,author synthesis,Also exported as CSV
+table,Bảng A2.1,Ký hiệu và tham số trong họ mô hình ARCH/GARCH,2.2,appendix,table_A2_1_notation_parameter_register.docx,author synthesis,Also exported as CSV
+table,Bảng A2.2,Phân vị đuôi trái của một số phân phối chuẩn hóa,2.3,appendix,table_A2_2_tail_quantiles.docx,simulation,Also exported as CSV
+table,Bảng A2.3,"Mẫu bảng so sánh log-likelihood, AIC và BIC",2.4,appendix,table_A2_3_model_comparison_template.docx,template,No empirical results inserted
+table,Bảng A2.4,Diễn giải các kiểm định chẩn đoán mô hình GARCH,2.4,appendix,table_A2_4_diagnostic_tests.docx,author synthesis,Also exported as CSV
+table,Bảng A2.5,Tiêu chí đánh giá dự báo biến động,2.4,appendix,table_A2_5_forecast_evaluation_criteria.docx,author synthesis,Use in Chapter 2 appendix or move to Chapter 3

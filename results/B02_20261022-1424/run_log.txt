@@ -1,0 +1,318 @@
+{
+ "python": "3.10.12",
+ "pandas": "2.3.3",
+ "profile": {
+  "XLSX": {
+   "path": "04. Chuong_04/data/raw/vni_data.xlsx",
+   "sha256": "79f69303fa73be87e77fb15b4c4dc4e07c3f486e5d99ed27e92bdef022447cb4",
+   "n": 4082,
+   "start": "2010-01-04",
+   "end": "2026-05-20",
+   "duplicates": 0,
+   "missing": {
+    "open": 0,
+    "high": 0,
+    "low": 0,
+    "close": 0
+   },
+   "weekend_dates": 0,
+   "has_volume": false,
+   "cols": [
+    "date",
+    "close",
+    "open",
+    "high",
+    "low"
+   ]
+  },
+  "CH1": {
+   "path": "01. Chuong_01/data/raw/vnindex.csv",
+   "sha256": "289e0a51aa5714eb567e31dc9699182be9fb236dec2a7617a3daf6662c75d484",
+   "n": 4785,
+   "start": "2007-01-02",
+   "end": "2026-03-19",
+   "duplicates": 0,
+   "missing": {
+    "open": 0,
+    "high": 0,
+    "low": 0,
+    "close": 0
+   },
+   "weekend_dates": 0,
+   "has_volume": true,
+   "cols": [
+    "date",
+    "close",
+    "open",
+    "high",
+    "low",
+    "volume",
+    "chg_pct"
+   ]
+  },
+  "CH3": {
+   "path": "03. Chuong_03/data/raw/vnindex_daily.csv",
+   "sha256": "b23d33a7c506a007ba49ca6f6f2c6d75dab4db33ffaed64805df1c8a4cc6c08e",
+   "n": 4081,
+   "start": "2010-01-05",
+   "end": "2026-05-20",
+   "duplicates": 0,
+   "missing": {
+    "open": 0,
+    "high": 0,
+    "low": 0,
+    "close": 0
+   },
+   "weekend_dates": 0,
+   "has_volume": false,
+   "cols": [
+    "date",
+    "open",
+    "high",
+    "low",
+    "close"
+   ]
+  },
+  "CH4CSV": {
+   "path": "04. Chuong_04/data/raw/VNI.csv",
+   "sha256": "289e0a51aa5714eb567e31dc9699182be9fb236dec2a7617a3daf6662c75d484",
+   "n": 4785,
+   "start": "2007-01-02",
+   "end": "2026-03-19",
+   "duplicates": 0,
+   "missing": {
+    "open": 0,
+    "high": 0,
+    "low": 0,
+    "close": 0
+   },
+   "weekend_dates": 0,
+   "has_volume": true,
+   "cols": [
+    "date",
+    "close",
+    "open",
+    "high",
+    "low",
+    "volume",
+    "chg_pct"
+   ]
+  }
+ },
+ "ch1_vs_ch4csv_identical_bytes": true,
+ "comparison": [
+  {
+   "pair": "XLSX-CH3",
+   "overlap_start": "2010-01-05",
+   "overlap_end": "2026-05-20",
+   "n_both": 4081,
+   "only_a": 0,
+   "only_b": 0,
+   "only_a_dates": "",
+   "only_b_dates": "",
+   "close_maxabs": 0.0,
+   "close_n_gt_0.005": 0,
+   "close_n_gt_0.5": 0,
+   "open_maxabs": 0.0,
+   "open_n_gt_0.005": 0,
+   "open_n_gt_0.5": 0,
+   "high_maxabs": 0.0,
+   "high_n_gt_0.005": 0,
+   "high_n_gt_0.5": 0,
+   "low_maxabs": 0.0,
+   "low_n_gt_0.005": 0,
+   "low_n_gt_0.5": 0
+  },
+  {
+   "pair": "XLSX-CH1",
+   "overlap_start": "2010-01-04",
+   "overlap_end": "2026-03-19",
+   "n_both": 4041,
+   "only_a": 0,
+   "only_b": 0,
+   "only_a_dates": "",
+   "only_b_dates": "",
+   "close_maxabs": 0.0,
+   "close_n_gt_0.005": 0,
+   "close_n_gt_0.5": 0,
+   "open_maxabs": 0.0,
+   "open_n_gt_0.005": 0,
+   "open_n_gt_0.5": 0,
+   "high_maxabs": 0.0,
+   "high_n_gt_0.005": 0,
+   "high_n_gt_0.5": 0,
+   "low_maxabs": 0.0,
+   "low_n_gt_0.005": 0,
+   "low_n_gt_0.5": 0
+  },
+  {
+   "pair": "CH1-CH3",
+   "overlap_start": "2010-01-05",
+   "overlap_end": "2026-03-19",
+   "n_both": 4040,
+   "only_a": 0,
+   "only_b": 0,
+   "only_a_dates": "",
+   "only_b_dates": "",
+   "close_maxabs": 0.0,
+   "close_n_gt_0.005": 0,
+   "close_n_gt_0.5": 0,
+   "open_maxabs": 0.0,
+   "open_n_gt_0.005": 0,
+   "open_n_gt_0.5": 0,
+   "high_maxabs": 0.0,
+   "high_n_gt_0.005": 0,
+   "high_n_gt_0.5": 0,
+   "low_maxabs": 0.0,
+   "low_n_gt_0.005": 0,
+   "low_n_gt_0.5": 0
+  }
+ ],
+ "ohlc_totals": {
+  "XLSX": {
+   "h_lt_maxoc": 0,
+   "l_gt_minoc": 0,
+   "h_lt_l": 0,
+   "zero_range": 0,
+   "open_eq_high": 224,
+   "open_eq_low": 463,
+   "close_eq_high_or_low": 988,
+   "open_eq_prevclose": 1244,
+   "n": 4082
+  },
+  "CH1": {
+   "h_lt_maxoc": 0,
+   "l_gt_minoc": 0,
+   "h_lt_l": 0,
+   "zero_range": 1,
+   "open_eq_high": 408,
+   "open_eq_low": 619,
+   "close_eq_high_or_low": 1382,
+   "open_eq_prevclose": 1204,
+   "n": 4785
+  },
+  "CH3": {
+   "h_lt_maxoc": 0,
+   "l_gt_minoc": 0,
+   "h_lt_l": 0,
+   "zero_range": 0,
+   "open_eq_high": 224,
+   "open_eq_low": 462,
+   "close_eq_high_or_low": 987,
+   "open_eq_prevclose": 1244,
+   "n": 4081
+  }
+ },
+ "sessions_per_year": {
+  "XLSX": {
+   "2010": 250,
+   "2011": 248,
+   "2012": 250,
+   "2013": 250,
+   "2014": 247,
+   "2015": 248,
+   "2016": 251,
+   "2017": 250,
+   "2018": 249,
+   "2019": 250,
+   "2020": 252,
+   "2021": 250,
+   "2022": 249,
+   "2023": 249,
+   "2024": 250,
+   "2025": 249,
+   "2026": 90
+  },
+  "CH1": {
+   "2007": 248,
+   "2008": 245,
+   "2009": 251,
+   "2010": 250,
+   "2011": 248,
+   "2012": 250,
+   "2013": 250,
+   "2014": 247,
+   "2015": 248,
+   "2016": 251,
+   "2017": 250,
+   "2018": 249,
+   "2019": 250,
+   "2020": 252,
+   "2021": 250,
+   "2022": 249,
+   "2023": 249,
+   "2024": 250,
+   "2025": 249,
+   "2026": 49
+  },
+  "CH3": {
+   "2010": 249,
+   "2011": 248,
+   "2012": 250,
+   "2013": 250,
+   "2014": 247,
+   "2015": 248,
+   "2016": 251,
+   "2017": 250,
+   "2018": 249,
+   "2019": 250,
+   "2020": 252,
+   "2021": 250,
+   "2022": 249,
+   "2023": 249,
+   "2024": 250,
+   "2025": 249,
+   "2026": 90
+  }
+ },
+ "return_summary": {
+  "XLSX": {
+   "n": 4081,
+   "min": -6.91,
+   "max": 6.547,
+   "date_min": "2025-04-03",
+   "date_max": "2025-04-10"
+  },
+  "CH1": {
+   "n": 4784,
+   "min": -6.91,
+   "max": 6.547,
+   "date_min": "2025-04-03",
+   "date_max": "2025-04-10"
+  },
+  "CH3": {
+   "n": 4080,
+   "min": -6.91,
+   "max": 6.547,
+   "date_min": "2025-04-03",
+   "date_max": "2025-04-10"
+  }
+ },
+ "ch1_volume": {
+  "n_missing": 0,
+  "by_year_median": {
+   "2007": 8965.0,
+   "2008": 12750.0,
+   "2009": 45760.0,
+   "2010": 45385.0,
+   "2011": 31310.0,
+   "2012": 45855.0,
+   "2013": 61350.0,
+   "2014": 118860.0,
+   "2015": 110180.0,
+   "2016": 125580.0,
+   "2017": 193985.0,
+   "2018": 188940.0,
+   "2019": 178160.0,
+   "2020": 318935.0,
+   "2021": 736670.0,
+   "2022": 660720.0,
+   "2023": 720750.0,
+   "2024": 744990.0,
+   "2025": 856900000.0,
+   "2026": 896280000.0
+  }
+ },
+ "ch1_changepct_mismatch_gt_0.011": 0
+}
+canonical: 13a5fa44f6cbfbb36d94b4a0dc04dd4918c8addf4fe46b18dfff43f015329a40

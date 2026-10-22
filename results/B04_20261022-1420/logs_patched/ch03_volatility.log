@@ -1,0 +1,150 @@
+Warning messages:
+1: In adf.test(daily$ret) : p-value smaller than printed p-value
+2: In kpss.test(daily$ret) : p-value greater than printed p-value
+Warning messages:
+1: In adf.test(daily$ret) : p-value smaller than printed p-value
+2: In adf.test(daily$ret) : p-value smaller than printed p-value
+3: In kpss.test(daily$log_price) : p-value smaller than printed p-value
+4: In kpss.test(daily$log_price) : p-value smaller than printed p-value
+5: In kpss.test(daily$ret) : p-value greater than printed p-value
+6: In kpss.test(daily$ret) : p-value greater than printed p-value
+Warning messages:
+1: In arima(data, order = c(modelinc[2], 0, modelinc[3]), include.mean = modelinc[1],  :
+  possible convergence problem: optim gave code = 1
+2: In arima(data, order = c(modelinc[2], 0, modelinc[3]), include.mean = modelinc[1],  :
+  possible convergence problem: optim gave code = 1
+There were 50 or more warnings (use warnings() to see the first 50)
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.13
+The current MCS p-Value is 0.13
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.16
+The current MCS p-Value is 0.16
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.268
+The current MCS p-Value is 0.268
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.326
+The current MCS p-Value is 0.326
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.31
+The current MCS p-Value is 0.326
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.334
+The current MCS p-Value is 0.334
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.428
+The current MCS p-Value is 0.428
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.381
+The current MCS p-Value is 0.428
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.46
+The current MCS p-Value is 0.46
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.648
+The current MCS p-Value is 0.648
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.46
+The current MCS p-Value is 0.46
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.431
+The current MCS p-Value is 0.46
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.498
+The current MCS p-Value is 0.498
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.468
+The current MCS p-Value is 0.498
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.904
+The current MCS p-Value is 0.904
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.919
+The current MCS p-Value is 0.919
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.949
+The current MCS p-Value is 0.949
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.925
+The current MCS p-Value is 0.949
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.867
+The current MCS p-Value is 0.949
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.632
+The current MCS p-Value is 0.949
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.196
+The current MCS p-Value is 0.196
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.526
+The current MCS p-Value is 0.526
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.723
+The current MCS p-Value is 0.723
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.738
+The current MCS p-Value is 0.738
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.797
+The current MCS p-Value is 0.797
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.905
+The current MCS p-Value is 0.905
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.856
+The current MCS p-Value is 0.905
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.796
+The current MCS p-Value is 0.905
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.996
+The current MCS p-Value is 0.996
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.961
+The current MCS p-Value is 0.996
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.044
+Model Rolling 60 is eliminated from the Superior Set of Models
+The current MCS p-Value is 0.044
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.157
+The current MCS p-Value is 0.157
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.539
+The current MCS p-Value is 0.539
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.562
+The current MCS p-Value is 0.562
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.843
+The current MCS p-Value is 0.843
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.868
+The current MCS p-Value is 0.868
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.852
+The current MCS p-Value is 0.868
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.872
+The current MCS p-Value is 0.872
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.782
+The current MCS p-Value is 0.872
+--------------------------------------------------------
+The current p-Value for H_{0,M_k} is 0.558
+The current MCS p-Value is 0.872
+Warning message:
+Removed 448 rows containing missing values or values outside the scale range
+(`geom_line()`). 
+Warning message:
+Removed 3 rows containing missing values or values outside the scale range
+(`geom_line()`). 
+Warning message:
+Removed 60 rows containing missing values or values outside the scale range
+(`geom_line()`). 
+Warning message:
+Removed 38 rows containing missing values or values outside the scale range
+(`geom_line()`). 
+Chapter 3 completed. See output/RUN_REPORT.md

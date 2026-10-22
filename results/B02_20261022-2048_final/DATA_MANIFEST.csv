@@ -1,0 +1,3 @@
+file,series,role,source,derived_from,sha256,start,end,n_sessions,note
+vnindex_daily_20100104_20260520.csv,VN-Index,chuỗi chính,"Investing.com (raw: 04. Chuong_04/data/raw/vni_data.xlsx, SHA 79f69303…)",results/B02_20261022-1424/vnindex_canonical_20100104_20260520.csv,7c7563691623fe9a85e0ceffe356aa179224e2f07758d6efecd4e663172ff05b,2010-01-04,2026-05-20,4081,bỏ 23/01/2018 (trùng 22/01); thiếu 24/01/2018 — giới hạn V9
+hnxindex_daily_20100104_20260520.csv,HNX-Index,chuỗi đối chứng,"Investing.com (raw: _project/data_incoming/Dữ liệu Lịch sử HNX.csv, SHA de05a611…)",results/B02_20261022-1616_HNX/hnxindex_canonical_20100104_20260520.csv,79c130bed33c9e2123c8a664cc87442502e067ceb580703b5a59360581bc322c,2010-01-04,2026-05-20,4083,cắt tại 20/05/2026

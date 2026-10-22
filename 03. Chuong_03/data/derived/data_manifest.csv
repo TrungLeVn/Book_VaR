@@ -1,0 +1,2 @@
+source_used,generated_at_utc,sample_start,sample_end,price_observations,return_observations,forecast_origins,mean_specification,garch_specifications,qlike_definition
+archive fallback,2026-08-16 00:19:25 UTC,2010-01-06,2026-05-20,4081,4080,50,"ARMA(2,1) selected by lowest BIC among candidates with Ljung-Box p >= 0.05",GARCH-normal; GARCH-Student-t; GJR-GARCH-Student-t; GJR-GARCH-skewed-t; EGARCH-Student-t; EGARCH-skewed-t; APARCH-Student-t; APARCH-skewed-t,mean(actual/forecast - log(actual/forecast) - 1)

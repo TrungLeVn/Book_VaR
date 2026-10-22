@@ -1,0 +1,23 @@
+role,path,mtime,sha256,status
+Đề cương chuẩn (3.1),00. Book/outline_v3.docx,2026-10-22,7fcb6458b8eb1c7991594de543f8f8f2f2a40bbc426f72774a0de4d9183ce9c4,verified
+Đề cương cũ (lịch sử),00. Book/outline.docx,2026-08-14,ccb7c9b23c87d8a16a8ec8fd1257ac4a963a6e78a1dff6635d84155aa4c68109,supplied
+Chương 1 – nguồn,01. Chuong_01/chapter.md,2026-08-15,f5355c8213fb616dbef5621df26497455ea1770c5d7043f321c7ab618b02b283,verified
+Chương 2 – nguồn,02. Chuong_02/chapter.md,2026-08-15,ac8d466402d4ccac2b68155c491de8c0bcd3ea323c8e9c1152d0a693ad35e129,verified
+Chương 3 – nguồn,03. Chuong_03/chapter.md,2026-08-16,2c6e42298c5164a46c54df91d9bd4c66fd658a48f9016362d6dcfe7477fe39bc,verified
+Chương 4 – nguồn,04. Chuong_04/chapter.md,2026-08-14,0b68c142217c9036fab2abc405b39acad48bcd62b61e470eae26408d4ee6a7a5,verified
+Chương 5 – nguồn,05. Chuong_05/chapter.md,2026-08-14,53236b2607562d225cf330b71430a17fa2f30dc1138ba68f0e80fd0bd700fc97,verified
+Chương 6 – khung,06. Chuong_06/chapter.md,2026-08-14,d521f696a7d9563465d5b77def7d73bfecd1f32c16c4e48e32255575c8b8329a,verified
+"VN-Index – bản chuẩn (2010-01-04 → 2026-05-20, OHLC)",04. Chuong_04/data/raw/vni_data.xlsx,2026-06-12,79f69303fa73be87e77fb15b4c4dc4e07c3f486e5d99ed27e92bdef022447cb4,supplied
+"VN-Index – Ch1 (2007 → 2026-03, có khối lượng)",01. Chuong_01/data/raw/vnindex.csv,2026-06-20,289e0a51aa5714eb567e31dc9699182be9fb236dec2a7617a3daf6662c75d484,supplied
+"VN-Index – Ch3 (archive fallback, đến 2026-05-20)",03. Chuong_03/data/raw/vnindex_daily.csv,2026-08-16,b23d33a7c506a007ba49ca6f6f2c6d75dab4db33ffaed64805df1c8a4cc6c08e,supplied
+Ch5 – kết quả cũ (không có code),05. Chuong_05/data/derived/ch07_backtesting_summary.csv,2026-06-12,175057a155ca5b05d1a48f701f51199c26bb56ec3c9ddf238acd2bb2a8dba087,supplied
+Bib Ch1,01. Chuong_01/references/bibliography.bib,2026-06-12,7d4168dc7cbec2f68ba1c270277c19b5b9b8acedc5e131d827d46fa080e50ad0,supplied
+Bib Ch2,02. Chuong_02/references/bibliography.bib,2026-06-12,5029cace118a244a4b6f1dbc34d6138ce52a4bfac9308587ce7171edd20f07fb,supplied
+Bib Ch3,03. Chuong_03/references/bibliography.bib,2026-08-16,e85bed98ab6a33a029a5a974e4f582579643ababdd6f38502235f805eb203632,supplied
+Pipeline Ch3,03. Chuong_03/code/R/run_chapter03_volatility.R,2026-08-16,bd58c52349625e1a15faead82c201957b8bde6caaffd8df03715ecd3652b2b63,supplied
+Script Ch2,02. Chuong_02/code/R/ch02_all_tables_figures_appendix.R,2026-08-14,c30766ef52025d2e58665b090f9f7c8ce5728a01b068cb273d55c3e83832625c,supplied
+Môi trường R,renv.lock,2026-05-22,5539d874652d693a0d2b9d9fe8cb5118e5eb20cfd646e9bbc61f43f82d2b86cd,supplied
+Kiểu trích dẫn,_project/apa.csl,2026-05-22,258a4e3a4ba8ea1862ca43b380d46cfda4b69a674c7bd73b5ab298c3a700a6cd,supplied
+Đề cương chuẩn (3.2),00. Book/outline_v3.2.docx,2026-10-22,93fcabb82666c7b0c7d37c36306a568c5e43e0c54e6880eeff99622a64be319b,verified
+"VN-Index – tệp chuẩn sách (B02 chốt)",_project/data/vnindex_daily_20100104_20260520.csv,2026-10-22,7c7563691623fe9a85e0ceffe356aa179224e2f07758d6efecd4e663172ff05b,verified
+"HNX-Index – tệp chuẩn sách (B02 chốt)",_project/data/hnxindex_daily_20100104_20260520.csv,2026-10-22,79c130bed33c9e2123c8a664cc87442502e067ceb580703b5a59360581bc322c,verified

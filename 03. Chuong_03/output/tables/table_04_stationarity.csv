@@ -1,0 +1,5 @@
+test,series,statistic,p_value
+ADF,log_price,-3.0916192114689833,0.116099711171703
+ADF,log_return,-16.281728221756847,0.01
+KPSS,log_price,34.32422375798605,0.01
+KPSS,log_return,0.1071314271376449,0.1

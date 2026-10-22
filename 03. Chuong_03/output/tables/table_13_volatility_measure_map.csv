@@ -1,0 +1,6 @@
+measure,data_required,chapter_role
+Historical,Close,Benchmark
+Rolling,Close,Dynamic benchmark
+EWMA,Close,RiskMetrics benchmark
+GARCH-type,Close,Main models
+Garman-Klass,OHLC,Supplementary proxy

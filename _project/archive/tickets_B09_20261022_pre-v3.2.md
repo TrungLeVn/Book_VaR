@@ -1,0 +1,18 @@
+# B09 — Mở đầu
+
+- **Chủ trì:** var-chapter-writer · **Mốc:** M2 · **Nơi làm:** Cowork · **Điểm duyệt:** — · **Làn:** L6
+- **Phụ thuộc:** C06-M2
+- **Trạng thái:** Chưa làm
+
+## Việc cần làm
+1. Xem card var-chapter-writer → B09
+
+## Đầu ra + tiêu chí nghiệm thu
+- Đầu ra: chapters/drafts/B09_mo-dau.md
+- Tiêu chí: Bốn mục theo đề cương 3.1; chỉ dùng kết quả đã kiểm
+
+## Dừng và báo Lead nếu
+Đầu vào khác phiên bản ghi trong ticket; việc cần ngoài tập ghi của card.
+
+## Giao việc (prompt mẫu)
+> Read your role card `team/agents/var-chapter-writer.md` first and follow it; it narrows, never widens, your base rules. Ticket `tickets/B09.md`. Gốc dự án `02. Drafts/`. Trả về theo mục Return to the Lead.

@@ -1,0 +1,7 @@
+Khái niệm,Ký hiệu gợi ý,Cách hiểu ngắn,Vai trò trong cuốn sách
+Tỷ lệ sinh lời,r_t hoặc R_t,Mức thay đổi tương đối của giá trị đầu tư qua một kỳ,Dữ liệu đầu vào cơ sở cho toàn bộ phân tích
+Lãi/lỗ vị thế,P&L_t,Giá trị lãi hoặc lỗ bằng tiền của một vị thế đầu tư,Cầu nối giữa return và quản trị danh mục
+Tổn thất,L_t = -P&L_t,Cách viết lại P&L để giá trị dương phản ánh mức lỗ,"Nền tảng để định nghĩa phân phối tổn thất, VaR và ES"
+Volatility,sigma_t,Thước đo quy mô dao động của tỷ lệ sinh lời,Cầu nối từ phân phối return sang mô hình rủi ro động
+Value-at-Risk,"VaR_alpha,t",Ngưỡng tổn thất tại một mức xác suất đuôi cho trước,Thước đo phân vị của rủi ro đuôi
+Expected Shortfall,"ES_alpha,t",Tổn thất trung bình khi đã vượt qua ngưỡng VaR,Thước đo độ nghiêm trọng của rủi ro đuôi

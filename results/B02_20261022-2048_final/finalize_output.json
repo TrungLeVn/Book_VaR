@@ -1,0 +1,57 @@
+{
+ "inputs": {
+  "VNI": {
+   "path": "results/B02_20261022-1424/vnindex_canonical_20100104_20260520.csv",
+   "sha256": "13a5fa44f6cbfbb36d94b4a0dc04dd4918c8addf4fe46b18dfff43f015329a40"
+  },
+  "HNX": {
+   "path": "results/B02_20261022-1616_HNX/hnxindex_canonical_20100104_20260520.csv",
+   "sha256": "79c130bed33c9e2123c8a664cc87442502e067ceb580703b5a59360581bc322c"
+  }
+ },
+ "dropped_vni": [
+  "2018-01-23"
+ ],
+ "missing_vni_not_filled": [
+  "2018-01-23",
+  "2018-01-24"
+ ],
+ "VNI": {
+  "n": 4081,
+  "start": "2010-01-04",
+  "end": "2026-05-20",
+  "dup_dates": 0,
+  "na": 0,
+  "weekend": 0,
+  "sorted": true,
+  "ohlc_viol": 0,
+  "dup_ohlc_rows": 0,
+  "n_returns": 4080,
+  "r_min": -6.91,
+  "r_max": 6.547
+ },
+ "HNX": {
+  "n": 4083,
+  "start": "2010-01-04",
+  "end": "2026-05-20",
+  "dup_dates": 0,
+  "na": 0,
+  "weekend": 0,
+  "sorted": true,
+  "ohlc_viol": 0,
+  "dup_ohlc_rows": 0,
+  "n_returns": 4082,
+  "r_min": -8.376,
+  "r_max": 7.856
+ },
+ "calendar_symmetric_diff": [
+  "2018-01-23",
+  "2018-01-24"
+ ],
+ "common_sessions": 4081,
+ "vni_r_20180125_spans": [
+  "2018-01-22",
+  "2018-01-25",
+  1.565
+ ]
+}

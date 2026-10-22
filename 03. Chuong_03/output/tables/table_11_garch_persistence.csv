@@ -1,0 +1,9 @@
+model,persistence,persistence_note,half_life_days
+GARCH-normal,0.9542748609504901,model persistence,14.809718606155897
+GARCH-Student-t,0.9684347206483832,model persistence,21.610738858242723
+GJR-GARCH-Student-t,0.9442928170081821,model persistence,12.092805211397941
+GJR-GARCH-skewed-t,0.948795303355805,model persistence,13.187179560351664
+EGARCH-Student-t,0.940688581028401,model persistence,11.336467071385629
+EGARCH-skewed-t,0.9446897839451417,model persistence,12.182131908215425
+APARCH-Student-t,1.1630796497053002,persistence proxy in power-volatility model,
+APARCH-skewed-t,1.1687933289045436,persistence proxy in power-volatility model,
