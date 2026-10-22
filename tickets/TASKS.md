@@ -214,14 +214,6 @@ Thứ tự (từ 22/10/2026): chương mô hình hóa Ch2–Ch5 chạy thực ng
     - Làn: L4
     - Điểm duyệt: Delivery
     - Chi tiết: tickets/C04-M6.md
-- [ ] **C05-D1 — Thiết kế thực nghiệm Chương 5** - Lead (+ var-reproduction-analyst, var-monograph-reviewer), —
-    - Đầu ra + tiêu chí: design/C05-D1_design.md; Mọi lựa chọn có lý do, định trước khi xem kết quả; tác giả duyệt
-    - Phụ thuộc: C03-D1 (quy tắc chung), B02; soạn song song, duyệt chung gói Design với C03-D1
-    - Nơi làm: Either
-    - Làn: L5
-    - Điểm duyệt: Design
-    - Chi tiết: tickets/C05-D1.md
-    - Trạng thái: Sẵn sàng — đợt A mở 22/10/2026 (brief: tickets/LANES.md mục 9)
 - [ ] **C05-M3a — Ch5 cấu phần a: VaR và ES với VN-Index, so sánh nhóm phương pháp (5.2–5.5)** - var-reproduction-analyst, M3
     - Đầu ra + tiêu chí: analysis/ch05/a_backtest/; results/C05-M3a_<ts>/; đối chiếu ch07_* cũ (reported vs executed); kiểm định ngược VaR/ES, hàm điểm, MCS; mọi số có run hoặc nhãn; reported vs executed
     - Phụ thuộc: C05-D1, B02, B04 (mô hình có điều kiện: analysis/common/ đã khoá từ C03-M3b)
@@ -324,6 +316,15 @@ Thứ tự (từ 22/10/2026): chương mô hình hóa Ch2–Ch5 chạy thực ng
     - Làn: L0
     - Cần quyết định: (a) clone lại ngoài Drive — khuyến nghị; (b) tạm không dùng git, dựa vào manifest SHA; (c) sửa repo tại chỗ (rủi ro do Drive đồng bộ .git)
     - Chi tiết: tickets/B06.md
+- [ ] **C05-D1 — Thiết kế thực nghiệm Chương 5** since 2026-10-22 - Lead (+ var-reproduction-analyst, var-monograph-reviewer), —
+    - Đầu ra + tiêu chí: design/C05-D1_design.md; Mọi lựa chọn có lý do, định trước khi xem kết quả; tác giả duyệt
+    - Phụ thuộc: C03-D1 (quy tắc chung), B02; soạn song song, duyệt chung gói Design với C03-D1
+    - Nơi làm: Either
+    - Làn: L5
+    - Điểm duyệt: Design
+    - Chi tiết: tickets/C05-D1.md
+    - Trạng thái: nháp 1 xong 22/10/2026 (design/C05-D1_design.md, SHA f1c1ed73…) — chờ khớp C03-D1 (mục 12, K1–K10) và duyệt Design gói chung (L3 gộp)
+    - Cần quyết định: (1) đoạn 2007–2009: không dùng — khuyến nghị | R8 mô tả (L0 mở rộng hợp đồng dữ liệu); (2) lưới GARCH 4 × 3 = 12 đặc tả trong bộ chung (thêm 4 so với Ch3) — khuyến nghị | giữ 8 (5.6.2 không cân đối); (3) cửa sổ chính W = 1.250 chung với Ch3 — khuyến nghị | W = 500 như bài cũ
 
 ## Someday
 - [ ] **B07 — Quy tắc chọn chỉ số ngành** - Lead + var-reproduction-analyst, —
