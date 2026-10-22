@@ -15,6 +15,10 @@ Tác giả mở nhiều phiên song song (Cowork, Claude Code theo làn). Phiên
 - **Mỗi prompt tự đủ**, gồm: dự án + gốc `02. Drafts/`; làn và vai trò; thứ tự đọc (`PROJECT.md` → `tickets/LANES.md` → mục ticket trong `tickets/TASKS.md` → `tickets/<mã>.md` → 10 dòng cuối `LOG.md` → card agent); đầu vào có SHA nếu ticket cần dữ liệu/kết quả; tập ghi; điểm dừng (điểm duyệt, `Cần quyết định`, phụ thuộc chưa Done); cách cập nhật (Edit mục ticket trong TASKS.md, thêm dòng LOG tiền tố `[Lx]`).
 - **Cowork:** không tự đọc tệp này, nên prompt Cowork phải tự nêu đủ các ý trên và thêm "bước cần chạy R ghi NOT RUN, chuyển sang Code". **Code:** dùng mẫu `tickets/LANES.md` mục 7/9, điền mã làn và ticket.
 - Prompt giống hệt lần trước → ghi "như phản hồi trước" thay vì lặp lại.
+- **Trong Claude Code:** dựng bằng skill `/lane-handoff` (`.claude/skills/lane-handoff/`; script `ready_tickets.py` đọc TASKS.md, chỉ đọc).
+
+## Tự động hóa Claude Code (`.claude/`, từ 22/10/2026)
+- Hook `protect_sources.py` (PreToolUse: Edit, Write, Bash) chặn ghi nguồn chỉ đọc, ghi đè `archive/`, Write cả tệp/lệnh shell ghi lên `tickets/TASKS.md`, `LOG.md`, `CHAPTERS.md`, và `git` ghi khi dự án nằm trong Drive (B06); hỏi trước khi ghi `_project/data/`, `renv.lock`. Bị chặn → làm theo lý do hook nêu, không tìm cách vòng. Chi tiết, giới hạn: `.claude/README.md`.
 
 ## Đội agent (role card trên agent gốc của plugin lht-academic-suite)
 | Card (`team/agents/`) | Agent gốc | Ghi vào |
