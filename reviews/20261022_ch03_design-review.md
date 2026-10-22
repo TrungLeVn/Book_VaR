@@ -140,3 +140,39 @@ Kiểm DOI/trang: Patton (2011) — dạng QLIKE và kết quả thước đo ch
 ---
 **Verdict:** Sẵn sàng sau khi sửa — 5 Major (M1–M5) chặn trình duyệt; sửa được trên giấy, không cần chạy.
 **Suggested next task:** C03-D1 v2 — L3 sửa M1–M4 và m1–m15 trong `design/C03-D1_design.md`, rồi gộp với C05-D1 thành gói Design (M5); reviewer recheck chỉ các Major.
+
+---
+
+## Vòng 2 (recheck v2, 22/10/2026)
+
+- **Đối tượng:** `design/C03-D1_design.md` v2 (22/10/2026; v1 = git `c84eebc` theo đầu bản v2). Chế độ recheck: chỉ kiểm M1–M5, tìm Major mới do sửa đổi v2 gây ra, kiểm nhanh m1–m15. Không đọc lại toàn bộ thiết kế ngoài các mục liên quan; không chạy R; không sửa tệp nào ngoài mục này.
+- **Ghi chú quy trình:** phiên review không có công cụ Edit; mục này được nối vào bằng cách ghi lại tệp với nguyên văn vòng 1 ở trên (không đổi chữ nào của vòng 1).
+- **Nhãn bằng chứng:** đối chiếu văn bản v2 ↔ yêu cầu vòng 1 (*checked against text*); số học kiểm tay (*computed*); không có *executed*.
+
+### R2.1. Trạng thái Major
+| # | Trạng thái | Vị trí v2 | Lý do (một dòng) |
+|---|---|---|---|
+| M1 | **resolved** | 5.2 (họ F2–F4), 5.3, 9; 0 dòng 9 | Mỗi giả thuyết có $H_0$/$H_1$ cùng chiều, quy tắc "ủng hộ / không ủng hộ / lẫn lộn" định trước theo MCS 10% QLIKE ở $h$ = 1 và 10; DM chỉ bổ trợ với Holm theo họ (F3 = 9, F4 = 8 cặp — đếm đúng); H5 có kiểm định Wald kiểu Giacomini–White với HAC + Holm trên 18 cặp; EWMA 0,94 biện minh bằng chuẩn RiskMetrics (3.3). |
+| M2 | **resolved** | 5.2 (DM chính/phụ), MZ cùng độ trễ | Chính: Newey–West Bartlett, trễ $\max(h-1,\lfloor 4(n/100)^{2/9}\rfloor)$, $N(0,1)$, không nhân HLN — kiểm tay $4\cdot 28{,}3^{2/9} \approx 8{,}4$ → 8, khớp; phụ: HLN chuẩn chỉ đối chiếu. Thiếu câu xử lý phương sai âm ở bản phụ (xem r2-m3) — không chặn vì bản phụ không dùng kết luận. |
+| M3 | **resolved** | 6.2; 10 điểm 2 | (a) Bỏ phương án lai: tam phân vị trên điểm ngoài mẫu, nêu rõ là phân loại phục vụ đánh giá, ≈ 943 điểm/ô (2.830/3 — khớp), cỡ ô tối thiểu định trước; phương án ex-ante đưa tác giả chọn. (b) Chỉ báo đổi sang Parkinson 20 phiên đến $t$ — không trùng dự báo của mô hình nào (mọi mô hình chỉ dùng giá đóng cửa), đo được tại $t$. |
+| M4 | **resolved** (chờ L5 xác nhận) | 4.1 (a), (b); 12.2 | Lưu $\hat\Theta$ đầy đủ + log-likelihood + cờ hội tụ + solver theo mỗi lần ước lượng; $\hat\mu_{t+j\mid t}$, $\hat\sigma^2_{t+j\mid t}$ với $j$ = 1..20; $z_t$ lọc; mã lần ước lượng, cờ tham số cũ. Điều kiện "L5 xác nhận lược đồ trước C03-M3b" được ghi ở 4.1 và 12.2. Một chi tiết tái dựng $z$ còn thiếu (r2-m2), không chặn. |
+| M5 | **not resolved — điểm dừng đã khai báo rõ** | Đầu bản (Trạng thái), 10 điểm 3, 12.5, 13 | Chưa có `design/C05-D1_design.md`; v2 ghi rõ là điểm dừng, khuyến nghị chờ gộp gói (10.3 lựa chọn a), phương án duyệt tách được nêu cùng hệ quả. Đúng yêu cầu vòng 1. |
+
+### R2.2. Major mới do sửa đổi v2
+Không thấy. Đã kiểm riêng: không có nhìn trước mới trong dự báo (chỉ báo Parkinson và $c$ của R3b đều dùng thông tin đến $t$ hoặc cửa sổ ước lượng đầu); bảng 0, 5.3, 6, 7, 10 nhất quán với nhau về quy tắc chính (MCS 10% QLIKE, $h$ = 1 và 10; quy tắc B chính cho H5, A phụ); đếm họ Holm, $n$, cỡ ô, độ trễ đúng.
+
+### R2.3. Minor mới (không chặn; sửa khi tiện, hoặc L3b ghi trong README run)
+| # | Vị trí | Vấn đề | Cách sửa |
+|---|---|---|---|
+| r2-m1 | 5.2–5.3 | Tập ứng viên của MCS không được ghi tường minh. Tư cách thành viên MCS phụ thuộc tập ứng viên, nên quy tắc H2–H4 chỉ xác định khi tập này cố định. Văn bản (mục 4 "mọi mô hình", 3.3 "19 mô hình") ngụ ý 19 mô hình theo từng chuỗi × kỳ × hàm tổn thất. | Ghi một câu ở 5.2: MCS chạy trên đủ 19 mô hình cho mỗi chuỗi × kỳ × hàm; không chạy MCS con theo nhóm. |
+| r2-m2 | 4.1 (b) | Muốn tái dựng $z$ của cả cửa sổ từ bảng (a) + dữ liệu (cho mô phỏng lịch sử có lọc) thì cần quy ước khởi tạo đệ quy phương sai của bộ lọc (giá trị $\sigma^2_0$ / cách rugarch khởi tạo). Thiếu trường này thì $z$ tái dựng có thể lệch ở đầu cửa sổ. | Thêm vào bảng (a): quy ước khởi tạo phương sai (và phiên bản rugarch); hoặc L5 xác nhận chấp nhận sai lệch đầu cửa sổ. |
+| r2-m3 | 5.2 (DM phụ) | Chưa nêu cách xử lý khi phương sai nhân chữ nhật ước lượng âm (yêu cầu của M2 vòng 1). `forecast::dm.test` có cơ chế tự xử lý khi $h$ > 1 — *chưa kiểm trong dự án*, người review nêu theo hiểu biết về gói. | Ghi: dùng đúng hành vi của `forecast::dm.test` (phiên bản theo `renv.lock`) và báo số trường hợp xảy ra. |
+| r2-m4 | 5.3 (H5); 6.2 | Ngưỡng tam phân vị lấy từ toàn bộ điểm ngoài mẫu, nên biến giả trạng thái không hoàn toàn đo được tại $t$ theo nghĩa chặt của Giacomini–White. Không phải nhìn trước trong dự báo (chỉ phân loại khâu đánh giá), và v2 đã ghi là "kiểu Giacomini–White". | Thêm một câu: kiểm định có điều kiện trên ngưỡng đã ước lượng; phương án ex-ante (10.2 b) tránh được điểm này. |
+| r2-m5 | 5.3 (H3, H4) | Ngưỡng "ủng hộ" khác nhau (≥ 2/3 phân phối cho H3, ≥ 3/4 phương trình cho H4) chưa có lý do. Đã định trước nên không phải lỗi hợp lệ. | Một dòng lý do (vd. "đa số rõ ràng" trên mỗi chiều) để tác giả duyệt có ý thức. |
+
+### R2.4. Kiểm nhanh m1–m15 (theo mục 13 của v2)
+Đã thấy trong văn bản v2: m1 (5.1), m2 (2 ghi chú, R3b), m3 (3.1, bỏ hệ số toàn mẫu), m4 (5.2, hỗn hợp $\tfrac12\chi^2_0+\tfrac12\chi^2_1$), m5 (2, R4), m6 (R5 ghi rõ, R5b, đoạn khâu ước lượng), m7 (5.2 MZ), m8 ($T_R$ chính có lý do, $T_{\max}$ phụ; R7 = khối 20), m9 (0, 5.1), m10 (6, 6.1 G6 ≈ 840, 6.3), m11 (4), m12 (3.2), m13 (3.3), m14 (12.1), m15 (5.3 H1) — **đều resolved**. n1–n7 cũng được xử lý theo mục 13. Lưu ý nhỏ: với $h$ = 20, R7 (khối 20) trùng cấu hình chính $\max(h,5)$ = 20 — không ảnh hưởng vì kỳ chính là 1 và 10.
+
+### R2.5. Verdict vòng 2
+**Sẵn sàng trình tác giả duyệt như một phần của gói Design chung** (cùng `design/C05-D1_design.md`). M1–M4 resolved; không có Major mới. Điều kiện còn lại không thuộc C03-D1: M5 (chờ C05-D1, L3 gộp gói) và L5 xác nhận lược đồ 4.1 trước C03-M3b. Năm Minor r2-m1…r2-m5 không chặn.
+**Suggested next task:** C05-D1 — L5 hoàn tất `design/C05-D1_design.md`, xác nhận lược đồ 4.1 (kèm r2-m2), rồi L3 gộp gói Design trình tác giả.

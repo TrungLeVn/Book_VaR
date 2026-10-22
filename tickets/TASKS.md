@@ -113,7 +113,7 @@ Thứ tự (từ 22/10/2026): chương mô hình hóa Ch2–Ch5 chạy thực ng
     - Làn: L3
     - Điểm duyệt: Design
     - Chi tiết: tickets/C03-D1.md
-    - Trạng thái: Đang làm (từ 22/10/2026) — L3, Claude Code
+    - Trạng thái: Đang làm (từ 22/10/2026) — L3, Claude Code. Bản thiết kế v2 xong (design/C03-D1_design.md, SHA 01d7eca1…); review độc lập 2 vòng: M1–M4 đã xử lý, không có Major mới (reviews/20261022_ch03_design-review.md). **Dừng ở điểm duyệt Design**: chờ design/C05-D1_design.md, L5 xác nhận lược đồ bộ dự báo dùng chung (mục 4.1), sau đó L3 gộp gói trình tác giả. Cần tác giả quyết: thiết kế ngoài mẫu; ngưỡng quy tắc B; trình gói chung hay duyệt tách (mục 10)
 - [ ] **C03-M3a — Ch3 cấu phần a: dữ liệu, đặc điểm thống kê, ước lượng trong mẫu (3.2–3.4)** - var-reproduction-analyst, M3
     - Đầu ra + tiêu chí: analysis/ch03/a_insample/; results/C03-M3a_<ts>/; tái tạo pipeline cũ + dữ liệu chuẩn; thống kê VN-Index và HNX-Index; ước lượng trong mẫu VN-Index; mọi số có run hoặc nhãn; reported vs executed
     - Phụ thuộc: C03-D1, B02, B04

@@ -1,7 +1,7 @@
 # C03-D1 — Thiết kế thực nghiệm Chương 3 (bản trình duyệt)
 
 - **Làn:** L3 (Lead Chương 3) · **Ticket:** `tickets/C03-D1.md` · **Điểm duyệt:** Design (gói chung với C05-D1) · **Trạng thái:** chờ gộp với C05-D1 rồi trình tác giả.
-- **Phiên bản:** **v2, 22/10/2026**. Bản này sửa v1 (git `c84eebc`) theo review độc lập `reviews/20261022_ch03_design-review.md`: xử lý 4 Major M1–M4 và 15 Minor m1–m15. M5 (chưa có C05-D1 để gộp gói) là điểm dừng, xem mục 10, 12. Bảng đối chiếu sửa đổi ở mục 13.
+- **Phiên bản:** **v2, 22/10/2026** (thêm 5 Minor của review vòng 2, xem mục 13). Bản này sửa v1 (git `c84eebc`) theo review độc lập `reviews/20261022_ch03_design-review.md`: xử lý 4 Major M1–M4 và 15 Minor m1–m15. M5 (chưa có C05-D1 để gộp gói) là điểm dừng, xem mục 10, 12. Bảng đối chiếu sửa đổi ở mục 13.
 - **Phạm vi:** chỉ thiết kế, **không chạy mô hình**. Đã đọc: `03. Chuong_03/chapter.md` (SHA `2c6e42298c5164a4…`, 711 dòng; 3.7 cũ "Thiết kế dự báo", bảng 3.14, giả thuyết H1–H5 ở 3.3.6), `code/R/run_chapter03_volatility.R` (SHA `bd58c52349625e1a…`), output cũ trong `03. Chuong_03/output/`. Đã làm thống kê mô tả dữ liệu (đếm phiên, giá mở cửa, khoảng trống lịch) ở mục 1.3.
 - **Khai báo trước khi xem kết quả:** kết quả cũ của Ch3 (50 điểm dự báo, dữ liệu "archive fallback") đã có, tác giả và agent đã xem. Các lựa chọn dưới đây **không** dựa vào thứ hạng mô hình trong kết quả cũ. Lý do của từng lựa chọn là lý do phương pháp hoặc dữ liệu. Sau khi duyệt, đổi đặc tả phải mở ticket mới. Kết quả bất lợi được giữ.
 - **Căn cứ:** đề cương 3.2 (`00. Book/architecture.md`, SHA docx `93fcabb8…`); `00. Book/glossary.md`, `notation.md` (chốt 22/10/2026); hợp đồng dữ liệu v2 (`results/B02_20261022-1616_HNX/data_contract.md`) và v2.1 (`_project/data/README.md`); dữ kiện thể chế từ `context/vn_market_facts.md`.
@@ -130,7 +130,7 @@ Ghi chú phương pháp, đưa vào 3.2.2:
 ### 4.1. Bộ dự báo dùng chung Ch3 ↔ Ch5 (`analysis/common/`, làn L3b). Khuyến nghị: **có**
 Một lần ước lượng trượt cho 12 mô hình GARCH × 2 chuỗi. Lưu hai bảng cho mỗi chuỗi (parquet hoặc csv.gz, có SHA trong README):
 
-**(a) Bảng theo lần ước lượng** (khoảng 142 dòng × 12 mô hình): ngày ước lượng; cửa sổ (đầu, cuối); **toàn bộ véc-tơ tham số** $\hat\Theta$ ($\phi_0, \phi_1, \omega, \alpha_1, \beta_1, \gamma_1, \delta, \nu, \eta$, tùy mô hình); log-likelihood; cờ hội tụ; solver đã dùng.
+**(a) Bảng theo lần ước lượng** (khoảng 142 dòng × 12 mô hình): ngày ước lượng; cửa sổ (đầu, cuối); **toàn bộ véc-tơ tham số** $\hat\Theta$ ($\phi_0, \phi_1, \omega, \alpha_1, \beta_1, \gamma_1, \delta, \nu, \eta$, tùy mô hình); log-likelihood; cờ hội tụ; solver đã dùng; **quy ước khởi tạo bộ lọc** (định trước: phương sai khởi đầu = trung bình $\hat\varepsilon^2$ trên cả cửa sổ ước lượng, tức mặc định `recursion.init` của rugarch; lưu giá trị $\hat\sigma^2_0$ để Ch5 dựng lại đúng $z$ ở đầu cửa sổ).
 
 **(b) Bảng theo điểm dự báo $t$** (khoảng 2.830 dòng × 12 mô hình):
 - $\hat\mu_{t+j\mid t}$ và $\hat\sigma^2_{t+j\mid t}$ với $j$ = 1..20;
@@ -158,9 +158,9 @@ Lý do và điều kiện:
 ### 5.2. Kiểm định
 | Kiểm định | Đặc tả định trước | Vai trò |
 |---|---|---|
-| Bộ tin cậy mô hình (MCS) | Mức 10%. Báo **cả hai thống kê $T_R$ và $T_{\max}$**: $T_R$ là chính (như code cũ, giữ để đối chiếu), $T_{\max}$ là phụ. Bootstrap khối, độ dài khối $\max(h, 5)$, $B$ = 5.000. Chạy trên QLIKE (chính) và MSE | **Quy tắc quyết định chính** (mục 5.3) |
+| Bộ tin cậy mô hình (MCS) | Tập khởi đầu: **cả 19 mô hình** (12 GARCH + 7 đối chứng). Mức 10%. Báo **cả hai thống kê $T_R$ và $T_{\max}$**: $T_R$ là chính (như code cũ, giữ để đối chiếu), $T_{\max}$ là phụ. Bootstrap khối, độ dài khối $\max(h, 5)$, $B$ = 5.000. Chạy trên QLIKE (chính) và MSE | **Quy tắc quyết định chính** (mục 5.3) |
 | Diebold–Mariano (chính) | $d_t$ trên QLIKE và MSE. Phương sai Newey–West nhân Bartlett, độ trễ $\max(h-1, \lfloor 4(n/100)^{2/9}\rfloor)$; với $n$ ≈ 2.830 thì độ trễ là $\max(h-1, 8)$. So với phân phối chuẩn. **Không** nhân hệ số HLN | Đọc kèm MCS; giá trị $p$ hiệu chỉnh Holm trong từng họ |
-| Diebold–Mariano (phụ) | Dạng Harvey–Leybourne–Newbold chuẩn (nhân chữ nhật, đúng $h-1$ độ trễ, phân phối $t_{n-1}$), tức `forecast::dm.test` như code cũ | Đối chiếu với code cũ; không dùng để kết luận |
+| Diebold–Mariano (phụ) | Dạng Harvey–Leybourne–Newbold chuẩn (nhân chữ nhật, đúng $h-1$ độ trễ, phân phối $t_{n-1}$), tức `forecast::dm.test` như code cũ. Nhân chữ nhật có thể cho phương sai ước lượng ≤ 0: khi đó ghi NA kèm cờ, không thay bằng cách khác (bản chính dùng nhân Bartlett nên luôn dương) | Đối chiếu với code cũ; không dùng để kết luận |
 | Mincer–Zarnowitz | $\tilde\sigma^2_{t,h} = a + b\,\hat\sigma^2_{t,h} + u$; kiểm định Wald $a = 0, b = 1$ với HAC (cùng độ trễ như DM chính); báo $R^2$. **Phụ:** bản có trọng số $1/\hat\sigma^2_{t,h}$ (ít bị phiên cực trị chi phối) `[Missing Citation]` đến C03-M4 | Kiểm độ chệch (3.5.1) |
 | Trong mẫu (H4) | Student-t lệch so với Student-t: kiểm định tỷ lệ hợp lý $\chi^2_1$ (tham số độ lệch nằm trong miền). Chuẩn so với Student-t: $1/\nu = 0$ nằm trên biên, phân phối giới hạn là $\tfrac12\chi^2_0 + \tfrac12\chi^2_1$. Báo kèm AIC/BIC | 3.4.1 |
 
@@ -180,6 +180,8 @@ Lý do và điều kiện:
 | H4 | Phân phối đuôi dày không cải thiện so với chuẩn cùng phương trình phương sai | Đuôi dày cải thiện | Ở ≥ 3/4 phương trình, mô hình chuẩn bị loại khỏi MCS 10% trong khi ≥ 1 mô hình đuôi dày cùng phương trình được giữ | Ở cả 4 phương trình, mô hình chuẩn được giữ | Họ F4; trong mẫu: kiểm định tỷ lệ hợp lý (5.2), AIC/BIC |
 | H5 | Chênh lệch tổn thất không phụ thuộc giai đoạn | Thứ hạng hoặc chênh lệch tổn thất thay đổi theo giai đoạn | Với quy tắc B: hồi quy $d_t = c + \sum_k \delta_k D_{k,t} + u_t$ (sai số HAC như DM chính, kiểm định Wald $\delta = 0$, kiểu Giacomini–White) cho 18 cặp (mỗi mô hình so với EWMA 0,94) bác bỏ ở ≥ 1 cặp sau Holm | Không cặp nào bác bỏ sau Holm | Quy tắc A (cùng hồi quy, biến giả theo khối); tương quan hạng Spearman giữa các giai đoạn (mô tả) |
 
+- Ngưỡng ở H3 (≥ 2/3) và H4 (≥ 3/4) cùng theo một nguyên tắc: **đa số nghiêm ngặt** số phép so sánh của họ đó (3 phân phối thì cần 2; 4 phương trình phương sai thì cần 3).
+- H5: ngưỡng tam phân vị của quy tắc B lấy trên toàn bộ điểm ngoài mẫu, nên biến giả trạng thái không đo được tại $t$ theo nghĩa chặt của Giacomini–White. Kiểm định ở đây là kiểm định **so sánh có điều kiện mô tả** theo trạng thái, không phải kiểm định khả năng dự báo có điều kiện theo thời gian thực. Dự báo không dùng ngưỡng này nên không có nhìn trước trong dự báo. Nêu rõ ở 3.6.
 - Trường hợp không rơi vào hai cột "ủng hộ" hoặc "không ủng hộ", hoặc $h$ = 1 và $h$ = 10 cho kết luận khác nhau: ghi **lẫn lộn** và mô tả, không chọn kết quả thuận lợi.
 - Ghi chú H4: phân phối sai số tác động tới dự báo phương sai chủ yếu qua ước lượng tham số. Vì vậy H4 có thể không được ủng hộ ở Ch3 nhưng được ủng hộ ở Ch5 (VaR/ES), và đây chính là câu hỏi của 5.6.2. Không coi kết quả H4 yếu ở Ch3 là bất lợi cần giấu.
 - **Xếp hạng chuyển sang 5.6 (định trước):** thứ hạng theo QLIKE trung bình, $h$ = 1, thước đo chính, VN-Index, kèm tư cách thành viên MCS 10%. Chuyển cả 12 mô hình GARCH, không lọc theo kết quả Ch3.
@@ -321,3 +323,8 @@ Nếu tác giả duyệt mà không ghi chú thêm, các phần sau áp dụng m
 | n6 vi phạm 10 ngày chồng lấn | 12.3 |
 | n7 $P^H$/$P^L$ và giá mở cửa giả | 2 (ghi chú) |
 | n1 chi phí | 4 |
+| Vòng 2: r2-m1 tập MCS | 5.2 |
+| r2-m2 khởi tạo bộ lọc | 4.1 (a) |
+| r2-m3 phương sai DM âm | 5.2 |
+| r2-m4 ngưỡng B và Giacomini–White | 5.3 |
+| r2-m5 ngưỡng H3/H4 | 5.3 |
