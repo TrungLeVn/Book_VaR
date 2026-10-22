@@ -68,13 +68,6 @@ Thứ tự (từ 22/10/2026): chương mô hình hóa Ch2–Ch5 chạy thực ng
     - Làn: L1
     - Điểm duyệt: Delivery
     - Chi tiết: tickets/C01-M6.md
-- [ ] **C02-M3 — Nội dung định lượng Chương 2: tái tạo và bổ sung** - var-reproduction-analyst, M3
-    - Đầu ra + tiêu chí: analysis/ch02/run_ch02_all.R; results/C02-M3_<ts>/; Mọi bảng/hình/số có lần chạy hoặc nhãn minh họa/chưa chạy; bảng reported vs executed; lệch được liệt kê
-    - Phụ thuộc: B02, B04 (chạy trước C02-M1)
-    - Nơi làm: Code
-    - Làn: L2
-    - Chi tiết: tickets/C02-M3.md
-    - Trạng thái: Sẵn sàng — đợt A mở 22/10/2026 (brief: tickets/LANES.md mục 9)
 - [ ] **C02-M1 — Ánh xạ Chương 2 hiện có vào đề cương 3.1** - Lead, M1
     - Đầu ra + tiêu chí: chapters/drafts/C02-M1_ch02_map.md; Mỗi tiểu mục đề cương 3.1 có: nội dung cũ chuyển vào / phần viết mới / phần bỏ; danh sách exhibit
     - Phụ thuộc: B01, C02-M3 (ánh xạ sau khi có output mới)
@@ -324,6 +317,15 @@ Thứ tự (từ 22/10/2026): chương mô hình hóa Ch2–Ch5 chạy thực ng
     - Làn: L0
     - Cần quyết định: (a) clone lại ngoài Drive — khuyến nghị; (b) tạm không dùng git, dựa vào manifest SHA; (c) sửa repo tại chỗ (rủi ro do Drive đồng bộ .git)
     - Chi tiết: tickets/B06.md
+- [ ] **C02-M3 — Nội dung định lượng Chương 2: tái tạo và bổ sung** since 2026-10-22 - var-reproduction-analyst, M3
+    - Đầu ra + tiêu chí: analysis/ch02/run_ch02_all.R; results/C02-M3_<ts>/; Mọi bảng/hình/số có lần chạy hoặc nhãn minh họa/chưa chạy; bảng reported vs executed; lệch được liệt kê
+    - Phụ thuộc: B02, B04 (chạy trước C02-M1)
+    - Nơi làm: Code
+    - Làn: L2
+    - Chi tiết: tickets/C02-M3.md
+    - Trạng thái: Cần quyết định — đã chạy results/C02-M3_20261022-2208/ (README, exhibit_map.csv): script chương tái tạo được, tất định, 9/9 CSV trùng byte lượt Mac B04; dừng vì 4/11 hình trong chapter.md lệch output
+    - Cần quyết định: (1) Hình 2.1, 2.4 trong docx khác lần mô phỏng của script, không tìm được nguồn → thay bằng fig_2_1, fig_2_4 (đề xuất); (2) Hình 2.3 là hình cũ, chú thích/lời mô tả fig_2_3_ewma_shock_response → dùng fig_2_3 (đề xuất); (3) Hình 2.6 là hình cũ, lời mô tả fig_2_6 (thêm EGARCH) → dùng fig_2_6, sửa chú thích (đề xuất); (4) có làm minh họa biên độ giá VN-Index cho 2.1.3 không (việc 2 của ticket)
+    - Còn lại sau quyết định: chạy lại run_ch02_all.R trên Mac (~20 s) để PNG trùng byte (lần này chạy trên cloud Linux; PNG khác font)
 
 ## Someday
 - [ ] **B07 — Quy tắc chọn chỉ số ngành** - Lead + var-reproduction-analyst, —

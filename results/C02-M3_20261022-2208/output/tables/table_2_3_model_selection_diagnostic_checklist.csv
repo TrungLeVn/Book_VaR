@@ -1,0 +1,7 @@
+Bước,Câu hỏi,Công cụ,Dấu hiệu đạt,Xử lý nếu chưa đạt
+1. Phương trình trung bình,Phần trung bình có còn phụ thuộc tuyến tính không?,"Đồ thị, ACF/PACF, Ljung-Box trên phần dư",Phần dư không còn tự tương quan rõ rệt,"Cân nhắc trung bình hằng số, ARMA bậc thấp hoặc biến giải thích phù hợp"
+2. Phương trình phương sai,Bình phương phần dư còn cụm biến động không?,"ACF của phần dư bình phương, ARCH LM",Không còn hiệu ứng ARCH đáng kể,Cân nhắc ARCH/GARCH bậc khác hoặc mô hình bất đối xứng
+3. Phân phối sai số,Sai số chuẩn hóa có đuôi dày hoặc lệch không?,"Histogram, QQ plot, log-likelihood, AIC/BIC",Phân phối mô tả tốt hình dạng phần dư chuẩn hóa,"Thử Student-t, skewed-t, SGED hoặc đặc tả đơn giản hơn nếu không ổn định"
+4. So sánh trong mẫu,Mô hình có cải thiện đủ để bù cho số tham số không?,"Log-likelihood, AIC, BIC",AIC/BIC thấp hơn và tham số có diễn giải hợp lý,Không chọn chỉ vì mô hình phức tạp hơn
+5. Chẩn đoán sau ước lượng,Phần dư chuẩn hóa còn cấu trúc động không?,"Ljung-Box trên z_t và z_t^2, ARCH LM",Không bác bỏ mạnh giả thuyết không còn cấu trúc động,"Quay lại đặc tả trung bình, phương sai hoặc phân phối"
+6. Chuẩn bị dự báo,Mô hình có thể dùng cho dự báo biến động kỳ tiếp theo không?,"Kiểm tra hội tụ, tham số, chẩn đoán",Mô hình ổn định và có diễn giải phù hợp,Chưa chuyển sang VaR/ES nếu chẩn đoán còn lỗi nghiêm trọng

@@ -1,0 +1,5 @@
+Tiêu chí,Công thức minh họa,Dùng cho thang đo,Ưu điểm,Hạn chế
+MSE,mean((v_t - vhat_t)^2),"Variance hoặc volatility, nhưng phải nhất quán",Phạt mạnh sai số lớn,Nhạy với ngoại lai và giai đoạn biến động cực đoan
+MAE,mean(abs(v_t - vhat_t)),"Variance hoặc volatility, nhưng phải nhất quán",Dễ diễn giải hơn MSE,Ít nhấn mạnh lỗi lớn hơn MSE
+QLIKE,mean(log(vhat_t) + v_t / vhat_t),Variance dương,Phù hợp khi đánh giá dự báo phương sai,Không dùng trực tiếp nếu v_t và vhat_t là độ lệch chuẩn
+VaR backtest,So sánh số vi phạm VaR với mức kỳ vọng,Dự báo phân vị/loss tail,Đánh giá trực tiếp mô hình rủi ro đuôi,"Thuộc chương VaR/backtesting, không thay thế đánh giá volatility"

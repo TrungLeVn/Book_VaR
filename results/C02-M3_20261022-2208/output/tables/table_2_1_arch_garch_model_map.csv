@@ -1,0 +1,7 @@
+Mô hình,Câu hỏi thực nghiệm,Thành phần chính,Mô tả được,Hạn chế chính
+ARCH,Cú sốc quá khứ có làm biến động hiện tại tăng không?,Bình phương cú sốc trễ,Hiệu ứng ARCH và cụm biến động,Có thể cần nhiều độ trễ khi biến động dai dẳng
+GARCH,Biến động có ghi nhớ quá khứ không?,Bình phương cú sốc và phương sai trễ,Cụm biến động và độ dai dẳng,Đối xứng với cú sốc âm và dương cùng độ lớn
+GJR-GARCH,Tin xấu có làm biến động tăng mạnh hơn tin tốt không?,Biến chỉ báo cú sốc âm,Bất đối xứng trong phản ứng biến động,Diễn giải phụ thuộc quy ước biến chỉ báo
+EGARCH,Có thể mô hình hóa bất đối xứng trên thang log phương sai không?,Log phương sai và sai số chuẩn hóa,Phương sai dương tự nhiên và phản ứng bất đối xứng,Khó diễn giải trực tiếp hơn GARCH chuẩn
+APARCH,Dữ liệu ủng hộ bậc lũy thừa nào của biến động?,Tham số lũy thừa delta và tham số bất đối xứng,Linh hoạt về dạng phản ứng biến động,"Nhiều tham số hơn, có thể khó ước lượng ổn định"
+GARCH-M,Biến động có ảnh hưởng đến tỷ suất sinh lời kỳ vọng không?,Phương sai hoặc độ lệch chuẩn trong phương trình trung bình,Quan hệ rủi ro - tỷ suất sinh lời kỳ vọng có điều kiện,Không nên diễn giải như khuyến nghị đầu tư; cần kiểm định trong mẫu cụ thể

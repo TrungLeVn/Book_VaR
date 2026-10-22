@@ -1,0 +1,8 @@
+Kiểm định/đồ thị,Áp dụng cho,Giả thuyết gốc hoặc mục tiêu,Diễn giải nếu không đạt,Gợi ý xử lý
+Đồ thị z_t,Sai số chuẩn hóa,Không còn cụm dao động rõ rệt,Mô hình có thể chưa lọc hết biến động,Xem lại phương trình phương sai hoặc phân phối
+ACF của z_t,Sai số chuẩn hóa,Không có tự tương quan tuyến tính,Phương trình trung bình có thể thiếu cấu trúc,Xem lại mean equation hoặc ARMA bậc thấp
+ACF của z_t^2,Bình phương sai số chuẩn hóa,Không còn phụ thuộc động trong phương sai,Còn hiệu ứng ARCH/GARCH,Xem lại bậc GARCH hoặc mô hình bất đối xứng
+Ljung-Box trên z_t,Sai số chuẩn hóa,Không có tự tương quan đến độ trễ m,Còn thông tin tuyến tính chưa khai thác,Điều chỉnh phương trình trung bình
+Ljung-Box trên z_t^2,Bình phương sai số chuẩn hóa,Không có tự tương quan đến độ trễ m,Còn cụm biến động sau chuẩn hóa,Điều chỉnh phương trình phương sai
+ARCH LM,Bình phương phần dư chuẩn hóa,Không còn hiệu ứng ARCH đến bậc kiểm định,Mô hình phương sai chưa hấp thụ hết ARCH effect,"Thử GARCH bậc khác, GJR-GARCH, EGARCH hoặc phân phối khác"
+QQ plot,Sai số chuẩn hóa,Phân phối giả định phù hợp tương đối với phần dư,Sai lệch rõ ở đuôi hoặc lệch phân phối,"Xem xét Student-t, skewed-t, SGED hoặc SGT"

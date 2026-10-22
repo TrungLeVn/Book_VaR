@@ -1,0 +1,6 @@
+Mô hình ứng viên,Phân phối z_t,Số tham số k,Log-likelihood,AIC,BIC,Ghi chú diễn giải
+"GARCH(1,1)",Normal,[điền sau khi ước lượng],[điền],[điền],[điền],Mô hình nền
+"GARCH(1,1)",Student-t,[điền sau khi ước lượng],[điền],[điền],[điền],Kiểm tra vai trò đuôi dày
+"GJR-GARCH(1,1)",Student-t hoặc skewed-t,[điền sau khi ước lượng],[điền],[điền],[điền],Kiểm tra bất đối xứng biến động
+"EGARCH(1,1)",Student-t hoặc SGED,[điền sau khi ước lượng],[điền],[điền],[điền],Kiểm tra bất đối xứng trên log phương sai
+"APARCH(1,1)",SGED hoặc SGT,[điền sau khi ước lượng],[điền],[điền],[điền],Kiểm tra tham số lũy thừa delta

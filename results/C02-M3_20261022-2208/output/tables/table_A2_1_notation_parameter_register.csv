@@ -1,0 +1,13 @@
+Ký hiệu,Xuất hiện trong,Ý nghĩa,Diễn giải khi tăng,Lưu ý
+r_t,Toàn chương,Tỷ suất/tỷ lệ sinh lời tại thời điểm t,Không áp dụng,Cần thống nhất một thuật ngữ trong toàn sách
+mu_t,Phương trình trung bình,Kỳ vọng có điều kiện,Phân phối có điều kiện dịch sang phải nếu mu_t tăng,"Với dữ liệu ngày, thường nhỏ so với biến động"
+epsilon_t,Phương trình sai số,Cú sốc chưa chuẩn hóa,Độ lớn cú sốc tăng,"Không quan sát trực tiếp, thường ước lượng từ phần dư"
+sigma_t,Phương trình phương sai,Độ lệch chuẩn có điều kiện,Phân phối có điều kiện rộng hơn,sigma_t^2 là phương sai có điều kiện
+z_t,Sai số chuẩn hóa,Cú sốc sau khi chuẩn hóa theo sigma_t,Không áp dụng,Thường giả định E(z_t)=0 và Var(z_t)=1
+omega,ARCH/GARCH,Hằng số trong phương trình phương sai,Mức nền phương sai tăng,Cần ràng buộc để phương sai dương
+alpha,ARCH/GARCH,Tác động của bình phương cú sốc quá khứ,Biến động phản ứng mạnh hơn với cú sốc mới,"Trong GARCH(1,1), alpha + beta thường đo độ dai dẳng"
+beta,GARCH,Tác động của phương sai có điều kiện quá khứ,Biến động dai dẳng hơn,alpha + beta gần 1 hàm ý cú sốc suy giảm chậm
+gamma,GJR/EGARCH/APARCH,Tham số bất đối xứng,Tác động phụ thuộc quy ước mô hình,Cần giải thích theo đúng phương trình đang dùng
+delta,APARCH,Bậc lũy thừa của biến động,Dạng phản ứng biến động linh hoạt hơn,Không phải lúc nào cũng dễ diễn giải kinh tế
+nu,Student-t,Bậc tự do,nu cao làm Student-t gần phân phối chuẩn hơn,nu thấp hàm ý đuôi dày hơn
+lambda,SGT/SGED/EWMA,Có thể là hệ số suy giảm hoặc tham số chệch,Ý nghĩa phụ thuộc ngữ cảnh,Tránh dùng cùng lambda cho EWMA và skewness nếu gây nhầm; có thể đổi skewness thành xi

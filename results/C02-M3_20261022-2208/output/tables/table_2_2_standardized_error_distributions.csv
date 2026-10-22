@@ -1,0 +1,6 @@
+Phân phối,Tham số chính,Đuôi dày,Bất đối xứng,Vai trò trong VaR/ES,Lưu ý
+Chuẩn,Không có tham số hình dạng ngoài chuẩn hóa,Không,Không,Mô hình nền và chuẩn so sánh,Có thể đánh giá thấp xác suất cú sốc cực đoan nếu dữ liệu có đuôi dày
+Student-t,Bậc tự do nu,Có,Không,Tạo phân vị đuôi xa hơn khi nu thấp,Cần chuẩn hóa phương sai khi dùng làm sai số z_t
+Student-t chệch,nu và tham số chệch,Có,Có,Mô tả đồng thời đuôi dày và lệch đuôi,Cách diễn giải tham số chệch phụ thuộc tham số hóa/package
+SGED,Tham số hình dạng p và tham số chệch lambda,Có thể có,Có,Linh hoạt về độ nhọn và độ lệch,Cần kiểm tra tham số hóa trước khi đưa công thức mật độ vào sách
+SGT,"lambda, p, q",Có,Có,Khung rất linh hoạt cho phân phối có điều kiện,Nhiều tham số hơn; quá trình ước lượng có thể nhạy với giá trị khởi tạo
