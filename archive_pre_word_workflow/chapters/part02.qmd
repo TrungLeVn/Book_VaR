@@ -1,3 +1,0 @@
-# Phần II. Khung mô hình cho đo lường rủi ro đuôi {.unnumbered}
-
-Phần này chuyển từ ngôn ngữ phân tích sang kiến trúc mô hình và tiêu chuẩn đánh giá, nhằm trả lời không chỉ mô hình nào tồn tại mà còn mô hình nào đáng tin cậy trong thực hành.

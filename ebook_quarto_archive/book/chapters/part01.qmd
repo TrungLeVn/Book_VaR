@@ -1,3 +1,0 @@
-# Phần I. Vấn đề nghiên cứu và nền tảng khái niệm {.unnumbered}
-
-Phần này xác lập câu hỏi trung tâm của chuyên khảo: làm thế nào để đo lường và đánh giá rủi ro đuôi của tỷ suất sinh lời trên thị trường chứng khoán Việt Nam theo một khung phân tích nhất quán.
